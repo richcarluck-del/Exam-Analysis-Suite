@@ -1,0 +1,29 @@
+# Combined requirements for Exam Analysis Suite
+
+# --- From Preprocessor ---
+Pillow>=10.0.0
+requests>=2.31.0
+opencv-python>=4.8.0
+numpy>=1.24.0
+
+# --- From Analyzer (with duplicates removed) ---
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+sqlalchemy==2.0.23
+alembic==1.12.1
+redis==5.0.1
+celery==5.3.4
+neo4j==5.15.0
+python-multipart==0.0.6
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+pydantic==1.10.13
+python-dotenv==1.0.0
+httpx==0.25.2
+aiofiles==23.2.1
+PyMuPDF==1.23.26
+python-docx==1.1.2
+chromadb==0.4.15
+sentence-transformers==2.2.2
+huggingface-hub==0.16.4
+gevent==24.2.1
