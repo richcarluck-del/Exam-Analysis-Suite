@@ -1,0 +1,54 @@
+[
+  {
+    "original_image_path": "preprocessor/my_test_images\\1.jpg",
+    "source_corrected_image": "D:\\10739\\Exam-Analysis-Suite\\temp_workspace\\run_20260313_171426\\preprocessor_output\\corrected_images\\1_corrected.jpg",
+    "page_type": "question_paper",
+    "page_index": 0,
+    "image_path": "D:\\10739\\Exam-Analysis-Suite\\temp_workspace\\run_20260313_171426\\preprocessor_output\\corrected_images\\1_corrected_left.jpg",
+    "part_type": "left",
+    "crop_area": [
+      0,
+      0,
+      1927,
+      1791
+    ],
+    "divider_x": 1927,
+    "parts": [
+      {
+        "label": "full_page_area",
+        "box": [
+          0,
+          0,
+          1927,
+          1791
+        ]
+      }
+    ]
+  },
+  {
+    "original_image_path": "preprocessor/my_test_images\\1.jpg",
+    "source_corrected_image": "D:\\10739\\Exam-Analysis-Suite\\temp_workspace\\run_20260313_171426\\preprocessor_output\\corrected_images\\1_corrected.jpg",
+    "page_type": "question_paper",
+    "page_index": 0,
+    "image_path": "D:\\10739\\Exam-Analysis-Suite\\temp_workspace\\run_20260313_171426\\preprocessor_output\\corrected_images\\1_corrected_right.jpg",
+    "part_type": "right",
+    "crop_area": [
+      1577,
+      0,
+      3505,
+      1791
+    ],
+    "divider_x": 1927,
+    "parts": [
+      {
+        "label": "full_page_area",
+        "box": [
+          0,
+          0,
+          1928,
+          1791
+        ]
+      }
+    ]
+  }
+]

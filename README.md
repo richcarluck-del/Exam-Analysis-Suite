@@ -56,7 +56,7 @@ This is the simplest way to process a new set of exam papers from start to finis
 Use the `run_pipeline.py` script and point it to your input directory:
 
 ```powershell
-python run_pipeline.py --input-dir "path/to/your/exam_images"
+python run_pipeline.py --input-dir "preprocessor/my_test_images"
 ```
 
 The script will automatically create a temporary workspace, run the preprocessor, feed its output to the analyzer, and save the final report.
