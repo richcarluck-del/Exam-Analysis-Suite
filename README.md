@@ -1,6 +1,14 @@
 # Exam Analysis Suite
 
+**Version: v0.3**
+
 This project is a comprehensive suite for analyzing exam papers, composed of two main modules: a `preprocessor` for image handling and a `analyzer` for content analysis and knowledge graph generation.
+
+## 📋 Version Information
+
+- **Current Version**: v0.3 (2026-03-20)
+- **Status**: 拼图测试工具稳定版 (Puzzle Test Tool Stable Version)
+- **Next Features**: 拼图分类 (Puzzle Classification) 和 切片 (Slicing)
 
 ---
 
