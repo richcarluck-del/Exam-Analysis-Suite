@@ -1,0 +1,30 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    libpq-dev \
+ && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt ./requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+# 拷貝後端代碼與共享模塊
+COPY shared ./shared
+COPY analyzer ./analyzer
+
+# 默認把當前倉庫的 SQLite 數據庫文件一起拷貝進容器
+# 如需使用 Postgres，可在容器環境變量中設置 DATABASE_URL 覆蓋
+COPY exam_analysis.db ./exam_analysis.db
+
+# 基本環境變量，可在 Docker Desktop 中按需覆蓋
+ENV APP_ENV=development
+ENV AUTO_CREATE_SCHEMA=true
+
+EXPOSE 8000
+
+CMD ["uvicorn", "analyzer.app.main:app", "--host", "0.0.0.0", "--port", "8000"]

@@ -1,0 +1,37 @@
+version: "3.9"
+
+services:
+  analyzer-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.analyzer-api
+    container_name: exam-analyzer-api
+    ports:
+      - "8000:8000"
+    environment:
+      APP_ENV: development
+      AUTO_CREATE_SCHEMA: "true"
+      # 如需連接 Postgres，請在 Docker Desktop 中覆蓋 / 新增 DATABASE_URL，例如：
+      # DATABASE_URL=postgresql+psycopg2://postgres:your_password@host.docker.internal:5432/exam
+      # 如需使用外部的 Qdrant / OpenSearch，也可以覆蓋下面兩個 URL
+      QDRANT_URL: "http://host.docker.internal:6333"
+      OPENSEARCH_URL: "http://host.docker.internal:9200"
+    volumes:
+      # 持久化 SQLite 數據庫文件（若仍使用 SQLite）
+      - ./exam_analysis.db:/app/exam_analysis.db
+      # 題庫相關的上傳與歸一化文件，確保容器重啟後仍然存在
+      - ./analyzer/uploads/question_bank:/app/analyzer/uploads/question_bank
+      - ./analyzer/uploads/question_bank_assets:/app/analyzer/uploads/question_bank_assets
+      - ./analyzer/normalized_documents:/app/analyzer/normalized_documents
+
+  analyzer-web:
+    build:
+      context: .
+      dockerfile: Dockerfile.analyzer-web
+    container_name: exam-analyzer-web
+    depends_on:
+      - analyzer-api
+    ports:
+      # 這裡將容器的 80 端口映射到宿主機 8001
+      # 這樣你可以通過 http://localhost:8001/paper-preview 訪問前端
+      - "8001:80"
