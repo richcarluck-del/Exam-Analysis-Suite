@@ -16,9 +16,7 @@ depends_on = None
 
 def upgrade() -> None:
     # 基线迁移占位符。
-    # 当前仓库已经依赖 FastAPI 启动时的 metadata.create_all，
-    # 为避免直接对现有 SQLite 数据做破坏性初始迁移，这里先建立 Alembic 基线。
-    # 后续可在此基础上执行 `alembic revision --autogenerate` 产出增量迁移。
+    # 该修订用于建立题库模块的 Alembic 基线，后续 schema 变更均应在此基础上追加增量迁移。
     pass
 
 

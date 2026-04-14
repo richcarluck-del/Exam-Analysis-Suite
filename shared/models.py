@@ -224,6 +224,7 @@ class Paper(Base, TimestampMixin):
 
     id = Column(Integer, primary_key=True, index=True)
     source_document_id = Column(Integer, ForeignKey("source_documents.id"), nullable=False, index=True)
+    knowledge_package_id = Column(Integer, ForeignKey("knowledge_packages.id", ondelete="SET NULL"), nullable=True, index=True)
     title = Column(String(255), nullable=False)
     subject = Column(String(32), index=True)
     grade = Column(String(32))
@@ -238,6 +239,7 @@ class Paper(Base, TimestampMixin):
     review_status = Column(String(16), default="draft", nullable=False)
 
     source_document = relationship("SourceDocument", back_populates="papers")
+    knowledge_package = relationship("KnowledgePackage", back_populates="material_papers", foreign_keys=[knowledge_package_id])
     sections = relationship("PaperSection", back_populates="paper", cascade="all, delete-orphan")
     questions = relationship("PaperQuestion", back_populates="paper", cascade="all, delete-orphan")
 
@@ -295,6 +297,11 @@ class QuestionItem(Base, TimestampMixin):
 
     family = relationship("QuestionFamily", back_populates="questions")
     paper_questions = relationship("PaperQuestion", back_populates="question_item")
+    knowledge_package_links = relationship(
+        "KnowledgePackageQuestion",
+        back_populates="question_item",
+        cascade="all, delete-orphan",
+    )
     blocks = relationship("QuestionBlock", back_populates="question_item", cascade="all, delete-orphan")
     options = relationship("QuestionOption", back_populates="question_item", cascade="all, delete-orphan")
 
@@ -383,8 +390,192 @@ class TaxonomyNode(Base, TimestampMixin):
     status = Column(String(16), default="active", nullable=False)
 
 
+class KnowledgePoint(Base, TimestampMixin):
+    __tablename__ = "knowledge_points"
+
+    id = Column(Integer, primary_key=True, index=True)
+    tenant_id = Column(Integer, ForeignKey("tenants.id"), nullable=True, index=True)
+    primary_taxonomy_node_id = Column(Integer, ForeignKey("taxonomy_nodes.id"), nullable=True, index=True)
+    subject = Column(String(32), index=True)
+    grade_scope = Column(String(64))
+    canonical_name = Column(String(255), nullable=False, index=True)
+    aliases_json = Column(JSON)
+    knowledge_type = Column(String(32), nullable=False, default="concept")
+    importance_level = Column(Integer)
+    difficulty_band = Column(String(16))
+    exam_frequency = Column(Integer)
+    canonical_summary = Column(Text)
+    learning_objectives_json = Column(JSON)
+    prerequisite_summary = Column(Text)
+    common_confusions_json = Column(JSON)
+    source_origin = Column(String(32), default="explicit", nullable=False)
+    review_status = Column(String(16), default="draft", nullable=False, index=True)
+    version_no = Column(Integer, default=1, nullable=False)
+    is_active = Column(Boolean, default=True, nullable=False, index=True)
+
+
+class KnowledgePackage(Base, TimestampMixin):
+    __tablename__ = "knowledge_packages"
+
+    id = Column(Integer, primary_key=True, index=True)
+    source_document_id = Column(Integer, ForeignKey("source_documents.id"), nullable=False, index=True)
+    tenant_id = Column(Integer, ForeignKey("tenants.id"), nullable=True, index=True)
+    package_title = Column(String(255), nullable=False, index=True)
+    package_type = Column(String(32), nullable=False, default="topic")
+    subject = Column(String(32), index=True)
+    grade = Column(String(32))
+    page_range_json = Column(JSON)
+    outline_json = Column(JSON)
+    summary_text = Column(Text)
+    parse_status = Column(String(16), default="pending", nullable=False, index=True)
+    review_status = Column(String(16), default="draft", nullable=False, index=True)
+    version_no = Column(Integer, default=1, nullable=False)
+
+    material_papers = relationship("Paper", back_populates="knowledge_package", foreign_keys="Paper.knowledge_package_id")
+    question_links = relationship(
+        "KnowledgePackageQuestion",
+        back_populates="package",
+        cascade="all, delete-orphan",
+    )
+
+
+class KnowledgePackagePoint(Base, TimestampMixin):
+    __tablename__ = "knowledge_package_points"
+
+    id = Column(Integer, primary_key=True, index=True)
+    package_id = Column(Integer, ForeignKey("knowledge_packages.id"), nullable=False, index=True)
+    knowledge_point_id = Column(Integer, ForeignKey("knowledge_points.id"), nullable=False, index=True)
+    relation_type = Column(String(32), default="core", nullable=False)
+    weight_score = Column(Numeric(5, 4))
+    order_in_package = Column(Integer)
+    source_origin = Column(String(32), default="explicit", nullable=False)
+    confidence = Column(Numeric(4, 2))
+    approved_status = Column(String(16), default="pending", nullable=False)
+
+
+class KnowledgeBlock(Base, TimestampMixin):
+    __tablename__ = "knowledge_blocks"
+
+    id = Column(Integer, primary_key=True, index=True)
+    package_id = Column(Integer, ForeignKey("knowledge_packages.id"), nullable=False, index=True)
+    knowledge_point_id = Column(Integer, ForeignKey("knowledge_points.id"), nullable=True, index=True)
+    parent_block_id = Column(Integer, ForeignKey("knowledge_blocks.id"), nullable=True, index=True)
+    block_order = Column(Integer, nullable=False)
+    section_path = Column(Text)
+    block_role = Column(String(32), nullable=False, index=True)
+    content_format = Column(String(32), nullable=False)
+    raw_text = Column(Text)
+    normalized_text = Column(Text)
+    rich_content_json = Column(JSON)
+    source_page_no = Column(Integer, index=True)
+    anchor_bbox_json = Column(JSON)
+    source_anchor_json = Column(JSON)
+    asset_id = Column(Integer, ForeignKey("assets.id"), nullable=True, index=True)
+    source_origin = Column(String(32), default="explicit", nullable=False)
+    confidence = Column(Numeric(4, 2))
+    is_primary = Column(Boolean, default=False, nullable=False)
+
+
+class KnowledgeAtom(Base, TimestampMixin):
+    __tablename__ = "knowledge_atoms"
+
+    id = Column(Integer, primary_key=True, index=True)
+    knowledge_point_id = Column(Integer, ForeignKey("knowledge_points.id"), nullable=False, index=True)
+    package_id = Column(Integer, ForeignKey("knowledge_packages.id"), nullable=True, index=True)
+    atom_type = Column(String(32), nullable=False, index=True)
+    canonical_text = Column(Text, nullable=False)
+    normalized_json = Column(JSON)
+    formula_signature = Column(Text)
+    importance_level = Column(Integer)
+    difficulty_band = Column(String(16))
+    evidence_block_id = Column(Integer, ForeignKey("knowledge_blocks.id"), nullable=True, index=True)
+    source_origin = Column(String(32), default="explicit", nullable=False)
+    confidence = Column(Numeric(4, 2))
+    review_status = Column(String(16), default="draft", nullable=False, index=True)
+
+
+class KnowledgePackageQuestion(Base, TimestampMixin):
+    """专题包 ↔ 题目 多对多；一题可挂多个专题，也可仅挂在试卷上而不挂专题。"""
+
+    __tablename__ = "knowledge_package_questions"
+
+    id = Column(Integer, primary_key=True, index=True)
+    package_id = Column(Integer, ForeignKey("knowledge_packages.id", ondelete="CASCADE"), nullable=False, index=True)
+    question_item_id = Column(Integer, ForeignKey("question_items.id", ondelete="CASCADE"), nullable=False, index=True)
+    display_order = Column(Integer, nullable=True)
+    relation_type = Column(String(32), nullable=False, default="topic_material")
+    context_json = Column(JSON, nullable=True)
+    source_block_id = Column(Integer, ForeignKey("knowledge_blocks.id", ondelete="SET NULL"), nullable=True)
+    source_origin = Column(String(32), nullable=False, default="model")
+    confidence = Column(Numeric(4, 2), nullable=True)
+    approved_status = Column(String(16), nullable=False, default="pending", index=True)
+
+    package = relationship("KnowledgePackage", back_populates="question_links")
+    question_item = relationship("QuestionItem", back_populates="knowledge_package_links")
+    source_block = relationship("KnowledgeBlock", foreign_keys=[source_block_id])
+
+
+class KnowledgeQuestionLink(Base, TimestampMixin):
+    __tablename__ = "knowledge_question_links"
+
+    id = Column(Integer, primary_key=True, index=True)
+    knowledge_point_id = Column(Integer, ForeignKey("knowledge_points.id"), nullable=False, index=True)
+    question_item_id = Column(Integer, ForeignKey("question_items.id"), nullable=False, index=True)
+    relation_type = Column(String(32), nullable=False, index=True)
+    relevance_score = Column(Numeric(5, 4))
+    entry_point_text = Column(Text)
+    explanation_block_id = Column(Integer, ForeignKey("knowledge_blocks.id"), nullable=True, index=True)
+    commentary_block_id = Column(Integer, ForeignKey("knowledge_blocks.id"), nullable=True, index=True)
+    source_origin = Column(String(32), default="explicit", nullable=False)
+    confidence = Column(Numeric(4, 2))
+    approved_status = Column(String(16), default="pending", nullable=False)
+
+
+class KnowledgePointRelation(Base, TimestampMixin):
+    __tablename__ = "knowledge_point_relations"
+
+    id = Column(Integer, primary_key=True, index=True)
+    source_knowledge_point_id = Column(Integer, ForeignKey("knowledge_points.id"), nullable=False, index=True)
+    target_knowledge_point_id = Column(Integer, ForeignKey("knowledge_points.id"), nullable=False, index=True)
+    relation_type = Column(String(32), nullable=False, index=True)
+    strength_score = Column(Numeric(5, 4))
+    evidence_block_id = Column(Integer, ForeignKey("knowledge_blocks.id"), nullable=True, index=True)
+    source_origin = Column(String(32), default="explicit", nullable=False)
+    confidence = Column(Numeric(4, 2))
+    approved_status = Column(String(16), default="pending", nullable=False)
+
+
+class EntityGraphEdge(Base, TimestampMixin):
+    __tablename__ = "entity_graph_edges"
+
+    id = Column(Integer, primary_key=True, index=True)
+    source_entity_type = Column(String(32), nullable=False, index=True)
+    source_entity_id = Column(Integer, nullable=False, index=True)
+    target_entity_type = Column(String(32), nullable=False, index=True)
+    target_entity_id = Column(Integer, nullable=False, index=True)
+    relation_type = Column(String(32), nullable=False, index=True)
+    weight_score = Column(Numeric(5, 4))
+    evidence_json = Column(JSON)
+    source_origin = Column(String(32), default="explicit", nullable=False)
+    confidence = Column(Numeric(4, 2))
+
+
+class KnowledgeDerivative(Base, TimestampMixin):
+    __tablename__ = "knowledge_derivatives"
+
+    id = Column(Integer, primary_key=True, index=True)
+    knowledge_point_id = Column(Integer, ForeignKey("knowledge_points.id"), nullable=False, index=True)
+    derivative_type = Column(String(32), nullable=False, index=True)
+    target_audience = Column(String(32), nullable=False, index=True)
+    prompt_version = Column(String(64))
+    source_snapshot_json = Column(JSON)
+    generated_content = Column(JSON)
+    review_status = Column(String(16), default="draft", nullable=False, index=True)
+
+
 class StrategyCard(Base, TimestampMixin):
     __tablename__ = "strategy_cards"
+
 
     id = Column(Integer, primary_key=True, index=True)
     code = Column(String(64), nullable=False, unique=True, index=True)

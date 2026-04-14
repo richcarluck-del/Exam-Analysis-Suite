@@ -12,8 +12,12 @@ if str(PROJECT_ROOT) not in sys.path:
 from shared.database import DATABASE_URL
 from shared import models
 
+if not DATABASE_URL.startswith(("postgresql", "postgres")):
+    raise RuntimeError("Alembic 迁移仅支持 PostgreSQL，当前数据库配置不合法。")
+
 config = context.config
 config.set_main_option("sqlalchemy.url", DATABASE_URL)
+
 
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
@@ -29,8 +33,8 @@ def run_migrations_offline() -> None:
         literal_binds=True,
         dialect_opts={"paramstyle": "named"},
         compare_type=True,
-        render_as_batch=url.startswith("sqlite"),
     )
+
 
     with context.begin_transaction():
         context.run_migrations()
@@ -48,8 +52,8 @@ def run_migrations_online() -> None:
             connection=connection,
             target_metadata=target_metadata,
             compare_type=True,
-            render_as_batch=connection.dialect.name == "sqlite",
         )
+
 
         with context.begin_transaction():
             context.run_migrations()

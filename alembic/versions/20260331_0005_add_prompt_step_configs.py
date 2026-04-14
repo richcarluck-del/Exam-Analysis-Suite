@@ -16,7 +16,13 @@ depends_on = None
 
 
 def upgrade() -> None:
+    bind = op.get_bind()
+    inspector = sa.inspect(bind)
+    if "prompt_step_configs" in inspector.get_table_names():
+        return
+
     op.create_table(
+
         "prompt_step_configs",
         sa.Column("id", sa.Integer(), nullable=False),
         sa.Column("step_key", sa.String(length=100), nullable=False),
@@ -26,7 +32,9 @@ def upgrade() -> None:
         sa.Column("description", sa.Text(), nullable=True),
         sa.Column("prompt_key", sa.String(length=255), nullable=False),
         sa.Column("selected_version", sa.Integer(), nullable=True),
-        sa.Column("is_active", sa.Boolean(), nullable=False, server_default=sa.text("1")),
+        sa.Column("is_active", sa.Boolean(), nullable=False, server_default=sa.text("true")),
+
+
         sa.Column("created_at", sa.DateTime(), nullable=False, server_default=sa.text("CURRENT_TIMESTAMP")),
         sa.Column("updated_at", sa.DateTime(), nullable=True, server_default=sa.text("CURRENT_TIMESTAMP")),
         sa.PrimaryKeyConstraint("id"),

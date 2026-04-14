@@ -15,7 +15,13 @@ depends_on = None
 
 
 def upgrade() -> None:
+    bind = op.get_bind()
+    inspector = sa.inspect(bind)
+    if "llm_step_configs" in inspector.get_table_names():
+        return
+
     op.create_table(
+
         "llm_step_configs",
         sa.Column("id", sa.Integer(), nullable=False),
         sa.Column("step_key", sa.String(length=100), nullable=False),

@@ -17,13 +17,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY shared ./shared
 COPY analyzer ./analyzer
 
-# 默認把當前倉庫的 SQLite 數據庫文件一起拷貝進容器
-# 如需使用 Postgres，可在容器環境變量中設置 DATABASE_URL 覆蓋
-COPY exam_analysis.db ./exam_analysis.db
-
-# 基本環境變量，可在 Docker Desktop 中按需覆蓋
+# 基本环境变量，可在运行容器时通过 DATABASE_URL 指向 PostgreSQL
 ENV APP_ENV=development
-ENV AUTO_CREATE_SCHEMA=true
+
 
 EXPOSE 8000
 
