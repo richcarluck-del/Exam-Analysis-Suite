@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 from typing import Any, Dict, Optional
 
 from sqlalchemy import func
@@ -91,6 +92,22 @@ STEP_CONFIG_DEFINITIONS = [
         "seed_model_name": "deepseek-chat",
     },
     {
+        "step_key": "analyzer.question_visual_observation",
+        "step_label": "分析器-视觉观察",
+        "module_name": "analyzer",
+        "step_order": "question_visual_observation",
+        "description": "逐题图片观察、提取视觉证据摘要所使用的视觉模型配置。",
+        "seed_strategy": "first_vision",
+    },
+    {
+        "step_key": "analyzer.question_multimodal_reasoning",
+        "step_label": "分析器-多模态推理",
+        "module_name": "analyzer",
+        "step_order": "question_multimodal_reasoning",
+        "description": "融合视觉观察、OCR 与检索证据得出逐题诊断所使用的文本模型配置。",
+        "seed_strategy": "first_available",
+    },
+    {
         "step_key": "analyzer.question_vlm",
 
         "step_label": "分析器-题级 VLM",
@@ -113,6 +130,37 @@ STEP_CONFIG_DEFINITIONS = [
         "module_name": "analyzer",
         "step_order": "knowledge_extraction",
         "description": "知识库文档实体关系抽取所使用的文本模型配置。",
+        "seed_strategy": "first_available",
+    },
+    {
+        "step_key": "analyzer.topic_docx_block_points",
+        "step_label": "分析器-专题DOCX块级知识点",
+        "module_name": "analyzer",
+        "step_order": "topic_docx_block_points",
+        "description": (
+            "教辅/专题 DOCX 按内容块自动标注知识点名称（与正则抽取互补）。"
+            "KNOWLEDGE_TOPIC_BLOCK_POINTS_MULTIMODAL=true 时同步步骤会绑定到种子视觉模型以发图。"
+        ),
+        "seed_provider_name": "dashscope",
+        "seed_model_name": "qwen3-vl-plus",
+    },
+    {
+        "step_key": "analyzer.topic_docx_question_bridge",
+        "step_label": "分析器-专题题知识点桥接",
+        "module_name": "analyzer",
+        "step_order": "topic_docx_question_bridge",
+        "description": "专题材料中每道题从本包候选知识点中由大模型挑选最相关的若干项（题-点桥接）。",
+        "seed_strategy": "first_available",
+    },
+    {
+        "step_key": "analyzer.knowledge_derivative_generation",
+        "step_label": "分析器-知识点衍生层生成",
+        "module_name": "analyzer",
+        "step_order": "knowledge_derivative_generation",
+        "description": (
+            "按知识点 + 目标受众（student/teacher/parent）生成衍生内容（速记卡、讲解、易错点、对比、记忆法等），"
+            "需 KNOWLEDGE_DERIVATIVE_ENABLED=true 才会被触发；产物落 knowledge_derivatives 表，默认 review_status=draft。"
+        ),
         "seed_strategy": "first_available",
     },
 ]
@@ -324,6 +372,28 @@ def sync_llm_step_configs(db: Session) -> list[Dict[str, Any]]:
             if provider and model:
                 record.provider_id = provider.id
                 record.model_id = model.id
+                changed = True
+
+        mm_block = os.environ.get("KNOWLEDGE_TOPIC_BLOCK_POINTS_MULTIMODAL", "").strip().lower() in (
+            "1",
+            "true",
+            "yes",
+            "on",
+        )
+        if (
+            mm_block
+            and definition.get("step_key") == "analyzer.topic_docx_block_points"
+            and definition.get("seed_provider_name")
+            and definition.get("seed_model_name")
+        ):
+            pv, mv = _resolve_named_provider_and_model(
+                db,
+                provider_name=definition.get("seed_provider_name"),
+                model_name=definition.get("seed_model_name"),
+            )
+            if pv and mv and (record.provider_id != pv.id or record.model_id != mv.id):
+                record.provider_id = pv.id
+                record.model_id = mv.id
                 changed = True
 
     if changed:

@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, Date, DateTime, ForeignKey, Integer, JSON, Numeric, String, Text
+from sqlalchemy import Boolean, Column, Date, DateTime, ForeignKey, Integer, JSON, Numeric, String, Text, UniqueConstraint
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 
@@ -453,6 +453,33 @@ class KnowledgePackagePoint(Base, TimestampMixin):
     approved_status = Column(String(16), default="pending", nullable=False)
 
 
+class KnowledgePointProvenance(Base, TimestampMixin):
+    """知识点产生源：创建知识点时写入，衍生层只读此处作为 grounded 语料入口。
+
+    source_kind + source_id 多态：当前主要使用 source_kind=knowledge_block → KnowledgeBlock.id。
+    """
+
+    __tablename__ = "knowledge_point_provenance"
+
+    id = Column(Integer, primary_key=True, index=True)
+    knowledge_point_id = Column(Integer, ForeignKey("knowledge_points.id", ondelete="CASCADE"), nullable=False, index=True)
+    source_kind = Column(String(32), nullable=False, index=True)
+    source_id = Column(Integer, nullable=False)
+    package_id = Column(Integer, ForeignKey("knowledge_packages.id", ondelete="SET NULL"), nullable=True, index=True)
+    origin_step = Column(String(64), nullable=False, default="")
+    is_primary = Column(Boolean, nullable=False, default=True)
+    extra_json = Column(JSON)
+
+    __table_args__ = (
+        UniqueConstraint(
+            "knowledge_point_id",
+            "source_kind",
+            "source_id",
+            name="uq_kp_provenance_kp_kind_source",
+        ),
+    )
+
+
 class KnowledgeBlock(Base, TimestampMixin):
     __tablename__ = "knowledge_blocks"
 
@@ -671,6 +698,7 @@ class ExamSession(Base, TimestampMixin):
     matching_status = Column(String(16), default="pending", nullable=False)
     analysis_status = Column(String(16), default="pending", nullable=False)
     visibility_scope = Column(String(32), default="private", nullable=False)
+    bundle_dir = Column(Text, nullable=True)
 
     tenant = relationship("Tenant", back_populates="exam_sessions")
     source_document = relationship("SourceDocument", back_populates="exam_sessions")

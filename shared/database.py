@@ -5,9 +5,9 @@ from dotenv import load_dotenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
 
-load_dotenv()
-
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
+# 必须从仓库根加载 .env；仅 load_dotenv() 会依赖进程 CWD，从子目录启动服务时读不到 KNOWLEDGE_POINT_* 等变量。
+load_dotenv(PROJECT_ROOT / ".env")
 POSTGRES_PREFIXES = ("postgresql://", "postgresql+", "postgres://", "postgres+")
 
 

@@ -229,6 +229,111 @@ PROMPT_DEFINITIONS = [
         },
     },
     {
+        "prompt_key": "analyzer.topic_docx_block_points.default",
+        "display_name": "分析器-专题DOCX块级知识点",
+        "module_name": "analyzer",
+        "description": "根据专题内容块文本列出可教学、可命题的知识点短语。",
+        "category": "analyzer",
+        "target_type": "topic_docx_segments",
+        "seed_versions": {
+            1: """你是一名中学教研助手。下面 JSON 的 blocks 数组中，每个元素是一段教辅/专题正文的片段（含 block_order、section_title、plain_text）。请**仅依据** plain_text 与 section_title，为该段列出本段涉及的核心知识点名称。
+
+要求：
+1. 只输出一个 JSON 对象，不要 Markdown、不要代码围栏、不要解释性文字。
+2. 顶层结构必须为：{"blocks":[{"block_order":整数,"knowledge_point_names":["短语1","短语2",...]}]}。
+3. knowledge_point_names 为 2～12 个字符串为宜；每个短语 2～24 个汉字为主，可含必要公式符号；不要整句照抄正文。
+4. 必须与输入中的 block_order 一一对应；若某段无明确知识点可写空数组 []。
+5. 不要编造输入中未体现的内容；宁可略少勿滥。
+
+输入数据：
+[[blocks_json]]""",
+        },
+    },
+    {
+        "prompt_key": "analyzer.topic_docx_question_bridge.default",
+        "display_name": "分析器-专题题知识点桥接",
+        "module_name": "analyzer",
+        "description": "从本包候选知识点 ID 中为多选题干挑选最相关项。",
+        "category": "analyzer",
+        "target_type": "topic_question_bridge",
+        "seed_versions": {
+            1: """你是一名中学教研助手。下面给出一道题的文字（题干等）以及**仅限**下列候选知识点（每条含 knowledge_point_id 与 canonical_name）。请判断本题主要考查哪些知识点。
+
+硬性规则：
+1. 只输出一个 JSON 对象，不要 Markdown、不要代码围栏、不要解释。
+2. 顶层结构必须为：{"knowledge_point_ids":[整数,...]}，数组元素必须全部来自候选中的 knowledge_point_id，禁止编造 ID。
+3. 按相关性从高到低排列，最多输出 [[max_pick]] 个；若无法判断可输出空数组 []。
+4. 宁缺毋滥：只有题干/选项/解析中确有依据时才选入。
+
+专题标题：[[package_title]]
+
+题干与题面文字：
+[[question_text]]
+
+候选知识点 JSON：
+[[candidates_json]]""",
+            2: """你是一名中学教研助手。下面给出一道题的文字（题干、选项、解析等）以及**仅限**下列候选知识点（每条含 knowledge_point_id 与 canonical_name）。请判断本题与哪些知识点相关，并给出**你自己判断的**关联强度。
+
+硬性规则：
+1. 只输出一个 JSON 对象，不要 Markdown、不要代码围栏、不要解释性文字。
+2. 顶层结构必须为：{"links":[{"knowledge_point_id":整数,"relevance":0到1的小数,"confidence":0到1的小数}, ...]}。
+   - links 可为空数组 []：当你认为候选中没有任何知识点与本题有足够依据相关时。
+   - 最多 [[max_links]] 条；宁缺毋滥，不要为凑条数硬塞弱相关项。
+   - knowledge_point_id 必须全部来自候选 JSON 中的 id，禁止编造。
+   - relevance：0～1，表示本题与该知识点的相关程度（越高越相关）。
+   - confidence：0～1，表示你对该判断的确信程度（可与 relevance 不同，例如概念模糊时 confidence 应偏低）。
+3. 按 relevance 从高到低排列 links；不要输出除上述字段外的其它键。
+
+专题标题：[[package_title]]
+
+题干与题面文字：
+[[question_text]]
+
+候选知识点 JSON：
+[[candidates_json]]""",
+        },
+    },
+    {
+        "prompt_key": "analyzer.knowledge_derivative.default",
+        "display_name": "分析器-知识点衍生内容",
+        "module_name": "analyzer",
+        "description": "按知识点源快照 + 目标受众 + 衍生类型，生成结构化衍生内容。",
+        "category": "analyzer",
+        "target_type": "knowledge_derivative",
+        "seed_versions": {
+            1: """你是一名经验丰富的中学教研/命题教师。请基于【source_snapshot】中的知识点与已有教材块内容，面向 [[target_audience]] 产出类型为 [[derivative_type]] 的衍生内容。
+
+硬性规则：
+1. 只输出一个 JSON 对象，不要 Markdown、不要代码围栏、不要解释性文字。
+2. 顶层结构必须为：
+   {"title": "...", "summary": "...", "bullets": ["...", "..."], "body": "...", "quality": {"groundedness": 0到1, "coverage": 0到1}, "notes": "..."}
+   - title：一句话命名（≤20 字），要能作为卡片/条目的标题。
+   - summary：2~4 句话的摘要，面向目标受众的通俗语言。
+   - bullets：3~6 条要点，每条≤40 字；不要机械罗列正文，要有「提炼」。
+   - body：完整的衍生正文，80~400 字；对 student/parent 用通俗语言并尽量举例，对 teacher 侧重命题点/易错点/讲法。
+   - quality.groundedness：本衍生内容与 source_snapshot 的贴合度（越贴近原文事实越高）。
+   - quality.coverage：对知识点核心要点的覆盖面。
+   - notes：可选，若 source_snapshot 明显信息不足或有歧义，写一句提醒；否则 ""。
+3. 禁止编造 source_snapshot 中没有的定义、公式、数值或题目；允许做通俗化解释与类比，但要与原文一致。
+4. 不要输出除上述字段外的其它键。
+
+derivative_type 语义参考：
+- concept_explainer：通俗化讲解，配合类比/例子。
+- exam_cheatsheet：考点速记卡，强调公式/要点/典型题型。
+- common_pitfalls：常见错误与纠正建议。
+- comparison：与易混知识点/概念的对比。
+- memory_tip：口诀/联想/图示思路的记忆方法。
+
+知识点：[[knowledge_point_name]]
+学科/学段：[[subject_grade]]
+目标受众（target_audience）：[[target_audience]]
+衍生类型（derivative_type）：[[derivative_type]]
+
+源快照 JSON（source_snapshot）：
+[[source_snapshot]]""",
+        },
+    },
+    {
         "prompt_key": "analyzer.ask.answer_generation.default",
         "display_name": "分析器-问答生成",
         "module_name": "analyzer",
@@ -367,6 +472,30 @@ PROMPT_STEP_DEFINITIONS = [
         "step_order": "knowledge-extraction",
         "description": "分析器构建知识图谱时使用的知识抽取提示词。",
         "prompt_key": "analyzer.knowledge_extraction.default",
+    },
+    {
+        "step_key": "analyzer.topic_docx_block_points",
+        "step_label": "分析器-专题DOCX块级知识点",
+        "module_name": "analyzer",
+        "step_order": "topic-docx-block-points",
+        "description": "专题 DOCX 按块调用大模型补充知识点名称（与正则规则互补）。",
+        "prompt_key": "analyzer.topic_docx_block_points.default",
+    },
+    {
+        "step_key": "analyzer.topic_docx_question_bridge",
+        "step_label": "分析器-专题题知识点桥接",
+        "module_name": "analyzer",
+        "step_order": "topic-docx-question-bridge",
+        "description": "专题材料每道题从候选知识点中由大模型挑选最相关项。",
+        "prompt_key": "analyzer.topic_docx_question_bridge.default",
+    },
+    {
+        "step_key": "analyzer.knowledge_derivative_generation",
+        "step_label": "分析器-知识点衍生内容",
+        "module_name": "analyzer",
+        "step_order": "knowledge-derivative",
+        "description": "知识点衍生层按类型+受众生成内容时使用的提示词。",
+        "prompt_key": "analyzer.knowledge_derivative.default",
     },
     {
         "step_key": "analyzer.ask.answer_generation",
