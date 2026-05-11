@@ -1,0 +1,54 @@
+{
+  "status": "success",
+  "analysis_mode": "bundle_contract_hybrid_retrieval_vlm_conclusion",
+  "message": "Bundle consumed successfully. Retrieval context, question-level VLM snapshots, and fused per-question conclusions have been prepared.",
+  "generated_at": "2026-03-26T04:24:01.003397Z",
+  "bundle_id": "run_20260325_133128",
+  "run_id": "run_20260325_133128",
+  "schema_version": "1.0",
+  "exam_context": {
+    "exam_id": null,
+    "paper_id": null,
+    "student_id": null,
+    "subject": null,
+    "grade": null,
+    "class_id": null,
+    "organization_id": null,
+    "source_mode": "unknown",
+    "workspace_name": "run_20260325_133128"
+  },
+  "input_stats": {
+    "total_questions": 17,
+    "answered_questions": 15,
+    "unanswered_questions": 0,
+    "uncertain_questions": 2,
+    "manual_review_questions": 2,
+    "sheet_count": 3
+  },
+  "summary": {
+    "total_questions": 17,
+    "answered_questions": 15,
+    "unanswered_questions": 0,
+    "uncertain_questions": 2,
+    "manual_review_questions": 2,
+    "ready_for_rag_questions": 15,
+    "retrieval_context_ready_questions": 0,
+    "retrieval_hit_questions": 17,
+    "vlm_analysis_ready_questions": 0,
+    "vlm_success_questions": 17,
+    "final_conclusion_ready_questions": 15,
+    "correct_questions": 16,
+    "incorrect_questions": 1,
+    "weak_mastery_questions": 0,
+    "completion_rate": 0.8824
+  },
+  "outputs": {
+    "question_analyses_file": "question_analyses.json",
+    "report_file": "analysis_report.json"
+  },
+  "manual_review_question_nos": [
+    "22",
+    "23"
+  ],
+  "warnings": []
+}

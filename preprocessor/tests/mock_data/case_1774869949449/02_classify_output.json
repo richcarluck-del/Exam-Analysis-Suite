@@ -1,0 +1,101 @@
+{
+  "set_id": "SET_20260330_6CA8",
+  "stitched_image_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\stitched_images\\SET_20260330_6CA8_stitched.jpg",
+  "sheets": [
+    {
+      "set_id": "SET_20260330_6CA8",
+      "sheet_id": "SET_20260330_6CA8_SHEET_005",
+      "order": 1,
+      "original_order": 5,
+      "sheet_type": "question_paper",
+      "layout": "full",
+      "original_image": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\compressed_images\\z.jpg",
+      "corrected_image": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\z_corrected.jpg",
+      "bbox_in_stitched": [
+        7656,
+        27,
+        9477,
+        1287
+      ],
+      "sheet_type_cn": "题目纸",
+      "physical_index": 4,
+      "reason": "该纸以题目内容为主，未见明确独立答题卡版式"
+    },
+    {
+      "set_id": "SET_20260330_6CA8",
+      "sheet_id": "SET_20260330_6CA8_SHEET_004",
+      "order": 2,
+      "original_order": 4,
+      "sheet_type": "question_paper",
+      "layout": "full",
+      "original_image": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\compressed_images\\j.jpg",
+      "corrected_image": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\j_corrected.jpg",
+      "bbox_in_stitched": [
+        5734,
+        0,
+        7606,
+        1314
+      ],
+      "sheet_type_cn": "题目纸",
+      "physical_index": 3,
+      "reason": "该纸以题目内容为主，未见明确独立答题卡版式"
+    },
+    {
+      "set_id": "SET_20260330_6CA8",
+      "sheet_id": "SET_20260330_6CA8_SHEET_002",
+      "order": 3,
+      "original_order": 2,
+      "sheet_type": "answer_sheet",
+      "layout": "full",
+      "original_image": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\compressed_images\\f.jpg",
+      "corrected_image": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\f_corrected.jpg",
+      "bbox_in_stitched": [
+        1910,
+        3,
+        3773,
+        1311
+      ],
+      "sheet_type_cn": "答题纸",
+      "physical_index": 1,
+      "reason": "该纸以填涂区、答题区域、手写作答为主"
+    },
+    {
+      "set_id": "SET_20260330_6CA8",
+      "sheet_id": "SET_20260330_6CA8_SHEET_003",
+      "order": 4,
+      "original_order": 3,
+      "sheet_type": "answer_sheet",
+      "layout": "full",
+      "original_image": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\compressed_images\\h.jpg",
+      "corrected_image": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\h_corrected.jpg",
+      "bbox_in_stitched": [
+        3823,
+        13,
+        5684,
+        1300
+      ],
+      "sheet_type_cn": "答题纸",
+      "physical_index": 2,
+      "reason": "该纸以填涂区、答题区域、手写作答为主"
+    },
+    {
+      "set_id": "SET_20260330_6CA8",
+      "sheet_id": "SET_20260330_6CA8_SHEET_001",
+      "order": 5,
+      "original_order": 1,
+      "sheet_type": "answer_sheet",
+      "layout": "full",
+      "original_image": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\compressed_images\\c.jpg",
+      "corrected_image": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\c_corrected.jpg",
+      "bbox_in_stitched": [
+        0,
+        10,
+        1860,
+        1303
+      ],
+      "sheet_type_cn": "答题纸",
+      "physical_index": 0,
+      "reason": "该纸以手写作答为主"
+    }
+  ]
+}

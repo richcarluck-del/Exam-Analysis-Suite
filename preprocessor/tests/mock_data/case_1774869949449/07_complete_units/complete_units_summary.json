@@ -1,0 +1,12 @@
+{
+  "total": 20,
+  "generated": 20,
+  "failed": 0,
+  "by_type": {
+    "objective": 10,
+    "subjective": 10,
+    "mixed": 0,
+    "no_answer": 0
+  },
+  "output_dir": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\07_complete_units"
+}

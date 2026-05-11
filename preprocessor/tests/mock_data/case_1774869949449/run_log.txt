@@ -1,0 +1,112 @@
+================================================================================
+测试运行日志
+================================================================================
+
+开始时间：2026-03-30 19:25:50
+结束时间：2026-03-30 19:41:25
+总耗时：934.56 秒
+工作目录：D:\10739\Exam-Analysis-Suite\preprocessor\tests\mock_data\case_1774869949449
+
+================================================================================
+LLM 调用记录
+================================================================================
+
+[1] perspective_correction
+    时间：2026-03-30T19:26:23.960371
+    模型：qwen3.5-plus
+    Temperature: 0.1
+    Seed: None
+    耗时：30.41秒
+    输入图片：D:\10739\Exam-Analysis-Suite\preprocessor\tests\mock_data\case_1774869949449\compressed_images\c.jpg
+    图片 Hash: 97d675c0b89af6a8b0777118221875f45b65652c142e71bc7b04c6ba35c4eab8
+
+[2] perspective_correction
+    时间：2026-03-30T19:27:00.257023
+    模型：qwen3.5-plus
+    Temperature: 0.1
+    Seed: None
+    耗时：36.09秒
+    输入图片：D:\10739\Exam-Analysis-Suite\preprocessor\tests\mock_data\case_1774869949449\compressed_images\f.jpg
+    图片 Hash: a8c212fcf467c5900c274735cb4e40a439e5176e4fddafb4e58dfc7c48b9888f
+
+[3] perspective_correction
+    时间：2026-03-30T19:27:25.956317
+    模型：qwen3.5-plus
+    Temperature: 0.1
+    Seed: None
+    耗时：25.55秒
+    输入图片：D:\10739\Exam-Analysis-Suite\preprocessor\tests\mock_data\case_1774869949449\compressed_images\h.jpg
+    图片 Hash: 7048c98100b92dd706a127a96600fb05f7459f5f08f7e2889fc51daa57c9968b
+
+[4] perspective_correction
+    时间：2026-03-30T19:28:08.757891
+    模型：qwen3.5-plus
+    Temperature: 0.1
+    Seed: None
+    耗时：42.66秒
+    输入图片：D:\10739\Exam-Analysis-Suite\preprocessor\tests\mock_data\case_1774869949449\compressed_images\j.jpg
+    图片 Hash: 348c66179108fc26880db6113a828d77ec462506d14ae92c75532030dda4de47
+
+[5] perspective_correction
+    时间：2026-03-30T19:28:42.626447
+    模型：qwen3.5-plus
+    Temperature: 0.1
+    Seed: None
+    耗时：33.74秒
+    输入图片：D:\10739\Exam-Analysis-Suite\preprocessor\tests\mock_data\case_1774869949449\compressed_images\z.jpg
+    图片 Hash: a1ac7c8bd0cc46a95e8ea72b398e46fe3c1a3f65da7d8a3d9ae7674c0d14d246
+
+[6] long_image_classification
+    时间：2026-03-30T19:36:44.701517
+    模型：qwen3.5-plus
+    Temperature: 0.1
+    Seed: None
+    耗时：481.70秒
+    输入图片：D:\10739\Exam-Analysis-Suite\preprocessor\tests\mock_data\case_1774869949449\stitched_images\SET_20260330_6CA8_stitched.jpg
+    图片 Hash: e8d585fe1eadd37a3d97c156d3b6c2e6005af44cacebb6aa6a29c5e498cc4b5f
+
+[7] content_extraction_question_paper
+    时间：2026-03-30T19:38:07.958872
+    模型：qwen3.5-plus
+    Temperature: 0.1
+    Seed: None
+    耗时：83.21秒
+    输入图片：D:\10739\Exam-Analysis-Suite\preprocessor\tests\mock_data\case_1774869949449\corrected_images\z_corrected.jpg
+    图片 Hash: 6395c8bcba69f521c869f0ef9d414b8660f121eb0dd858b9f366483b6cab7dd1
+
+[8] content_extraction_question_paper
+    时间：2026-03-30T19:39:04.078479
+    模型：qwen3.5-plus
+    Temperature: 0.1
+    Seed: None
+    耗时：55.81秒
+    输入图片：D:\10739\Exam-Analysis-Suite\preprocessor\tests\mock_data\case_1774869949449\corrected_images\j_corrected.jpg
+    图片 Hash: 8a8f711fb444fbba2606f6dadcc8e4773217353465f5532000e87b8554105bb7
+
+[9] content_extraction_answer_sheet
+    时间：2026-03-30T19:39:39.071517
+    模型：qwen3.5-plus
+    Temperature: 0.1
+    Seed: None
+    耗时：34.77秒
+    输入图片：D:\10739\Exam-Analysis-Suite\preprocessor\tests\mock_data\case_1774869949449\corrected_images\f_corrected.jpg
+    图片 Hash: 62775e442a04bef9cbc9af5d566bf24a5238590401da4914ac48a9b9f73a2107
+
+[10] content_extraction_answer_sheet
+    时间：2026-03-30T19:40:38.929743
+    模型：qwen3.5-plus
+    Temperature: 0.1
+    Seed: None
+    耗时：59.83秒
+    输入图片：D:\10739\Exam-Analysis-Suite\preprocessor\tests\mock_data\case_1774869949449\corrected_images\h_corrected.jpg
+    图片 Hash: 4bf84eeb38bcf933e32cfe4283787188d4707e8de96ffb27a9c6c3a95491f242
+
+[11] content_extraction_answer_sheet
+    时间：2026-03-30T19:41:11.765321
+    模型：qwen3.5-plus
+    Temperature: 0.1
+    Seed: None
+    耗时：32.82秒
+    输入图片：D:\10739\Exam-Analysis-Suite\preprocessor\tests\mock_data\case_1774869949449\corrected_images\c_corrected.jpg
+    图片 Hash: 98c9eac16621de159dc0cc30429aa147d82ee30620c1cd1ccce108c3d6dc5748
+

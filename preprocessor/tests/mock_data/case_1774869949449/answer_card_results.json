@@ -1,0 +1,38 @@
+{
+  "1-21": {
+    "crop_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\answer_card_areas\\answer_card_1-21.jpg",
+    "bbox": {
+      "top_left": [
+        66,
+        383
+      ],
+      "top_right": [
+        500,
+        383
+      ],
+      "bottom_right": [
+        500,
+        480
+      ],
+      "bottom_left": [
+        66,
+        480
+      ]
+    },
+    "description": "客观题填涂区（1-10题）",
+    "sheet_id": "SET_20260330_6CA8_SHEET_003",
+    "sheet_type": "answer_sheet",
+    "answers": {
+      "1": "C",
+      "2": "B",
+      "3": "D",
+      "4": "D",
+      "5": "A",
+      "6": "D",
+      "7": "C",
+      "8": "A",
+      "9": "A",
+      "10": "B"
+    }
+  }
+}

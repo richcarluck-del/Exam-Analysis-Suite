@@ -1,0 +1,82 @@
+{
+  "set_id": "SET_20260330_6CA8",
+  "correction_map": [
+    {
+      "original_image_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\compressed_images\\c.jpg",
+      "corrected_image_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\c_corrected.jpg"
+    },
+    {
+      "original_image_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\compressed_images\\f.jpg",
+      "corrected_image_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\f_corrected.jpg"
+    },
+    {
+      "original_image_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\compressed_images\\h.jpg",
+      "corrected_image_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\h_corrected.jpg"
+    },
+    {
+      "original_image_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\compressed_images\\j.jpg",
+      "corrected_image_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\j_corrected.jpg"
+    },
+    {
+      "original_image_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\compressed_images\\z.jpg",
+      "corrected_image_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\z_corrected.jpg"
+    }
+  ],
+  "sheet_metadata": [
+    {
+      "set_id": "SET_20260330_6CA8",
+      "sheet_id": "SET_20260330_6CA8_SHEET_001",
+      "order": null,
+      "original_order": 1,
+      "sheet_type": null,
+      "layout": "full",
+      "original_image": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\compressed_images\\c.jpg",
+      "corrected_image": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\c_corrected.jpg",
+      "bbox_in_stitched": null
+    },
+    {
+      "set_id": "SET_20260330_6CA8",
+      "sheet_id": "SET_20260330_6CA8_SHEET_002",
+      "order": null,
+      "original_order": 2,
+      "sheet_type": null,
+      "layout": "full",
+      "original_image": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\compressed_images\\f.jpg",
+      "corrected_image": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\f_corrected.jpg",
+      "bbox_in_stitched": null
+    },
+    {
+      "set_id": "SET_20260330_6CA8",
+      "sheet_id": "SET_20260330_6CA8_SHEET_003",
+      "order": null,
+      "original_order": 3,
+      "sheet_type": null,
+      "layout": "full",
+      "original_image": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\compressed_images\\h.jpg",
+      "corrected_image": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\h_corrected.jpg",
+      "bbox_in_stitched": null
+    },
+    {
+      "set_id": "SET_20260330_6CA8",
+      "sheet_id": "SET_20260330_6CA8_SHEET_004",
+      "order": null,
+      "original_order": 4,
+      "sheet_type": null,
+      "layout": "full",
+      "original_image": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\compressed_images\\j.jpg",
+      "corrected_image": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\j_corrected.jpg",
+      "bbox_in_stitched": null
+    },
+    {
+      "set_id": "SET_20260330_6CA8",
+      "sheet_id": "SET_20260330_6CA8_SHEET_005",
+      "order": null,
+      "original_order": 5,
+      "sheet_type": null,
+      "layout": "full",
+      "original_image": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\compressed_images\\z.jpg",
+      "corrected_image": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\z_corrected.jpg",
+      "bbox_in_stitched": null
+    }
+  ]
+}

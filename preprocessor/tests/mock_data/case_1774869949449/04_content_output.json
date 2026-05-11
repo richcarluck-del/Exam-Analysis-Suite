@@ -1,0 +1,2794 @@
+[
+  {
+    "source_image_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\compressed_images\\z.jpg",
+    "source_corrected_image": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\z_corrected.jpg",
+    "part_image_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\z_corrected.jpg",
+    "page_type": "question_paper",
+    "page_index": 1,
+    "part_type": "whole",
+    "crop_area": [
+      0,
+      0,
+      1821,
+      1260
+    ],
+    "divider_x": 0,
+    "sheet_id": "SET_20260330_6CA8_SHEET_005",
+    "sheet_type": "question_paper",
+    "order": 1,
+    "vlm_output": {
+      "questions": [
+        {
+          "number": "1",
+          "points": {
+            "top_left": [
+              71,
+              339
+            ],
+            "top_right": [
+              513,
+              339
+            ],
+            "bottom_right": [
+              513,
+              417
+            ],
+            "bottom_left": [
+              71,
+              417
+            ]
+          },
+          "description": "第 1 题：已知集合 A={0,2}, B={-1,0,1}, 则集合 A∪B=",
+          "original_points": {
+            "top_left": [
+              126,
+              366
+            ],
+            "top_right": [
+              492,
+              366
+            ],
+            "bottom_right": [
+              492,
+              415
+            ],
+            "bottom_left": [
+              126,
+              415
+            ]
+          },
+          "question_slice_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\question_slices\\SET_20260330_6CA8_SHEET_005\\Q001.jpg",
+          "source_image_for_crop": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\z_corrected.jpg",
+          "crop_debug": {
+            "mode": "question",
+            "crop_area": [
+              0,
+              0,
+              1821,
+              1260
+            ],
+            "hard_guard_bounds": [
+              0,
+              0,
+              935,
+              525
+            ],
+            "soft_guard_bounds": [
+              0,
+              0,
+              935,
+              525
+            ],
+            "peer_box_count": 14,
+            "original_page_box": [
+              229,
+              461,
+              896,
+              523
+            ],
+            "refined_page_box": [
+              130,
+              427,
+              935,
+              525
+            ],
+            "page_ocr_backend": "opencv_fallback",
+            "text_block_count": 188,
+            "question_anchor_count": 0
+          },
+          "refine_flags": [
+            "dynamic_expand",
+            "edge_expand_bottom",
+            "edge_expand_left",
+            "edge_expand_right",
+            "edge_expand_top"
+          ]
+        },
+        {
+          "number": "2",
+          "points": {
+            "top_left": [
+              71,
+              409
+            ],
+            "top_right": [
+              513,
+              409
+            ],
+            "bottom_right": [
+              513,
+              483
+            ],
+            "bottom_left": [
+              71,
+              483
+            ]
+          },
+          "description": "第 2 题：命题“∀x∈R, x²-2x+4≤0”的否定为",
+          "original_points": {
+            "top_left": [
+              126,
+              418
+            ],
+            "top_right": [
+              492,
+              418
+            ],
+            "bottom_right": [
+              492,
+              480
+            ],
+            "bottom_left": [
+              126,
+              480
+            ]
+          },
+          "question_slice_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\question_slices\\SET_20260330_6CA8_SHEET_005\\Q002.jpg",
+          "source_image_for_crop": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\z_corrected.jpg",
+          "crop_debug": {
+            "mode": "question",
+            "crop_area": [
+              0,
+              0,
+              1821,
+              1260
+            ],
+            "hard_guard_bounds": [
+              0,
+              527,
+              935,
+              609
+            ],
+            "soft_guard_bounds": [
+              0,
+              515,
+              935,
+              609
+            ],
+            "peer_box_count": 14,
+            "original_page_box": [
+              229,
+              527,
+              896,
+              605
+            ],
+            "refined_page_box": [
+              130,
+              515,
+              935,
+              609
+            ],
+            "page_ocr_backend": "opencv_fallback",
+            "text_block_count": 188,
+            "question_anchor_count": 0
+          },
+          "refine_flags": [
+            "dynamic_expand",
+            "edge_expand_bottom",
+            "edge_expand_left",
+            "edge_expand_right",
+            "edge_expand_top"
+          ]
+        },
+        {
+          "number": "3",
+          "points": {
+            "top_left": [
+              71,
+              475
+            ],
+            "top_right": [
+              513,
+              475
+            ],
+            "bottom_right": [
+              513,
+              579
+            ],
+            "bottom_left": [
+              71,
+              579
+            ]
+          },
+          "description": "第 3 题：若函数 f(x)={x²+1, x≤1; 2/x, x>1}, 则 f(f(3))=",
+          "original_points": {
+            "top_left": [
+              126,
+              485
+            ],
+            "top_right": [
+              492,
+              485
+            ],
+            "bottom_right": [
+              492,
+              575
+            ],
+            "bottom_left": [
+              126,
+              575
+            ]
+          },
+          "question_slice_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\question_slices\\SET_20260330_6CA8_SHEET_005\\Q003.jpg",
+          "source_image_for_crop": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\z_corrected.jpg",
+          "crop_debug": {
+            "mode": "question",
+            "crop_area": [
+              0,
+              0,
+              1821,
+              1260
+            ],
+            "hard_guard_bounds": [
+              0,
+              611,
+              935,
+              729
+            ],
+            "soft_guard_bounds": [
+              0,
+              599,
+              935,
+              729
+            ],
+            "peer_box_count": 14,
+            "original_page_box": [
+              229,
+              611,
+              896,
+              724
+            ],
+            "refined_page_box": [
+              130,
+              599,
+              935,
+              729
+            ],
+            "page_ocr_backend": "opencv_fallback",
+            "text_block_count": 188,
+            "question_anchor_count": 0
+          },
+          "refine_flags": [
+            "dynamic_expand",
+            "edge_expand_bottom",
+            "edge_expand_left",
+            "edge_expand_right",
+            "edge_expand_top"
+          ]
+        },
+        {
+          "number": "4",
+          "points": {
+            "top_left": [
+              71,
+              571
+            ],
+            "top_right": [
+              513,
+              571
+            ],
+            "bottom_right": [
+              513,
+              638
+            ],
+            "bottom_left": [
+              71,
+              638
+            ]
+          },
+          "description": "第 4 题：若 a,b,c∈R, a>b, 则",
+          "original_points": {
+            "top_left": [
+              126,
+              580
+            ],
+            "top_right": [
+              492,
+              580
+            ],
+            "bottom_right": [
+              492,
+              635
+            ],
+            "bottom_left": [
+              126,
+              635
+            ]
+          },
+          "question_slice_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\question_slices\\SET_20260330_6CA8_SHEET_005\\Q004.jpg",
+          "source_image_for_crop": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\z_corrected.jpg",
+          "crop_debug": {
+            "mode": "question",
+            "crop_area": [
+              0,
+              0,
+              1821,
+              1260
+            ],
+            "hard_guard_bounds": [
+              0,
+              731,
+              935,
+              804
+            ],
+            "soft_guard_bounds": [
+              0,
+              719,
+              935,
+              804
+            ],
+            "peer_box_count": 14,
+            "original_page_box": [
+              229,
+              731,
+              896,
+              800
+            ],
+            "refined_page_box": [
+              130,
+              719,
+              935,
+              804
+            ],
+            "page_ocr_backend": "opencv_fallback",
+            "text_block_count": 188,
+            "question_anchor_count": 0
+          },
+          "refine_flags": [
+            "dynamic_expand",
+            "edge_expand_bottom",
+            "edge_expand_left",
+            "edge_expand_right",
+            "edge_expand_top"
+          ]
+        },
+        {
+          "number": "5",
+          "points": {
+            "top_left": [
+              71,
+              630
+            ],
+            "top_right": [
+              513,
+              630
+            ],
+            "bottom_right": [
+              513,
+              698
+            ],
+            "bottom_left": [
+              71,
+              698
+            ]
+          },
+          "description": "第 5 题：已知函数 f(x) 为奇函数, 且当 x>0 时, f(x)=x²-2/x, 则 f(-1)=",
+          "original_points": {
+            "top_left": [
+              126,
+              640
+            ],
+            "top_right": [
+              492,
+              640
+            ],
+            "bottom_right": [
+              492,
+              695
+            ],
+            "bottom_left": [
+              126,
+              695
+            ]
+          },
+          "question_slice_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\question_slices\\SET_20260330_6CA8_SHEET_005\\Q005.jpg",
+          "source_image_for_crop": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\z_corrected.jpg",
+          "crop_debug": {
+            "mode": "question",
+            "crop_area": [
+              0,
+              0,
+              1821,
+              1260
+            ],
+            "hard_guard_bounds": [
+              0,
+              806,
+              935,
+              880
+            ],
+            "soft_guard_bounds": [
+              0,
+              794,
+              935,
+              880
+            ],
+            "peer_box_count": 14,
+            "original_page_box": [
+              229,
+              806,
+              896,
+              876
+            ],
+            "refined_page_box": [
+              130,
+              794,
+              935,
+              880
+            ],
+            "page_ocr_backend": "opencv_fallback",
+            "text_block_count": 188,
+            "question_anchor_count": 0
+          },
+          "refine_flags": [
+            "dynamic_expand",
+            "edge_expand_bottom",
+            "edge_expand_left",
+            "edge_expand_right",
+            "edge_expand_top"
+          ]
+        },
+        {
+          "number": "6",
+          "points": {
+            "top_left": [
+              71,
+              690
+            ],
+            "top_right": [
+              513,
+              690
+            ],
+            "bottom_right": [
+              513,
+              759
+            ],
+            "bottom_left": [
+              71,
+              759
+            ]
+          },
+          "description": "第 6 题：下列四个函数中, 在 (0,+∞) 上单调递减的是",
+          "original_points": {
+            "top_left": [
+              126,
+              700
+            ],
+            "top_right": [
+              492,
+              700
+            ],
+            "bottom_right": [
+              492,
+              755
+            ],
+            "bottom_left": [
+              126,
+              755
+            ]
+          },
+          "question_slice_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\question_slices\\SET_20260330_6CA8_SHEET_005\\Q006.jpg",
+          "source_image_for_crop": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\z_corrected.jpg",
+          "crop_debug": {
+            "mode": "question",
+            "crop_area": [
+              0,
+              0,
+              1821,
+              1260
+            ],
+            "hard_guard_bounds": [
+              0,
+              881,
+              935,
+              956
+            ],
+            "soft_guard_bounds": [
+              0,
+              869,
+              935,
+              956
+            ],
+            "peer_box_count": 14,
+            "original_page_box": [
+              229,
+              882,
+              896,
+              951
+            ],
+            "refined_page_box": [
+              130,
+              869,
+              935,
+              956
+            ],
+            "page_ocr_backend": "opencv_fallback",
+            "text_block_count": 188,
+            "question_anchor_count": 0
+          },
+          "refine_flags": [
+            "dynamic_expand",
+            "edge_expand_bottom",
+            "edge_expand_left",
+            "edge_expand_right",
+            "edge_expand_top"
+          ]
+        },
+        {
+          "number": "7",
+          "points": {
+            "top_left": [
+              71,
+              751
+            ],
+            "top_right": [
+              513,
+              751
+            ],
+            "bottom_right": [
+              513,
+              935
+            ],
+            "bottom_left": [
+              71,
+              935
+            ]
+          },
+          "description": "第 7 题：已知函数 f(x) 是定义在 R 上的偶函数, 当 x≥0 时, f(x)=x-x², 则下列说法错误的是",
+          "original_points": {
+            "top_left": [
+              126,
+              760
+            ],
+            "top_right": [
+              492,
+              760
+            ],
+            "bottom_right": [
+              492,
+              885
+            ],
+            "bottom_left": [
+              126,
+              885
+            ]
+          },
+          "question_slice_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\question_slices\\SET_20260330_6CA8_SHEET_005\\Q007.jpg",
+          "source_image_for_crop": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\z_corrected.jpg",
+          "crop_debug": {
+            "mode": "question",
+            "crop_area": [
+              0,
+              0,
+              1821,
+              1260
+            ],
+            "hard_guard_bounds": [
+              0,
+              958,
+              935,
+              1260
+            ],
+            "soft_guard_bounds": [
+              0,
+              946,
+              935,
+              1260
+            ],
+            "peer_box_count": 14,
+            "original_page_box": [
+              229,
+              958,
+              896,
+              1115
+            ],
+            "refined_page_box": [
+              130,
+              946,
+              935,
+              1178
+            ],
+            "page_ocr_backend": "opencv_fallback",
+            "text_block_count": 188,
+            "question_anchor_count": 0
+          },
+          "refine_flags": [
+            "dynamic_expand",
+            "edge_expand_bottom",
+            "edge_expand_left",
+            "edge_expand_right",
+            "edge_expand_top"
+          ]
+        },
+        {
+          "number": "8",
+          "points": {
+            "top_left": [
+              481,
+              83
+            ],
+            "top_right": [
+              954,
+              83
+            ],
+            "bottom_right": [
+              954,
+              168
+            ],
+            "bottom_left": [
+              481,
+              168
+            ]
+          },
+          "description": "第 8 题：设 m∈R 且 m≠0, 则 m+4/m≥4 的一个必要不充分条件是",
+          "original_points": {
+            "top_left": [
+              535,
+              110
+            ],
+            "top_right": [
+              900,
+              110
+            ],
+            "bottom_right": [
+              900,
+              165
+            ],
+            "bottom_left": [
+              535,
+              165
+            ]
+          },
+          "question_slice_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\question_slices\\SET_20260330_6CA8_SHEET_005\\Q008.jpg",
+          "source_image_for_crop": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\z_corrected.jpg",
+          "crop_debug": {
+            "mode": "question",
+            "crop_area": [
+              0,
+              0,
+              1821,
+              1260
+            ],
+            "hard_guard_bounds": [
+              0,
+              0,
+              1821,
+              212
+            ],
+            "soft_guard_bounds": [
+              0,
+              0,
+              1821,
+              212
+            ],
+            "peer_box_count": 14,
+            "original_page_box": [
+              974,
+              139,
+              1639,
+              208
+            ],
+            "refined_page_box": [
+              876,
+              105,
+              1737,
+              212
+            ],
+            "page_ocr_backend": "opencv_fallback",
+            "text_block_count": 188,
+            "question_anchor_count": 0
+          },
+          "refine_flags": [
+            "dynamic_expand",
+            "edge_expand_bottom",
+            "edge_expand_left",
+            "edge_expand_right",
+            "edge_expand_top"
+          ]
+        },
+        {
+          "number": "9",
+          "points": {
+            "top_left": [
+              481,
+              160
+            ],
+            "top_right": [
+              954,
+              160
+            ],
+            "bottom_right": [
+              954,
+              279
+            ],
+            "bottom_left": [
+              481,
+              279
+            ]
+          },
+          "description": "第 9 题：已知函数 f(x)={x², x≥0; ax-1, x<0}, 若存在实数 x₀(x₀≠0), 使得 f(-x₀)=f(x₀) 成立, 则实数 a 的取值范围是",
+          "original_points": {
+            "top_left": [
+              535,
+              170
+            ],
+            "top_right": [
+              900,
+              170
+            ],
+            "bottom_right": [
+              900,
+              275
+            ],
+            "bottom_left": [
+              535,
+              275
+            ]
+          },
+          "question_slice_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\question_slices\\SET_20260330_6CA8_SHEET_005\\Q009.jpg",
+          "source_image_for_crop": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\z_corrected.jpg",
+          "crop_debug": {
+            "mode": "question",
+            "crop_area": [
+              0,
+              0,
+              1821,
+              1260
+            ],
+            "hard_guard_bounds": [
+              0,
+              214,
+              1821,
+              351
+            ],
+            "soft_guard_bounds": [
+              0,
+              202,
+              1821,
+              351
+            ],
+            "peer_box_count": 14,
+            "original_page_box": [
+              974,
+              214,
+              1639,
+              346
+            ],
+            "refined_page_box": [
+              876,
+              202,
+              1737,
+              351
+            ],
+            "page_ocr_backend": "opencv_fallback",
+            "text_block_count": 188,
+            "question_anchor_count": 0
+          },
+          "refine_flags": [
+            "dynamic_expand",
+            "edge_expand_bottom",
+            "edge_expand_left",
+            "edge_expand_right",
+            "edge_expand_top"
+          ]
+        },
+        {
+          "number": "10",
+          "points": {
+            "top_left": [
+              514,
+              271
+            ],
+            "top_right": [
+              954,
+              271
+            ],
+            "bottom_right": [
+              954,
+              449
+            ],
+            "bottom_left": [
+              514,
+              449
+            ]
+          },
+          "description": "第 10 题：已知集合 A={(x₁,x₂,⋯,x₁₀)|xᵢ=1 或 0, i=1,2,⋯,10}, 对于集合 A 中的任意元素 p=(p₁,p₂,⋯,p₁₀) 和 q=(q₁,q₂,⋯,q₁₀)...",
+          "original_points": {
+            "top_left": [
+              535,
+              280
+            ],
+            "top_right": [
+              900,
+              280
+            ],
+            "bottom_right": [
+              900,
+              415
+            ],
+            "bottom_left": [
+              535,
+              415
+            ]
+          },
+          "question_slice_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\question_slices\\SET_20260330_6CA8_SHEET_005\\Q010.jpg",
+          "source_image_for_crop": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\z_corrected.jpg",
+          "crop_debug": {
+            "mode": "question",
+            "crop_area": [
+              0,
+              0,
+              1821,
+              1260
+            ],
+            "hard_guard_bounds": [
+              954,
+              353,
+              1821,
+              566
+            ],
+            "soft_guard_bounds": [
+              936,
+              341,
+              1821,
+              566
+            ],
+            "peer_box_count": 14,
+            "original_page_box": [
+              974,
+              353,
+              1639,
+              523
+            ],
+            "refined_page_box": [
+              936,
+              341,
+              1737,
+              566
+            ],
+            "page_ocr_backend": "opencv_fallback",
+            "text_block_count": 188,
+            "question_anchor_count": 0
+          },
+          "refine_flags": [
+            "dynamic_expand",
+            "edge_expand_bottom",
+            "edge_expand_left",
+            "edge_expand_right",
+            "edge_expand_top"
+          ]
+        },
+        {
+          "number": "11",
+          "points": {
+            "top_left": [
+              514,
+              441
+            ],
+            "top_right": [
+              954,
+              441
+            ],
+            "bottom_right": [
+              954,
+              498
+            ],
+            "bottom_left": [
+              514,
+              498
+            ]
+          },
+          "description": "第 11 题：函数 f(x)=1/x + √(x+2) 的定义域为",
+          "original_points": {
+            "top_left": [
+              535,
+              455
+            ],
+            "top_right": [
+              900,
+              455
+            ],
+            "bottom_right": [
+              900,
+              495
+            ],
+            "bottom_left": [
+              535,
+              495
+            ]
+          },
+          "question_slice_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\question_slices\\SET_20260330_6CA8_SHEET_005\\Q011.jpg",
+          "source_image_for_crop": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\z_corrected.jpg",
+          "crop_debug": {
+            "mode": "question",
+            "crop_area": [
+              0,
+              0,
+              1821,
+              1260
+            ],
+            "hard_guard_bounds": [
+              954,
+              568,
+              1821,
+              628
+            ],
+            "soft_guard_bounds": [
+              936,
+              556,
+              1821,
+              628
+            ],
+            "peer_box_count": 14,
+            "original_page_box": [
+              974,
+              573,
+              1639,
+              624
+            ],
+            "refined_page_box": [
+              936,
+              556,
+              1737,
+              628
+            ],
+            "page_ocr_backend": "opencv_fallback",
+            "text_block_count": 188,
+            "question_anchor_count": 0
+          },
+          "refine_flags": [
+            "dynamic_expand",
+            "edge_expand_bottom",
+            "edge_expand_left",
+            "edge_expand_right",
+            "edge_expand_top"
+          ]
+        },
+        {
+          "number": "12",
+          "points": {
+            "top_left": [
+              514,
+              493
+            ],
+            "top_right": [
+              954,
+              493
+            ],
+            "bottom_right": [
+              954,
+              538
+            ],
+            "bottom_left": [
+              514,
+              538
+            ]
+          },
+          "description": "第 12 题：若关于 x 的不等式 ax²+bx-2>0 的解集是 (-∞,-2)∪(1,+∞), 则 a+b=",
+          "original_points": {
+            "top_left": [
+              535,
+              500
+            ],
+            "top_right": [
+              900,
+              500
+            ],
+            "bottom_right": [
+              900,
+              535
+            ],
+            "bottom_left": [
+              535,
+              535
+            ]
+          },
+          "question_slice_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\question_slices\\SET_20260330_6CA8_SHEET_005\\Q012.jpg",
+          "source_image_for_crop": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\z_corrected.jpg",
+          "crop_debug": {
+            "mode": "question",
+            "crop_area": [
+              0,
+              0,
+              1821,
+              1260
+            ],
+            "hard_guard_bounds": [
+              954,
+              629,
+              1821,
+              678
+            ],
+            "soft_guard_bounds": [
+              936,
+              617,
+              1821,
+              678
+            ],
+            "peer_box_count": 14,
+            "original_page_box": [
+              974,
+              630,
+              1639,
+              674
+            ],
+            "refined_page_box": [
+              936,
+              621,
+              1737,
+              678
+            ],
+            "page_ocr_backend": "opencv_fallback",
+            "text_block_count": 188,
+            "question_anchor_count": 0
+          },
+          "refine_flags": [
+            "dynamic_expand",
+            "edge_expand_bottom",
+            "edge_expand_left",
+            "edge_expand_right",
+            "edge_expand_top"
+          ]
+        },
+        {
+          "number": "13",
+          "points": {
+            "top_left": [
+              514,
+              530
+            ],
+            "top_right": [
+              954,
+              530
+            ],
+            "bottom_right": [
+              954,
+              598
+            ],
+            "bottom_left": [
+              514,
+              598
+            ]
+          },
+          "description": "第 13 题：设函数 f(x)=-x²+2ax+3. 若 f(x) 在区间 (-∞,2] 上是增函数, 则实数 a 的一个取值为__, a 的最小值为__",
+          "original_points": {
+            "top_left": [
+              535,
+              540
+            ],
+            "top_right": [
+              900,
+              540
+            ],
+            "bottom_right": [
+              900,
+              595
+            ],
+            "bottom_left": [
+              535,
+              595
+            ]
+          },
+          "question_slice_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\question_slices\\SET_20260330_6CA8_SHEET_005\\Q013.jpg",
+          "source_image_for_crop": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\z_corrected.jpg",
+          "crop_debug": {
+            "mode": "question",
+            "crop_area": [
+              0,
+              0,
+              1821,
+              1260
+            ],
+            "hard_guard_bounds": [
+              954,
+              680,
+              1821,
+              754
+            ],
+            "soft_guard_bounds": [
+              936,
+              668,
+              1821,
+              754
+            ],
+            "peer_box_count": 14,
+            "original_page_box": [
+              974,
+              680,
+              1639,
+              750
+            ],
+            "refined_page_box": [
+              936,
+              668,
+              1737,
+              754
+            ],
+            "page_ocr_backend": "opencv_fallback",
+            "text_block_count": 188,
+            "question_anchor_count": 0
+          },
+          "refine_flags": [
+            "dynamic_expand",
+            "edge_expand_bottom",
+            "edge_expand_left",
+            "edge_expand_right",
+            "edge_expand_top"
+          ]
+        },
+        {
+          "number": "14",
+          "points": {
+            "top_left": [
+              514,
+              590
+            ],
+            "top_right": [
+              954,
+              590
+            ],
+            "bottom_right": [
+              954,
+              659
+            ],
+            "bottom_left": [
+              514,
+              659
+            ]
+          },
+          "description": "第 14 题：已知定义在 R 上的奇函数 f(x) 满足: 对任意的 x∈R, 都有 f(x+3)=-f(x), 且当 x∈(0,3/2] 时, f(x)=x², 则 f(9/4)=",
+          "original_points": {
+            "top_left": [
+              535,
+              600
+            ],
+            "top_right": [
+              900,
+              600
+            ],
+            "bottom_right": [
+              900,
+              655
+            ],
+            "bottom_left": [
+              535,
+              655
+            ]
+          },
+          "question_slice_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\question_slices\\SET_20260330_6CA8_SHEET_005\\Q014.jpg",
+          "source_image_for_crop": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\z_corrected.jpg",
+          "crop_debug": {
+            "mode": "question",
+            "crop_area": [
+              0,
+              0,
+              1821,
+              1260
+            ],
+            "hard_guard_bounds": [
+              954,
+              755,
+              1821,
+              830
+            ],
+            "soft_guard_bounds": [
+              936,
+              743,
+              1821,
+              830
+            ],
+            "peer_box_count": 14,
+            "original_page_box": [
+              974,
+              756,
+              1639,
+              825
+            ],
+            "refined_page_box": [
+              936,
+              743,
+              1737,
+              830
+            ],
+            "page_ocr_backend": "opencv_fallback",
+            "text_block_count": 188,
+            "question_anchor_count": 0
+          },
+          "refine_flags": [
+            "dynamic_expand",
+            "edge_expand_bottom",
+            "edge_expand_left",
+            "edge_expand_right",
+            "edge_expand_top"
+          ]
+        },
+        {
+          "number": "15",
+          "points": {
+            "top_left": [
+              514,
+              651
+            ],
+            "top_right": [
+              954,
+              651
+            ],
+            "bottom_right": [
+              954,
+              859
+            ],
+            "bottom_left": [
+              514,
+              859
+            ]
+          },
+          "description": "第 15 题：已知符号 [x] 表示不超过 x 的最大整数, 若函数 f(x)=[x]/x (x≠0), 给出下列四个结论...",
+          "original_points": {
+            "top_left": [
+              535,
+              660
+            ],
+            "top_right": [
+              900,
+              660
+            ],
+            "bottom_right": [
+              900,
+              805
+            ],
+            "bottom_left": [
+              535,
+              805
+            ]
+          },
+          "question_slice_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\question_slices\\SET_20260330_6CA8_SHEET_005\\Q015.jpg",
+          "source_image_for_crop": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\z_corrected.jpg",
+          "crop_debug": {
+            "mode": "question",
+            "crop_area": [
+              0,
+              0,
+              1821,
+              1260
+            ],
+            "hard_guard_bounds": [
+              954,
+              832,
+              1821,
+              1260
+            ],
+            "soft_guard_bounds": [
+              936,
+              820,
+              1821,
+              1260
+            ],
+            "peer_box_count": 14,
+            "original_page_box": [
+              974,
+              832,
+              1639,
+              1014
+            ],
+            "refined_page_box": [
+              936,
+              820,
+              1737,
+              1082
+            ],
+            "page_ocr_backend": "opencv_fallback",
+            "text_block_count": 188,
+            "question_anchor_count": 0
+          },
+          "refine_flags": [
+            "dynamic_expand",
+            "edge_expand_bottom",
+            "edge_expand_left",
+            "edge_expand_right",
+            "edge_expand_top"
+          ]
+        }
+      ]
+    },
+    "page_ocr_backend": "opencv_fallback"
+  },
+  {
+    "source_image_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\compressed_images\\j.jpg",
+    "source_corrected_image": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\j_corrected.jpg",
+    "part_image_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\j_corrected.jpg",
+    "page_type": "question_paper",
+    "page_index": 2,
+    "part_type": "whole",
+    "crop_area": [
+      0,
+      0,
+      1872,
+      1314
+    ],
+    "divider_x": 0,
+    "sheet_id": "SET_20260330_6CA8_SHEET_004",
+    "sheet_type": "question_paper",
+    "order": 2,
+    "vlm_output": {
+      "questions": [
+        {
+          "number": "16",
+          "points": {
+            "top_left": [
+              69,
+              94
+            ],
+            "top_right": [
+              546,
+              94
+            ],
+            "bottom_right": [
+              546,
+              266
+            ],
+            "bottom_left": [
+              69,
+              266
+            ]
+          },
+          "description": "第 16 题：(本小题 11 分) 已知集合 A={x|...}, B={x|...}. (1) 求 A∪B, A∩∁RB; (2) 记关于 x 的不等式...的解集为 M, 若 B∪M=R, 求实数 m 的取值范围.",
+          "original_points": {
+            "top_left": [
+              123,
+              136
+            ],
+            "top_right": [
+              492,
+              136
+            ],
+            "bottom_right": [
+              492,
+              258
+            ],
+            "bottom_left": [
+              123,
+              258
+            ]
+          },
+          "question_slice_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\question_slices\\SET_20260330_6CA8_SHEET_004\\Q016.jpg",
+          "source_image_for_crop": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\j_corrected.jpg",
+          "crop_debug": {
+            "mode": "question",
+            "crop_area": [
+              0,
+              0,
+              1872,
+              1314
+            ],
+            "hard_guard_bounds": [
+              0,
+              0,
+              1872,
+              350
+            ],
+            "soft_guard_bounds": [
+              0,
+              0,
+              1872,
+              350
+            ],
+            "peer_box_count": 4,
+            "original_page_box": [
+              230,
+              179,
+              921,
+              339
+            ],
+            "refined_page_box": [
+              129,
+              123,
+              1022,
+              350
+            ],
+            "page_ocr_backend": "opencv_fallback",
+            "text_block_count": 185,
+            "question_anchor_count": 0
+          },
+          "refine_flags": [
+            "dynamic_expand",
+            "edge_expand_bottom",
+            "edge_expand_left",
+            "edge_expand_right",
+            "edge_expand_top"
+          ]
+        },
+        {
+          "number": "17",
+          "points": {
+            "top_left": [
+              69,
+              259
+            ],
+            "top_right": [
+              546,
+              259
+            ],
+            "bottom_right": [
+              546,
+              396
+            ],
+            "bottom_left": [
+              69,
+              396
+            ]
+          },
+          "description": "第 17 题：(本小题 11 分) 已知函数 f(x)=... 是定义在 (-2,2) 上的奇函数. (1) 确定 f(x) 的解析式; (2) 用定义证明: f(x) 在区间 (-2,2) 上是减函数; (3) 解不等式 f[t(t-1)] + f(t) < 0.",
+          "original_points": {
+            "top_left": [
+              123,
+              268
+            ],
+            "top_right": [
+              492,
+              268
+            ],
+            "bottom_right": [
+              492,
+              388
+            ],
+            "bottom_left": [
+              123,
+              388
+            ]
+          },
+          "question_slice_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\question_slices\\SET_20260330_6CA8_SHEET_004\\Q017.jpg",
+          "source_image_for_crop": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\j_corrected.jpg",
+          "crop_debug": {
+            "mode": "question",
+            "crop_area": [
+              0,
+              0,
+              1872,
+              1314
+            ],
+            "hard_guard_bounds": [
+              0,
+              352,
+              1872,
+              521
+            ],
+            "soft_guard_bounds": [
+              0,
+              340,
+              1872,
+              521
+            ],
+            "peer_box_count": 4,
+            "original_page_box": [
+              230,
+              352,
+              921,
+              510
+            ],
+            "refined_page_box": [
+              129,
+              340,
+              1022,
+              521
+            ],
+            "page_ocr_backend": "opencv_fallback",
+            "text_block_count": 185,
+            "question_anchor_count": 0
+          },
+          "refine_flags": [
+            "dynamic_expand",
+            "edge_expand_bottom",
+            "edge_expand_left",
+            "edge_expand_right",
+            "edge_expand_top"
+          ]
+        },
+        {
+          "number": "18",
+          "points": {
+            "top_left": [
+              69,
+              388
+            ],
+            "top_right": [
+              546,
+              388
+            ],
+            "bottom_right": [
+              546,
+              457
+            ],
+            "bottom_left": [
+              69,
+              457
+            ]
+          },
+          "description": "第 18 题：(本小题 10 分) 求关于 x 的不等式 ax²-x+1 < 3-2ax (a∈R) 的解集.",
+          "original_points": {
+            "top_left": [
+              123,
+              398
+            ],
+            "top_right": [
+              492,
+              398
+            ],
+            "bottom_right": [
+              492,
+              448
+            ],
+            "bottom_left": [
+              123,
+              448
+            ]
+          },
+          "question_slice_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\question_slices\\SET_20260330_6CA8_SHEET_004\\Q018.jpg",
+          "source_image_for_crop": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\j_corrected.jpg",
+          "crop_debug": {
+            "mode": "question",
+            "crop_area": [
+              0,
+              0,
+              1872,
+              1314
+            ],
+            "hard_guard_bounds": [
+              0,
+              522,
+              1872,
+              600
+            ],
+            "soft_guard_bounds": [
+              0,
+              510,
+              1872,
+              600
+            ],
+            "peer_box_count": 4,
+            "original_page_box": [
+              230,
+              523,
+              921,
+              589
+            ],
+            "refined_page_box": [
+              129,
+              510,
+              1022,
+              600
+            ],
+            "page_ocr_backend": "opencv_fallback",
+            "text_block_count": 185,
+            "question_anchor_count": 0
+          },
+          "refine_flags": [
+            "dynamic_expand",
+            "edge_expand_bottom",
+            "edge_expand_left",
+            "edge_expand_right",
+            "edge_expand_top"
+          ]
+        },
+        {
+          "number": "19",
+          "points": {
+            "top_left": [
+              69,
+              449
+            ],
+            "top_right": [
+              546,
+              449
+            ],
+            "bottom_right": [
+              546,
+              587
+            ],
+            "bottom_left": [
+              69,
+              587
+            ]
+          },
+          "description": "第 19 题：(本小题 11 分) 已知关于 x 的方程 x²-mx+n-2=0 (m,n∈R). (1) 若 m=1, n=0, 则不等式...的解集为___; (2) 若关于 x 的方程...有两个不相等的实数根 x₁, x₂, 且 (x₁+x₂)²-4x₁x₂=8, 求...的最小值.",
+          "original_points": {
+            "top_left": [
+              123,
+              458
+            ],
+            "top_right": [
+              492,
+              458
+            ],
+            "bottom_right": [
+              492,
+              578
+            ],
+            "bottom_left": [
+              123,
+              578
+            ]
+          },
+          "question_slice_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\question_slices\\SET_20260330_6CA8_SHEET_004\\Q019.jpg",
+          "source_image_for_crop": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\j_corrected.jpg",
+          "crop_debug": {
+            "mode": "question",
+            "crop_area": [
+              0,
+              0,
+              1872,
+              1314
+            ],
+            "hard_guard_bounds": [
+              0,
+              602,
+              1872,
+              771
+            ],
+            "soft_guard_bounds": [
+              0,
+              590,
+              1872,
+              771
+            ],
+            "peer_box_count": 4,
+            "original_page_box": [
+              230,
+              602,
+              921,
+              759
+            ],
+            "refined_page_box": [
+              129,
+              590,
+              1022,
+              771
+            ],
+            "page_ocr_backend": "opencv_fallback",
+            "text_block_count": 185,
+            "question_anchor_count": 0
+          },
+          "refine_flags": [
+            "dynamic_expand",
+            "edge_expand_bottom",
+            "edge_expand_left",
+            "edge_expand_right",
+            "edge_expand_top"
+          ]
+        },
+        {
+          "number": "20",
+          "points": {
+            "top_left": [
+              69,
+              579
+            ],
+            "top_right": [
+              546,
+              579
+            ],
+            "bottom_right": [
+              546,
+              804
+            ],
+            "bottom_left": [
+              69,
+              804
+            ]
+          },
+          "description": "第 20 题：(本小题 12 分) 已知 n 是正整数, 集合 Mn={x∈Z|-n≤x≤n}. 若集合 P⊆Mn 且 P 中元素个数为 k, 则称 P 是 Mn 的 k 元子集... (1) 判断 P={-3,-1,1,3} 是否是 M₃ 的 4 元基子集, 说明理由; (2) 设 P 是 M₄ 的 7 元子集, 判断 P 是否一定是 M₄ 的 7 元基子集, 说明理由; (3) 若 M₁₀ 的任意 k 元子集均是 k 元基子集, 求 k 的最小值.",
+          "original_points": {
+            "top_left": [
+              123,
+              588
+            ],
+            "top_right": [
+              492,
+              588
+            ],
+            "bottom_right": [
+              492,
+              748
+            ],
+            "bottom_left": [
+              123,
+              748
+            ]
+          },
+          "question_slice_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\question_slices\\SET_20260330_6CA8_SHEET_004\\Q020.jpg",
+          "source_image_for_crop": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\j_corrected.jpg",
+          "crop_debug": {
+            "mode": "question",
+            "crop_area": [
+              0,
+              0,
+              1872,
+              1314
+            ],
+            "hard_guard_bounds": [
+              0,
+              773,
+              1872,
+              1314
+            ],
+            "soft_guard_bounds": [
+              0,
+              761,
+              1872,
+              1314
+            ],
+            "peer_box_count": 4,
+            "original_page_box": [
+              230,
+              773,
+              921,
+              983
+            ],
+            "refined_page_box": [
+              129,
+              761,
+              1022,
+              1057
+            ],
+            "page_ocr_backend": "opencv_fallback",
+            "text_block_count": 185,
+            "question_anchor_count": 0
+          },
+          "refine_flags": [
+            "dynamic_expand",
+            "edge_expand_bottom",
+            "edge_expand_left",
+            "edge_expand_right",
+            "edge_expand_top"
+          ]
+        }
+      ]
+    },
+    "page_ocr_backend": "opencv_fallback"
+  },
+  {
+    "source_image_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\compressed_images\\f.jpg",
+    "source_corrected_image": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\f_corrected.jpg",
+    "part_image_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\f_corrected.jpg",
+    "page_type": "answer_sheet",
+    "page_index": 3,
+    "part_type": "whole",
+    "crop_area": [
+      0,
+      0,
+      1863,
+      1308
+    ],
+    "divider_x": 0,
+    "sheet_id": "SET_20260330_6CA8_SHEET_002",
+    "sheet_type": "answer_sheet",
+    "order": 3,
+    "vlm_output": {
+      "questions": [
+        {
+          "number": "19",
+          "points": {
+            "top_left": [
+              48,
+              328
+            ],
+            "top_right": [
+              502,
+              328
+            ],
+            "bottom_right": [
+              502,
+              976
+            ],
+            "bottom_left": [
+              48,
+              976
+            ]
+          },
+          "description": "第 19 题：包含 (1) (-∞, -1) U (2, +∞) 及 (2) 关于方程根和不等式的推导过程",
+          "type": "answer_area",
+          "original_points": {
+            "top_left": [
+              88,
+              392
+            ],
+            "top_right": [
+              472,
+              392
+            ],
+            "bottom_right": [
+              472,
+              892
+            ],
+            "bottom_left": [
+              88,
+              892
+            ]
+          },
+          "answer_slice_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\answer_slices\\SET_20260330_6CA8_SHEET_002\\A019.jpg",
+          "source_image_for_crop": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\f_corrected.jpg",
+          "crop_debug": {
+            "mode": "answer",
+            "crop_area": [
+              0,
+              0,
+              1863,
+              1308
+            ],
+            "hard_guard_bounds": [
+              0,
+              0,
+              935,
+              1308
+            ],
+            "soft_guard_bounds": [
+              0,
+              0,
+              935,
+              1308
+            ],
+            "peer_box_count": 1,
+            "original_page_box": [
+              164,
+              513,
+              879,
+              1167
+            ],
+            "refined_page_box": [
+              89,
+              429,
+              935,
+              1277
+            ],
+            "page_ocr_backend": "opencv_fallback",
+            "text_block_count": 71,
+            "question_anchor_count": 0
+          },
+          "refine_flags": [
+            "dynamic_expand",
+            "edge_expand_bottom",
+            "edge_expand_left",
+            "edge_expand_right",
+            "edge_expand_top"
+          ]
+        },
+        {
+          "number": "20",
+          "points": {
+            "top_left": [
+              517,
+              13
+            ],
+            "top_right": [
+              958,
+              13
+            ],
+            "bottom_right": [
+              958,
+              1000
+            ],
+            "bottom_left": [
+              517,
+              1000
+            ]
+          },
+          "description": "第 20 题：包含 (1) 集合 M3 的判断，(2) 不一定成立的证明，(3) 关于 k 的取值范围推导",
+          "type": "answer_area",
+          "original_points": {
+            "top_left": [
+              532,
+              102
+            ],
+            "top_right": [
+              918,
+              102
+            ],
+            "bottom_right": [
+              918,
+              902
+            ],
+            "bottom_left": [
+              532,
+              902
+            ]
+          },
+          "answer_slice_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\answer_slices\\SET_20260330_6CA8_SHEET_002\\A020.jpg",
+          "source_image_for_crop": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\f_corrected.jpg",
+          "crop_debug": {
+            "mode": "answer",
+            "crop_area": [
+              0,
+              0,
+              1863,
+              1308
+            ],
+            "hard_guard_bounds": [
+              963,
+              0,
+              1863,
+              1308
+            ],
+            "soft_guard_bounds": [
+              963,
+              0,
+              1863,
+              1308
+            ],
+            "peer_box_count": 1,
+            "original_page_box": [
+              991,
+              133,
+              1710,
+              1180
+            ],
+            "refined_page_box": [
+              963,
+              17,
+              1785,
+              1308
+            ],
+            "page_ocr_backend": "opencv_fallback",
+            "text_block_count": 71,
+            "question_anchor_count": 0
+          },
+          "refine_flags": [
+            "dynamic_expand",
+            "edge_expand_bottom",
+            "edge_expand_left",
+            "edge_expand_right",
+            "edge_expand_top"
+          ]
+        }
+      ]
+    },
+    "page_ocr_backend": "opencv_fallback"
+  },
+  {
+    "source_image_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\compressed_images\\h.jpg",
+    "source_corrected_image": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\h_corrected.jpg",
+    "part_image_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\h_corrected.jpg",
+    "page_type": "answer_sheet",
+    "page_index": 4,
+    "part_type": "whole",
+    "crop_area": [
+      0,
+      0,
+      1861,
+      1287
+    ],
+    "divider_x": 0,
+    "sheet_id": "SET_20260330_6CA8_SHEET_003",
+    "sheet_type": "answer_sheet",
+    "order": 4,
+    "vlm_output": {
+      "questions": [
+        {
+          "number": "1-21",
+          "points": {
+            "top_left": [
+              66,
+              383
+            ],
+            "top_right": [
+              500,
+              383
+            ],
+            "bottom_right": [
+              500,
+              480
+            ],
+            "bottom_left": [
+              66,
+              480
+            ]
+          },
+          "description": "客观题填涂区（1-10题）",
+          "type": "objective_choice",
+          "original_points": {
+            "top_left": [
+              105,
+              405
+            ],
+            "top_right": [
+              475,
+              405
+            ],
+            "bottom_right": [
+              475,
+              455
+            ],
+            "bottom_left": [
+              105,
+              455
+            ]
+          },
+          "answer_slice_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\answer_slices\\SET_20260330_6CA8_SHEET_003\\A1-21.jpg",
+          "source_image_for_crop": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\h_corrected.jpg",
+          "crop_debug": {
+            "mode": "answer",
+            "crop_area": [
+              0,
+              0,
+              1861,
+              1287
+            ],
+            "hard_guard_bounds": [
+              0,
+              0,
+              931,
+              649
+            ],
+            "soft_guard_bounds": [
+              0,
+              0,
+              931,
+              649
+            ],
+            "peer_box_count": 6,
+            "original_page_box": [
+              195,
+              521,
+              884,
+              586
+            ],
+            "refined_page_box": [
+              122,
+              493,
+              931,
+              618
+            ],
+            "page_ocr_backend": "opencv_fallback",
+            "text_block_count": 110,
+            "question_anchor_count": 0
+          },
+          "refine_flags": [
+            "dynamic_expand",
+            "edge_expand_bottom",
+            "edge_expand_left",
+            "edge_expand_right",
+            "edge_expand_top"
+          ]
+        },
+        {
+          "number": "11",
+          "points": {
+            "top_left": [
+              45,
+              498
+            ],
+            "top_right": [
+              495,
+              498
+            ],
+            "bottom_right": [
+              495,
+              583
+            ],
+            "bottom_left": [
+              45,
+              583
+            ]
+          },
+          "description": "第11题：填空题",
+          "type": "answer_area",
+          "original_points": {
+            "top_left": [
+              85,
+              520
+            ],
+            "top_right": [
+              465,
+              520
+            ],
+            "bottom_right": [
+              465,
+              575
+            ],
+            "bottom_left": [
+              85,
+              575
+            ]
+          },
+          "answer_slice_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\answer_slices\\SET_20260330_6CA8_SHEET_003\\A011.jpg",
+          "source_image_for_crop": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\h_corrected.jpg",
+          "crop_debug": {
+            "mode": "answer",
+            "crop_area": [
+              0,
+              0,
+              1861,
+              1287
+            ],
+            "hard_guard_bounds": [
+              0,
+              630,
+              921,
+              750
+            ],
+            "soft_guard_bounds": [
+              0,
+              630,
+              921,
+              750
+            ],
+            "peer_box_count": 6,
+            "original_page_box": [
+              158,
+              669,
+              865,
+              740
+            ],
+            "refined_page_box": [
+              84,
+              641,
+              921,
+              750
+            ],
+            "page_ocr_backend": "opencv_fallback",
+            "text_block_count": 110,
+            "question_anchor_count": 0
+          },
+          "refine_flags": [
+            "dynamic_expand",
+            "edge_expand_bottom",
+            "edge_expand_left",
+            "edge_expand_right",
+            "edge_expand_top"
+          ]
+        },
+        {
+          "number": "12",
+          "points": {
+            "top_left": [
+              45,
+              584
+            ],
+            "top_right": [
+              495,
+              584
+            ],
+            "bottom_right": [
+              495,
+              632
+            ],
+            "bottom_left": [
+              45,
+              632
+            ]
+          },
+          "description": "第12题：填空题",
+          "type": "answer_area",
+          "original_points": {
+            "top_left": [
+              85,
+              585
+            ],
+            "top_right": [
+              465,
+              585
+            ],
+            "bottom_right": [
+              465,
+              625
+            ],
+            "bottom_left": [
+              85,
+              625
+            ]
+          },
+          "answer_slice_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\answer_slices\\SET_20260330_6CA8_SHEET_003\\A012.jpg",
+          "source_image_for_crop": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\h_corrected.jpg",
+          "crop_debug": {
+            "mode": "answer",
+            "crop_area": [
+              0,
+              0,
+              1861,
+              1287
+            ],
+            "hard_guard_bounds": [
+              0,
+              752,
+              921,
+              814
+            ],
+            "soft_guard_bounds": [
+              0,
+              752,
+              921,
+              814
+            ],
+            "peer_box_count": 6,
+            "original_page_box": [
+              158,
+              753,
+              865,
+              804
+            ],
+            "refined_page_box": [
+              84,
+              752,
+              921,
+              814
+            ],
+            "page_ocr_backend": "opencv_fallback",
+            "text_block_count": 110,
+            "question_anchor_count": 0
+          },
+          "refine_flags": [
+            "dynamic_expand",
+            "edge_expand_bottom",
+            "edge_expand_left",
+            "edge_expand_right",
+            "edge_expand_top"
+          ]
+        },
+        {
+          "number": "13",
+          "points": {
+            "top_left": [
+              45,
+              633
+            ],
+            "top_right": [
+              495,
+              633
+            ],
+            "bottom_right": [
+              495,
+              683
+            ],
+            "bottom_left": [
+              45,
+              683
+            ]
+          },
+          "description": "第13题：填空题",
+          "type": "answer_area",
+          "original_points": {
+            "top_left": [
+              85,
+              635
+            ],
+            "top_right": [
+              465,
+              635
+            ],
+            "bottom_right": [
+              465,
+              675
+            ],
+            "bottom_left": [
+              85,
+              675
+            ]
+          },
+          "answer_slice_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\answer_slices\\SET_20260330_6CA8_SHEET_003\\A013.jpg",
+          "source_image_for_crop": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\h_corrected.jpg",
+          "crop_debug": {
+            "mode": "answer",
+            "crop_area": [
+              0,
+              0,
+              1861,
+              1287
+            ],
+            "hard_guard_bounds": [
+              0,
+              815,
+              921,
+              879
+            ],
+            "soft_guard_bounds": [
+              0,
+              815,
+              921,
+              879
+            ],
+            "peer_box_count": 6,
+            "original_page_box": [
+              158,
+              817,
+              865,
+              869
+            ],
+            "refined_page_box": [
+              84,
+              815,
+              921,
+              879
+            ],
+            "page_ocr_backend": "opencv_fallback",
+            "text_block_count": 110,
+            "question_anchor_count": 0
+          },
+          "refine_flags": [
+            "dynamic_expand",
+            "edge_expand_bottom",
+            "edge_expand_left",
+            "edge_expand_right",
+            "edge_expand_top"
+          ]
+        },
+        {
+          "number": "14",
+          "points": {
+            "top_left": [
+              45,
+              685
+            ],
+            "top_right": [
+              495,
+              685
+            ],
+            "bottom_right": [
+              495,
+              747
+            ],
+            "bottom_left": [
+              45,
+              747
+            ]
+          },
+          "description": "第14题：填空题",
+          "type": "answer_area",
+          "original_points": {
+            "top_left": [
+              85,
+              685
+            ],
+            "top_right": [
+              465,
+              685
+            ],
+            "bottom_right": [
+              465,
+              735
+            ],
+            "bottom_left": [
+              85,
+              735
+            ]
+          },
+          "answer_slice_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\answer_slices\\SET_20260330_6CA8_SHEET_003\\A014.jpg",
+          "source_image_for_crop": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\h_corrected.jpg",
+          "crop_debug": {
+            "mode": "answer",
+            "crop_area": [
+              0,
+              0,
+              1861,
+              1287
+            ],
+            "hard_guard_bounds": [
+              0,
+              881,
+              921,
+              961
+            ],
+            "soft_guard_bounds": [
+              0,
+              881,
+              921,
+              961
+            ],
+            "peer_box_count": 6,
+            "original_page_box": [
+              158,
+              882,
+              865,
+              946
+            ],
+            "refined_page_box": [
+              84,
+              881,
+              921,
+              961
+            ],
+            "page_ocr_backend": "opencv_fallback",
+            "text_block_count": 110,
+            "question_anchor_count": 0
+          },
+          "refine_flags": [
+            "dynamic_expand",
+            "edge_expand_bottom",
+            "edge_expand_left",
+            "edge_expand_right",
+            "edge_expand_top"
+          ]
+        },
+        {
+          "number": "15",
+          "points": {
+            "top_left": [
+              45,
+              748
+            ],
+            "top_right": [
+              495,
+              748
+            ],
+            "bottom_right": [
+              495,
+              825
+            ],
+            "bottom_left": [
+              45,
+              825
+            ]
+          },
+          "description": "第15题：填空题",
+          "type": "answer_area",
+          "original_points": {
+            "top_left": [
+              85,
+              750
+            ],
+            "top_right": [
+              465,
+              750
+            ],
+            "bottom_right": [
+              465,
+              800
+            ],
+            "bottom_left": [
+              85,
+              800
+            ]
+          },
+          "answer_slice_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\answer_slices\\SET_20260330_6CA8_SHEET_003\\A015.jpg",
+          "source_image_for_crop": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\h_corrected.jpg",
+          "crop_debug": {
+            "mode": "answer",
+            "crop_area": [
+              0,
+              0,
+              1861,
+              1287
+            ],
+            "hard_guard_bounds": [
+              0,
+              963,
+              921,
+              1287
+            ],
+            "soft_guard_bounds": [
+              0,
+              963,
+              921,
+              1287
+            ],
+            "peer_box_count": 6,
+            "original_page_box": [
+              158,
+              965,
+              865,
+              1030
+            ],
+            "refined_page_box": [
+              84,
+              963,
+              921,
+              1062
+            ],
+            "page_ocr_backend": "opencv_fallback",
+            "text_block_count": 110,
+            "question_anchor_count": 0
+          },
+          "refine_flags": [
+            "dynamic_expand",
+            "edge_expand_bottom",
+            "edge_expand_left",
+            "edge_expand_right",
+            "edge_expand_top"
+          ]
+        },
+        {
+          "number": "16",
+          "points": {
+            "top_left": [
+              512,
+              48
+            ],
+            "top_right": [
+              945,
+              48
+            ],
+            "bottom_right": [
+              945,
+              1000
+            ],
+            "bottom_left": [
+              512,
+              1000
+            ]
+          },
+          "description": "第16题：解答题",
+          "type": "answer_area",
+          "original_points": {
+            "top_left": [
+              525,
+              135
+            ],
+            "top_right": [
+              905,
+              135
+            ],
+            "bottom_right": [
+              905,
+              915
+            ],
+            "bottom_left": [
+              525,
+              915
+            ]
+          },
+          "answer_slice_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\answer_slices\\SET_20260330_6CA8_SHEET_003\\A016.jpg",
+          "source_image_for_crop": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\h_corrected.jpg",
+          "crop_debug": {
+            "mode": "answer",
+            "crop_area": [
+              0,
+              0,
+              1861,
+              1287
+            ],
+            "hard_guard_bounds": [
+              953,
+              0,
+              1861,
+              1287
+            ],
+            "soft_guard_bounds": [
+              953,
+              0,
+              1861,
+              1287
+            ],
+            "peer_box_count": 6,
+            "original_page_box": [
+              977,
+              174,
+              1684,
+              1178
+            ],
+            "refined_page_box": [
+              953,
+              62,
+              1758,
+              1287
+            ],
+            "page_ocr_backend": "opencv_fallback",
+            "text_block_count": 110,
+            "question_anchor_count": 0
+          },
+          "refine_flags": [
+            "dynamic_expand",
+            "edge_expand_bottom",
+            "edge_expand_left",
+            "edge_expand_right",
+            "edge_expand_top"
+          ]
+        }
+      ]
+    },
+    "page_ocr_backend": "opencv_fallback"
+  },
+  {
+    "source_image_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\compressed_images\\c.jpg",
+    "source_corrected_image": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\c_corrected.jpg",
+    "part_image_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\c_corrected.jpg",
+    "page_type": "answer_sheet",
+    "page_index": 5,
+    "part_type": "whole",
+    "crop_area": [
+      0,
+      0,
+      1860,
+      1293
+    ],
+    "divider_x": 0,
+    "sheet_id": "SET_20260330_6CA8_SHEET_001",
+    "sheet_type": "answer_sheet",
+    "order": 5,
+    "vlm_output": {
+      "questions": [
+        {
+          "number": "17",
+          "points": {
+            "top_left": [
+              45,
+              0
+            ],
+            "top_right": [
+              500,
+              0
+            ],
+            "bottom_right": [
+              500,
+              1000
+            ],
+            "bottom_left": [
+              45,
+              1000
+            ]
+          },
+          "description": "第 17 题：函数奇偶性、单调性及不等式求解",
+          "type": "answer_area",
+          "original_points": {
+            "top_left": [
+              85,
+              85
+            ],
+            "top_right": [
+              465,
+              85
+            ],
+            "bottom_right": [
+              465,
+              885
+            ],
+            "bottom_left": [
+              85,
+              885
+            ]
+          },
+          "answer_slice_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\answer_slices\\SET_20260330_6CA8_SHEET_001\\A017.jpg",
+          "source_image_for_crop": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\c_corrected.jpg",
+          "crop_debug": {
+            "mode": "answer",
+            "crop_area": [
+              0,
+              0,
+              1860,
+              1293
+            ],
+            "hard_guard_bounds": [
+              0,
+              0,
+              930,
+              1293
+            ],
+            "soft_guard_bounds": [
+              0,
+              0,
+              930,
+              1293
+            ],
+            "peer_box_count": 1,
+            "original_page_box": [
+              158,
+              110,
+              865,
+              1144
+            ],
+            "refined_page_box": [
+              84,
+              0,
+              930,
+              1293
+            ],
+            "page_ocr_backend": "opencv_fallback",
+            "text_block_count": 36,
+            "question_anchor_count": 0
+          },
+          "refine_flags": [
+            "dynamic_expand",
+            "edge_expand_bottom",
+            "edge_expand_left",
+            "edge_expand_right",
+            "edge_expand_top"
+          ]
+        },
+        {
+          "number": "18",
+          "points": {
+            "top_left": [
+              517,
+              50
+            ],
+            "top_right": [
+              966,
+              50
+            ],
+            "bottom_right": [
+              966,
+              999
+            ],
+            "bottom_left": [
+              517,
+              999
+            ]
+          },
+          "description": "第 18 题：含参一元二次不等式求解",
+          "type": "answer_area",
+          "original_points": {
+            "top_left": [
+              535,
+              135
+            ],
+            "top_right": [
+              925,
+              135
+            ],
+            "bottom_right": [
+              925,
+              885
+            ],
+            "bottom_left": [
+              535,
+              885
+            ]
+          },
+          "answer_slice_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\answer_slices\\SET_20260330_6CA8_SHEET_001\\A018.jpg",
+          "source_image_for_crop": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\c_corrected.jpg",
+          "crop_debug": {
+            "mode": "answer",
+            "crop_area": [
+              0,
+              0,
+              1860,
+              1293
+            ],
+            "hard_guard_bounds": [
+              962,
+              0,
+              1860,
+              1293
+            ],
+            "soft_guard_bounds": [
+              962,
+              0,
+              1860,
+              1293
+            ],
+            "peer_box_count": 1,
+            "original_page_box": [
+              995,
+              175,
+              1720,
+              1144
+            ],
+            "refined_page_box": [
+              962,
+              65,
+              1796,
+              1292
+            ],
+            "page_ocr_backend": "opencv_fallback",
+            "text_block_count": 36,
+            "question_anchor_count": 0
+          },
+          "refine_flags": [
+            "dynamic_expand",
+            "edge_expand_bottom",
+            "edge_expand_left",
+            "edge_expand_right",
+            "edge_expand_top"
+          ]
+        }
+      ]
+    },
+    "page_ocr_backend": "opencv_fallback"
+  }
+]

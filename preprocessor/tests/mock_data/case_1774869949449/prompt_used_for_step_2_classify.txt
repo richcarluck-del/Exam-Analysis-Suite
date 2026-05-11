@@ -1,0 +1,16 @@
+请判断这张图片是否是一张**试卷**或**考试题目**。
+
+**页面类型判断标准**：
+1. **question_paper (试卷)**：包含完整的题干内容
+2. **answer_sheet (答题纸)**：主要由作答区域或考场信息区组成
+3. **mixed (混合)**：一张图中既有大量题干又有大量答题区域
+
+请输出 JSON 格式：
+```json
+{
+  "is_exam_paper": true/false,
+  "page_type": "question_paper" 或 "answer_sheet" 或 "mixed" 或 "other",
+  "confidence": "high/medium/low",
+  "reason": "简短的判断依据"
+}
+```

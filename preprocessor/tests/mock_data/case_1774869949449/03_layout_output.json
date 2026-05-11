@@ -1,0 +1,147 @@
+[
+  {
+    "original_image_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\compressed_images\\z.jpg",
+    "source_corrected_image": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\z_corrected.jpg",
+    "page_type": "question_paper",
+    "page_index": 1,
+    "sheet_id": "SET_20260330_6CA8_SHEET_005",
+    "sheet_type": "question_paper",
+    "order": 1,
+    "image_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\z_corrected.jpg",
+    "part_type": "whole",
+    "crop_area": [
+      0,
+      0,
+      1821,
+      1260
+    ],
+    "divider_x": 0,
+    "parts": [
+      {
+        "label": "full_page_area",
+        "box": [
+          0,
+          0,
+          1821,
+          1260
+        ]
+      }
+    ]
+  },
+  {
+    "original_image_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\compressed_images\\j.jpg",
+    "source_corrected_image": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\j_corrected.jpg",
+    "page_type": "question_paper",
+    "page_index": 2,
+    "sheet_id": "SET_20260330_6CA8_SHEET_004",
+    "sheet_type": "question_paper",
+    "order": 2,
+    "image_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\j_corrected.jpg",
+    "part_type": "whole",
+    "crop_area": [
+      0,
+      0,
+      1872,
+      1314
+    ],
+    "divider_x": 0,
+    "parts": [
+      {
+        "label": "full_page_area",
+        "box": [
+          0,
+          0,
+          1872,
+          1314
+        ]
+      }
+    ]
+  },
+  {
+    "original_image_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\compressed_images\\f.jpg",
+    "source_corrected_image": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\f_corrected.jpg",
+    "page_type": "answer_sheet",
+    "page_index": 3,
+    "sheet_id": "SET_20260330_6CA8_SHEET_002",
+    "sheet_type": "answer_sheet",
+    "order": 3,
+    "image_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\f_corrected.jpg",
+    "part_type": "whole",
+    "crop_area": [
+      0,
+      0,
+      1863,
+      1308
+    ],
+    "divider_x": 0,
+    "parts": [
+      {
+        "label": "full_page_area",
+        "box": [
+          0,
+          0,
+          1863,
+          1308
+        ]
+      }
+    ]
+  },
+  {
+    "original_image_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\compressed_images\\h.jpg",
+    "source_corrected_image": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\h_corrected.jpg",
+    "page_type": "answer_sheet",
+    "page_index": 4,
+    "sheet_id": "SET_20260330_6CA8_SHEET_003",
+    "sheet_type": "answer_sheet",
+    "order": 4,
+    "image_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\h_corrected.jpg",
+    "part_type": "whole",
+    "crop_area": [
+      0,
+      0,
+      1861,
+      1287
+    ],
+    "divider_x": 0,
+    "parts": [
+      {
+        "label": "full_page_area",
+        "box": [
+          0,
+          0,
+          1861,
+          1287
+        ]
+      }
+    ]
+  },
+  {
+    "original_image_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\compressed_images\\c.jpg",
+    "source_corrected_image": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\c_corrected.jpg",
+    "page_type": "answer_sheet",
+    "page_index": 5,
+    "sheet_id": "SET_20260330_6CA8_SHEET_001",
+    "sheet_type": "answer_sheet",
+    "order": 5,
+    "image_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\c_corrected.jpg",
+    "part_type": "whole",
+    "crop_area": [
+      0,
+      0,
+      1860,
+      1293
+    ],
+    "divider_x": 0,
+    "parts": [
+      {
+        "label": "full_page_area",
+        "box": [
+          0,
+          0,
+          1860,
+          1293
+        ]
+      }
+    ]
+  }
+]

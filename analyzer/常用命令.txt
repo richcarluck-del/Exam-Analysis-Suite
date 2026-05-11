@@ -1,0 +1,5 @@
+Get-NetTCPConnection -LocalPort 6379 | Select-Object -Property OwningProcess
+
+Stop-Process -Id 12345 -Force
+
+Invoke-WebRequest -Uri http://localhost:8000/api/ingest-knowledge -Method POST

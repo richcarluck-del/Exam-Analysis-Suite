@@ -1,0 +1,29 @@
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+sqlalchemy==2.0.23
+
+alembic==1.12.1
+redis==5.0.1
+celery==5.3.4
+neo4j==5.15.0
+python-multipart==0.0.6
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+pydantic==1.10.13 # Using Pydantic v1 for compatibility with some libraries
+
+python-dotenv==1.0.0
+httpx==0.25.2
+aiofiles==23.2.1
+PyMuPDF==1.23.26
+python-docx==1.1.2
+psycopg[binary]==3.2.6
+opensearch-py==2.8.0
+qdrant-client==1.13.2
+
+# New dependencies for Hybrid RAG
+chromadb==0.4.15
+sentence-transformers==2.2.2
+huggingface-hub==0.16.4 # Pinned to a compatible version for sentence-transformers 2.2.2
+gevent==24.2.1
+
+# 可选：PDF 整页 OCR（Pix2Text），见 requirements-ocr.txt

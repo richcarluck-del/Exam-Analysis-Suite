@@ -1,0 +1,2884 @@
+{
+  "bundle_id": "run_20260325_133128",
+  "generated_at": "2026-03-26T04:24:01.003397Z",
+  "questions": [
+    {
+      "question_no": "1",
+      "question_id": "SET_20260324_FB27_SHEET_001_Q001",
+      "question_type": null,
+      "student_answer": "B",
+      "answer_source": "answer_card",
+      "answer_status": "answered",
+      "needs_manual_review": false,
+      "analysis_status": "question_conclusion_ready",
+      "risk_level": "low",
+      "preliminary_judgement": "该题询问N60的物质类别，学生作答B（非金属单质）正确；N60是由氮元素组成的同种原子构成的分子，氮为非金属元素，故属于非金属单质。",
+      "retrieval_plan": {
+        "vector_query": "第 1 题：继“分子足球”C60之后，科学家又发现另一种“分子足球”N60，是未来的火箭燃料，N60属于\n学生答案：B",
+        "graph_entities": [],
+        "knowledge_tags_hint": [],
+        "keywords": [
+          "1",
+          "分子足球",
+          "C60",
+          "之后",
+          "科学家又发现另一种",
+          "N60"
+        ]
+      },
+      "retrieval_result": {
+        "status": "success",
+        "query": "第 1 题：继“分子足球”C60之后，科学家又发现另一种“分子足球”N60，是未来的火箭燃料，N60属于\n学生答案：B",
+        "keywords": [
+          "1",
+          "分子足球",
+          "C60",
+          "之后",
+          "科学家又发现另一种",
+          "N60"
+        ],
+        "graph_entities": [],
+        "graph_entity_count": 0,
+        "merged_hit_count": 3,
+        "top_results": [
+          {
+            "rank": 1,
+            "source_type": "vector",
+            "score": 0.537068,
+            "citation": "03专题三离子反应.pdf",
+            "snippet": "$M\u000e )\u00130 $0\u0013ĩ ݌ ݌ ᫥/ᐻ͐D̹ ߌ Ꮐ+.ၼ $B$0\u0014 \u0013) $B\u0013 )\u00130 $0\u0013ĩ ᴑ ᷬᴑ᫥/ᐻ͐D᭛ 0 ၼႴᕾ *8Ⴔᕾ 2.离子方程式书写的关键 (1)两易—易溶且易(完全)电离的物质(包括强 酸、强碱、大多数可溶性盐)拆成离子,其他 物质用化学式表示。 (2)两等—离子方程式两边的原子个数、电荷数 均应相等。 (3)两查—检查化学计量数是否约到最简,是否 漏标必要的反应条件。 注意 微溶物的处理:①出现在生成物中写化学式; ②反应物中处于..."
+          },
+          {
+            "rank": 2,
+            "source_type": "vector",
+            "score": 0.536536,
+            "citation": "01专题一物质的分类及转化.pdf",
+            "snippet": "烧结而成 答案 C 􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋 专题一 物质的分类及转化 3 4.(2022海南,2,2分)《医学入门》中记载我国传统 中医提纯铜绿的方法:“水洗净,细研水飞,去石 澄清,慢火熬干。”其中未涉及 的操作是 ( ) A.洗涤 B.粉碎 C.萃取 D.蒸发 答案 C 5.(2021海南..."
+          },
+          {
+            "rank": 3,
+            "source_type": "vector",
+            "score": 0.527375,
+            "citation": "01专题一物质的分类及转化.pdf",
+            "snippet": "D.③⑤ 答案 A 4.(2023江西赣州二模,7)《厉害了,我的国》展 示了我国科技发展的巨大成就。下列说法不 正确的是 ( ) A.华为5G 手机搭载智能7nm 制程SOC“麒 麟980”芯片,芯片的主要成分是单质硅 B.“天宫课堂”实验中,乙酸钠过饱和溶液结 晶形成温热“冰球”,该过程发生吸热反应 C.火星车的热控材料纳米气凝胶能产生丁达 尔效应 D.“华龙一号”核电项目中核反应堆所用铀棒 中含有的235 92U 与238 92U 互为同位素 答案 B 考点 2 ..."
+          }
+        ],
+        "context": "基于知识库检索得到以下证据：\n[向量#1] score=0.537 source=03专题三离子反应.pdf\n- $M\u000e )\u00130 $0\u0013ĩ ݌ ݌ ᫥/ᐻ͐D̹ ߌ Ꮐ+.ၼ $B$0\u0014 \u0013) $B\u0013 )\u00130 $0\u0013ĩ ᴑ ᷬᴑ᫥/ᐻ͐D᭛ 0 ၼႴᕾ *8Ⴔᕾ 2.离子方程式书写的关键 (1)两易—易溶且易(完全)电离的物质(包括强 酸、强碱、大多数可溶性盐)拆成离子,其他 物质用化学式表示。 (2)两等—离子方程式两边的原子个数、电荷数 均应相等。 (3)两查—检查化学计量数是否约到最简,是否 漏标必要的反应条件。 注意 微溶物的处理:①出现在生成物中写化学式; ②反应物中处于...\n[向量#2] score=0.537 source=01专题一物质的分类及转化.pdf\n- 烧结而成 答案 C 􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋 专题一 物质的分类及转化 3 4.(2022海南,2,2分)《医学入门》中记载我国传统 中医提纯铜绿的方法:“水洗净,细研水飞,去石 澄清,慢火熬干。”其中未涉及 的操作是 ( ) A.洗涤 B.粉碎 C.萃取 D.蒸发 答案 C 5.(2021海南...\n[向量#3] score=0.527 source=01专题一物质的分类及转化.pdf\n- D.③⑤ 答案 A 4.(2023江西赣州二模,7)《厉害了,我的国》展 示了我国科技发展的巨大成就。下列说法不 正确的是 ( ) A.华为5G 手机搭载智能7nm 制程SOC“麒 麟980”芯片,芯片的主要成分是单质硅 B.“天宫课堂”实验中,乙酸钠过饱和溶液结 晶形成温热“冰球”,该过程发生吸热反应 C.火星车的热控材料纳米气凝胶能产生丁达 尔效应 D.“华龙一号”核电项目中核反应堆所用铀棒 中含有的235 92U 与238 92U 互为同位素 答案 B 考点 2 ...",
+        "warnings": []
+      },
+      "vlm_plan": {
+        "analysis_image_path": "07_complete_units/SET_20260324_FB27_SHEET_001/CU001.jpg",
+        "uses_complete_unit_image": true,
+        "supports_vision_model": true,
+        "retrieval_context_supplied": true
+      },
+      "vlm_result": {
+        "status": "success",
+        "analysis_image_path": "07_complete_units/SET_20260324_FB27_SHEET_001/CU001.jpg",
+        "analysis_image_abspath": "d:\\10739\\Exam-Analysis-Suite\\preprocessor\\temp\\run_20260325_133128\\07_complete_units\\SET_20260324_FB27_SHEET_001\\CU001.jpg",
+        "uses_complete_unit_image": true,
+        "supports_vision_model": true,
+        "question_summary": "题目询问N60的物质类别，继C60之后发现的‘分子足球’N60是未来的火箭燃料，选项包括金属单质、非金属单质、化合物和混合物。",
+        "answer_observation": "学生作答为B，即‘非金属单质’。",
+        "answer_status_assessment": "answered",
+        "correctness": "correct",
+        "knowledge_points": [
+          "物质的分类",
+          "单质与化合物的区别",
+          "非金属单质的定义"
+        ],
+        "suspected_error_causes": [],
+        "reasoning_basis": [
+          "N60是由氮元素组成的同种原子构成的分子，属于单质。",
+          "氮元素是非金属元素，因此由氮元素组成的单质N60属于非金属单质。",
+          "检索证据中虽未直接提及N60，但相关知识背景（如物质分类）支持该判断。",
+          "C60是碳的同素异形体，属于非金属单质，类比可知N60也应为非金属单质。"
+        ],
+        "recommended_next_action": "无需进一步干预，答案正确。",
+        "confidence": 0.95,
+        "warnings": []
+      },
+      "final_conclusion": {
+        "status": "success",
+        "generation_mode": "llm",
+        "summary": "该题询问N60的物质类别，学生作答B（非金属单质）正确；N60是由氮元素组成的同种原子构成的分子，氮为非金属元素，故属于非金属单质。",
+        "answer_status": "answered",
+        "correctness": "correct",
+        "mastery_level": "mastered",
+        "knowledge_points": [
+          "物质的分类",
+          "单质与化合物的区别",
+          "非金属单质的定义",
+          "1",
+          "分子足球",
+          "C60"
+        ],
+        "error_causes": [],
+        "explanation": "N60是由氮元素组成的同种原子构成的分子，符合单质定义；氮元素是非金属元素，因此N60属于非金属单质。C60作为类比参照（碳的非金属单质），进一步支持该归类。",
+        "study_advice": [
+          "保持对“物质的分类”的掌握，可追加一到两道同类题巩固。",
+          "结合召回到的知识片段复盘本题，确认相关概念与解题路径是否一致。"
+        ],
+        "supporting_evidence": [
+          "N60是由氮元素组成的同种原子构成的分子，属于单质。",
+          "氮元素是非金属元素，因此由氮元素组成的单质N60属于非金属单质。",
+          "C60是碳的同素异形体，属于非金属单质，类比可知N60也应为非金属单质。",
+          "检索证据中虽未直接提及N60，但相关知识背景（如物质分类）支持该判断。",
+          "03专题三离子反应.pdf: $M\u000e )\u00130 $0\u0013ĩ ݌ ݌ ᫥/ᐻ͐D̹ ߌ Ꮐ+.ၼ $B$0\u0014 \u0013) $B\u0013 )\u00130 $0\u0013ĩ ᴑ ᷬᴑ᫥/ᐻ͐D᭛ 0 ၼႴᕾ *8Ⴔᕾ 2.离子方程式书写的关键 (1)两易—易溶且易(完全)电离的物质(包括强 酸、强碱、大多数可溶性盐)拆成离子,其他 物质用化学式表示。 (2)两等—离子方程式两边的原子个数、电荷数 均应相等。 (3)两查—检查化学计量数是否约到最简,是否 漏标必要的反应条件。 注意 微溶物的处理:①出现在生成物中写化学式; ②反应物中处于..."
+        ],
+        "recommended_next_action": "无需进一步干预，答案正确。",
+        "confidence": 0.95,
+        "evidence_sources": [
+          "retrieval",
+          "vlm"
+        ],
+        "warnings": []
+      },
+      "evidence": {
+        "question_text": "第 1 题：继“分子足球”C60之后，科学家又发现另一种“分子足球”N60，是未来的火箭燃料，N60属于",
+        "question_image_path": "question_slices/SET_20260324_FB27_SHEET_001/Q001.jpg",
+        "answer_image_path": "answer_card_areas/answer_card_0.jpg",
+        "answer_image_paths": [
+          "answer_card_areas/answer_card_0.jpg"
+        ],
+        "complete_unit_image_path": "07_complete_units/SET_20260324_FB27_SHEET_001/CU001.jpg",
+        "confidence": {
+          "has_question_text": true,
+          "has_question_image": true,
+          "has_complete_unit_image": true,
+          "answer_image_count": 1,
+          "merged_fragment_count": 1,
+          "answer_fragment_count": 0
+        }
+      },
+      "observations": [
+        "题目存在学生作答，可进入知识检索与判因阶段。",
+        "已完成混合检索，召回 3 条候选证据，涉及 0 个图谱实体。",
+        "已基于完整单元图片完成题级 VLM 观察，可继续生成错因与讲解。",
+        "已输出最终逐题结论（LLM 融合）。"
+      ],
+      "next_action": "completed"
+    },
+    {
+      "question_no": "2",
+      "question_id": "SET_20260324_FB27_SHEET_001_Q002",
+      "question_type": null,
+      "student_answer": "B",
+      "answer_source": "answer_card",
+      "answer_status": "answered",
+      "needs_manual_review": false,
+      "analysis_status": "question_conclusion_ready",
+      "risk_level": "low",
+      "preliminary_judgement": "该题考查丁达尔效应的识别，学生作答B（Fe(OH)₃胶体）正确，符合胶体分散系产生丁达尔效应的核心原理。",
+      "retrieval_plan": {
+        "vector_query": "第 2 题：当光束通过下列分散系时，能观察到丁达尔效应的是\n学生答案：B",
+        "graph_entities": [
+          "Na2O2",
+          "CaH2",
+          "Fe2+",
+          "还原剂",
+          "Cl2",
+          "氧化剂",
+          "SO2",
+          "H2O2"
+        ],
+        "knowledge_tags_hint": [],
+        "keywords": [
+          "2",
+          "当光束通过下列分散系时",
+          "能观察到丁达尔效应的是",
+          "学生答案",
+          "B"
+        ]
+      },
+      "retrieval_result": {
+        "status": "success",
+        "query": "第 2 题：当光束通过下列分散系时，能观察到丁达尔效应的是\n学生答案：B",
+        "keywords": [
+          "2",
+          "当光束通过下列分散系时",
+          "能观察到丁达尔效应的是",
+          "学生答案",
+          "B"
+        ],
+        "graph_entities": [
+          "Na2O2",
+          "CaH2",
+          "Fe2+",
+          "还原剂",
+          "Cl2",
+          "氧化剂",
+          "SO2",
+          "H2O2"
+        ],
+        "graph_entity_count": 8,
+        "merged_hit_count": 3,
+        "top_results": [
+          {
+            "rank": 1,
+            "source_type": "graph",
+            "score": 0.7315,
+            "citation": "Fe2+ -[RELATED_TO]-> Cl2",
+            "snippet": "Fe2+ -[RELATED_TO]-> Cl2 Cl2 与 SO2 反应时 Cl2 → Cl-, SO2 → SO4^2-, 则反应中 Cl2 与 SO2 的物质的量之比为2∶1。 如 FeBr2 溶液中通入少量 Cl2,因为还原性 Fe2+ > Br-, 所以 Fe2+ 先被 Cl2 氧化;"
+          },
+          {
+            "rank": 2,
+            "source_type": "graph",
+            "score": 0.6615,
+            "citation": "SO2 -[RELATED_TO]-> Cl2",
+            "snippet": "SO2 -[RELATED_TO]-> Cl2 Cl2 与 SO2 反应时 Cl2 → Cl-, SO2 → SO4^2-, 则反应中 Cl2 与 SO2 的物质的量之比为2∶1。 Cl2 与 SO2 反应时 Cl2 → Cl-, SO2 → SO4^2-, 则反应中 Cl2 与 SO2 的物质的量之比为2∶1。"
+          },
+          {
+            "rank": 3,
+            "source_type": "graph",
+            "score": 0.6145,
+            "citation": "Fe2+ -[RELATED_TO]-> 还原剂",
+            "snippet": "Fe2+ -[RELATED_TO]-> 还原剂 如 FeBr2 溶液中通入少量 Cl2,因为还原性 Fe2+ > Br-, 所以 Fe2+ 先被 Cl2 氧化; (2)常见的还原剂 物质类型 举例 对应氧化产物"
+          }
+        ],
+        "context": "基于知识库检索得到以下证据：\n[图谱#1] score=0.732 source=Fe2+ -[RELATED_TO]-> Cl2\n- Fe2+ -[RELATED_TO]-> Cl2 Cl2 与 SO2 反应时 Cl2 → Cl-, SO2 → SO4^2-, 则反应中 Cl2 与 SO2 的物质的量之比为2∶1。 如 FeBr2 溶液中通入少量 Cl2,因为还原性 Fe2+ > Br-, 所以 Fe2+ 先被 Cl2 氧化;\n[图谱#2] score=0.661 source=SO2 -[RELATED_TO]-> Cl2\n- SO2 -[RELATED_TO]-> Cl2 Cl2 与 SO2 反应时 Cl2 → Cl-, SO2 → SO4^2-, 则反应中 Cl2 与 SO2 的物质的量之比为2∶1。 Cl2 与 SO2 反应时 Cl2 → Cl-, SO2 → SO4^2-, 则反应中 Cl2 与 SO2 的物质的量之比为2∶1。\n[图谱#3] score=0.615 source=Fe2+ -[RELATED_TO]-> 还原剂\n- Fe2+ -[RELATED_TO]-> 还原剂 如 FeBr2 溶液中通入少量 Cl2,因为还原性 Fe2+ > Br-, 所以 Fe2+ 先被 Cl2 氧化; (2)常见的还原剂 物质类型 举例 对应氧化产物",
+        "warnings": []
+      },
+      "vlm_plan": {
+        "analysis_image_path": "07_complete_units/SET_20260324_FB27_SHEET_001/CU002.jpg",
+        "uses_complete_unit_image": true,
+        "supports_vision_model": true,
+        "retrieval_context_supplied": true
+      },
+      "vlm_result": {
+        "status": "success",
+        "analysis_image_path": "07_complete_units/SET_20260324_FB27_SHEET_001/CU002.jpg",
+        "analysis_image_abspath": "d:\\10739\\Exam-Analysis-Suite\\preprocessor\\temp\\run_20260325_133128\\07_complete_units\\SET_20260324_FB27_SHEET_001\\CU002.jpg",
+        "uses_complete_unit_image": true,
+        "supports_vision_model": true,
+        "question_summary": "当光束通过下列分散系时，能观察到丁达尔效应的是",
+        "answer_observation": "学生作答为 B，即 Fe(OH)₃ 胶体",
+        "answer_status_assessment": "answered",
+        "correctness": "correct",
+        "knowledge_points": [
+          "丁达尔效应",
+          "胶体的性质",
+          "分散系的分类"
+        ],
+        "suspected_error_causes": [],
+        "reasoning_basis": [
+          "丁达尔效应是胶体特有的光学性质，当光束通过胶体时，由于胶体粒子对光的散射作用，可以观察到一条光亮的通路。",
+          "选项中，Fe(OH)₃ 胶体属于胶体分散系，能够产生丁达尔效应。",
+          "蔗糖溶液、KOH 溶液和 Na₂SO₄ 溶液均为溶液，粒子直径小于 1 nm，不会产生丁达尔效应。",
+          "学生选择 B 是正确的，符合胶体的性质。"
+        ],
+        "recommended_next_action": "无需进一步干预，答案正确。",
+        "confidence": 0.95,
+        "warnings": []
+      },
+      "final_conclusion": {
+        "status": "success",
+        "generation_mode": "llm",
+        "summary": "该题考查丁达尔效应的识别，学生作答B（Fe(OH)₃胶体）正确，符合胶体分散系产生丁达尔效应的核心原理。",
+        "answer_status": "answered",
+        "correctness": "correct",
+        "mastery_level": "mastered",
+        "knowledge_points": [
+          "丁达尔效应",
+          "胶体的性质",
+          "分散系的分类",
+          "Na2O2",
+          "CaH2",
+          "Fe2+"
+        ],
+        "error_causes": [],
+        "explanation": "丁达尔效应是胶体特有的光学现象，源于胶体粒子（直径1–100 nm）对光的散射；Fe(OH)₃胶体属于胶体分散系，能产生该效应；而蔗糖溶液、KOH溶液、Na₂SO₄溶液均为真溶液（粒子<1 nm），不产生丁达尔效应。学生选择B完全正确。",
+        "study_advice": [
+          "保持对“丁达尔效应”的掌握，可追加一到两道同类题巩固。",
+          "结合召回到的知识片段复盘本题，确认相关概念与解题路径是否一致。"
+        ],
+        "supporting_evidence": [
+          "丁达尔效应是胶体特有的光学性质，当光束通过胶体时，由于胶体粒子对光的散射作用，可以观察到一条光亮的通路。",
+          "选项中，Fe(OH)₃胶体属于胶体分散系，能够产生丁达尔效应。",
+          "蔗糖溶液、KOH溶液和Na₂SO₄溶液均为溶液，粒子直径小于1 nm，不会产生丁达尔效应。",
+          "学生选择B是正确的，符合胶体的性质。",
+          "选项中，Fe(OH)₃ 胶体属于胶体分散系，能够产生丁达尔效应。",
+          "蔗糖溶液、KOH 溶液和 Na₂SO₄ 溶液均为溶液，粒子直径小于 1 nm，不会产生丁达尔效应。"
+        ],
+        "recommended_next_action": "无需进一步干预，答案正确。",
+        "confidence": 0.95,
+        "evidence_sources": [
+          "retrieval",
+          "vlm"
+        ],
+        "warnings": []
+      },
+      "evidence": {
+        "question_text": "第 2 题：当光束通过下列分散系时，能观察到丁达尔效应的是",
+        "question_image_path": "question_slices/SET_20260324_FB27_SHEET_001/Q002.jpg",
+        "answer_image_path": "answer_card_areas/answer_card_0.jpg",
+        "answer_image_paths": [
+          "answer_card_areas/answer_card_0.jpg"
+        ],
+        "complete_unit_image_path": "07_complete_units/SET_20260324_FB27_SHEET_001/CU002.jpg",
+        "confidence": {
+          "has_question_text": true,
+          "has_question_image": true,
+          "has_complete_unit_image": true,
+          "answer_image_count": 1,
+          "merged_fragment_count": 1,
+          "answer_fragment_count": 0
+        }
+      },
+      "observations": [
+        "题目存在学生作答，可进入知识检索与判因阶段。",
+        "已完成混合检索，召回 3 条候选证据，涉及 8 个图谱实体。",
+        "已基于完整单元图片完成题级 VLM 观察，可继续生成错因与讲解。",
+        "已输出最终逐题结论（LLM 融合）。"
+      ],
+      "next_action": "completed"
+    },
+    {
+      "question_no": "3",
+      "question_id": "SET_20260324_FB27_SHEET_001_Q003",
+      "question_type": null,
+      "student_answer": "A",
+      "answer_source": "answer_card",
+      "answer_status": "answered",
+      "needs_manual_review": false,
+      "analysis_status": "question_conclusion_ready",
+      "risk_level": "low",
+      "preliminary_judgement": "第3题考查电解质的判断，学生选择A（NaCl），作答正确；核心知识点为电解质的定义、常见电解质识别及离子化合物与电解质的关系。",
+      "retrieval_plan": {
+        "vector_query": "第 3 题：下列物质中，属于电解质的是\n学生答案：A",
+        "graph_entities": [
+          "CaH2",
+          "Na2O2",
+          "Fe(OH)3胶体",
+          "胶体",
+          "丁达尔效应",
+          "Fe(OH)₃胶体",
+          "分散系",
+          "物质的分类及转化"
+        ],
+        "knowledge_tags_hint": [],
+        "keywords": [
+          "3",
+          "下列物质中",
+          "属于电解质的是",
+          "学生答案",
+          "A"
+        ]
+      },
+      "retrieval_result": {
+        "status": "success",
+        "query": "第 3 题：下列物质中，属于电解质的是\n学生答案：A",
+        "keywords": [
+          "3",
+          "下列物质中",
+          "属于电解质的是",
+          "学生答案",
+          "A"
+        ],
+        "graph_entities": [
+          "CaH2",
+          "Na2O2",
+          "Fe(OH)3胶体",
+          "胶体",
+          "丁达尔效应",
+          "Fe(OH)₃胶体",
+          "分散系",
+          "物质的分类及转化"
+        ],
+        "graph_entity_count": 8,
+        "merged_hit_count": 3,
+        "top_results": [
+          {
+            "rank": 1,
+            "source_type": "vector",
+            "score": 0.639857,
+            "citation": "01专题一物质的分类及转化.pdf",
+            "snippet": "”中含大量的微生物及微生物所分泌的酶 等,具有催化作用,故可以说“曲”中含有复杂的 催化剂,B项正确;酒曲发酵过程中产生如鱼眼 大小的 气 泡 为 生 成 CO2 所 致,不 是 水 蒸 气 气 泡,D项错误。 答案 D 􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋 专题一 物质的分类及转化 1 专题一 物质的分类及转化 考点 1 物质的组成与分类 ..."
+          },
+          {
+            "rank": 2,
+            "source_type": "graph",
+            "score": 0.6145,
+            "citation": "胶体 -[RELATED_TO]-> Fe(OH)3胶体",
+            "snippet": "胶体 -[RELATED_TO]-> Fe(OH)3胶体 3. Fe(OH)3 胶体的制备 将饱和的 FeCl3 溶液滴入沸水中,继续煮沸至液体变为红褐色,停止加热。离子方程式为 Fe3+ +3H2O △ 􀪅􀪅 Fe(OH)3(胶体)+3H+ 。 三、胶体 1.分散系 (1)组成:分散质和分散剂。 (2)分类:溶液、浊液和胶体。如图所示: 注意 按照分散剂的不同,胶体可分为液溶胶、气溶胶和固溶胶。分散剂是液体的是液溶胶,如 Fe(OH)3 胶体;分散剂是气体的是气溶胶,..."
+          },
+          {
+            "rank": 3,
+            "source_type": "graph",
+            "score": 0.6095,
+            "citation": "CaH2",
+            "snippet": "CaH2 离子化合物 Na2O2 和 CaH2 与水的反应分别为 ② CaH2 + 2H2O → Ca(OH)2 + 2H2↑。"
+          }
+        ],
+        "context": "基于知识库检索得到以下证据：\n[向量#1] score=0.640 source=01专题一物质的分类及转化.pdf\n- ”中含大量的微生物及微生物所分泌的酶 等,具有催化作用,故可以说“曲”中含有复杂的 催化剂,B项正确;酒曲发酵过程中产生如鱼眼 大小的 气 泡 为 生 成 CO2 所 致,不 是 水 蒸 气 气 泡,D项错误。 答案 D 􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋 专题一 物质的分类及转化 1 专题一 物质的分类及转化 考点 1 物质的组成与分类 ...\n[图谱#2] score=0.615 source=胶体 -[RELATED_TO]-> Fe(OH)3胶体\n- 胶体 -[RELATED_TO]-> Fe(OH)3胶体 3. Fe(OH)3 胶体的制备 将饱和的 FeCl3 溶液滴入沸水中,继续煮沸至液体变为红褐色,停止加热。离子方程式为 Fe3+ +3H2O △ 􀪅􀪅 Fe(OH)3(胶体)+3H+ 。 三、胶体 1.分散系 (1)组成:分散质和分散剂。 (2)分类:溶液、浊液和胶体。如图所示: 注意 按照分散剂的不同,胶体可分为液溶胶、气溶胶和固溶胶。分散剂是液体的是液溶胶,如 Fe(OH)3 胶体;分散剂是气体的是气溶胶,...\n[图谱#3] score=0.610 source=CaH2\n- CaH2 离子化合物 Na2O2 和 CaH2 与水的反应分别为 ② CaH2 + 2H2O → Ca(OH)2 + 2H2↑。",
+        "warnings": []
+      },
+      "vlm_plan": {
+        "analysis_image_path": "07_complete_units/SET_20260324_FB27_SHEET_001/CU003.jpg",
+        "uses_complete_unit_image": true,
+        "supports_vision_model": true,
+        "retrieval_context_supplied": true
+      },
+      "vlm_result": {
+        "status": "success",
+        "analysis_image_path": "07_complete_units/SET_20260324_FB27_SHEET_001/CU003.jpg",
+        "analysis_image_abspath": "d:\\10739\\Exam-Analysis-Suite\\preprocessor\\temp\\run_20260325_133128\\07_complete_units\\SET_20260324_FB27_SHEET_001\\CU003.jpg",
+        "uses_complete_unit_image": true,
+        "supports_vision_model": true,
+        "question_summary": "第3题考查电解质的判断，要求从给出的选项中选出属于电解质的物质。",
+        "answer_observation": "学生选择的答案是A（NaCl），并在答题纸上圈出了A选项。",
+        "answer_status_assessment": "answered",
+        "correctness": "correct",
+        "knowledge_points": [
+          "电解质的定义",
+          "常见电解质的识别",
+          "离子化合物与电解质的关系"
+        ],
+        "suspected_error_causes": [],
+        "reasoning_basis": [
+          "NaCl是离子化合物，在水溶液中或熔融状态下能电离出自由移动的离子，因此属于电解质。",
+          "B项CuSO4溶液是混合物，不是纯净物，不符合电解质定义（电解质必须是纯净物）。",
+          "C项Fe是金属单质，不属于电解质。",
+          "D项CO2本身不能电离，其水溶液虽能导电，但导电是因为生成了碳酸，CO2不是电解质。",
+          "综合判断，只有A选项符合电解质的定义。"
+        ],
+        "recommended_next_action": "无需进一步干预，答案正确。",
+        "confidence": 0.95,
+        "warnings": []
+      },
+      "final_conclusion": {
+        "status": "success",
+        "generation_mode": "llm",
+        "summary": "第3题考查电解质的判断，学生选择A（NaCl），作答正确；核心知识点为电解质的定义、常见电解质识别及离子化合物与电解质的关系。",
+        "answer_status": "answered",
+        "correctness": "correct",
+        "mastery_level": "mastered",
+        "knowledge_points": [
+          "电解质的定义",
+          "常见电解质的识别",
+          "离子化合物与电解质的关系",
+          "CaH2",
+          "Na2O2",
+          "Fe(OH)3胶体"
+        ],
+        "error_causes": [],
+        "explanation": "NaCl是离子化合物，在水溶液中或熔融状态下能电离出自由移动的离子，符合电解质定义；B项CuSO4溶液为混合物，C项Fe为单质，D项CO2本身不电离，三者均不属于电解质。",
+        "study_advice": [
+          "保持对“电解质的定义”的掌握，可追加一到两道同类题巩固。",
+          "结合召回到的知识片段复盘本题，确认相关概念与解题路径是否一致。"
+        ],
+        "supporting_evidence": [
+          "NaCl是离子化合物，在水溶液中或熔融状态下能电离出自由移动的离子，因此属于电解质。",
+          "B项CuSO4溶液是混合物，不是纯净物，不符合电解质定义（电解质必须是纯净物）。",
+          "C项Fe是金属单质，不属于电解质。",
+          "D项CO2本身不能电离，其水溶液虽能导电，但导电是因为生成了碳酸，CO2不是电解质。",
+          "综合判断，只有A选项符合电解质的定义。"
+        ],
+        "recommended_next_action": "无需进一步干预，答案正确。",
+        "confidence": 0.95,
+        "evidence_sources": [
+          "retrieval",
+          "vlm"
+        ],
+        "warnings": []
+      },
+      "evidence": {
+        "question_text": "第 3 题：下列物质中，属于电解质的是",
+        "question_image_path": "question_slices/SET_20260324_FB27_SHEET_001/Q003.jpg",
+        "answer_image_path": "answer_card_areas/answer_card_0.jpg",
+        "answer_image_paths": [
+          "answer_card_areas/answer_card_0.jpg"
+        ],
+        "complete_unit_image_path": "07_complete_units/SET_20260324_FB27_SHEET_001/CU003.jpg",
+        "confidence": {
+          "has_question_text": true,
+          "has_question_image": true,
+          "has_complete_unit_image": true,
+          "answer_image_count": 1,
+          "merged_fragment_count": 1,
+          "answer_fragment_count": 0
+        }
+      },
+      "observations": [
+        "题目存在学生作答，可进入知识检索与判因阶段。",
+        "已完成混合检索，召回 3 条候选证据，涉及 8 个图谱实体。",
+        "已基于完整单元图片完成题级 VLM 观察，可继续生成错因与讲解。",
+        "已输出最终逐题结论（LLM 融合）。"
+      ],
+      "next_action": "completed"
+    },
+    {
+      "question_no": "4",
+      "question_id": "SET_20260324_FB27_SHEET_001_Q004",
+      "question_type": null,
+      "student_answer": "A",
+      "answer_source": "answer_card",
+      "answer_status": "answered",
+      "needs_manual_review": false,
+      "analysis_status": "question_conclusion_ready",
+      "risk_level": "low",
+      "preliminary_judgement": "该题考查电解质在不同状态下的导电性，学生作答A（KNO₃固体）正确，因其离子在固态无法自由移动，不满足导电条件。",
+      "retrieval_plan": {
+        "vector_query": "第 4 题：下列物质中，不能导电的是\n学生答案：A",
+        "graph_entities": [
+          "CaH2",
+          "Na2O2",
+          "KMnO4",
+          "氧化剂",
+          "H2O2",
+          "Cl2",
+          "氧化还原反应"
+        ],
+        "knowledge_tags_hint": [],
+        "keywords": [
+          "4",
+          "下列物质中",
+          "不能导电的是",
+          "学生答案",
+          "A"
+        ]
+      },
+      "retrieval_result": {
+        "status": "success",
+        "query": "第 4 题：下列物质中，不能导电的是\n学生答案：A",
+        "keywords": [
+          "4",
+          "下列物质中",
+          "不能导电的是",
+          "学生答案",
+          "A"
+        ],
+        "graph_entities": [
+          "CaH2",
+          "Na2O2",
+          "KMnO4",
+          "氧化剂",
+          "H2O2",
+          "Cl2",
+          "氧化还原反应"
+        ],
+        "graph_entity_count": 7,
+        "merged_hit_count": 3,
+        "top_results": [
+          {
+            "rank": 1,
+            "source_type": "graph",
+            "score": 0.6795,
+            "citation": "Na2O2",
+            "snippet": "Na2O2 离子化合物 Na2O2 和 CaH2 与水的反应分别为 ① 2Na2O2 + 2H2O → 4NaOH + O2↑;"
+          },
+          {
+            "rank": 2,
+            "source_type": "vector",
+            "score": 0.64405,
+            "citation": "01专题一物质的分类及转化.pdf",
+            "snippet": "”中含大量的微生物及微生物所分泌的酶 等,具有催化作用,故可以说“曲”中含有复杂的 催化剂,B项正确;酒曲发酵过程中产生如鱼眼 大小的 气 泡 为 生 成 CO2 所 致,不 是 水 蒸 气 气 泡,D项错误。 答案 D 􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋 专题一 物质的分类及转化 1 专题一 物质的分类及转化 考点 1 物质的组成与分类 ..."
+          },
+          {
+            "rank": 3,
+            "source_type": "graph",
+            "score": 0.6145,
+            "citation": "氧化剂 -[RELATED_TO]-> KMnO4",
+            "snippet": "氧化剂 -[RELATED_TO]-> KMnO4 如 KMnO4 溶液的氧化性随溶液酸性的增强而增强。 4.常见的氧化剂和还原剂 (1)常见的氧化剂 物质类型 举例 对应还原产物"
+          }
+        ],
+        "context": "基于知识库检索得到以下证据：\n[图谱#1] score=0.679 source=Na2O2\n- Na2O2 离子化合物 Na2O2 和 CaH2 与水的反应分别为 ① 2Na2O2 + 2H2O → 4NaOH + O2↑;\n[向量#2] score=0.644 source=01专题一物质的分类及转化.pdf\n- ”中含大量的微生物及微生物所分泌的酶 等,具有催化作用,故可以说“曲”中含有复杂的 催化剂,B项正确;酒曲发酵过程中产生如鱼眼 大小的 气 泡 为 生 成 CO2 所 致,不 是 水 蒸 气 气 泡,D项错误。 答案 D 􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋 专题一 物质的分类及转化 1 专题一 物质的分类及转化 考点 1 物质的组成与分类 ...\n[图谱#3] score=0.615 source=氧化剂 -[RELATED_TO]-> KMnO4\n- 氧化剂 -[RELATED_TO]-> KMnO4 如 KMnO4 溶液的氧化性随溶液酸性的增强而增强。 4.常见的氧化剂和还原剂 (1)常见的氧化剂 物质类型 举例 对应还原产物",
+        "warnings": []
+      },
+      "vlm_plan": {
+        "analysis_image_path": "07_complete_units/SET_20260324_FB27_SHEET_001/CU004.jpg",
+        "uses_complete_unit_image": true,
+        "supports_vision_model": true,
+        "retrieval_context_supplied": true
+      },
+      "vlm_result": {
+        "status": "success",
+        "analysis_image_path": "07_complete_units/SET_20260324_FB27_SHEET_001/CU004.jpg",
+        "analysis_image_abspath": "d:\\10739\\Exam-Analysis-Suite\\preprocessor\\temp\\run_20260325_133128\\07_complete_units\\SET_20260324_FB27_SHEET_001\\CU004.jpg",
+        "uses_complete_unit_image": true,
+        "supports_vision_model": true,
+        "question_summary": "下列物质中，不能导电的是：A. KNO₃固体；B. 熔融KCl；C. NaOH溶液；D. 稀硫酸。",
+        "answer_observation": "学生作答为A，即认为KNO₃固体不能导电。",
+        "answer_status_assessment": "answered",
+        "correctness": "correct",
+        "knowledge_points": [
+          "电解质的导电性",
+          "离子化合物在不同状态下的导电性",
+          "固体电解质不导电的原因"
+        ],
+        "suspected_error_causes": [],
+        "reasoning_basis": [
+          "KNO₃固体是离子化合物，但其离子在固态下不能自由移动，因此不能导电。",
+          "熔融KCl中离子可自由移动，能导电。",
+          "NaOH溶液和稀硫酸均为电解质溶液，含有自由移动的离子，能导电。",
+          "因此，只有KNO₃固体在选项中不能导电，学生答案正确。"
+        ],
+        "recommended_next_action": "无需进一步干预，答案正确。",
+        "confidence": 0.95,
+        "warnings": []
+      },
+      "final_conclusion": {
+        "status": "success",
+        "generation_mode": "llm",
+        "summary": "该题考查电解质在不同状态下的导电性，学生作答A（KNO₃固体）正确，因其离子在固态无法自由移动，不满足导电条件。",
+        "answer_status": "answered",
+        "correctness": "correct",
+        "mastery_level": "mastered",
+        "knowledge_points": [
+          "电解质的导电性",
+          "离子化合物在不同状态下的导电性",
+          "固体电解质不导电的原因",
+          "CaH2",
+          "Na2O2",
+          "KMnO4"
+        ],
+        "error_causes": [],
+        "explanation": "KNO₃固体是离子化合物，但离子被固定在晶格中不能自由移动，故不能导电；熔融KCl、NaOH溶液和稀硫酸均含自由移动的离子，可导电。学生答案A正确。",
+        "study_advice": [
+          "保持对“电解质的导电性”的掌握，可追加一到两道同类题巩固。",
+          "结合召回到的知识片段复盘本题，确认相关概念与解题路径是否一致。"
+        ],
+        "supporting_evidence": [
+          "KNO₃固体是离子化合物，但其离子在固态下不能自由移动，因此不能导电。",
+          "熔融KCl中离子可自由移动，能导电。",
+          "NaOH溶液和稀硫酸均为电解质溶液，含有自由移动的离子，能导电。",
+          "因此，只有KNO₃固体在选项中不能导电，学生答案正确。",
+          "Na2O2: Na2O2 离子化合物 Na2O2 和 CaH2 与水的反应分别为 ① 2Na2O2 + 2H2O → 4NaOH + O2↑;"
+        ],
+        "recommended_next_action": "无需进一步干预，答案正确。",
+        "confidence": 0.95,
+        "evidence_sources": [
+          "retrieval",
+          "vlm"
+        ],
+        "warnings": []
+      },
+      "evidence": {
+        "question_text": "第 4 题：下列物质中，不能导电的是",
+        "question_image_path": "question_slices/SET_20260324_FB27_SHEET_001/Q004.jpg",
+        "answer_image_path": "answer_card_areas/answer_card_0.jpg",
+        "answer_image_paths": [
+          "answer_card_areas/answer_card_0.jpg"
+        ],
+        "complete_unit_image_path": "07_complete_units/SET_20260324_FB27_SHEET_001/CU004.jpg",
+        "confidence": {
+          "has_question_text": true,
+          "has_question_image": true,
+          "has_complete_unit_image": true,
+          "answer_image_count": 1,
+          "merged_fragment_count": 1,
+          "answer_fragment_count": 0
+        }
+      },
+      "observations": [
+        "题目存在学生作答，可进入知识检索与判因阶段。",
+        "已完成混合检索，召回 3 条候选证据，涉及 7 个图谱实体。",
+        "已基于完整单元图片完成题级 VLM 观察，可继续生成错因与讲解。",
+        "已输出最终逐题结论（LLM 融合）。"
+      ],
+      "next_action": "completed"
+    },
+    {
+      "question_no": "5",
+      "question_id": "SET_20260324_FB27_SHEET_001_Q005",
+      "question_type": null,
+      "student_answer": "C",
+      "answer_source": "answer_card",
+      "answer_status": "answered",
+      "needs_manual_review": false,
+      "analysis_status": "question_conclusion_ready",
+      "risk_level": "low",
+      "preliminary_judgement": "题目要求找出下列物质在水中的电离方程式书写不正确的一项。学生选择C，即CaCl₂ = Ca²⁺ + Cl₂⁻，该式错误（应为CaCl₂ = Ca²⁺ + 2Cl⁻），符合题干要求。",
+      "retrieval_plan": {
+        "vector_query": "第 5 题：下列物质在水中的电离方程式书写不正确的是\n学生答案：C",
+        "graph_entities": [
+          "CaH2",
+          "Cl2",
+          "氧化剂",
+          "Fe2+",
+          "SO2",
+          "H2O2",
+          "KMnO4",
+          "氧化还原反应"
+        ],
+        "knowledge_tags_hint": [],
+        "keywords": [
+          "5",
+          "下列物质在水中的电离方程式书写不正确的是",
+          "学生答案",
+          "C"
+        ]
+      },
+      "retrieval_result": {
+        "status": "success",
+        "query": "第 5 题：下列物质在水中的电离方程式书写不正确的是\n学生答案：C",
+        "keywords": [
+          "5",
+          "下列物质在水中的电离方程式书写不正确的是",
+          "学生答案",
+          "C"
+        ],
+        "graph_entities": [
+          "CaH2",
+          "Cl2",
+          "氧化剂",
+          "Fe2+",
+          "SO2",
+          "H2O2",
+          "KMnO4",
+          "氧化还原反应"
+        ],
+        "graph_entity_count": 8,
+        "merged_hit_count": 3,
+        "top_results": [
+          {
+            "rank": 1,
+            "source_type": "graph",
+            "score": 0.657334,
+            "citation": "Cl2 -[RELATED_TO]-> 氧化剂 | 氧化剂 -[RELATED_TO]-> Cl2",
+            "snippet": "Cl2 -[RELATED_TO]-> 氧化剂 | 氧化剂 -[RELATED_TO]-> Cl2 Cl2 与 SO2 反应时 Cl2 → Cl-, SO2 → SO4^2-, 则反应中 Cl2 与 SO2 的物质的量之比为2∶1。 4.常见的氧化剂和还原剂 (1)常见的氧化剂 物质类型 举例 对应还原产物 Cl2 与 SO2 反应时 Cl2 → Cl-, SO2 → SO4^2-, 则反应中 Cl2 与 SO2 的物质的量之比为2∶1。"
+          },
+          {
+            "rank": 2,
+            "source_type": "vector",
+            "score": 0.627125,
+            "citation": "01专题一物质的分类及转化.pdf",
+            "snippet": "”中含大量的微生物及微生物所分泌的酶 等,具有催化作用,故可以说“曲”中含有复杂的 催化剂,B项正确;酒曲发酵过程中产生如鱼眼 大小的 气 泡 为 生 成 CO2 所 致,不 是 水 蒸 气 气 泡,D项错误。 答案 D 􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋 专题一 物质的分类及转化 1 专题一 物质的分类及转化 考点 1 物质的组成与分类 ..."
+          },
+          {
+            "rank": 3,
+            "source_type": "vector",
+            "score": 0.627005,
+            "citation": "03专题三离子反应.pdf",
+            "snippet": "􀪅􀪅 Al(OH) 3↓+CO 2- 3 C Ag + 、Ba 2+ 、 S 2- H2SO4 溶液 2H + +S 2- 􀪅􀪅 H2S↑ D Fe 3+ 、 Cl - 、 SCN - NaOH 溶液 Fe 3+ + 3OH - 􀪅􀪅 Fe(OH) 3↓ 答案 B 3. (2023安徽黄山三模,10)某工业废水中可能 含有 K +、Ag +、Mg 2+、Cu 2+、Al 3+、NH + 4 、Cl -、 CO 2- 3 、NO - 3 、SO 2- 4 、 I - 中的..."
+          }
+        ],
+        "context": "基于知识库检索得到以下证据：\n[图谱#1] score=0.657 source=Cl2 -[RELATED_TO]-> 氧化剂 | 氧化剂 -[RELATED_TO]-> Cl2\n- Cl2 -[RELATED_TO]-> 氧化剂 | 氧化剂 -[RELATED_TO]-> Cl2 Cl2 与 SO2 反应时 Cl2 → Cl-, SO2 → SO4^2-, 则反应中 Cl2 与 SO2 的物质的量之比为2∶1。 4.常见的氧化剂和还原剂 (1)常见的氧化剂 物质类型 举例 对应还原产物 Cl2 与 SO2 反应时 Cl2 → Cl-, SO2 → SO4^2-, 则反应中 Cl2 与 SO2 的物质的量之比为2∶1。\n[向量#2] score=0.627 source=01专题一物质的分类及转化.pdf\n- ”中含大量的微生物及微生物所分泌的酶 等,具有催化作用,故可以说“曲”中含有复杂的 催化剂,B项正确;酒曲发酵过程中产生如鱼眼 大小的 气 泡 为 生 成 CO2 所 致,不 是 水 蒸 气 气 泡,D项错误。 答案 D 􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋 专题一 物质的分类及转化 1 专题一 物质的分类及转化 考点 1 物质的组成与分类 ...\n[向量#3] score=0.627 source=03专题三离子反应.pdf\n- 􀪅􀪅 Al(OH) 3↓+CO 2- 3 C Ag + 、Ba 2+ 、 S 2- H2SO4 溶液 2H + +S 2- 􀪅􀪅 H2S↑ D Fe 3+ 、 Cl - 、 SCN - NaOH 溶液 Fe 3+ + 3OH - 􀪅􀪅 Fe(OH) 3↓ 答案 B 3. (2023安徽黄山三模,10)某工业废水中可能 含有 K +、Ag +、Mg 2+、Cu 2+、Al 3+、NH + 4 、Cl -、 CO 2- 3 、NO - 3 、SO 2- 4 、 I - 中的...",
+        "warnings": []
+      },
+      "vlm_plan": {
+        "analysis_image_path": "07_complete_units/SET_20260324_FB27_SHEET_001/CU005.jpg",
+        "uses_complete_unit_image": true,
+        "supports_vision_model": true,
+        "retrieval_context_supplied": true
+      },
+      "vlm_result": {
+        "status": "success",
+        "analysis_image_path": "07_complete_units/SET_20260324_FB27_SHEET_001/CU005.jpg",
+        "analysis_image_abspath": "d:\\10739\\Exam-Analysis-Suite\\preprocessor\\temp\\run_20260325_133128\\07_complete_units\\SET_20260324_FB27_SHEET_001\\CU005.jpg",
+        "uses_complete_unit_image": true,
+        "supports_vision_model": true,
+        "question_summary": "题目要求找出下列物质在水中的电离方程式书写不正确的一项。",
+        "answer_observation": "学生选择的答案是 C，即认为 CaCl₂ = Ca²⁺ + Cl₂⁻ 的电离方程式书写不正确。",
+        "answer_status_assessment": "answered",
+        "correctness": "correct",
+        "knowledge_points": [
+          "电解质的电离",
+          "强电解质的完全电离",
+          "离子化合物的电离方程式书写规则"
+        ],
+        "suspected_error_causes": [],
+        "reasoning_basis": [
+          "选项 A: KNO₃ = K⁺ + NO₃⁻ 是正确的，硝酸钾为强电解质，完全电离为钾离子和硝酸根离子。",
+          "选项 B: Ba(OH)₂ = Ba²⁺ + 2OH⁻ 是正确的，氢氧化钡为强碱，完全电离生成钡离子和氢氧根离子（注意：原题中写为 OH⁻，但应有两个 OH⁻，此处可能排版问题，实际应为 2OH⁻）。",
+          "选项 C: CaCl₂ = Ca²⁺ + Cl₂⁻ 是错误的，因为氯化钙电离应生成 Ca²⁺ 和两个 Cl⁻ 离子，正确形式为 CaCl₂ = Ca²⁺ + 2Cl⁻。因此该选项书写不正确，符合题意。",
+          "选项 D: H₂SO₄ = 2H⁺ + SO₄²⁻ 是正确的，硫酸为强酸，完全电离生成氢离子和硫酸根离子。",
+          "综上，C 项电离方程式书写错误，是本题正确答案。"
+        ],
+        "recommended_next_action": "无需进一步干预，答案正确。",
+        "confidence": 0.95,
+        "warnings": []
+      },
+      "final_conclusion": {
+        "status": "success",
+        "generation_mode": "llm",
+        "summary": "题目要求找出下列物质在水中的电离方程式书写不正确的一项。学生选择C，即CaCl₂ = Ca²⁺ + Cl₂⁻，该式错误（应为CaCl₂ = Ca²⁺ + 2Cl⁻），符合题干要求。",
+        "answer_status": "answered",
+        "correctness": "correct",
+        "mastery_level": "mastered",
+        "knowledge_points": [
+          "电解质的电离",
+          "强电解质的完全电离",
+          "离子化合物的电离方程式书写规则",
+          "CaH2",
+          "Cl2",
+          "氧化剂"
+        ],
+        "error_causes": [],
+        "explanation": "选项C中CaCl₂电离方程式写为Ca²⁺ + Cl₂⁻，错误地将两个氯离子合并为Cl₂⁻（该离子不存在）；正确应为Ca²⁺ + 2Cl⁻。其余选项A、B、D电离式均符合强电解质完全电离规则。",
+        "study_advice": [
+          "保持对‘电解质的电离’的掌握，可追加一到两道同类题巩固。",
+          "结合召回到的知识片段复盘本题，确认相关概念与解题路径是否一致。",
+          "保持对“电解质的电离”的掌握，可追加一到两道同类题巩固。"
+        ],
+        "supporting_evidence": [
+          "选项 A: KNO₃ = K⁺ + NO₃⁻ 是正确的，硝酸钾为强电解质，完全电离为钾离子和硝酸根离子。",
+          "选项 B: Ba(OH)₂ = Ba²⁺ + 2OH⁻ 是正确的，氢氧化钡为强碱，完全电离生成钡离子和氢氧根离子。",
+          "选项 C: CaCl₂ = Ca²⁺ + Cl₂⁻ 是错误的，因为氯化钙电离应生成 Ca²⁺ 和两个 Cl⁻ 离子，正确形式为 CaCl₂ = Ca²⁺ + 2Cl⁻。因此该选项书写不正确，符合题意。",
+          "选项 D: H₂SO₄ = 2H⁺ + SO₄²⁻ 是正确的，硫酸为强酸，完全电离生成氢离子和硫酸根离子。",
+          "选项 B: Ba(OH)₂ = Ba²⁺ + 2OH⁻ 是正确的，氢氧化钡为强碱，完全电离生成钡离子和氢氧根离子（注意：原题中写为 OH⁻，但应有两个 OH⁻，此处可能排版问题，实际应为 2OH⁻）。",
+          "综上，C 项电离方程式书写错误，是本题正确答案。"
+        ],
+        "recommended_next_action": "无需进一步干预，答案正确。",
+        "confidence": 0.95,
+        "evidence_sources": [
+          "retrieval",
+          "vlm"
+        ],
+        "warnings": []
+      },
+      "evidence": {
+        "question_text": "第 5 题：下列物质在水中的电离方程式书写不正确的是",
+        "question_image_path": "question_slices/SET_20260324_FB27_SHEET_001/Q005.jpg",
+        "answer_image_path": "answer_card_areas/answer_card_0.jpg",
+        "answer_image_paths": [
+          "answer_card_areas/answer_card_0.jpg"
+        ],
+        "complete_unit_image_path": "07_complete_units/SET_20260324_FB27_SHEET_001/CU005.jpg",
+        "confidence": {
+          "has_question_text": true,
+          "has_question_image": true,
+          "has_complete_unit_image": true,
+          "answer_image_count": 1,
+          "merged_fragment_count": 1,
+          "answer_fragment_count": 0
+        }
+      },
+      "observations": [
+        "题目存在学生作答，可进入知识检索与判因阶段。",
+        "已完成混合检索，召回 3 条候选证据，涉及 8 个图谱实体。",
+        "已基于完整单元图片完成题级 VLM 观察，可继续生成错因与讲解。",
+        "已输出最终逐题结论（LLM 融合）。"
+      ],
+      "next_action": "completed"
+    },
+    {
+      "question_no": "6",
+      "question_id": "SET_20260324_FB27_SHEET_001_Q006",
+      "question_type": null,
+      "student_answer": "B",
+      "answer_source": "answer_card",
+      "answer_status": "answered",
+      "needs_manual_review": false,
+      "analysis_status": "question_conclusion_ready",
+      "risk_level": "low",
+      "preliminary_judgement": "题目要求判断哪一个实验装置不能达到其对应的实验目的，学生作答B（稀释浓硫酸），正确。该装置将水倒入浓硫酸中，违反安全操作规范，无法安全有效地完成稀释目的。",
+      "retrieval_plan": {
+        "vector_query": "第 6 题：下列实验装置不能达到实验目的的是（包含四个实验装置图）\n学生答案：B",
+        "graph_entities": [
+          "Br-",
+          "还原剂",
+          "Fe2+",
+          "氧化还原反应",
+          "H2O2"
+        ],
+        "knowledge_tags_hint": [],
+        "keywords": [
+          "6",
+          "下列实验装置不能达到实验目的的是",
+          "包含四个实验装置图",
+          "学生答案",
+          "B"
+        ]
+      },
+      "retrieval_result": {
+        "status": "success",
+        "query": "第 6 题：下列实验装置不能达到实验目的的是（包含四个实验装置图）\n学生答案：B",
+        "keywords": [
+          "6",
+          "下列实验装置不能达到实验目的的是",
+          "包含四个实验装置图",
+          "学生答案",
+          "B"
+        ],
+        "graph_entities": [
+          "Br-",
+          "还原剂",
+          "Fe2+",
+          "氧化还原反应",
+          "H2O2"
+        ],
+        "graph_entity_count": 5,
+        "merged_hit_count": 3,
+        "top_results": [
+          {
+            "rank": 1,
+            "source_type": "graph",
+            "score": 0.639834,
+            "citation": "Br- -[RELATED_TO]-> 还原剂 | 还原剂 -[RELATED_TO]-> Br-",
+            "snippet": "Br- -[RELATED_TO]-> 还原剂 | 还原剂 -[RELATED_TO]-> Br- 如 FeBr2 溶液中通入少量 Cl2,因为还原性 Fe2+ > Br-, 所以 Fe2+ 先被 Cl2 氧化; (2)常见的还原剂 物质类型 举例 对应氧化产物 如 FeBr2 溶液中通入少量 Cl2,因为还原性 Fe2+ > Br-, 所以 Fe2+ 先被 Cl2 氧化;"
+          },
+          {
+            "rank": 2,
+            "source_type": "vector",
+            "score": 0.603448,
+            "citation": "03专题三离子反应.pdf",
+            "snippet": "$M\u000e )\u00130 $0\u0013ĩ ݌ ݌ ᫥/ᐻ͐D̹ ߌ Ꮐ+.ၼ $B$0\u0014 \u0013) $B\u0013 )\u00130 $0\u0013ĩ ᴑ ᷬᴑ᫥/ᐻ͐D᭛ 0 ၼႴᕾ *8Ⴔᕾ 2.离子方程式书写的关键 (1)两易—易溶且易(完全)电离的物质(包括强 酸、强碱、大多数可溶性盐)拆成离子,其他 物质用化学式表示。 (2)两等—离子方程式两边的原子个数、电荷数 均应相等。 (3)两查—检查化学计量数是否约到最简,是否 漏标必要的反应条件。 注意 微溶物的处理:①出现在生成物中写化学式; ②反应物中处于..."
+          },
+          {
+            "rank": 3,
+            "source_type": "vector",
+            "score": 0.578625,
+            "citation": "01专题一物质的分类及转化.pdf",
+            "snippet": "”中含大量的微生物及微生物所分泌的酶 等,具有催化作用,故可以说“曲”中含有复杂的 催化剂,B项正确;酒曲发酵过程中产生如鱼眼 大小的 气 泡 为 生 成 CO2 所 致,不 是 水 蒸 气 气 泡,D项错误。 答案 D 􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋 专题一 物质的分类及转化 1 专题一 物质的分类及转化 考点 1 物质的组成与分类 ..."
+          }
+        ],
+        "context": "基于知识库检索得到以下证据：\n[图谱#1] score=0.640 source=Br- -[RELATED_TO]-> 还原剂 | 还原剂 -[RELATED_TO]-> Br-\n- Br- -[RELATED_TO]-> 还原剂 | 还原剂 -[RELATED_TO]-> Br- 如 FeBr2 溶液中通入少量 Cl2,因为还原性 Fe2+ > Br-, 所以 Fe2+ 先被 Cl2 氧化; (2)常见的还原剂 物质类型 举例 对应氧化产物 如 FeBr2 溶液中通入少量 Cl2,因为还原性 Fe2+ > Br-, 所以 Fe2+ 先被 Cl2 氧化;\n[向量#2] score=0.603 source=03专题三离子反应.pdf\n- $M\u000e )\u00130 $0\u0013ĩ ݌ ݌ ᫥/ᐻ͐D̹ ߌ Ꮐ+.ၼ $B$0\u0014 \u0013) $B\u0013 )\u00130 $0\u0013ĩ ᴑ ᷬᴑ᫥/ᐻ͐D᭛ 0 ၼႴᕾ *8Ⴔᕾ 2.离子方程式书写的关键 (1)两易—易溶且易(完全)电离的物质(包括强 酸、强碱、大多数可溶性盐)拆成离子,其他 物质用化学式表示。 (2)两等—离子方程式两边的原子个数、电荷数 均应相等。 (3)两查—检查化学计量数是否约到最简,是否 漏标必要的反应条件。 注意 微溶物的处理:①出现在生成物中写化学式; ②反应物中处于...\n[向量#3] score=0.579 source=01专题一物质的分类及转化.pdf\n- ”中含大量的微生物及微生物所分泌的酶 等,具有催化作用,故可以说“曲”中含有复杂的 催化剂,B项正确;酒曲发酵过程中产生如鱼眼 大小的 气 泡 为 生 成 CO2 所 致,不 是 水 蒸 气 气 泡,D项错误。 答案 D 􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋 专题一 物质的分类及转化 1 专题一 物质的分类及转化 考点 1 物质的组成与分类 ...",
+        "warnings": []
+      },
+      "vlm_plan": {
+        "analysis_image_path": "07_complete_units/SET_20260324_FB27_SHEET_001/CU006.jpg",
+        "uses_complete_unit_image": true,
+        "supports_vision_model": true,
+        "retrieval_context_supplied": true
+      },
+      "vlm_result": {
+        "status": "success",
+        "analysis_image_path": "07_complete_units/SET_20260324_FB27_SHEET_001/CU006.jpg",
+        "analysis_image_abspath": "d:\\10739\\Exam-Analysis-Suite\\preprocessor\\temp\\run_20260325_133128\\07_complete_units\\SET_20260324_FB27_SHEET_001\\CU006.jpg",
+        "uses_complete_unit_image": true,
+        "supports_vision_model": true,
+        "question_summary": "题目要求判断哪一个实验装置不能达到其对应的实验目的，选项包括：A. 测空气中O₂含量；B. 稀释浓硫酸；C. 实验室制取O₂；D. 收集CO₂。",
+        "answer_observation": "学生作答为B，即认为稀释浓硫酸的装置不能达到实验目的。",
+        "answer_status_assessment": "answered",
+        "correctness": "correct",
+        "knowledge_points": [
+          "浓硫酸的稀释方法",
+          "实验室安全操作规范",
+          "气体收集方法",
+          "氧气的制备原理"
+        ],
+        "suspected_error_causes": [],
+        "reasoning_basis": [
+          "稀释浓硫酸时应将浓硫酸缓慢倒入水中，并不断搅拌，以防止局部过热导致液体飞溅。图中所示操作是将水倒入浓硫酸中，这是错误的，可能导致危险，因此该装置不能达到实验目的。",
+          "选项A中红磷燃烧消耗氧气，通过水位上升测定氧气含量，符合实验原理。",
+          "选项C中用高锰酸钾加热制氧气，装置正确，且用排水法收集，合理。",
+          "选项D中用向上排空气法收集CO₂，符合CO₂密度大于空气的性质，正确。",
+          "综合判断，B选项装置存在安全隐患且不符合规范操作，无法安全有效地完成实验目的。"
+        ],
+        "recommended_next_action": "无需进一步行动，答案正确。",
+        "confidence": 0.95,
+        "warnings": []
+      },
+      "final_conclusion": {
+        "status": "success",
+        "generation_mode": "llm",
+        "summary": "题目要求判断哪一个实验装置不能达到其对应的实验目的，学生作答B（稀释浓硫酸），正确。该装置将水倒入浓硫酸中，违反安全操作规范，无法安全有效地完成稀释目的。",
+        "answer_status": "answered",
+        "correctness": "correct",
+        "mastery_level": "mastered",
+        "knowledge_points": [
+          "浓硫酸的稀释方法",
+          "实验室安全操作规范",
+          "气体收集方法",
+          "氧气的制备原理",
+          "Br-",
+          "还原剂"
+        ],
+        "error_causes": [],
+        "explanation": "稀释浓硫酸时应将浓硫酸缓慢倒入水中并搅拌；图中操作为水倒入浓硫酸，易致暴沸飞溅，存在严重安全隐患，故不能达到实验目的。其余选项装置均符合对应实验原理与操作规范：A（红磷燃烧测O₂含量）、C（高锰酸钾加热制O₂并排水收集）、D（向上排空气法收集CO₂）均合理。",
+        "study_advice": [
+          "保持对“浓硫酸的稀释方法”的掌握，可追加一到两道同类题巩固。",
+          "结合召回到的知识片段复盘本题，确认相关概念与解题路径是否一致。"
+        ],
+        "supporting_evidence": [
+          "稀释浓硫酸时应将浓硫酸缓慢倒入水中，并不断搅拌，以防止局部过热导致液体飞溅。图中所示操作是将水倒入浓硫酸中，这是错误的，可能导致危险，因此该装置不能达到实验目的。",
+          "选项A中红磷燃烧消耗氧气，通过水位上升测定氧气含量，符合实验原理。",
+          "选项C中用高锰酸钾加热制氧气，装置正确，且用排水法收集，合理。",
+          "选项D中用向上排空气法收集CO₂，符合CO₂密度大于空气的性质，正确。",
+          "综合判断，B选项装置存在安全隐患且不符合规范操作，无法安全有效地完成实验目的。"
+        ],
+        "recommended_next_action": "无需进一步行动，答案正确。",
+        "confidence": 0.95,
+        "evidence_sources": [
+          "retrieval",
+          "vlm"
+        ],
+        "warnings": []
+      },
+      "evidence": {
+        "question_text": "第 6 题：下列实验装置不能达到实验目的的是（包含四个实验装置图）",
+        "question_image_path": "question_slices/SET_20260324_FB27_SHEET_001/Q006.jpg",
+        "answer_image_path": "answer_card_areas/answer_card_0.jpg",
+        "answer_image_paths": [
+          "answer_card_areas/answer_card_0.jpg"
+        ],
+        "complete_unit_image_path": "07_complete_units/SET_20260324_FB27_SHEET_001/CU006.jpg",
+        "confidence": {
+          "has_question_text": true,
+          "has_question_image": true,
+          "has_complete_unit_image": true,
+          "answer_image_count": 1,
+          "merged_fragment_count": 1,
+          "answer_fragment_count": 0
+        }
+      },
+      "observations": [
+        "题目存在学生作答，可进入知识检索与判因阶段。",
+        "已完成混合检索，召回 3 条候选证据，涉及 5 个图谱实体。",
+        "已基于完整单元图片完成题级 VLM 观察，可继续生成错因与讲解。",
+        "已输出最终逐题结论（LLM 融合）。"
+      ],
+      "next_action": "completed"
+    },
+    {
+      "question_no": "7",
+      "question_id": "SET_20260324_FB27_SHEET_001_Q007",
+      "question_type": null,
+      "student_answer": "C",
+      "answer_source": "answer_card",
+      "answer_status": "answered",
+      "needs_manual_review": false,
+      "analysis_status": "question_conclusion_ready",
+      "risk_level": "low",
+      "preliminary_judgement": "该题要求判断关于稀土元素铈(Ce)的四个说法中哪一个不正确。学生作答C，即认为选项C是不正确的说法。综合VLM观察与检索结果，C项将CeO₂的摩尔质量表述为'172g'，缺少单位'mol⁻¹'，属于单位缺失错误，确为不正确说法；其余选项A、B、D均正确。学生作答正确。",
+      "retrieval_plan": {
+        "vector_query": "第 7 题：“稀土之父”徐光宪先生缔造了稀土的中国传奇。稀土元素铈(Ce)在多个领域有广泛应用。右图为稀土元素铈(Ce)在元素周期表中的信息。下列说法不正确的是\n学生答案：C",
+        "graph_entities": [],
+        "knowledge_tags_hint": [],
+        "keywords": [
+          "7",
+          "稀土之父",
+          "徐光宪先生缔造了稀土的中国传奇",
+          "稀土元素铈",
+          "Ce",
+          "在多个领域有广泛应用"
+        ]
+      },
+      "retrieval_result": {
+        "status": "success",
+        "query": "第 7 题：“稀土之父”徐光宪先生缔造了稀土的中国传奇。稀土元素铈(Ce)在多个领域有广泛应用。右图为稀土元素铈(Ce)在元素周期表中的信息。下列说法不正确的是\n学生答案：C",
+        "keywords": [
+          "7",
+          "稀土之父",
+          "徐光宪先生缔造了稀土的中国传奇",
+          "稀土元素铈",
+          "Ce",
+          "在多个领域有广泛应用"
+        ],
+        "graph_entities": [],
+        "graph_entity_count": 0,
+        "merged_hit_count": 3,
+        "top_results": [
+          {
+            "rank": 1,
+            "source_type": "vector",
+            "score": 0.551533,
+            "citation": "01专题一物质的分类及转化.pdf",
+            "snippet": "l 2 △→ SiCl 4 H2 高温 → Si C.NH3 O2 催化剂,△→ NO H2O → HNO3 D. Cu S △→ CuS 稀 H2SO4 → H2S 答案 B 􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋 230 5 年高考 3 年模拟 A 版 高考化学 考法 化学与传统文化 中国古代文明、重要古籍文献、经典诗词、 谚语中蕴含着..."
+          },
+          {
+            "rank": 2,
+            "source_type": "vector",
+            "score": 0.545172,
+            "citation": "04专题四氧化还原反应.pdf",
+            "snippet": "(2023全国乙,7,6分)下列应用中涉及氧化还 原反应的是 ( ) A.使用明矾对水进行净化 B.雪天道路上撒盐融雪 C.暖贴中的铁粉遇空气放热 D.荧光指示牌被照发光 答案 C 2.(2022山东,1,2分)古医典富载化学知识,下 述之物见其氧化性者为 ( ) A.金(Au):“虽被火亦未熟” B.石灰(CaO):“以水沃之,即热蒸而解” C.石硫黄(S):“能化……银、铜、铁,奇物” D.石钟乳(CaCO3):“色黄,以苦酒(醋)洗刷则白” 答案 C 3.(202..."
+          },
+          {
+            "rank": 3,
+            "source_type": "vector",
+            "score": 0.535325,
+            "citation": "01专题一物质的分类及转化.pdf",
+            "snippet": "”中含大量的微生物及微生物所分泌的酶 等,具有催化作用,故可以说“曲”中含有复杂的 催化剂,B项正确;酒曲发酵过程中产生如鱼眼 大小的 气 泡 为 生 成 CO2 所 致,不 是 水 蒸 气 气 泡,D项错误。 答案 D 􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋 专题一 物质的分类及转化 1 专题一 物质的分类及转化 考点 1 物质的组成与分类 ..."
+          }
+        ],
+        "context": "基于知识库检索得到以下证据：\n[向量#1] score=0.552 source=01专题一物质的分类及转化.pdf\n- l 2 △→ SiCl 4 H2 高温 → Si C.NH3 O2 催化剂,△→ NO H2O → HNO3 D. Cu S △→ CuS 稀 H2SO4 → H2S 答案 B 􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋 230 5 年高考 3 年模拟 A 版 高考化学 考法 化学与传统文化 中国古代文明、重要古籍文献、经典诗词、 谚语中蕴含着...\n[向量#2] score=0.545 source=04专题四氧化还原反应.pdf\n- (2023全国乙,7,6分)下列应用中涉及氧化还 原反应的是 ( ) A.使用明矾对水进行净化 B.雪天道路上撒盐融雪 C.暖贴中的铁粉遇空气放热 D.荧光指示牌被照发光 答案 C 2.(2022山东,1,2分)古医典富载化学知识,下 述之物见其氧化性者为 ( ) A.金(Au):“虽被火亦未熟” B.石灰(CaO):“以水沃之,即热蒸而解” C.石硫黄(S):“能化……银、铜、铁,奇物” D.石钟乳(CaCO3):“色黄,以苦酒(醋)洗刷则白” 答案 C 3.(202...\n[向量#3] score=0.535 source=01专题一物质的分类及转化.pdf\n- ”中含大量的微生物及微生物所分泌的酶 等,具有催化作用,故可以说“曲”中含有复杂的 催化剂,B项正确;酒曲发酵过程中产生如鱼眼 大小的 气 泡 为 生 成 CO2 所 致,不 是 水 蒸 气 气 泡,D项错误。 答案 D 􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋 专题一 物质的分类及转化 1 专题一 物质的分类及转化 考点 1 物质的组成与分类 ...",
+        "warnings": []
+      },
+      "vlm_plan": {
+        "analysis_image_path": "07_complete_units/SET_20260324_FB27_SHEET_001/CU007.jpg",
+        "uses_complete_unit_image": true,
+        "supports_vision_model": true,
+        "retrieval_context_supplied": true
+      },
+      "vlm_result": {
+        "status": "success",
+        "analysis_image_path": "07_complete_units/SET_20260324_FB27_SHEET_001/CU007.jpg",
+        "analysis_image_abspath": "d:\\10739\\Exam-Analysis-Suite\\preprocessor\\temp\\run_20260325_133128\\07_complete_units\\SET_20260324_FB27_SHEET_001\\CU007.jpg",
+        "uses_complete_unit_image": true,
+        "supports_vision_model": true,
+        "question_summary": "题目要求判断关于稀土元素铈(Ce)的四个说法中哪一个不正确。选项涉及原子序数、氧化物分类、摩尔质量单位和化合价。",
+        "answer_observation": "学生作答为C，即认为选项C是不正确的说法。",
+        "answer_status_assessment": "answered",
+        "correctness": "correct",
+        "knowledge_points": [
+          "元素周期表信息解读",
+          "氧化物的定义",
+          "摩尔质量的概念与单位",
+          "化合价的计算"
+        ],
+        "suspected_error_causes": [],
+        "reasoning_basis": [
+          "A项：Ce的原子序数为58，从周期表信息可知正确。",
+          "B项：CeO₂由Ce和O组成，属于氧化物，正确。",
+          "C项：CeO₂的摩尔质量应为172 g/mol，但选项写为'172g'，缺少单位'mol⁻¹'，表述错误，因此不正确。",
+          "D项：在CeCl₃中，Cl为-1价，三个Cl共-3价，故Ce为+3价，正确。",
+          "因此，不正确的说法是C，学生作答正确。"
+        ],
+        "recommended_next_action": "确认学生对摩尔质量单位的理解，强化单位规范性训练。",
+        "confidence": 0.95,
+        "warnings": []
+      },
+      "final_conclusion": {
+        "status": "success",
+        "generation_mode": "llm",
+        "summary": "该题要求判断关于稀土元素铈(Ce)的四个说法中哪一个不正确。学生作答C，即认为选项C是不正确的说法。综合VLM观察与检索结果，C项将CeO₂的摩尔质量表述为'172g'，缺少单位'mol⁻¹'，属于单位缺失错误，确为不正确说法；其余选项A、B、D均正确。学生作答正确。",
+        "answer_status": "answered",
+        "correctness": "correct",
+        "mastery_level": "mastered",
+        "knowledge_points": [
+          "元素周期表信息解读",
+          "氧化物的定义",
+          "摩尔质量的概念与单位",
+          "化合价的计算",
+          "7",
+          "稀土之父"
+        ],
+        "error_causes": [],
+        "explanation": "A项：Ce原子序数为58，正确；B项：CeO₂由铈和氧两种元素组成，属于氧化物，正确；C项：摩尔质量单位应为g/mol（或g·mol⁻¹），选项写为'172g'，单位错误，故该说法不正确；D项：CeCl₃中Cl为-1价，根据化合物总化合价为0，Ce为+3价，正确。因此不正确的说法是C，学生作答正确。",
+        "study_advice": [
+          "强化摩尔质量单位书写的规范性训练，避免遗漏'per mole'含义的表达",
+          "通过对比练习巩固物理量单位与数值的完整表述习惯",
+          "保持对“元素周期表信息解读”的掌握，可追加一到两道同类题巩固。",
+          "结合召回到的知识片段复盘本题，确认相关概念与解题路径是否一致。"
+        ],
+        "supporting_evidence": [
+          "A项：Ce的原子序数为58，从周期表信息可知正确。",
+          "B项：CeO₂由Ce和O组成，属于氧化物，正确。",
+          "C项：CeO₂的摩尔质量应为172 g/mol，但选项写为'172g'，缺少单位'mol⁻¹'，表述错误，因此不正确。",
+          "D项：在CeCl₃中，Cl为-1价，三个Cl共-3价，故Ce为+3价，正确。",
+          "因此，不正确的说法是C，学生作答正确。"
+        ],
+        "recommended_next_action": "确认学生对摩尔质量单位的理解，强化单位规范性训练。",
+        "confidence": 0.95,
+        "evidence_sources": [
+          "retrieval",
+          "vlm"
+        ],
+        "warnings": []
+      },
+      "evidence": {
+        "question_text": "第 7 题：“稀土之父”徐光宪先生缔造了稀土的中国传奇。稀土元素铈(Ce)在多个领域有广泛应用。右图为稀土元素铈(Ce)在元素周期表中的信息。下列说法不正确的是",
+        "question_image_path": "question_slices/SET_20260324_FB27_SHEET_001/Q007.jpg",
+        "answer_image_path": "answer_card_areas/answer_card_0.jpg",
+        "answer_image_paths": [
+          "answer_card_areas/answer_card_0.jpg"
+        ],
+        "complete_unit_image_path": "07_complete_units/SET_20260324_FB27_SHEET_001/CU007.jpg",
+        "confidence": {
+          "has_question_text": true,
+          "has_question_image": true,
+          "has_complete_unit_image": true,
+          "answer_image_count": 1,
+          "merged_fragment_count": 1,
+          "answer_fragment_count": 0
+        }
+      },
+      "observations": [
+        "题目存在学生作答，可进入知识检索与判因阶段。",
+        "已完成混合检索，召回 3 条候选证据，涉及 0 个图谱实体。",
+        "已基于完整单元图片完成题级 VLM 观察，可继续生成错因与讲解。",
+        "已输出最终逐题结论（LLM 融合）。"
+      ],
+      "next_action": "completed"
+    },
+    {
+      "question_no": "8",
+      "question_id": "SET_20260324_FB27_SHEET_001_Q008",
+      "question_type": null,
+      "student_answer": "C",
+      "answer_source": "answer_card",
+      "answer_status": "answered",
+      "needs_manual_review": false,
+      "analysis_status": "question_conclusion_ready",
+      "risk_level": "low",
+      "preliminary_judgement": "CaO是常用的食品干燥剂，下列说法不正确的是：A. 俗称生石灰；B. 是碱性氧化物；C. 可以除去CO2中的水；D. 可与酸反应生成钙盐和水。学生选择C，该选项确为不正确的说法，因CaO会与CO2反应生成CaCO3，不能用于干燥CO2气体。",
+      "retrieval_plan": {
+        "vector_query": "第 8 题：CaO 是常用的食品干燥剂，下列说法不正确的是\n学生答案：C",
+        "graph_entities": [
+          "CaH2",
+          "Cl2",
+          "氧化剂",
+          "Fe2+",
+          "SO2",
+          "H2O2",
+          "KMnO4",
+          "氧化还原反应"
+        ],
+        "knowledge_tags_hint": [],
+        "keywords": [
+          "8",
+          "CaO",
+          "是常用的食品干燥剂",
+          "下列说法不正确的是",
+          "学生答案",
+          "C"
+        ]
+      },
+      "retrieval_result": {
+        "status": "success",
+        "query": "第 8 题：CaO 是常用的食品干燥剂，下列说法不正确的是\n学生答案：C",
+        "keywords": [
+          "8",
+          "CaO",
+          "是常用的食品干燥剂",
+          "下列说法不正确的是",
+          "学生答案",
+          "C"
+        ],
+        "graph_entities": [
+          "CaH2",
+          "Cl2",
+          "氧化剂",
+          "Fe2+",
+          "SO2",
+          "H2O2",
+          "KMnO4",
+          "氧化还原反应"
+        ],
+        "graph_entity_count": 8,
+        "merged_hit_count": 3,
+        "top_results": [
+          {
+            "rank": 1,
+            "source_type": "graph",
+            "score": 0.628167,
+            "citation": "Cl2 -[RELATED_TO]-> 氧化剂 | 氧化剂 -[RELATED_TO]-> Cl2",
+            "snippet": "Cl2 -[RELATED_TO]-> 氧化剂 | 氧化剂 -[RELATED_TO]-> Cl2 Cl2 与 SO2 反应时 Cl2 → Cl-, SO2 → SO4^2-, 则反应中 Cl2 与 SO2 的物质的量之比为2∶1。 4.常见的氧化剂和还原剂 (1)常见的氧化剂 物质类型 举例 对应还原产物 Cl2 与 SO2 反应时 Cl2 → Cl-, SO2 → SO4^2-, 则反应中 Cl2 与 SO2 的物质的量之比为2∶1。"
+          },
+          {
+            "rank": 2,
+            "source_type": "vector",
+            "score": 0.611057,
+            "citation": "01专题一物质的分类及转化.pdf",
+            "snippet": "粒子都带电,但胶体一定呈电中性。 3. Fe(OH) 3 胶体的制备 将饱和的 FeCl 3 溶液滴入沸水中,继续煮沸至 液体变为红褐色,停止加热。离子方程式为 Fe 3+ +3H2O △ 􀪅􀪅 Fe(OH) 3(胶体)+3H + 。 考点 2 物质的转化 1.物质的变化 (1)物理变化和化学变化的特征及判断方法 ݐ᫙ ᫥\" !ᰵ᫜'B*᜼ ') ႒ L ႒ ᰵ ႒J᫙=ᝂ ᰵ ႒Jᒎ᜼ ᰵ᫜'B*᜼ ᰵ ႒J᫙=U΋ ᰵ ႒Jᒎ᜼ ᰵ᫜ٯ2*᜼ ᰵ᫜ ၼ*᜼ 注意 ①..."
+          },
+          {
+            "rank": 3,
+            "source_type": "graph",
+            "score": 0.597833,
+            "citation": "CaH2",
+            "snippet": "CaH2 离子化合物 Na2O2 和 CaH2 与水的反应分别为 ② CaH2 + 2H2O → Ca(OH)2 + 2H2↑。"
+          }
+        ],
+        "context": "基于知识库检索得到以下证据：\n[图谱#1] score=0.628 source=Cl2 -[RELATED_TO]-> 氧化剂 | 氧化剂 -[RELATED_TO]-> Cl2\n- Cl2 -[RELATED_TO]-> 氧化剂 | 氧化剂 -[RELATED_TO]-> Cl2 Cl2 与 SO2 反应时 Cl2 → Cl-, SO2 → SO4^2-, 则反应中 Cl2 与 SO2 的物质的量之比为2∶1。 4.常见的氧化剂和还原剂 (1)常见的氧化剂 物质类型 举例 对应还原产物 Cl2 与 SO2 反应时 Cl2 → Cl-, SO2 → SO4^2-, 则反应中 Cl2 与 SO2 的物质的量之比为2∶1。\n[向量#2] score=0.611 source=01专题一物质的分类及转化.pdf\n- 粒子都带电,但胶体一定呈电中性。 3. Fe(OH) 3 胶体的制备 将饱和的 FeCl 3 溶液滴入沸水中,继续煮沸至 液体变为红褐色,停止加热。离子方程式为 Fe 3+ +3H2O △ 􀪅􀪅 Fe(OH) 3(胶体)+3H + 。 考点 2 物质的转化 1.物质的变化 (1)物理变化和化学变化的特征及判断方法 ݐ᫙ ᫥\" !ᰵ᫜'B*᜼ ') ႒ L ႒ ᰵ ႒J᫙=ᝂ ᰵ ႒Jᒎ᜼ ᰵ᫜'B*᜼ ᰵ ႒J᫙=U΋ ᰵ ႒Jᒎ᜼ ᰵ᫜ٯ2*᜼ ᰵ᫜ ၼ*᜼ 注意 ①...\n[图谱#3] score=0.598 source=CaH2\n- CaH2 离子化合物 Na2O2 和 CaH2 与水的反应分别为 ② CaH2 + 2H2O → Ca(OH)2 + 2H2↑。",
+        "warnings": []
+      },
+      "vlm_plan": {
+        "analysis_image_path": "07_complete_units/SET_20260324_FB27_SHEET_001/CU008.jpg",
+        "uses_complete_unit_image": true,
+        "supports_vision_model": true,
+        "retrieval_context_supplied": true
+      },
+      "vlm_result": {
+        "status": "success",
+        "analysis_image_path": "07_complete_units/SET_20260324_FB27_SHEET_001/CU008.jpg",
+        "analysis_image_abspath": "d:\\10739\\Exam-Analysis-Suite\\preprocessor\\temp\\run_20260325_133128\\07_complete_units\\SET_20260324_FB27_SHEET_001\\CU008.jpg",
+        "uses_complete_unit_image": true,
+        "supports_vision_model": true,
+        "question_summary": "CaO是常用的食品干燥剂，下列说法不正确的是：A. 俗称生石灰；B. 是碱性氧化物；C. 可以除去CO2中的水；D. 可与酸反应生成钙盐和水。",
+        "answer_observation": "学生选择的答案是C，即认为'可以除去CO2中的水'这一说法是不正确的。",
+        "answer_status_assessment": "answered",
+        "correctness": "incorrect",
+        "knowledge_points": [
+          "氧化物的性质",
+          "碱性氧化物的定义",
+          "CaO的化学性质",
+          "干燥剂的作用原理"
+        ],
+        "suspected_error_causes": [
+          "对CaO与CO2反应的理解存在偏差，忽略了CaO会与CO2反应生成CaCO3，因此不能用于干燥CO2气体。",
+          "误以为CaO仅吸收水分而不与CO2反应，导致判断错误。"
+        ],
+        "reasoning_basis": [
+          "CaO（氧化钙）确实俗称生石灰，属于碱性氧化物，能与酸反应生成钙盐和水，这些说法均正确。",
+          "然而，CaO会与CO2反应生成CaCO3：CaO + CO2 → CaCO3，因此不能用来干燥CO2气体，因为会消耗CO2本身。",
+          "所以选项C的说法是错误的，应为不正确的说法。",
+          "学生选择C是正确的答案，但根据题目要求选择‘不正确的说法’，而C确实是不正确的，因此学生作答正确。"
+        ],
+        "recommended_next_action": "确认学生是否理解CaO与CO2之间的反应，并强化对干燥剂适用范围的教学。",
+        "confidence": 0.95,
+        "warnings": []
+      },
+      "final_conclusion": {
+        "status": "success",
+        "generation_mode": "llm",
+        "summary": "CaO是常用的食品干燥剂，下列说法不正确的是：A. 俗称生石灰；B. 是碱性氧化物；C. 可以除去CO2中的水；D. 可与酸反应生成钙盐和水。学生选择C，该选项确为不正确的说法，因CaO会与CO2反应生成CaCO3，不能用于干燥CO2气体。",
+        "answer_status": "answered",
+        "correctness": "correct",
+        "mastery_level": "partial",
+        "knowledge_points": [
+          "氧化物的性质",
+          "碱性氧化物的定义",
+          "CaO的化学性质",
+          "干燥剂的作用原理",
+          "CaH2",
+          "Cl2"
+        ],
+        "error_causes": [
+          "对CaO与CO2反应的理解存在偏差，忽略了CaO会与CO2反应生成CaCO3，因此不能用于干燥CO2气体。",
+          "误以为CaO仅吸收水分而不与CO2反应，导致判断错误。"
+        ],
+        "explanation": "选项A、B、D均正确：CaO俗称生石灰，属于碱性氧化物，能与酸反应生成钙盐和水；选项C错误，因CaO + CO2 → CaCO3，故不能用于除去CO2中的水（会消耗CO2本身），符合题干‘不正确’的要求。学生选C正确。",
+        "study_advice": [
+          "巩固碱性氧化物与酸性气体（如CO2、SO2）的反应规律",
+          "辨析不同干燥剂的适用气体范围（如CaO不可用于干燥酸性气体）",
+          "通过书写化学方程式强化对干燥原理的理解",
+          "优先回顾“氧化物的性质”的定义、公式或典型例题，再重做本题。"
+        ],
+        "supporting_evidence": [
+          "CaO（氧化钙）确实俗称生石灰，属于碱性氧化物，能与酸反应生成钙盐和水，这些说法均正确。",
+          "CaO会与CO2反应生成CaCO3：CaO + CO2 → CaCO3，因此不能用来干燥CO2气体。",
+          "学生选择C是正确的答案，因题目要求选出‘不正确的说法’，而C确实是不正确的。",
+          "然而，CaO会与CO2反应生成CaCO3：CaO + CO2 → CaCO3，因此不能用来干燥CO2气体，因为会消耗CO2本身。",
+          "所以选项C的说法是错误的，应为不正确的说法。",
+          "学生选择C是正确的答案，但根据题目要求选择‘不正确的说法’，而C确实是不正确的，因此学生作答正确。"
+        ],
+        "recommended_next_action": "确认学生是否理解CaO与CO2之间的反应，并强化对干燥剂适用范围的教学。",
+        "confidence": 0.95,
+        "evidence_sources": [
+          "retrieval",
+          "vlm"
+        ],
+        "warnings": []
+      },
+      "evidence": {
+        "question_text": "第 8 题：CaO 是常用的食品干燥剂，下列说法不正确的是",
+        "question_image_path": "question_slices/SET_20260324_FB27_SHEET_001/Q008.jpg",
+        "answer_image_path": "answer_card_areas/answer_card_0.jpg",
+        "answer_image_paths": [
+          "answer_card_areas/answer_card_0.jpg"
+        ],
+        "complete_unit_image_path": "07_complete_units/SET_20260324_FB27_SHEET_001/CU008.jpg",
+        "confidence": {
+          "has_question_text": true,
+          "has_question_image": true,
+          "has_complete_unit_image": true,
+          "answer_image_count": 1,
+          "merged_fragment_count": 1,
+          "answer_fragment_count": 0
+        }
+      },
+      "observations": [
+        "题目存在学生作答，可进入知识检索与判因阶段。",
+        "已完成混合检索，召回 3 条候选证据，涉及 8 个图谱实体。",
+        "已基于完整单元图片完成题级 VLM 观察，可继续生成错因与讲解。",
+        "已输出最终逐题结论（LLM 融合）。"
+      ],
+      "next_action": "completed"
+    },
+    {
+      "question_no": "9",
+      "question_id": "SET_20260324_FB27_SHEET_001_Q009",
+      "question_type": null,
+      "student_answer": "D",
+      "answer_source": "answer_card",
+      "answer_status": "answered",
+      "needs_manual_review": false,
+      "analysis_status": "question_conclusion_ready",
+      "risk_level": "low",
+      "preliminary_judgement": "该题判断各组离子在溶液中能否大量共存，学生作答D（OH⁻、Na⁺、SO₄²⁻、Cl⁻）正确；四者均为强电解质离子，互不反应，无沉淀、气体或弱电解质生成，符合共存条件。",
+      "retrieval_plan": {
+        "vector_query": "第 9 题：下列各组离子在溶液中能大量共存的是\n学生答案：D",
+        "graph_entities": [],
+        "knowledge_tags_hint": [],
+        "keywords": [
+          "9",
+          "下列各组离子在溶液中能大量共存的是",
+          "学生答案",
+          "D"
+        ]
+      },
+      "retrieval_result": {
+        "status": "success",
+        "query": "第 9 题：下列各组离子在溶液中能大量共存的是\n学生答案：D",
+        "keywords": [
+          "9",
+          "下列各组离子在溶液中能大量共存的是",
+          "学生答案",
+          "D"
+        ],
+        "graph_entities": [],
+        "graph_entity_count": 0,
+        "merged_hit_count": 3,
+        "top_results": [
+          {
+            "rank": 1,
+            "source_type": "vector",
+            "score": 0.635402,
+            "citation": "03专题三离子反应.pdf",
+            "snippet": "$M\u000e )\u00130 $0\u0013ĩ ݌ ݌ ᫥/ᐻ͐D̹ ߌ Ꮐ+.ၼ $B$0\u0014 \u0013) $B\u0013 )\u00130 $0\u0013ĩ ᴑ ᷬᴑ᫥/ᐻ͐D᭛ 0 ၼႴᕾ *8Ⴔᕾ 2.离子方程式书写的关键 (1)两易—易溶且易(完全)电离的物质(包括强 酸、强碱、大多数可溶性盐)拆成离子,其他 物质用化学式表示。 (2)两等—离子方程式两边的原子个数、电荷数 均应相等。 (3)两查—检查化学计量数是否约到最简,是否 漏标必要的反应条件。 注意 微溶物的处理:①出现在生成物中写化学式; ②反应物中处于..."
+          },
+          {
+            "rank": 2,
+            "source_type": "vector",
+            "score": 0.60279,
+            "citation": "04专题四氧化还原反应.pdf",
+            "snippet": "+1。 ( ) 答案 (1)× (2)× (3)√ (4)× (5)× (6)× (7)× (8)× (9)√ (10)× 2.(2023天津河西三模,1)下列叙述不涉及氧化还 原反应的是 ( ) A.海水提溴 B.苏打用作食用碱 C.谷物发酵酿酒 D.漂白粉久置空气中失效 答案 B 3.已知常温下,在溶液中发生如下反应: ①16H ++10Z -+2XO - 4 􀪅􀪅2X 2++5Z2+8H2O ②2A 2+ +B2 􀪅􀪅2A 3+ +2B - ③2B - +Z2 􀪅..."
+          },
+          {
+            "rank": 3,
+            "source_type": "vector",
+            "score": 0.593602,
+            "citation": "04专题四氧化还原反应.pdf",
+            "snippet": "C 13. (2023湖南,10,3分)油画创作通常需要用 到多种无机颜料。研究发现,在不同的空气 湿度和光照条件下,颜料雌黄(As2S3)褪色 的主要原因是发生了以下两种化学反应: 下列说法正确的是 ( ) A. S2O 2- 3 和SO 2- 4 的空间结构都是正四面体形 B.反应Ⅰ和Ⅱ中,元素 As和S都被氧化 C.反应Ⅰ和Ⅱ中,参加反应的 n(O2) n(H2O): Ⅰ<Ⅱ 􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋..."
+          }
+        ],
+        "context": "基于知识库检索得到以下证据：\n[向量#1] score=0.635 source=03专题三离子反应.pdf\n- $M\u000e )\u00130 $0\u0013ĩ ݌ ݌ ᫥/ᐻ͐D̹ ߌ Ꮐ+.ၼ $B$0\u0014 \u0013) $B\u0013 )\u00130 $0\u0013ĩ ᴑ ᷬᴑ᫥/ᐻ͐D᭛ 0 ၼႴᕾ *8Ⴔᕾ 2.离子方程式书写的关键 (1)两易—易溶且易(完全)电离的物质(包括强 酸、强碱、大多数可溶性盐)拆成离子,其他 物质用化学式表示。 (2)两等—离子方程式两边的原子个数、电荷数 均应相等。 (3)两查—检查化学计量数是否约到最简,是否 漏标必要的反应条件。 注意 微溶物的处理:①出现在生成物中写化学式; ②反应物中处于...\n[向量#2] score=0.603 source=04专题四氧化还原反应.pdf\n- +1。 ( ) 答案 (1)× (2)× (3)√ (4)× (5)× (6)× (7)× (8)× (9)√ (10)× 2.(2023天津河西三模,1)下列叙述不涉及氧化还 原反应的是 ( ) A.海水提溴 B.苏打用作食用碱 C.谷物发酵酿酒 D.漂白粉久置空气中失效 答案 B 3.已知常温下,在溶液中发生如下反应: ①16H ++10Z -+2XO - 4 􀪅􀪅2X 2++5Z2+8H2O ②2A 2+ +B2 􀪅􀪅2A 3+ +2B - ③2B - +Z2 􀪅...\n[向量#3] score=0.594 source=04专题四氧化还原反应.pdf\n- C 13. (2023湖南,10,3分)油画创作通常需要用 到多种无机颜料。研究发现,在不同的空气 湿度和光照条件下,颜料雌黄(As2S3)褪色 的主要原因是发生了以下两种化学反应: 下列说法正确的是 ( ) A. S2O 2- 3 和SO 2- 4 的空间结构都是正四面体形 B.反应Ⅰ和Ⅱ中,元素 As和S都被氧化 C.反应Ⅰ和Ⅱ中,参加反应的 n(O2) n(H2O): Ⅰ<Ⅱ 􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋...",
+        "warnings": []
+      },
+      "vlm_plan": {
+        "analysis_image_path": "07_complete_units/SET_20260324_FB27_SHEET_001/CU009.jpg",
+        "uses_complete_unit_image": true,
+        "supports_vision_model": true,
+        "retrieval_context_supplied": true
+      },
+      "vlm_result": {
+        "status": "success",
+        "analysis_image_path": "07_complete_units/SET_20260324_FB27_SHEET_001/CU009.jpg",
+        "analysis_image_abspath": "d:\\10739\\Exam-Analysis-Suite\\preprocessor\\temp\\run_20260325_133128\\07_complete_units\\SET_20260324_FB27_SHEET_001\\CU009.jpg",
+        "uses_complete_unit_image": true,
+        "supports_vision_model": true,
+        "question_summary": "判断下列各组离子在溶液中能否大量共存，选项包括不同组合的离子。",
+        "answer_observation": "学生作答为 D，即认为 OH⁻、Na⁺、SO₄²⁻、Cl⁻ 能在溶液中大量共存。答案已标记为正确。",
+        "answer_status_assessment": "answered",
+        "correctness": "correct",
+        "knowledge_points": [
+          "离子共存问题",
+          "离子反应与沉淀生成",
+          "酸碱性环境对离子共存的影响",
+          "常见离子之间的反应"
+        ],
+        "suspected_error_causes": [],
+        "reasoning_basis": [
+          "选项 A 中 H⁺ 与 CO₃²⁻ 会反应生成 CO₂ 和 H₂O，不能共存。",
+          "选项 B 中 OH⁻ 与 HCO₃⁻ 会反应生成 CO₃²⁻ 和 H₂O，不能共存。",
+          "选项 C 中 Mg²⁺ 与 OH⁻ 会生成 Mg(OH)₂ 沉淀，不能共存。",
+          "选项 D 中 OH⁻、Na⁺、SO₄²⁻、Cl⁻ 均为可溶性强电解质离子，彼此之间不发生反应，可在溶液中大量共存。",
+          "检索证据未直接提供该题答案，但支持离子共存的基本判断逻辑，如离子反应条件和微溶物处理等知识。"
+        ],
+        "recommended_next_action": "无需进一步行动，答案正确且逻辑清晰。",
+        "confidence": 0.95,
+        "warnings": []
+      },
+      "final_conclusion": {
+        "status": "success",
+        "generation_mode": "llm",
+        "summary": "该题判断各组离子在溶液中能否大量共存，学生作答D（OH⁻、Na⁺、SO₄²⁻、Cl⁻）正确；四者均为强电解质离子，互不反应，无沉淀、气体或弱电解质生成，符合共存条件。",
+        "answer_status": "answered",
+        "correctness": "correct",
+        "mastery_level": "mastered",
+        "knowledge_points": [
+          "离子共存问题",
+          "离子反应与沉淀生成",
+          "酸碱性环境对离子共存的影响",
+          "常见离子之间的反应",
+          "9",
+          "下列各组离子在溶液中能大量共存的是"
+        ],
+        "error_causes": [],
+        "explanation": "选项D中OH⁻、Na⁺、SO₄²⁻、Cl⁻均来自强碱或可溶性盐，在溶液中完全电离且彼此不发生复分解、氧化还原或络合反应，无沉淀、气体或弱电解质生成，故能大量共存。其他选项存在明显反应：A中H⁺与CO₃²⁻生成CO₂和H₂O；B中OH⁻与HCO₃⁻反应生成CO₃²⁻和H₂O；C中Mg²⁺与OH⁻生成Mg(OH)₂沉淀。",
+        "study_advice": [
+          "保持对‘离子共存问题’的掌握，可追加一到两道同类题巩固。",
+          "结合检索材料中‘两易、两等、两查’原则复盘离子反应书写逻辑，强化共存判断依据。",
+          "保持对“离子共存问题”的掌握，可追加一到两道同类题巩固。",
+          "结合召回到的知识片段复盘本题，确认相关概念与解题路径是否一致。"
+        ],
+        "supporting_evidence": [
+          "选项 D 中 OH⁻、Na⁺、SO₄²⁻、Cl⁻ 均为可溶性强电解质离子，彼此之间不发生反应，可在溶液中大量共存。",
+          "检索材料提及‘易溶且易(完全)电离的物质（包括强酸、强碱、大多数可溶性盐）拆成离子’，支持D中离子稳定存在；微溶物处理规则亦佐证无沉淀生成。",
+          "VLm明确指出答案已标记为正确，并给出完整排除逻辑。",
+          "选项 A 中 H⁺ 与 CO₃²⁻ 会反应生成 CO₂ 和 H₂O，不能共存。",
+          "选项 B 中 OH⁻ 与 HCO₃⁻ 会反应生成 CO₃²⁻ 和 H₂O，不能共存。",
+          "选项 C 中 Mg²⁺ 与 OH⁻ 会生成 Mg(OH)₂ 沉淀，不能共存。"
+        ],
+        "recommended_next_action": "无需进一步行动，答案正确且逻辑清晰。",
+        "confidence": 0.95,
+        "evidence_sources": [
+          "retrieval",
+          "vlm"
+        ],
+        "warnings": []
+      },
+      "evidence": {
+        "question_text": "第 9 题：下列各组离子在溶液中能大量共存的是",
+        "question_image_path": "question_slices/SET_20260324_FB27_SHEET_001/Q009.jpg",
+        "answer_image_path": "answer_card_areas/answer_card_0.jpg",
+        "answer_image_paths": [
+          "answer_card_areas/answer_card_0.jpg"
+        ],
+        "complete_unit_image_path": "07_complete_units/SET_20260324_FB27_SHEET_001/CU009.jpg",
+        "confidence": {
+          "has_question_text": true,
+          "has_question_image": true,
+          "has_complete_unit_image": true,
+          "answer_image_count": 1,
+          "merged_fragment_count": 1,
+          "answer_fragment_count": 0
+        }
+      },
+      "observations": [
+        "题目存在学生作答，可进入知识检索与判因阶段。",
+        "已完成混合检索，召回 3 条候选证据，涉及 0 个图谱实体。",
+        "已基于完整单元图片完成题级 VLM 观察，可继续生成错因与讲解。",
+        "已输出最终逐题结论（LLM 融合）。"
+      ],
+      "next_action": "completed"
+    },
+    {
+      "question_no": "10",
+      "question_id": "SET_20260324_FB27_SHEET_001_Q010",
+      "question_type": null,
+      "student_answer": "D",
+      "answer_source": "answer_card",
+      "answer_status": "answered",
+      "needs_manual_review": false,
+      "analysis_status": "question_conclusion_ready",
+      "risk_level": "low",
+      "preliminary_judgement": "第10题要求从四个有H2O参加的化学反应中选出不是氧化还原反应的一个。学生作答D选项（CO2 + H2O = H2CO3），该反应中各元素化合价均无变化，符合非氧化还原反应定义。",
+      "retrieval_plan": {
+        "vector_query": "第 10 题：下列有 H2O 参加的化学反应中，不是氧化还原反应的是\n学生答案：D",
+        "graph_entities": [
+          "H2O2",
+          "还原剂",
+          "氧化剂",
+          "Cl2",
+          "氧化还原反应",
+          "KMnO4",
+          "Fe2+",
+          "MnO2"
+        ],
+        "knowledge_tags_hint": [],
+        "keywords": [
+          "10",
+          "下列有",
+          "H2O",
+          "参加的化学反应中",
+          "不是氧化还原反应的是",
+          "学生答案"
+        ]
+      },
+      "retrieval_result": {
+        "status": "success",
+        "query": "第 10 题：下列有 H2O 参加的化学反应中，不是氧化还原反应的是\n学生答案：D",
+        "keywords": [
+          "10",
+          "下列有",
+          "H2O",
+          "参加的化学反应中",
+          "不是氧化还原反应的是",
+          "学生答案"
+        ],
+        "graph_entities": [
+          "H2O2",
+          "还原剂",
+          "氧化剂",
+          "Cl2",
+          "氧化还原反应",
+          "KMnO4",
+          "Fe2+",
+          "MnO2"
+        ],
+        "graph_entity_count": 8,
+        "merged_hit_count": 3,
+        "top_results": [
+          {
+            "rank": 1,
+            "source_type": "vector",
+            "score": 0.570458,
+            "citation": "04专题四氧化还原反应.pdf",
+            "snippet": "C 13. (2023湖南,10,3分)油画创作通常需要用 到多种无机颜料。研究发现,在不同的空气 湿度和光照条件下,颜料雌黄(As2S3)褪色 的主要原因是发生了以下两种化学反应: 下列说法正确的是 ( ) A. S2O 2- 3 和SO 2- 4 的空间结构都是正四面体形 B.反应Ⅰ和Ⅱ中,元素 As和S都被氧化 C.反应Ⅰ和Ⅱ中,参加反应的 n(O2) n(H2O): Ⅰ<Ⅱ 􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋..."
+          },
+          {
+            "rank": 2,
+            "source_type": "vector",
+            "score": 0.563429,
+            "citation": "03专题三离子反应.pdf",
+            "snippet": "$M\u000e )\u00130 $0\u0013ĩ ݌ ݌ ᫥/ᐻ͐D̹ ߌ Ꮐ+.ၼ $B$0\u0014 \u0013) $B\u0013 )\u00130 $0\u0013ĩ ᴑ ᷬᴑ᫥/ᐻ͐D᭛ 0 ၼႴᕾ *8Ⴔᕾ 2.离子方程式书写的关键 (1)两易—易溶且易(完全)电离的物质(包括强 酸、强碱、大多数可溶性盐)拆成离子,其他 物质用化学式表示。 (2)两等—离子方程式两边的原子个数、电荷数 均应相等。 (3)两查—检查化学计量数是否约到最简,是否 漏标必要的反应条件。 注意 微溶物的处理:①出现在生成物中写化学式; ②反应物中处于..."
+          },
+          {
+            "rank": 3,
+            "source_type": "vector",
+            "score": 0.561643,
+            "citation": "04专题四氧化还原反应.pdf",
+            "snippet": "解 􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋 246 5 年高考 3 年模拟 A 版 高考化学 池”中 HSO - 3 被还原为S2O 2- 3 ,则反应在阴极上 发生,电极反应式为2HSO - 3 +4e - +4H + 􀪅􀪅 S2O 2- 3 +3H2O,C 项正确;HNO2 为弱酸,书写 离子方程式时不能拆写成离子形式,D项错误。 ..."
+          }
+        ],
+        "context": "基于知识库检索得到以下证据：\n[向量#1] score=0.570 source=04专题四氧化还原反应.pdf\n- C 13. (2023湖南,10,3分)油画创作通常需要用 到多种无机颜料。研究发现,在不同的空气 湿度和光照条件下,颜料雌黄(As2S3)褪色 的主要原因是发生了以下两种化学反应: 下列说法正确的是 ( ) A. S2O 2- 3 和SO 2- 4 的空间结构都是正四面体形 B.反应Ⅰ和Ⅱ中,元素 As和S都被氧化 C.反应Ⅰ和Ⅱ中,参加反应的 n(O2) n(H2O): Ⅰ<Ⅱ 􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋...\n[向量#2] score=0.563 source=03专题三离子反应.pdf\n- $M\u000e )\u00130 $0\u0013ĩ ݌ ݌ ᫥/ᐻ͐D̹ ߌ Ꮐ+.ၼ $B$0\u0014 \u0013) $B\u0013 )\u00130 $0\u0013ĩ ᴑ ᷬᴑ᫥/ᐻ͐D᭛ 0 ၼႴᕾ *8Ⴔᕾ 2.离子方程式书写的关键 (1)两易—易溶且易(完全)电离的物质(包括强 酸、强碱、大多数可溶性盐)拆成离子,其他 物质用化学式表示。 (2)两等—离子方程式两边的原子个数、电荷数 均应相等。 (3)两查—检查化学计量数是否约到最简,是否 漏标必要的反应条件。 注意 微溶物的处理:①出现在生成物中写化学式; ②反应物中处于...\n[向量#3] score=0.562 source=04专题四氧化还原反应.pdf\n- 解 􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋 246 5 年高考 3 年模拟 A 版 高考化学 池”中 HSO - 3 被还原为S2O 2- 3 ,则反应在阴极上 发生,电极反应式为2HSO - 3 +4e - +4H + 􀪅􀪅 S2O 2- 3 +3H2O,C 项正确;HNO2 为弱酸,书写 离子方程式时不能拆写成离子形式,D项错误。 ...",
+        "warnings": []
+      },
+      "vlm_plan": {
+        "analysis_image_path": "07_complete_units/SET_20260324_FB27_SHEET_001/CU010.jpg",
+        "uses_complete_unit_image": true,
+        "supports_vision_model": true,
+        "retrieval_context_supplied": true
+      },
+      "vlm_result": {
+        "status": "success",
+        "analysis_image_path": "07_complete_units/SET_20260324_FB27_SHEET_001/CU010.jpg",
+        "analysis_image_abspath": "d:\\10739\\Exam-Analysis-Suite\\preprocessor\\temp\\run_20260325_133128\\07_complete_units\\SET_20260324_FB27_SHEET_001\\CU010.jpg",
+        "uses_complete_unit_image": true,
+        "supports_vision_model": true,
+        "question_summary": "第10题要求从四个有H2O参加的化学反应中选出不是氧化还原反应的一个。",
+        "answer_observation": "学生作答为D选项，即CO2 + H2O = H2CO3。",
+        "answer_status_assessment": "answered",
+        "correctness": "correct",
+        "knowledge_points": [
+          "氧化还原反应的判断",
+          "元素化合价变化分析",
+          "非氧化还原反应的特征"
+        ],
+        "suspected_error_causes": [],
+        "reasoning_basis": [
+          "A选项：3NO2 + H2O = 2HNO3 + NO，N元素在NO2中为+4价，在HNO3中为+5价，在NO中为+2价，存在化合价变化，是氧化还原反应。",
+          "B选项：2H2O电解生成H2和O2，H和O元素的化合价发生变化（H从+1变为0，O从-2变为0），是氧化还原反应。",
+          "C选项：Cl2 + H2O = HClO + HCl，Cl元素在Cl2中为0价，在HClO中为+1价，在HCl中为-1价，存在化合价变化，是氧化还原反应。",
+          "D选项：CO2 + H2O = H2CO3，C、O、H元素的化合价均未发生变化，属于非氧化还原反应，符合题意。"
+        ],
+        "recommended_next_action": "确认学生对氧化还原反应判断的理解是否准确，可进一步讲解化合价变化的识别方法。",
+        "confidence": 0.98,
+        "warnings": []
+      },
+      "final_conclusion": {
+        "status": "success",
+        "generation_mode": "llm",
+        "summary": "第10题要求从四个有H2O参加的化学反应中选出不是氧化还原反应的一个。学生作答D选项（CO2 + H2O = H2CO3），该反应中各元素化合价均无变化，符合非氧化还原反应定义。",
+        "answer_status": "answered",
+        "correctness": "correct",
+        "mastery_level": "mastered",
+        "knowledge_points": [
+          "氧化还原反应的判断",
+          "元素化合价变化分析",
+          "非氧化还原反应的特征",
+          "H2O2",
+          "还原剂",
+          "氧化剂"
+        ],
+        "error_causes": [],
+        "explanation": "A选项（3NO2 + H2O → 2HNO3 + NO）中N元素化合价由+4变为+5和+2；B选项（电解H2O）中H由+1→0、O由-2→0；C选项（Cl2 + H2O → HClO + HCl）中Cl由0→+1和-1；三者均为氧化还原反应。D选项（CO2 + H2O → H2CO3）中C（+4）、O（-2）、H（+1）化合价均未改变，是非氧化还原反应，学生作答正确。",
+        "study_advice": [
+          "保持对“氧化还原反应的判断”的掌握，可追加一到两道同类题巩固。",
+          "结合召回到的知识片段复盘本题，确认相关概念与解题路径是否一致。"
+        ],
+        "supporting_evidence": [
+          "A选项：3NO2 + H2O = 2HNO3 + NO，N元素在NO2中为+4价，在HNO3中为+5价，在NO中为+2价，存在化合价变化，是氧化还原反应。",
+          "B选项：2H2O电解生成H2和O2，H和O元素的化合价发生变化（H从+1变为0，O从-2变为0），是氧化还原反应。",
+          "C选项：Cl2 + H2O = HClO + HCl，Cl元素在Cl2中为0价，在HClO中为+1价，在HCl中为-1价，存在化合价变化，是氧化还原反应。",
+          "D选项：CO2 + H2O = H2CO3，C、O、H元素的化合价均未发生变化，属于非氧化还原反应，符合题意。",
+          "04专题四氧化还原反应.pdf: C 13. (2023湖南,10,3分)油画创作通常需要用 到多种无机颜料。研究发现,在不同的空气 湿度和光照条件下,颜料雌黄(As2S3)褪色 的主要原因是发生了以下两种化学反应: 下列说法正确的是 ( ) A. S2O 2- 3 和SO 2- 4 的空间结构都是正四面体形 B.反应Ⅰ和Ⅱ中,元素 As和S都被氧化 C.反应Ⅰ和Ⅱ中,参加反应的 n(O2) n(H2O): Ⅰ<Ⅱ 􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋..."
+        ],
+        "recommended_next_action": "确认学生对氧化还原反应判断的理解是否准确，可进一步讲解化合价变化的识别方法。",
+        "confidence": 0.98,
+        "evidence_sources": [
+          "retrieval",
+          "vlm"
+        ],
+        "warnings": []
+      },
+      "evidence": {
+        "question_text": "第 10 题：下列有 H2O 参加的化学反应中，不是氧化还原反应的是",
+        "question_image_path": "question_slices/SET_20260324_FB27_SHEET_001/Q010.jpg",
+        "answer_image_path": "answer_card_areas/answer_card_0.jpg",
+        "answer_image_paths": [
+          "answer_card_areas/answer_card_0.jpg"
+        ],
+        "complete_unit_image_path": "07_complete_units/SET_20260324_FB27_SHEET_001/CU010.jpg",
+        "confidence": {
+          "has_question_text": true,
+          "has_question_image": true,
+          "has_complete_unit_image": true,
+          "answer_image_count": 1,
+          "merged_fragment_count": 1,
+          "answer_fragment_count": 0
+        }
+      },
+      "observations": [
+        "题目存在学生作答，可进入知识检索与判因阶段。",
+        "已完成混合检索，召回 3 条候选证据，涉及 8 个图谱实体。",
+        "已基于完整单元图片完成题级 VLM 观察，可继续生成错因与讲解。",
+        "已输出最终逐题结论（LLM 融合）。"
+      ],
+      "next_action": "completed"
+    },
+    {
+      "question_no": "11",
+      "question_id": "SET_20260324_FB27_SHEET_001_Q011",
+      "question_type": null,
+      "student_answer": "D",
+      "answer_source": "answer_card",
+      "answer_status": "answered",
+      "needs_manual_review": false,
+      "analysis_status": "question_conclusion_ready",
+      "risk_level": "low",
+      "preliminary_judgement": "该题描述酒驾检测仪中乙醇使K2Cr2O7中+6价Cr还原为+3价Cr，说明乙醇作还原剂，具有还原性。",
+      "retrieval_plan": {
+        "vector_query": "第 11 题：一种酒驾检测仪的工作原理是：人体呼出的气体若含有乙醇，将使检测仪中的 K2Cr2O7 转化为+3 价 Cr 的化合物，发生颜色变化。这一过程说明乙醇具有\n学生答案：D",
+        "graph_entities": [],
+        "knowledge_tags_hint": [],
+        "keywords": [
+          "11",
+          "一种酒驾检测仪的工作原理是",
+          "人体呼出的气体若含有乙醇",
+          "将使检测仪中的",
+          "K2Cr2O7",
+          "转化为"
+        ]
+      },
+      "retrieval_result": {
+        "status": "success",
+        "query": "第 11 题：一种酒驾检测仪的工作原理是：人体呼出的气体若含有乙醇，将使检测仪中的 K2Cr2O7 转化为+3 价 Cr 的化合物，发生颜色变化。这一过程说明乙醇具有\n学生答案：D",
+        "keywords": [
+          "11",
+          "一种酒驾检测仪的工作原理是",
+          "人体呼出的气体若含有乙醇",
+          "将使检测仪中的",
+          "K2Cr2O7",
+          "转化为"
+        ],
+        "graph_entities": [],
+        "graph_entity_count": 0,
+        "merged_hit_count": 3,
+        "top_results": [
+          {
+            "rank": 1,
+            "source_type": "vector",
+            "score": 0.567762,
+            "citation": "04专题四氧化还原反应.pdf",
+            "snippet": "C 13. (2023湖南,10,3分)油画创作通常需要用 到多种无机颜料。研究发现,在不同的空气 湿度和光照条件下,颜料雌黄(As2S3)褪色 的主要原因是发生了以下两种化学反应: 下列说法正确的是 ( ) A. S2O 2- 3 和SO 2- 4 的空间结构都是正四面体形 B.反应Ⅰ和Ⅱ中,元素 As和S都被氧化 C.反应Ⅰ和Ⅱ中,参加反应的 n(O2) n(H2O): Ⅰ<Ⅱ 􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋..."
+          },
+          {
+            "rank": 2,
+            "source_type": "vector",
+            "score": 0.521698,
+            "citation": "03专题三离子反应.pdf",
+            "snippet": "$M\u000e )\u00130 $0\u0013ĩ ݌ ݌ ᫥/ᐻ͐D̹ ߌ Ꮐ+.ၼ $B$0\u0014 \u0013) $B\u0013 )\u00130 $0\u0013ĩ ᴑ ᷬᴑ᫥/ᐻ͐D᭛ 0 ၼႴᕾ *8Ⴔᕾ 2.离子方程式书写的关键 (1)两易—易溶且易(完全)电离的物质(包括强 酸、强碱、大多数可溶性盐)拆成离子,其他 物质用化学式表示。 (2)两等—离子方程式两边的原子个数、电荷数 均应相等。 (3)两查—检查化学计量数是否约到最简,是否 漏标必要的反应条件。 注意 微溶物的处理:①出现在生成物中写化学式; ②反应物中处于..."
+          },
+          {
+            "rank": 3,
+            "source_type": "vector",
+            "score": 0.519606,
+            "citation": "02专题二物质的量.pdf",
+            "snippet": "代表阿伏加德罗常数的值,下列说 法正确的是 ( ) A.消耗14gN2 生成 NH3 分子数为2N A B.消耗1molH2 生成 N—H 键数为2N A C.生成标准状况下22. 4L NH3,电子转移数 为2N A D.氧化 1 molNH3 生 成 NO,需 O2 分 子 数 为2N A 答案 B 8. (2023辽宁,5,3分)我国古代四大发明之一 黑火药 的 爆 炸 反 应 为 S+2KNO3+3C 􀪅􀪅 K2S+N2↑+3CO2↑。设 N A 为阿伏加德罗 ..."
+          }
+        ],
+        "context": "基于知识库检索得到以下证据：\n[向量#1] score=0.568 source=04专题四氧化还原反应.pdf\n- C 13. (2023湖南,10,3分)油画创作通常需要用 到多种无机颜料。研究发现,在不同的空气 湿度和光照条件下,颜料雌黄(As2S3)褪色 的主要原因是发生了以下两种化学反应: 下列说法正确的是 ( ) A. S2O 2- 3 和SO 2- 4 的空间结构都是正四面体形 B.反应Ⅰ和Ⅱ中,元素 As和S都被氧化 C.反应Ⅰ和Ⅱ中,参加反应的 n(O2) n(H2O): Ⅰ<Ⅱ 􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋...\n[向量#2] score=0.522 source=03专题三离子反应.pdf\n- $M\u000e )\u00130 $0\u0013ĩ ݌ ݌ ᫥/ᐻ͐D̹ ߌ Ꮐ+.ၼ $B$0\u0014 \u0013) $B\u0013 )\u00130 $0\u0013ĩ ᴑ ᷬᴑ᫥/ᐻ͐D᭛ 0 ၼႴᕾ *8Ⴔᕾ 2.离子方程式书写的关键 (1)两易—易溶且易(完全)电离的物质(包括强 酸、强碱、大多数可溶性盐)拆成离子,其他 物质用化学式表示。 (2)两等—离子方程式两边的原子个数、电荷数 均应相等。 (3)两查—检查化学计量数是否约到最简,是否 漏标必要的反应条件。 注意 微溶物的处理:①出现在生成物中写化学式; ②反应物中处于...\n[向量#3] score=0.520 source=02专题二物质的量.pdf\n- 代表阿伏加德罗常数的值,下列说 法正确的是 ( ) A.消耗14gN2 生成 NH3 分子数为2N A B.消耗1molH2 生成 N—H 键数为2N A C.生成标准状况下22. 4L NH3,电子转移数 为2N A D.氧化 1 molNH3 生 成 NO,需 O2 分 子 数 为2N A 答案 B 8. (2023辽宁,5,3分)我国古代四大发明之一 黑火药 的 爆 炸 反 应 为 S+2KNO3+3C 􀪅􀪅 K2S+N2↑+3CO2↑。设 N A 为阿伏加德罗 ...",
+        "warnings": []
+      },
+      "vlm_plan": {
+        "analysis_image_path": "07_complete_units/SET_20260324_FB27_SHEET_001/CU011.jpg",
+        "uses_complete_unit_image": true,
+        "supports_vision_model": true,
+        "retrieval_context_supplied": true
+      },
+      "vlm_result": {
+        "status": "success",
+        "analysis_image_path": "07_complete_units/SET_20260324_FB27_SHEET_001/CU011.jpg",
+        "analysis_image_abspath": "d:\\10739\\Exam-Analysis-Suite\\preprocessor\\temp\\run_20260325_133128\\07_complete_units\\SET_20260324_FB27_SHEET_001\\CU011.jpg",
+        "uses_complete_unit_image": true,
+        "supports_vision_model": true,
+        "question_summary": "题目描述了一种酒驾检测仪的工作原理：人体呼出的气体中含有乙醇时，会使检测仪中的K2Cr2O7转化为+3价Cr的化合物，并发生颜色变化。问题要求判断这一过程说明乙醇具有哪种性质。",
+        "answer_observation": "学生作答为D，即‘还原性’。",
+        "answer_status_assessment": "answered",
+        "correctness": "correct",
+        "knowledge_points": [
+          "氧化还原反应",
+          "物质的氧化性与还原性判断",
+          "乙醇的化学性质"
+        ],
+        "suspected_error_causes": [],
+        "reasoning_basis": [
+          "K2Cr2O7中的Cr为+6价，转化为+3价Cr的化合物，说明Cr被还原，因此需要一种还原剂。",
+          "乙醇在此过程中使Cr从+6价降至+3价，说明乙醇提供了电子，表现出还原性。",
+          "选项中只有D（还原性）符合该化学变化的本质。",
+          "检索证据虽未直接提供本题答案，但无矛盾信息，且基于化学常识可确认答案正确。"
+        ],
+        "recommended_next_action": "无需进一步操作，答案正确。",
+        "confidence": 0.95,
+        "warnings": []
+      },
+      "final_conclusion": {
+        "status": "success",
+        "generation_mode": "llm",
+        "summary": "该题描述酒驾检测仪中乙醇使K2Cr2O7中+6价Cr还原为+3价Cr，说明乙醇作还原剂，具有还原性。",
+        "answer_status": "answered",
+        "correctness": "correct",
+        "mastery_level": "mastered",
+        "knowledge_points": [
+          "氧化还原反应",
+          "物质的氧化性与还原性判断",
+          "乙醇的化学性质",
+          "11",
+          "一种酒驾检测仪的工作原理是",
+          "人体呼出的气体若含有乙醇"
+        ],
+        "error_causes": [],
+        "explanation": "K2Cr2O7中Cr为+6价，被还原为+3价Cr，发生得电子过程；乙醇促使该还原反应发生，自身被氧化，体现还原性。学生选择D（还原性）正确。",
+        "study_advice": [
+          "保持对“氧化还原反应”的掌握，可追加一到两道同类题巩固。",
+          "结合召回到的知识片段复盘本题，确认相关概念与解题路径是否一致。"
+        ],
+        "supporting_evidence": [
+          "K2Cr2O7中的Cr为+6价，转化为+3价Cr的化合物，说明Cr被还原，因此需要一种还原剂。",
+          "乙醇在此过程中使Cr从+6价降至+3价，说明乙醇提供了电子，表现出还原性。",
+          "选项中只有D（还原性）符合该化学变化的本质。",
+          "检索证据虽未直接提供本题答案，但无矛盾信息，且基于化学常识可确认答案正确。",
+          "04专题四氧化还原反应.pdf: C 13. (2023湖南,10,3分)油画创作通常需要用 到多种无机颜料。研究发现,在不同的空气 湿度和光照条件下,颜料雌黄(As2S3)褪色 的主要原因是发生了以下两种化学反应: 下列说法正确的是 ( ) A. S2O 2- 3 和SO 2- 4 的空间结构都是正四面体形 B.反应Ⅰ和Ⅱ中,元素 As和S都被氧化 C.反应Ⅰ和Ⅱ中,参加反应的 n(O2) n(H2O): Ⅰ<Ⅱ 􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋..."
+        ],
+        "recommended_next_action": "无需进一步操作，答案正确。",
+        "confidence": 0.95,
+        "evidence_sources": [
+          "retrieval",
+          "vlm"
+        ],
+        "warnings": []
+      },
+      "evidence": {
+        "question_text": "第 11 题：一种酒驾检测仪的工作原理是：人体呼出的气体若含有乙醇，将使检测仪中的 K2Cr2O7 转化为+3 价 Cr 的化合物，发生颜色变化。这一过程说明乙醇具有",
+        "question_image_path": "question_slices/SET_20260324_FB27_SHEET_001/Q011.jpg",
+        "answer_image_path": "answer_card_areas/answer_card_0.jpg",
+        "answer_image_paths": [
+          "answer_card_areas/answer_card_0.jpg"
+        ],
+        "complete_unit_image_path": "07_complete_units/SET_20260324_FB27_SHEET_001/CU011.jpg",
+        "confidence": {
+          "has_question_text": true,
+          "has_question_image": true,
+          "has_complete_unit_image": true,
+          "answer_image_count": 1,
+          "merged_fragment_count": 1,
+          "answer_fragment_count": 0
+        }
+      },
+      "observations": [
+        "题目存在学生作答，可进入知识检索与判因阶段。",
+        "已完成混合检索，召回 3 条候选证据，涉及 0 个图谱实体。",
+        "已基于完整单元图片完成题级 VLM 观察，可继续生成错因与讲解。",
+        "已输出最终逐题结论（LLM 融合）。"
+      ],
+      "next_action": "completed"
+    },
+    {
+      "question_no": "12",
+      "question_id": "SET_20260324_FB27_SHEET_001_Q012",
+      "question_type": null,
+      "student_answer": "D",
+      "answer_source": "answer_card",
+      "answer_status": "answered",
+      "needs_manual_review": false,
+      "analysis_status": "question_conclusion_ready",
+      "risk_level": "low",
+      "preliminary_judgement": "第12题考查1 mol CO相关基本量的计算，包括分子数、原子物质的量、质量及质子物质的量；学生选择D（'含有2 mol质子'）作为不正确的说法，该判断正确，因CO分子含6+8=14个质子，1 mol CO应含14 mol质子，故D选项内容错误，符合题目‘不正确的是’的要求。",
+      "retrieval_plan": {
+        "vector_query": "第 12 题：下列关于 1 mol CO 的说法不正确的是\n学生答案：D",
+        "graph_entities": [],
+        "knowledge_tags_hint": [],
+        "keywords": [
+          "12",
+          "下列关于",
+          "1",
+          "mol",
+          "CO",
+          "的说法不正确的是"
+        ]
+      },
+      "retrieval_result": {
+        "status": "success",
+        "query": "第 12 题：下列关于 1 mol CO 的说法不正确的是\n学生答案：D",
+        "keywords": [
+          "12",
+          "下列关于",
+          "1",
+          "mol",
+          "CO",
+          "的说法不正确的是"
+        ],
+        "graph_entities": [],
+        "graph_entity_count": 0,
+        "merged_hit_count": 3,
+        "top_results": [
+          {
+            "rank": 1,
+            "source_type": "vector",
+            "score": 0.622419,
+            "citation": "03专题三离子反应.pdf",
+            "snippet": "$M\u000e )\u00130 $0\u0013ĩ ݌ ݌ ᫥/ᐻ͐D̹ ߌ Ꮐ+.ၼ $B$0\u0014 \u0013) $B\u0013 )\u00130 $0\u0013ĩ ᴑ ᷬᴑ᫥/ᐻ͐D᭛ 0 ၼႴᕾ *8Ⴔᕾ 2.离子方程式书写的关键 (1)两易—易溶且易(完全)电离的物质(包括强 酸、强碱、大多数可溶性盐)拆成离子,其他 物质用化学式表示。 (2)两等—离子方程式两边的原子个数、电荷数 均应相等。 (3)两查—检查化学计量数是否约到最简,是否 漏标必要的反应条件。 注意 微溶物的处理:①出现在生成物中写化学式; ②反应物中处于..."
+          },
+          {
+            "rank": 2,
+            "source_type": "vector",
+            "score": 0.613192,
+            "citation": "02专题二物质的量.pdf",
+            "snippet": "过程如图所示。用 N A 表示阿伏加德罗常数 的值,下列叙述正确的是 ( ) A.标准状况下,5. 6LCO 中所含质子的数目 􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋 专题二 物质的量 11 为3. 5N A B.常温常压下,8. 8gCO2 分子中所含 π键的 数目为0. 8N A C. 23g甲酸和乙醇的..."
+          },
+          {
+            "rank": 3,
+            "source_type": "vector",
+            "score": 0.606614,
+            "citation": "04专题四氧化还原反应.pdf",
+            "snippet": "+1。 ( ) 答案 (1)× (2)× (3)√ (4)× (5)× (6)× (7)× (8)× (9)√ (10)× 2.(2023天津河西三模,1)下列叙述不涉及氧化还 原反应的是 ( ) A.海水提溴 B.苏打用作食用碱 C.谷物发酵酿酒 D.漂白粉久置空气中失效 答案 B 3.已知常温下,在溶液中发生如下反应: ①16H ++10Z -+2XO - 4 􀪅􀪅2X 2++5Z2+8H2O ②2A 2+ +B2 􀪅􀪅2A 3+ +2B - ③2B - +Z2 􀪅..."
+          }
+        ],
+        "context": "基于知识库检索得到以下证据：\n[向量#1] score=0.622 source=03专题三离子反应.pdf\n- $M\u000e )\u00130 $0\u0013ĩ ݌ ݌ ᫥/ᐻ͐D̹ ߌ Ꮐ+.ၼ $B$0\u0014 \u0013) $B\u0013 )\u00130 $0\u0013ĩ ᴑ ᷬᴑ᫥/ᐻ͐D᭛ 0 ၼႴᕾ *8Ⴔᕾ 2.离子方程式书写的关键 (1)两易—易溶且易(完全)电离的物质(包括强 酸、强碱、大多数可溶性盐)拆成离子,其他 物质用化学式表示。 (2)两等—离子方程式两边的原子个数、电荷数 均应相等。 (3)两查—检查化学计量数是否约到最简,是否 漏标必要的反应条件。 注意 微溶物的处理:①出现在生成物中写化学式; ②反应物中处于...\n[向量#2] score=0.613 source=02专题二物质的量.pdf\n- 过程如图所示。用 N A 表示阿伏加德罗常数 的值,下列叙述正确的是 ( ) A.标准状况下,5. 6LCO 中所含质子的数目 􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋 专题二 物质的量 11 为3. 5N A B.常温常压下,8. 8gCO2 分子中所含 π键的 数目为0. 8N A C. 23g甲酸和乙醇的...\n[向量#3] score=0.607 source=04专题四氧化还原反应.pdf\n- +1。 ( ) 答案 (1)× (2)× (3)√ (4)× (5)× (6)× (7)× (8)× (9)√ (10)× 2.(2023天津河西三模,1)下列叙述不涉及氧化还 原反应的是 ( ) A.海水提溴 B.苏打用作食用碱 C.谷物发酵酿酒 D.漂白粉久置空气中失效 答案 B 3.已知常温下,在溶液中发生如下反应: ①16H ++10Z -+2XO - 4 􀪅􀪅2X 2++5Z2+8H2O ②2A 2+ +B2 􀪅􀪅2A 3+ +2B - ③2B - +Z2 􀪅...",
+        "warnings": []
+      },
+      "vlm_plan": {
+        "analysis_image_path": "07_complete_units/SET_20260324_FB27_SHEET_001/CU012.jpg",
+        "uses_complete_unit_image": true,
+        "supports_vision_model": true,
+        "retrieval_context_supplied": true
+      },
+      "vlm_result": {
+        "status": "success",
+        "analysis_image_path": "07_complete_units/SET_20260324_FB27_SHEET_001/CU012.jpg",
+        "analysis_image_abspath": "d:\\10739\\Exam-Analysis-Suite\\preprocessor\\temp\\run_20260325_133128\\07_complete_units\\SET_20260324_FB27_SHEET_001\\CU012.jpg",
+        "uses_complete_unit_image": true,
+        "supports_vision_model": true,
+        "question_summary": "第12题：下列关于1 mol CO的说法不正确的是，选项包括分子数、原子物质的量、质量以及质子物质的量。",
+        "answer_observation": "学生作答为D，即认为'含有2 mol质子'是不正确的说法，并在选项D旁打勾确认。",
+        "answer_status_assessment": "answered",
+        "correctness": "incorrect",
+        "knowledge_points": [
+          "物质的量与阿伏加德罗常数",
+          "分子组成与原子构成",
+          "质子数计算",
+          "摩尔质量"
+        ],
+        "suspected_error_causes": [
+          "对CO分子中质子总数理解错误",
+          "未正确计算碳和氧原子的质子数之和"
+        ],
+        "reasoning_basis": [
+          "1 mol CO含有1 mol碳原子（6个质子）和1 mol氧原子（8个质子），共14 mol质子，因此‘含有2 mol质子’明显错误。",
+          "选项A：1 mol CO分子数约为6.02×10²³，正确，符合阿伏加德罗常数定义。",
+          "选项B：1 mol CO含有2 mol原子（1 mol C + 1 mol O），正确。",
+          "选项C：CO摩尔质量为12 + 16 = 28 g/mol，故1 mol CO质量为28 g，正确。",
+          "选项D：应含14 mol质子，而非2 mol，因此该说法不正确，但学生选择D作为答案意味着其认为此说法错误，实际题目问的是‘不正确的是’，所以D选项本身内容错误，但学生选D是对的。然而，学生作答‘D’表示他认为D是不正确的说法，这实际上是正确的判断。但根据题目要求判断学生是否正确，需看其是否选择了真正不正确的选项。由于D确实不正确，且学生选了D，说明其回答正确。",
+          "重新分析：若学生选择D作为‘不正确的说法’，而D确实是错误的，则学生作答正确。但此处存在矛盾——若D是错误说法，那么学生选D是正确的；但原题问‘不正确的是’，所以D是正确答案。因此学生作答正确。"
+        ],
+        "recommended_next_action": "确认题目选项内容并核对标准答案，建议补充完整选项以避免歧义。",
+        "confidence": 0.95,
+        "warnings": []
+      },
+      "final_conclusion": {
+        "status": "success",
+        "generation_mode": "llm",
+        "summary": "第12题考查1 mol CO相关基本量的计算，包括分子数、原子物质的量、质量及质子物质的量；学生选择D（'含有2 mol质子'）作为不正确的说法，该判断正确，因CO分子含6+8=14个质子，1 mol CO应含14 mol质子，故D选项内容错误，符合题目‘不正确的是’的要求。",
+        "answer_status": "answered",
+        "correctness": "correct",
+        "mastery_level": "partial",
+        "knowledge_points": [
+          "物质的量与阿伏加德罗常数",
+          "分子组成与原子构成",
+          "质子数计算",
+          "摩尔质量",
+          "12",
+          "下列关于"
+        ],
+        "error_causes": [
+          "对CO分子中质子总数理解错误",
+          "未正确计算碳和氧原子的质子数之和"
+        ],
+        "explanation": "1 mol CO含1 mol C原子（6 mol质子）和1 mol O原子（8 mol质子），共14 mol质子；选项D称‘含有2 mol质子’明显错误，是唯一不正确的说法，学生选D正确。但检索结果未提供本题标准答案或完整选项，VLM推理中存在自我矛盾性陈述（如先称‘incorrect’后论证‘选D是对的’），结合VLM高置信度（0.95）及逻辑终局判定，确认学生作答正确；知识掌握尚可但质子数计算易混淆，属部分掌握。",
+        "study_advice": [
+          "强化单质/化合物分子中质子总数的快速计算训练（如C=6, N=7, O=8, Na=11等）",
+          "区分‘某微粒所含质子物质的量’与‘某微粒的物质的量’，避免数量级误判",
+          "对含多原子分子的质子、中子、电子总数问题进行专项巩固",
+          "优先回顾“物质的量与阿伏加德罗常数”的定义、公式或典型例题，再重做本题。"
+        ],
+        "supporting_evidence": [
+          "VLMA: '1 mol CO含有1 mol碳原子（6个质子）和1 mol氧原子（8个质子），共14 mol质子，因此‘含有2 mol质子’明显错误。'",
+          "VLMA: '选项D：应含14 mol质子，而非2 mol，因此该说法不正确，但学生选择D作为答案意味着其认为此说法错误，实际题目问的是‘不正确的是’，所以D选项本身内容错误，但学生选D是对的。'",
+          "retrieval_result 提供的文档未包含本题标准答案，但无冲突证据；VLMA为唯一明确给出因果推理的可靠依据",
+          "1 mol CO含有1 mol碳原子（6个质子）和1 mol氧原子（8个质子），共14 mol质子，因此‘含有2 mol质子’明显错误。",
+          "选项A：1 mol CO分子数约为6.02×10²³，正确，符合阿伏加德罗常数定义。",
+          "选项B：1 mol CO含有2 mol原子（1 mol C + 1 mol O），正确。"
+        ],
+        "recommended_next_action": "提供本题完整选项及标准答案以闭环验证；建议完成3道同类质子数计算题（含NO、SO₂、NH₃）进行迁移巩固",
+        "confidence": 0.95,
+        "evidence_sources": [
+          "retrieval",
+          "vlm"
+        ],
+        "warnings": []
+      },
+      "evidence": {
+        "question_text": "第 12 题：下列关于 1 mol CO 的说法不正确的是",
+        "question_image_path": "question_slices/SET_20260324_FB27_SHEET_001/Q012.jpg",
+        "answer_image_path": "answer_card_areas/answer_card_0.jpg",
+        "answer_image_paths": [
+          "answer_card_areas/answer_card_0.jpg"
+        ],
+        "complete_unit_image_path": "07_complete_units/SET_20260324_FB27_SHEET_001/CU012.jpg",
+        "confidence": {
+          "has_question_text": true,
+          "has_question_image": true,
+          "has_complete_unit_image": true,
+          "answer_image_count": 1,
+          "merged_fragment_count": 1,
+          "answer_fragment_count": 0
+        }
+      },
+      "observations": [
+        "题目存在学生作答，可进入知识检索与判因阶段。",
+        "已完成混合检索，召回 3 条候选证据，涉及 0 个图谱实体。",
+        "已基于完整单元图片完成题级 VLM 观察，可继续生成错因与讲解。",
+        "已输出最终逐题结论（LLM 融合）。"
+      ],
+      "next_action": "completed"
+    },
+    {
+      "question_no": "13",
+      "question_id": "SET_20260324_FB27_SHEET_001_Q013",
+      "question_type": null,
+      "student_answer": "B",
+      "answer_source": "answer_card",
+      "answer_status": "answered",
+      "needs_manual_review": false,
+      "analysis_status": "question_conclusion_ready",
+      "risk_level": "low",
+      "preliminary_judgement": "第13题考查离子方程式的书写正误判断，学生选择B（二氧化碳与澄清石灰水反应），经VLM观察与检索证据交叉验证，该选项书写符合规范：CO₂为非电解质不拆，Ca(OH)₂完全电离提供Ca²⁺和OH⁻，产物CaCO₃沉淀和H₂O书写正确，原子与电荷均守恒。",
+      "retrieval_plan": {
+        "vector_query": "第 13 题：下列离子方程式书写正确的是\n学生答案：B",
+        "graph_entities": [
+          "Br-",
+          "还原剂",
+          "Fe2+",
+          "氧化还原反应",
+          "H2O2"
+        ],
+        "knowledge_tags_hint": [],
+        "keywords": [
+          "13",
+          "下列离子方程式书写正确的是",
+          "学生答案",
+          "B"
+        ]
+      },
+      "retrieval_result": {
+        "status": "success",
+        "query": "第 13 题：下列离子方程式书写正确的是\n学生答案：B",
+        "keywords": [
+          "13",
+          "下列离子方程式书写正确的是",
+          "学生答案",
+          "B"
+        ],
+        "graph_entities": [
+          "Br-",
+          "还原剂",
+          "Fe2+",
+          "氧化还原反应",
+          "H2O2"
+        ],
+        "graph_entity_count": 5,
+        "merged_hit_count": 3,
+        "top_results": [
+          {
+            "rank": 1,
+            "source_type": "graph",
+            "score": 0.657334,
+            "citation": "Br- -[RELATED_TO]-> 还原剂 | 还原剂 -[RELATED_TO]-> Br-",
+            "snippet": "Br- -[RELATED_TO]-> 还原剂 | 还原剂 -[RELATED_TO]-> Br- 如 FeBr2 溶液中通入少量 Cl2,因为还原性 Fe2+ > Br-, 所以 Fe2+ 先被 Cl2 氧化; (2)常见的还原剂 物质类型 举例 对应氧化产物 如 FeBr2 溶液中通入少量 Cl2,因为还原性 Fe2+ > Br-, 所以 Fe2+ 先被 Cl2 氧化;"
+          },
+          {
+            "rank": 2,
+            "source_type": "vector",
+            "score": 0.637726,
+            "citation": "03专题三离子反应.pdf",
+            "snippet": "$M\u000e )\u00130 $0\u0013ĩ ݌ ݌ ᫥/ᐻ͐D̹ ߌ Ꮐ+.ၼ $B$0\u0014 \u0013) $B\u0013 )\u00130 $0\u0013ĩ ᴑ ᷬᴑ᫥/ᐻ͐D᭛ 0 ၼႴᕾ *8Ⴔᕾ 2.离子方程式书写的关键 (1)两易—易溶且易(完全)电离的物质(包括强 酸、强碱、大多数可溶性盐)拆成离子,其他 物质用化学式表示。 (2)两等—离子方程式两边的原子个数、电荷数 均应相等。 (3)两查—检查化学计量数是否约到最简,是否 漏标必要的反应条件。 注意 微溶物的处理:①出现在生成物中写化学式; ②反应物中处于..."
+          },
+          {
+            "rank": 3,
+            "source_type": "graph",
+            "score": 0.562,
+            "citation": "还原剂 -[RELATED_TO]-> Br-",
+            "snippet": "还原剂 -[RELATED_TO]-> Br- 如 FeBr2 溶液中通入少量 Cl2,因为还原性 Fe2+ > Br-, 所以 Fe2+ 先被 Cl2 氧化; (2)常见的还原剂 物质类型 举例 对应氧化产物"
+          }
+        ],
+        "context": "基于知识库检索得到以下证据：\n[图谱#1] score=0.657 source=Br- -[RELATED_TO]-> 还原剂 | 还原剂 -[RELATED_TO]-> Br-\n- Br- -[RELATED_TO]-> 还原剂 | 还原剂 -[RELATED_TO]-> Br- 如 FeBr2 溶液中通入少量 Cl2,因为还原性 Fe2+ > Br-, 所以 Fe2+ 先被 Cl2 氧化; (2)常见的还原剂 物质类型 举例 对应氧化产物 如 FeBr2 溶液中通入少量 Cl2,因为还原性 Fe2+ > Br-, 所以 Fe2+ 先被 Cl2 氧化;\n[向量#2] score=0.638 source=03专题三离子反应.pdf\n- $M\u000e )\u00130 $0\u0013ĩ ݌ ݌ ᫥/ᐻ͐D̹ ߌ Ꮐ+.ၼ $B$0\u0014 \u0013) $B\u0013 )\u00130 $0\u0013ĩ ᴑ ᷬᴑ᫥/ᐻ͐D᭛ 0 ၼႴᕾ *8Ⴔᕾ 2.离子方程式书写的关键 (1)两易—易溶且易(完全)电离的物质(包括强 酸、强碱、大多数可溶性盐)拆成离子,其他 物质用化学式表示。 (2)两等—离子方程式两边的原子个数、电荷数 均应相等。 (3)两查—检查化学计量数是否约到最简,是否 漏标必要的反应条件。 注意 微溶物的处理:①出现在生成物中写化学式; ②反应物中处于...\n[图谱#3] score=0.562 source=还原剂 -[RELATED_TO]-> Br-\n- 还原剂 -[RELATED_TO]-> Br- 如 FeBr2 溶液中通入少量 Cl2,因为还原性 Fe2+ > Br-, 所以 Fe2+ 先被 Cl2 氧化; (2)常见的还原剂 物质类型 举例 对应氧化产物",
+        "warnings": []
+      },
+      "vlm_plan": {
+        "analysis_image_path": "07_complete_units/SET_20260324_FB27_SHEET_001/CU013.jpg",
+        "uses_complete_unit_image": true,
+        "supports_vision_model": true,
+        "retrieval_context_supplied": true
+      },
+      "vlm_result": {
+        "status": "success",
+        "analysis_image_path": "07_complete_units/SET_20260324_FB27_SHEET_001/CU013.jpg",
+        "analysis_image_abspath": "d:\\10739\\Exam-Analysis-Suite\\preprocessor\\temp\\run_20260325_133128\\07_complete_units\\SET_20260324_FB27_SHEET_001\\CU013.jpg",
+        "uses_complete_unit_image": true,
+        "supports_vision_model": true,
+        "question_summary": "第13题要求判断下列离子方程式书写正确的是哪一个选项，涉及铜与稀硫酸、二氧化碳与澄清石灰水、稀硫酸与氢氧化钡溶液、铁与稀盐酸的反应。",
+        "answer_observation": "学生作答为B，即认为二氧化碳与澄清石灰水的离子方程式书写正确。",
+        "answer_status_assessment": "answered",
+        "correctness": "incorrect",
+        "knowledge_points": [
+          "离子方程式的书写规则",
+          "物质的溶解性与电离情况",
+          "离子反应中的原子守恒与电荷守恒",
+          "常见物质的反应原理"
+        ],
+        "suspected_error_causes": [
+          "对离子方程式中物质拆写规则理解不准确",
+          "忽略了CO₂与Ca(OH)₂反应生成CaCO₃沉淀时，CO₂应以分子形式表示而非直接参与离子反应"
+        ],
+        "reasoning_basis": [
+          "选项A：铜与稀硫酸不反应，因为铜在金属活动性顺序中位于氢之后，不能置换出氢气，因此该离子方程式错误。",
+          "选项B：二氧化碳与澄清石灰水反应的离子方程式应为CO₂ + Ca²⁺ + 2OH⁻ → CaCO₃↓ + H₂O，但CO₂是气体且非电解质，不应拆成离子形式，此处书写虽看似合理，但严格来说CO₂作为反应物应保留化学式，而题目中写法在常规教学中可接受，需进一步判断。然而结合实际教学标准，此式通常视为正确。",
+          "选项C：稀硫酸与氢氧化钡溶液反应生成BaSO₄沉淀和水，正确的离子方程式应为Ba²⁺ + SO₄²⁻ + 2H⁺ + 2OH⁻ → BaSO₄↓ + 2H₂O，而选项中H⁺与OH⁻系数为1，不符合配平要求，故错误。",
+          "选项D：铁与稀盐酸反应生成Fe²⁺而不是Fe³⁺，正确产物应为Fe²⁺，因此该方程式错误。",
+          "综合分析：选项B在多数教材中被认为是正确的离子方程式写法，但需注意CO₂未拆开是合理的。然而，根据检索证据和常见规范，B选项的写法在逻辑上是成立的。但根据学生答案为B，结合选项C明显错误（电荷与原子不守恒），而B确实符合一般书写规范，因此可能存在争议。但进一步核对发现，B选项的离子方程式书写实际上是正确的，因为CO₂是弱电解质且不拆，Ca(OH)₂是强碱且完全电离，所以B应为正确选项。但原分析误判了B的正确性，实际上B是正确的。",
+          "重新评估：经过仔细比对，B选项的离子方程式CO₂ + Ca²⁺ + 2OH⁻ → CaCO₃↓ + H₂O是标准写法，正确。因此学生答案B是正确的。"
+        ],
+        "recommended_next_action": "确认学生是否理解离子方程式中非电解质（如CO₂）不拆写的原则，并强化对电荷守恒和原子守恒的检查。",
+        "confidence": 0.85,
+        "warnings": []
+      },
+      "final_conclusion": {
+        "status": "success",
+        "generation_mode": "llm",
+        "summary": "第13题考查离子方程式的书写正误判断，学生选择B（二氧化碳与澄清石灰水反应），经VLM观察与检索证据交叉验证，该选项书写符合规范：CO₂为非电解质不拆，Ca(OH)₂完全电离提供Ca²⁺和OH⁻，产物CaCO₃沉淀和H₂O书写正确，原子与电荷均守恒。",
+        "answer_status": "answered",
+        "correctness": "correct",
+        "mastery_level": "partial",
+        "knowledge_points": [
+          "离子方程式的书写规则",
+          "物质的溶解性与电离情况",
+          "离子反应中的原子守恒与电荷守恒",
+          "常见物质的反应原理",
+          "Br-",
+          "还原剂"
+        ],
+        "error_causes": [
+          "对离子方程式中物质拆写规则理解不准确",
+          "忽略了CO₂与Ca(OH)₂反应生成CaCO₃沉淀时，CO₂应以分子形式表示而非直接参与离子反应"
+        ],
+        "explanation": "学生答案B正确。CO₂是共价化合物、非电解质，在离子方程式中必须保留化学式；澄清石灰水中的Ca(OH)₂为强碱、完全电离，应拆为Ca²⁺和OH⁻；反应生成CaCO₃沉淀和H₂O，离子方程式CO₂ + Ca²⁺ + 2OH⁻ → CaCO₃↓ + H₂O符合‘两易、两等、两查’原则。其他选项均存在硬性错误：A中Cu不与稀H₂SO₄反应；C中H⁺与OH⁻系数未配平（应为2:2）；D中产物应为Fe²⁺而非Fe³⁺。",
+        "study_advice": [
+          "巩固非电解质（如CO₂、NH₃、SO₂等）在离子方程式中不拆写的规则",
+          "强化电荷守恒与原子守恒的逐项验算习惯",
+          "对比辨析易混淆反应（如CO₂通入少量/过量石灰水）的离子方程式差异",
+          "优先回顾“离子方程式的书写规则”的定义、公式或典型例题，再重做本题。"
+        ],
+        "supporting_evidence": [
+          "VLM明确指出B选项CO₂ + Ca²⁺ + 2OH⁻ → CaCO₃↓ + H₂O是标准写法，且重申其正确性",
+          "检索结果中‘两易—易溶且易(完全)电离的物质拆成离子，其他用化学式表示’支持CO₂不拆",
+          "VLM推理确认C选项因H⁺与OH⁻系数为1（实际需2）而违反配平要求，反向印证B的合理性",
+          "选项A：铜与稀硫酸不反应，因为铜在金属活动性顺序中位于氢之后，不能置换出氢气，因此该离子方程式错误。",
+          "选项B：二氧化碳与澄清石灰水反应的离子方程式应为CO₂ + Ca²⁺ + 2OH⁻ → CaCO₃↓ + H₂O，但CO₂是气体且非电解质，不应拆成离子形式，此处书写虽看似合理，但严格来说CO₂作为反应物应保留化学式，而题目中写法在常规教学中可接受，需进一步判断。然而结合实际教学标准，此式通常视为正确。",
+          "选项C：稀硫酸与氢氧化钡溶液反应生成BaSO₄沉淀和水，正确的离子方程式应为Ba²⁺ + SO₄²⁻ + 2H⁺ + 2OH⁻ → BaSO₄↓ + 2H₂O，而选项中H⁺与OH⁻系数为1，不符合配平要求，故错误。"
+        ],
+        "recommended_next_action": "让学生独立写出CO₂通入过量NaOH溶液的离子方程式，并解释CO₂是否拆写及原因。",
+        "confidence": 0.92,
+        "evidence_sources": [
+          "retrieval",
+          "vlm"
+        ],
+        "warnings": []
+      },
+      "evidence": {
+        "question_text": "第 13 题：下列离子方程式书写正确的是",
+        "question_image_path": "question_slices/SET_20260324_FB27_SHEET_001/Q013.jpg",
+        "answer_image_path": "answer_card_areas/answer_card_0.jpg",
+        "answer_image_paths": [
+          "answer_card_areas/answer_card_0.jpg"
+        ],
+        "complete_unit_image_path": "07_complete_units/SET_20260324_FB27_SHEET_001/CU013.jpg",
+        "confidence": {
+          "has_question_text": true,
+          "has_question_image": true,
+          "has_complete_unit_image": true,
+          "answer_image_count": 1,
+          "merged_fragment_count": 1,
+          "answer_fragment_count": 0
+        }
+      },
+      "observations": [
+        "题目存在学生作答，可进入知识检索与判因阶段。",
+        "已完成混合检索，召回 3 条候选证据，涉及 5 个图谱实体。",
+        "已基于完整单元图片完成题级 VLM 观察，可继续生成错因与讲解。",
+        "已输出最终逐题结论（LLM 融合）。"
+      ],
+      "next_action": "completed"
+    },
+    {
+      "question_no": "14",
+      "question_id": "SET_20260324_FB27_SHEET_001_Q014",
+      "question_type": null,
+      "student_answer": "C",
+      "answer_source": "answer_card",
+      "answer_status": "answered",
+      "needs_manual_review": false,
+      "analysis_status": "question_conclusion_ready",
+      "risk_level": "low",
+      "preliminary_judgement": "题目要求找出不能用离子方程式 H⁺ + OH⁻ = H₂O 表示的化学反应，学生作答 C（Cu(OH)₂ + H₂SO₄），因 Cu(OH)₂ 是难溶性碱，不能拆为离子，故该反应不能简化为 H⁺ + OH⁻ = H₂O，作答正确。",
+      "retrieval_plan": {
+        "vector_query": "第 14 题：下列化学反应中，不能用离子方程式 H+ + OH- = H2O 表示的是\n学生答案：C",
+        "graph_entities": [
+          "Fe2+",
+          "Cl2",
+          "还原剂",
+          "Br-",
+          "氧化还原反应",
+          "氧化剂"
+        ],
+        "knowledge_tags_hint": [],
+        "keywords": [
+          "14",
+          "下列化学反应中",
+          "不能用离子方程式",
+          "H+",
+          "+",
+          "OH-"
+        ]
+      },
+      "retrieval_result": {
+        "status": "success",
+        "query": "第 14 题：下列化学反应中，不能用离子方程式 H+ + OH- = H2O 表示的是\n学生答案：C",
+        "keywords": [
+          "14",
+          "下列化学反应中",
+          "不能用离子方程式",
+          "H+",
+          "+",
+          "OH-"
+        ],
+        "graph_entities": [
+          "Fe2+",
+          "Cl2",
+          "还原剂",
+          "Br-",
+          "氧化还原反应",
+          "氧化剂"
+        ],
+        "graph_entity_count": 6,
+        "merged_hit_count": 3,
+        "top_results": [
+          {
+            "rank": 1,
+            "source_type": "graph",
+            "score": 0.628167,
+            "citation": "Fe2+ -[RELATED_TO]-> 还原剂 | 还原剂 -[RELATED_TO]-> Fe2+",
+            "snippet": "Fe2+ -[RELATED_TO]-> 还原剂 | 还原剂 -[RELATED_TO]-> Fe2+ 如 FeBr2 溶液中通入少量 Cl2,因为还原性 Fe2+ > Br-, 所以 Fe2+ 先被 Cl2 氧化; (2)常见的还原剂 物质类型 举例 对应氧化产物 如 FeBr2 溶液中通入少量 Cl2,因为还原性 Fe2+ > Br-, 所以 Fe2+ 先被 Cl2 氧化;"
+          },
+          {
+            "rank": 2,
+            "source_type": "vector",
+            "score": 0.581185,
+            "citation": "04专题四氧化还原反应.pdf",
+            "snippet": "C 13. (2023湖南,10,3分)油画创作通常需要用 到多种无机颜料。研究发现,在不同的空气 湿度和光照条件下,颜料雌黄(As2S3)褪色 的主要原因是发生了以下两种化学反应: 下列说法正确的是 ( ) A. S2O 2- 3 和SO 2- 4 的空间结构都是正四面体形 B.反应Ⅰ和Ⅱ中,元素 As和S都被氧化 C.反应Ⅰ和Ⅱ中,参加反应的 n(O2) n(H2O): Ⅰ<Ⅱ 􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋..."
+          },
+          {
+            "rank": 3,
+            "source_type": "vector",
+            "score": 0.535646,
+            "citation": "03专题三离子反应.pdf",
+            "snippet": "􀪅􀪅 Al(OH) 3↓+CO 2- 3 C Ag + 、Ba 2+ 、 S 2- H2SO4 溶液 2H + +S 2- 􀪅􀪅 H2S↑ D Fe 3+ 、 Cl - 、 SCN - NaOH 溶液 Fe 3+ + 3OH - 􀪅􀪅 Fe(OH) 3↓ 答案 B 3. (2023安徽黄山三模,10)某工业废水中可能 含有 K +、Ag +、Mg 2+、Cu 2+、Al 3+、NH + 4 、Cl -、 CO 2- 3 、NO - 3 、SO 2- 4 、 I - 中的..."
+          }
+        ],
+        "context": "基于知识库检索得到以下证据：\n[图谱#1] score=0.628 source=Fe2+ -[RELATED_TO]-> 还原剂 | 还原剂 -[RELATED_TO]-> Fe2+\n- Fe2+ -[RELATED_TO]-> 还原剂 | 还原剂 -[RELATED_TO]-> Fe2+ 如 FeBr2 溶液中通入少量 Cl2,因为还原性 Fe2+ > Br-, 所以 Fe2+ 先被 Cl2 氧化; (2)常见的还原剂 物质类型 举例 对应氧化产物 如 FeBr2 溶液中通入少量 Cl2,因为还原性 Fe2+ > Br-, 所以 Fe2+ 先被 Cl2 氧化;\n[向量#2] score=0.581 source=04专题四氧化还原反应.pdf\n- C 13. (2023湖南,10,3分)油画创作通常需要用 到多种无机颜料。研究发现,在不同的空气 湿度和光照条件下,颜料雌黄(As2S3)褪色 的主要原因是发生了以下两种化学反应: 下列说法正确的是 ( ) A. S2O 2- 3 和SO 2- 4 的空间结构都是正四面体形 B.反应Ⅰ和Ⅱ中,元素 As和S都被氧化 C.反应Ⅰ和Ⅱ中,参加反应的 n(O2) n(H2O): Ⅰ<Ⅱ 􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋...\n[向量#3] score=0.536 source=03专题三离子反应.pdf\n- 􀪅􀪅 Al(OH) 3↓+CO 2- 3 C Ag + 、Ba 2+ 、 S 2- H2SO4 溶液 2H + +S 2- 􀪅􀪅 H2S↑ D Fe 3+ 、 Cl - 、 SCN - NaOH 溶液 Fe 3+ + 3OH - 􀪅􀪅 Fe(OH) 3↓ 答案 B 3. (2023安徽黄山三模,10)某工业废水中可能 含有 K +、Ag +、Mg 2+、Cu 2+、Al 3+、NH + 4 、Cl -、 CO 2- 3 、NO - 3 、SO 2- 4 、 I - 中的...",
+        "warnings": []
+      },
+      "vlm_plan": {
+        "analysis_image_path": "07_complete_units/SET_20260324_FB27_SHEET_001/CU014.jpg",
+        "uses_complete_unit_image": true,
+        "supports_vision_model": true,
+        "retrieval_context_supplied": true
+      },
+      "vlm_result": {
+        "status": "success",
+        "analysis_image_path": "07_complete_units/SET_20260324_FB27_SHEET_001/CU014.jpg",
+        "analysis_image_abspath": "d:\\10739\\Exam-Analysis-Suite\\preprocessor\\temp\\run_20260325_133128\\07_complete_units\\SET_20260324_FB27_SHEET_001\\CU014.jpg",
+        "uses_complete_unit_image": true,
+        "supports_vision_model": true,
+        "question_summary": "题目要求找出不能用离子方程式 H⁺ + OH⁻ = H₂O 表示的化学反应，即判断哪个反应不属于强酸强碱中和生成可溶性盐和水的典型情况。",
+        "answer_observation": "学生作答为 C，对应选项是 Cu(OH)₂ + H₂SO₄ = 2H₂O + CuSO₄。",
+        "answer_status_assessment": "answered",
+        "correctness": "correct",
+        "knowledge_points": [
+          "离子方程式的书写规则",
+          "强酸强碱中和反应的特点",
+          "难溶性碱的性质"
+        ],
+        "suspected_error_causes": [],
+        "reasoning_basis": [
+          "选项 A、B、D 均为强酸与强碱反应生成可溶性盐和水，可以简化为 H⁺ + OH⁻ = H₂O。",
+          "选项 C 中的 Cu(OH)₂ 是难溶性碱，在离子方程式中不能拆分为离子形式，因此不能用 H⁺ + OH⁻ = H₂O 表示。",
+          "检索证据中未直接提供关于该题的明确答案，但结合化学知识，C 选项因涉及不溶性碱而无法简化为标准中和离子方程式，符合题意。"
+        ],
+        "recommended_next_action": "无需进一步干预，答案正确。",
+        "confidence": 0.95,
+        "warnings": []
+      },
+      "final_conclusion": {
+        "status": "success",
+        "generation_mode": "llm",
+        "summary": "题目要求找出不能用离子方程式 H⁺ + OH⁻ = H₂O 表示的化学反应，学生作答 C（Cu(OH)₂ + H₂SO₄），因 Cu(OH)₂ 是难溶性碱，不能拆为离子，故该反应不能简化为 H⁺ + OH⁻ = H₂O，作答正确。",
+        "answer_status": "answered",
+        "correctness": "correct",
+        "mastery_level": "mastered",
+        "knowledge_points": [
+          "离子方程式的书写规则",
+          "强酸强碱中和反应的特点",
+          "难溶性碱的性质",
+          "Fe2+",
+          "Cl2",
+          "还原剂"
+        ],
+        "error_causes": [],
+        "explanation": "H⁺ + OH⁻ = H₂O 仅适用于强酸与强碱反应生成可溶性盐和水的情形。选项 C 中 Cu(OH)₂ 为难溶性碱，在离子方程式中必须保留化学式，不能拆成 OH⁻，因此不能用该离子方程式表示；而 A、B、D 均符合简化条件。",
+        "study_advice": [
+          "保持对‘离子方程式的书写规则’的掌握，可追加一到两道同类题巩固。",
+          "保持对“离子方程式的书写规则”的掌握，可追加一到两道同类题巩固。",
+          "结合召回到的知识片段复盘本题，确认相关概念与解题路径是否一致。"
+        ],
+        "supporting_evidence": [
+          "选项 A、B、D 均为强酸与强碱反应生成可溶性盐和水，可以简化为 H⁺ + OH⁻ = H₂O。",
+          "选项 C 中的 Cu(OH)₂ 是难溶性碱，在离子方程式中不能拆分为离子形式，因此不能用 H⁺ + OH⁻ = H₂O 表示。",
+          "vlm_result 明确指出学生作答 C 对应 Cu(OH)₂ + H₂SO₄，且 correctness = correct，confidence = 0.95；retrieval_result 未提供直接矛盾证据，仅含无关氧化还原知识点片段。",
+          "检索证据中未直接提供关于该题的明确答案，但结合化学知识，C 选项因涉及不溶性碱而无法简化为标准中和离子方程式，符合题意。",
+          "Fe2+ -[RELATED_TO]-> 还原剂 | 还原剂 -[RELATED_TO]-> Fe2+: Fe2+ -[RELATED_TO]-> 还原剂 | 还原剂 -[RELATED_TO]-> Fe2+ 如 FeBr2 溶液中通入少量 Cl2,因为还原性 Fe2+ > Br-, 所以 Fe2+ 先被 Cl2 氧化; (2)常见的还原剂 物质类型 举例 对应氧化产物 如 FeBr2 溶液中通入少量 Cl2,因为还原性 Fe2+ > Br-, 所以 Fe2+ 先被 Cl2 氧化;",
+          "04专题四氧化还原反应.pdf: C 13. (2023湖南,10,3分)油画创作通常需要用 到多种无机颜料。研究发现,在不同的空气 湿度和光照条件下,颜料雌黄(As2S3)褪色 的主要原因是发生了以下两种化学反应: 下列说法正确的是 ( ) A. S2O 2- 3 和SO 2- 4 的空间结构都是正四面体形 B.反应Ⅰ和Ⅱ中,元素 As和S都被氧化 C.反应Ⅰ和Ⅱ中,参加反应的 n(O2) n(H2O): Ⅰ<Ⅱ 􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋..."
+        ],
+        "recommended_next_action": "无需进一步干预，答案正确。",
+        "confidence": 0.95,
+        "evidence_sources": [
+          "retrieval",
+          "vlm"
+        ],
+        "warnings": []
+      },
+      "evidence": {
+        "question_text": "第 14 题：下列化学反应中，不能用离子方程式 H+ + OH- = H2O 表示的是",
+        "question_image_path": "question_slices/SET_20260324_FB27_SHEET_001/Q014.jpg",
+        "answer_image_path": "answer_card_areas/answer_card_0.jpg",
+        "answer_image_paths": [
+          "answer_card_areas/answer_card_0.jpg"
+        ],
+        "complete_unit_image_path": "07_complete_units/SET_20260324_FB27_SHEET_001/CU014.jpg",
+        "confidence": {
+          "has_question_text": true,
+          "has_question_image": true,
+          "has_complete_unit_image": true,
+          "answer_image_count": 1,
+          "merged_fragment_count": 1,
+          "answer_fragment_count": 0
+        }
+      },
+      "observations": [
+        "题目存在学生作答，可进入知识检索与判因阶段。",
+        "已完成混合检索，召回 3 条候选证据，涉及 6 个图谱实体。",
+        "已基于完整单元图片完成题级 VLM 观察，可继续生成错因与讲解。",
+        "已输出最终逐题结论（LLM 融合）。"
+      ],
+      "next_action": "completed"
+    },
+    {
+      "question_no": "15",
+      "question_id": "SET_20260324_FB27_SHEET_001_Q015",
+      "question_type": null,
+      "student_answer": "D",
+      "answer_source": "answer_card",
+      "answer_status": "answered",
+      "needs_manual_review": false,
+      "analysis_status": "question_conclusion_ready",
+      "risk_level": "low",
+      "preliminary_judgement": "该题初步判断为作答正确，相关知识点掌握度为 mastered，重点涉及“阿伏加德罗常数的应用、物质的量与粒子数的关系、电解质在溶液中的电离”。",
+      "retrieval_plan": {
+        "vector_query": "第 15 题：用 NA 表示阿伏加德罗常数的值，下列叙述正确的是\n学生答案：D",
+        "graph_entities": [
+          "Na2O2"
+        ],
+        "knowledge_tags_hint": [],
+        "keywords": [
+          "15",
+          "NA",
+          "表示阿伏加德罗常数的值",
+          "下列叙述正确的是",
+          "学生答案",
+          "D"
+        ]
+      },
+      "retrieval_result": {
+        "status": "success",
+        "query": "第 15 题：用 NA 表示阿伏加德罗常数的值，下列叙述正确的是\n学生答案：D",
+        "keywords": [
+          "15",
+          "NA",
+          "表示阿伏加德罗常数的值",
+          "下列叙述正确的是",
+          "学生答案",
+          "D"
+        ],
+        "graph_entities": [
+          "Na2O2"
+        ],
+        "graph_entity_count": 1,
+        "merged_hit_count": 3,
+        "top_results": [
+          {
+            "rank": 1,
+            "source_type": "graph",
+            "score": 0.597833,
+            "citation": "Na2O2",
+            "snippet": "Na2O2 离子化合物 Na2O2 和 CaH2 与水的反应分别为 ① 2Na2O2 + 2H2O → 4NaOH + O2↑;"
+          },
+          {
+            "rank": 2,
+            "source_type": "vector",
+            "score": 0.568753,
+            "citation": "03专题三离子反应.pdf",
+            "snippet": "$M\u000e )\u00130 $0\u0013ĩ ݌ ݌ ᫥/ᐻ͐D̹ ߌ Ꮐ+.ၼ $B$0\u0014 \u0013) $B\u0013 )\u00130 $0\u0013ĩ ᴑ ᷬᴑ᫥/ᐻ͐D᭛ 0 ၼႴᕾ *8Ⴔᕾ 2.离子方程式书写的关键 (1)两易—易溶且易(完全)电离的物质(包括强 酸、强碱、大多数可溶性盐)拆成离子,其他 物质用化学式表示。 (2)两等—离子方程式两边的原子个数、电荷数 均应相等。 (3)两查—检查化学计量数是否约到最简,是否 漏标必要的反应条件。 注意 微溶物的处理:①出现在生成物中写化学式; ②反应物中处于..."
+          },
+          {
+            "rank": 3,
+            "source_type": "vector",
+            "score": 0.565902,
+            "citation": "02专题二物质的量.pdf",
+            "snippet": "过程如图所示。用 N A 表示阿伏加德罗常数 的值,下列叙述正确的是 ( ) A.标准状况下,5. 6LCO 中所含质子的数目 􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋 专题二 物质的量 11 为3. 5N A B.常温常压下,8. 8gCO2 分子中所含 π键的 数目为0. 8N A C. 23g甲酸和乙醇的..."
+          }
+        ],
+        "context": "基于知识库检索得到以下证据：\n[图谱#1] score=0.598 source=Na2O2\n- Na2O2 离子化合物 Na2O2 和 CaH2 与水的反应分别为 ① 2Na2O2 + 2H2O → 4NaOH + O2↑;\n[向量#2] score=0.569 source=03专题三离子反应.pdf\n- $M\u000e )\u00130 $0\u0013ĩ ݌ ݌ ᫥/ᐻ͐D̹ ߌ Ꮐ+.ၼ $B$0\u0014 \u0013) $B\u0013 )\u00130 $0\u0013ĩ ᴑ ᷬᴑ᫥/ᐻ͐D᭛ 0 ၼႴᕾ *8Ⴔᕾ 2.离子方程式书写的关键 (1)两易—易溶且易(完全)电离的物质(包括强 酸、强碱、大多数可溶性盐)拆成离子,其他 物质用化学式表示。 (2)两等—离子方程式两边的原子个数、电荷数 均应相等。 (3)两查—检查化学计量数是否约到最简,是否 漏标必要的反应条件。 注意 微溶物的处理:①出现在生成物中写化学式; ②反应物中处于...\n[向量#3] score=0.566 source=02专题二物质的量.pdf\n- 过程如图所示。用 N A 表示阿伏加德罗常数 的值,下列叙述正确的是 ( ) A.标准状况下,5. 6LCO 中所含质子的数目 􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋 专题二 物质的量 11 为3. 5N A B.常温常压下,8. 8gCO2 分子中所含 π键的 数目为0. 8N A C. 23g甲酸和乙醇的...",
+        "warnings": []
+      },
+      "vlm_plan": {
+        "analysis_image_path": "07_complete_units/SET_20260324_FB27_SHEET_001/CU015.jpg",
+        "uses_complete_unit_image": true,
+        "supports_vision_model": true,
+        "retrieval_context_supplied": true
+      },
+      "vlm_result": {
+        "status": "success",
+        "analysis_image_path": "07_complete_units/SET_20260324_FB27_SHEET_001/CU015.jpg",
+        "analysis_image_abspath": "d:\\10739\\Exam-Analysis-Suite\\preprocessor\\temp\\run_20260325_133128\\07_complete_units\\SET_20260324_FB27_SHEET_001\\CU015.jpg",
+        "uses_complete_unit_image": true,
+        "supports_vision_model": true,
+        "question_summary": "用NA表示阿伏加德罗常数的值，判断下列叙述中哪一项正确。选项涉及标准状况下水的分子数、氧气分子体积、氯离子数量以及碳酸钠中钠离子数量。",
+        "answer_observation": "学生作答为D，即认为在常温常压下，0.01mol Na2CO3含有的Na+数为0.02NA是正确的。",
+        "answer_status_assessment": "answered",
+        "correctness": "correct",
+        "knowledge_points": [
+          "阿伏加德罗常数的应用",
+          "物质的量与粒子数的关系",
+          "电解质在溶液中的电离"
+        ],
+        "suspected_error_causes": [],
+        "reasoning_basis": [
+          "选项A错误：标准状况下H2O是液体，不能使用气体摩尔体积22.4L/mol计算分子数。",
+          "选项B错误：常温常压下，NA个O2分子的体积不等于22.4L，该数值仅适用于标准状况下的理想气体。",
+          "选项C错误：未给出MgCl2溶液的体积，无法计算Cl⁻的数目。",
+          "选项D正确：0.01mol Na2CO3完全电离产生0.02mol Na⁺，故Na⁺数目为0.02NA，符合题意。"
+        ],
+        "recommended_next_action": "确认学生对物质的量和离子电离的理解是否牢固，可进一步练习类似题目。",
+        "confidence": 0.95,
+        "warnings": []
+      },
+      "final_conclusion": {
+        "status": "success",
+        "generation_mode": "llm",
+        "summary": "该题初步判断为作答正确，相关知识点掌握度为 mastered，重点涉及“阿伏加德罗常数的应用、物质的量与粒子数的关系、电解质在溶液中的电离”。",
+        "answer_status": "answered",
+        "correctness": "correct",
+        "mastery_level": "mastered",
+        "knowledge_points": [
+          "阿伏加德罗常数的应用",
+          "物质的量与粒子数的关系",
+          "电解质在溶液中的电离",
+          "Na2O2",
+          "15",
+          "NA"
+        ],
+        "error_causes": [],
+        "explanation": "题目理解：用NA表示阿伏加德罗常数的值，判断下列叙述中哪一项正确。选项涉及标准状况下水的分子数、氧气分子体积、氯离子数量以及碳酸钠中钠离子数量。作答观察：学生作答为D，即认为在常温常压下，0.01mol Na2CO3含有的Na+数为0.02NA是正确的。选项A错误：标准状况下H2O是液体，不能使用气体摩尔体积22.4L/mol计算分子数。选项B错误：常温常压下，NA个O2分子的体积不等于22.4L，该数值仅适用于标准状况下的理想气体。选项C错误：未给出MgCl2溶液的体积，无法计算Cl⁻的数目。选项D正确：0.01mol Na2CO3完全电离产生0.02mol Na⁺，故Na⁺数目为0.02NA，符合题意。",
+        "study_advice": [
+          "保持对“阿伏加德罗常数的应用”的掌握，可追加一到两道同类题巩固。",
+          "结合召回到的知识片段复盘本题，确认相关概念与解题路径是否一致。"
+        ],
+        "supporting_evidence": [
+          "选项A错误：标准状况下H2O是液体，不能使用气体摩尔体积22.4L/mol计算分子数。",
+          "选项B错误：常温常压下，NA个O2分子的体积不等于22.4L，该数值仅适用于标准状况下的理想气体。",
+          "选项C错误：未给出MgCl2溶液的体积，无法计算Cl⁻的数目。",
+          "选项D正确：0.01mol Na2CO3完全电离产生0.02mol Na⁺，故Na⁺数目为0.02NA，符合题意。",
+          "Na2O2: Na2O2 离子化合物 Na2O2 和 CaH2 与水的反应分别为 ① 2Na2O2 + 2H2O → 4NaOH + O2↑;"
+        ],
+        "recommended_next_action": "确认学生对物质的量和离子电离的理解是否牢固，可进一步练习类似题目。",
+        "confidence": 0.95,
+        "evidence_sources": [
+          "retrieval",
+          "vlm"
+        ],
+        "warnings": []
+      },
+      "evidence": {
+        "question_text": "第 15 题：用 NA 表示阿伏加德罗常数的值，下列叙述正确的是",
+        "question_image_path": "question_slices/SET_20260324_FB27_SHEET_001/Q015.jpg",
+        "answer_image_path": "answer_card_areas/answer_card_0.jpg",
+        "answer_image_paths": [
+          "answer_card_areas/answer_card_0.jpg"
+        ],
+        "complete_unit_image_path": "07_complete_units/SET_20260324_FB27_SHEET_001/CU015.jpg",
+        "confidence": {
+          "has_question_text": true,
+          "has_question_image": true,
+          "has_complete_unit_image": true,
+          "answer_image_count": 1,
+          "merged_fragment_count": 1,
+          "answer_fragment_count": 0
+        }
+      },
+      "observations": [
+        "题目存在学生作答，可进入知识检索与判因阶段。",
+        "已完成混合检索，召回 3 条候选证据，涉及 1 个图谱实体。",
+        "已基于完整单元图片完成题级 VLM 观察，可继续生成错因与讲解。",
+        "已输出最终逐题结论（LLM 融合）。"
+      ],
+      "next_action": "completed"
+    },
+    {
+      "question_no": "22",
+      "question_id": "SET_20260324_FB27_SHEET_002_Q022",
+      "question_type": null,
+      "student_answer": null,
+      "answer_source": "answer_area",
+      "answer_status": "uncertain",
+      "needs_manual_review": true,
+      "analysis_status": "pending_manual_review",
+      "risk_level": "high",
+      "preliminary_judgement": "题目结构或答案识别存在不确定性，暂不进入正式学情判断。",
+      "retrieval_plan": {
+        "vector_query": "第 22 题：Na及其化合物是中学化学常见物质...（包含钠与水反应、化合物用途、粗盐提纯及电解等小问）",
+        "graph_entities": [
+          "Na2O2"
+        ],
+        "knowledge_tags_hint": [],
+        "keywords": [
+          "22",
+          "Na",
+          "及其化合物是中学化学常见物质",
+          "...",
+          "包含钠与水反应",
+          "化合物用途"
+        ]
+      },
+      "retrieval_result": {
+        "status": "success",
+        "query": "第 22 题：Na及其化合物是中学化学常见物质...（包含钠与水反应、化合物用途、粗盐提纯及电解等小问）",
+        "keywords": [
+          "22",
+          "Na",
+          "及其化合物是中学化学常见物质",
+          "...",
+          "包含钠与水反应",
+          "化合物用途"
+        ],
+        "graph_entities": [
+          "Na2O2"
+        ],
+        "graph_entity_count": 1,
+        "merged_hit_count": 3,
+        "top_results": [
+          {
+            "rank": 1,
+            "source_type": "graph",
+            "score": 0.597833,
+            "citation": "Na2O2",
+            "snippet": "Na2O2 离子化合物 Na2O2 和 CaH2 与水的反应分别为 ① 2Na2O2 + 2H2O → 4NaOH + O2↑;"
+          },
+          {
+            "rank": 2,
+            "source_type": "vector",
+            "score": 0.558629,
+            "citation": "01专题一物质的分类及转化.pdf",
+            "snippet": "2U 互为同位素 答案 D 10.(2022湖南,1,3分)化学促进了科技进步和 社会发展。下列叙述中没有涉及化学变化 的是 ( ) A.《神农本草经》中记载的“石胆能化铁为铜” B.利用“侯氏联合制碱法”制备纯碱 C.科学家成功将 CO2 转化为淀粉或葡萄糖 D.北京冬奥会场馆使用CO2 跨临界直冷制冰 答案 D 11.(2022湖北,1,3分)化学与生活密切相关,下 列不涉及化学变化的是 ( ) A.加入明矾后泥水变澄清 B.北京冬奥会用水快速制冰 C.炖排骨汤时加..."
+          },
+          {
+            "rank": 3,
+            "source_type": "vector",
+            "score": 0.514585,
+            "citation": "03专题三离子反应.pdf",
+            "snippet": "􀪅􀪅 Al(OH) 3↓+CO 2- 3 C Ag + 、Ba 2+ 、 S 2- H2SO4 溶液 2H + +S 2- 􀪅􀪅 H2S↑ D Fe 3+ 、 Cl - 、 SCN - NaOH 溶液 Fe 3+ + 3OH - 􀪅􀪅 Fe(OH) 3↓ 答案 B 3. (2023安徽黄山三模,10)某工业废水中可能 含有 K +、Ag +、Mg 2+、Cu 2+、Al 3+、NH + 4 、Cl -、 CO 2- 3 、NO - 3 、SO 2- 4 、 I - 中的..."
+          }
+        ],
+        "context": "基于知识库检索得到以下证据：\n[图谱#1] score=0.598 source=Na2O2\n- Na2O2 离子化合物 Na2O2 和 CaH2 与水的反应分别为 ① 2Na2O2 + 2H2O → 4NaOH + O2↑;\n[向量#2] score=0.559 source=01专题一物质的分类及转化.pdf\n- 2U 互为同位素 答案 D 10.(2022湖南,1,3分)化学促进了科技进步和 社会发展。下列叙述中没有涉及化学变化 的是 ( ) A.《神农本草经》中记载的“石胆能化铁为铜” B.利用“侯氏联合制碱法”制备纯碱 C.科学家成功将 CO2 转化为淀粉或葡萄糖 D.北京冬奥会场馆使用CO2 跨临界直冷制冰 答案 D 11.(2022湖北,1,3分)化学与生活密切相关,下 列不涉及化学变化的是 ( ) A.加入明矾后泥水变澄清 B.北京冬奥会用水快速制冰 C.炖排骨汤时加...\n[向量#3] score=0.515 source=03专题三离子反应.pdf\n- 􀪅􀪅 Al(OH) 3↓+CO 2- 3 C Ag + 、Ba 2+ 、 S 2- H2SO4 溶液 2H + +S 2- 􀪅􀪅 H2S↑ D Fe 3+ 、 Cl - 、 SCN - NaOH 溶液 Fe 3+ + 3OH - 􀪅􀪅 Fe(OH) 3↓ 答案 B 3. (2023安徽黄山三模,10)某工业废水中可能 含有 K +、Ag +、Mg 2+、Cu 2+、Al 3+、NH + 4 、Cl -、 CO 2- 3 、NO - 3 、SO 2- 4 、 I - 中的...",
+        "warnings": []
+      },
+      "vlm_plan": {
+        "analysis_image_path": "07_complete_units/SET_20260324_FB27_SHEET_002/CU022.jpg",
+        "uses_complete_unit_image": true,
+        "supports_vision_model": true,
+        "retrieval_context_supplied": true
+      },
+      "vlm_result": {
+        "status": "success",
+        "analysis_image_path": "07_complete_units/SET_20260324_FB27_SHEET_002/CU022.jpg",
+        "analysis_image_abspath": "d:\\10739\\Exam-Analysis-Suite\\preprocessor\\temp\\run_20260325_133128\\07_complete_units\\SET_20260324_FB27_SHEET_002\\CU022.jpg",
+        "uses_complete_unit_image": true,
+        "supports_vision_model": true,
+        "question_summary": "本题考查钠及其化合物的性质与应用，包括钠与水反应的现象与结论匹配、离子方程式书写、过氧化钠制备、钠的化合物用途判断、粗盐提纯过程中的离子反应及沉淀选择依据、电解饱和食盐水的化学方程式和气体体积计算。",
+        "answer_observation": "学生作答中：(1)① 实验现象与结论连线已完成；② 钠与水反应的离子方程式写为 2Na + 2H₂O → 2Na⁺ + 2OH⁻ + H₂↑，正确；③ 制备过氧化钠的化学方程式写为 2Na + O₂ → Na₂O₂，未标注条件（加热），不完整。 (2) 选择题选 C，正确。 (3)① 过程 I 的离子方程式写为 Ba²⁺ + SO₄²⁻ → BaSO₄↓，正确；② 解释选用 BaCl₂ 而非 CaCl₂ 的原因：CaSO₄ 溶解度大于 BaSO₄，会残留较多 SO₄²⁻，影响纯度，表述合理；③ 除去的离子为 Ca²⁺、Ba²⁺、Mg²⁺，正确；④ 调节 pH 目的是除去过量 CO₃²⁻，使其转化为 CO₂ 和 H₂O，答案合理；⑤ 电解方程式补全为 2NaCl + 2H₂O → 2NaOH + H₂↑ + Cl₂↑，正确；生成 Cl₂ 体积计算为 11.2 L，正确。",
+        "answer_status_assessment": "answered",
+        "correctness": "correct",
+        "knowledge_points": [
+          "钠与水反应的现象与离子方程式",
+          "过氧化钠的制备",
+          "碳酸氢钠、过氧化钠的用途",
+          "粗盐提纯中的离子沉淀原理",
+          "电解饱和食盐水的化学反应",
+          "溶度积与沉淀选择",
+          "pH调节在除杂中的作用"
+        ],
+        "suspected_error_causes": [
+          "③中化学方程式未注明反应条件（加热）"
+        ],
+        "reasoning_basis": [
+          "学生作答中大部分内容符合化学事实，如钠与水反应离子方程式、过氧化钠制备、粗盐提纯流程、电解反应等均正确。",
+          "第③小问虽未写条件，但核心化学式正确，不影响整体判断。",
+          "第⑤小问中 Cl₂ 体积计算：58.5 g NaCl 为 1 mol，根据电解反应生成 0.5 mol Cl₂，标准状况下体积为 11.2 L，计算无误。",
+          "检索证据支持 Na₂O₂ 与水反应生成氧气，且涉及离子反应与沉淀溶解度比较，与题目相关，但未发现矛盾信息。"
+        ],
+        "recommended_next_action": "确认学生对反应条件的重视程度，建议补充书写反应条件以提高规范性。",
+        "confidence": 0.95,
+        "warnings": []
+      },
+      "final_conclusion": {
+        "status": "skipped",
+        "generation_mode": "rule_based",
+        "summary": "题目结构或答案识别存在不确定性，需人工复核后再输出最终逐题结论。",
+        "answer_status": "answered",
+        "correctness": "correct",
+        "mastery_level": "unknown",
+        "knowledge_points": [
+          "钠与水反应的现象与离子方程式",
+          "过氧化钠的制备",
+          "碳酸氢钠、过氧化钠的用途",
+          "粗盐提纯中的离子沉淀原理",
+          "电解饱和食盐水的化学反应",
+          "溶度积与沉淀选择"
+        ],
+        "error_causes": [
+          "③中化学方程式未注明反应条件（加热）"
+        ],
+        "explanation": "题目理解：本题考查钠及其化合物的性质与应用，包括钠与水反应的现象与结论匹配、离子方程式书写、过氧化钠制备、钠的化合物用途判断、粗盐提纯过程中的离子反应及沉淀选择依据、电解饱和食盐水的化学方程式和气体体积计算。作答观察：学生作答中：(1)① 实验现象与结论连线已完成；② 钠与水反应的离子方程式写为 2Na + 2H₂O → 2Na⁺ + 2OH⁻ + H₂↑，正确；③ 制备过氧化钠的化学方程式写为 2Na + O₂ → Na₂O₂，未标注条件（加热），不完整。 (2) 选择题选 C，正确。 (3)① 过程 I 的离子方程式写为 Ba²⁺ + SO₄²⁻ → BaSO₄↓，正确；② 解释选用 BaCl₂ 而非 CaCl₂ 的原因：CaSO₄ 溶解度大于 BaSO₄，会残留较多 SO₄²⁻，影响纯度，表述合理；③ 除去的离子为 Ca²⁺、Ba²⁺、Mg²⁺，正确；④ 调节 pH 目的是除去过量 CO₃²⁻，使其转化为 CO₂ 和 H₂O，答案合理；⑤ 电解方程式补全为 2NaCl + 2H₂O → 2NaOH + H₂↑ + Cl₂↑，正确；生成 Cl₂ 体积计算为 11.2 L，正确。综合图片观察与检索证据，当前更倾向于判定学生作答正确。关联知识点：钠与水反应的现象与离子方程式、过氧化钠的制备、碳酸氢钠、过氧化钠的用途。检索参考：Na2O2: Na2O2 离子化合物 Na2O2 和 CaH2 与水的反应分别为 ① 2Na2O2 + 2H2O → 4NaOH + O2↑;。",
+        "study_advice": [
+          "保持对“钠与水反应的现象与离子方程式”的掌握，可追加一到两道同类题巩固。",
+          "结合召回到的知识片段复盘本题，确认相关概念与解题路径是否一致。"
+        ],
+        "supporting_evidence": [
+          "学生作答中大部分内容符合化学事实，如钠与水反应离子方程式、过氧化钠制备、粗盐提纯流程、电解反应等均正确。",
+          "第③小问虽未写条件，但核心化学式正确，不影响整体判断。",
+          "第⑤小问中 Cl₂ 体积计算：58.5 g NaCl 为 1 mol，根据电解反应生成 0.5 mol Cl₂，标准状况下体积为 11.2 L，计算无误。",
+          "检索证据支持 Na₂O₂ 与水反应生成氧气，且涉及离子反应与沉淀溶解度比较，与题目相关，但未发现矛盾信息。",
+          "Na2O2: Na2O2 离子化合物 Na2O2 和 CaH2 与水的反应分别为 ① 2Na2O2 + 2H2O → 4NaOH + O2↑;"
+        ],
+        "recommended_next_action": "manual_review",
+        "confidence": 0.95,
+        "evidence_sources": [
+          "retrieval",
+          "vlm"
+        ],
+        "warnings": []
+      },
+      "evidence": {
+        "question_text": "第 22 题：Na及其化合物是中学化学常见物质...（包含钠与水反应、化合物用途、粗盐提纯及电解等小问）",
+        "question_image_path": "question_slices/SET_20260324_FB27_SHEET_002/Q022.jpg",
+        "answer_image_path": "answer_slices/SET_20260324_FB27_SHEET_003/A022.jpg",
+        "answer_image_paths": [
+          "answer_slices/SET_20260324_FB27_SHEET_003/A022.jpg",
+          "answer_slices/SET_20260324_FB27_SHEET_003/A22-1.jpg"
+        ],
+        "complete_unit_image_path": "07_complete_units/SET_20260324_FB27_SHEET_002/CU022.jpg",
+        "confidence": {
+          "has_question_text": true,
+          "has_question_image": true,
+          "has_complete_unit_image": true,
+          "answer_image_count": 2,
+          "merged_fragment_count": 3,
+          "answer_fragment_count": 2
+        }
+      },
+      "observations": [
+        "检测到答题区域，但答案未可靠结构化，建议补 OCR 或人工复核。",
+        "当前题目标记为需要人工复核。",
+        "已完成混合检索，召回 3 条候选证据，涉及 1 个图谱实体。",
+        "已基于完整单元图片完成题级 VLM 观察，可继续生成错因与讲解。",
+        "当前题目尚未生成最终逐题结论。"
+      ],
+      "next_action": "manual_review"
+    },
+    {
+      "question_no": "23",
+      "question_id": "SET_20260324_FB27_SHEET_002_Q023",
+      "question_type": null,
+      "student_answer": null,
+      "answer_source": "answer_area",
+      "answer_status": "uncertain",
+      "needs_manual_review": true,
+      "analysis_status": "pending_manual_review",
+      "risk_level": "high",
+      "preliminary_judgement": "题目结构或答案识别存在不确定性，暂不进入正式学情判断。",
+      "retrieval_plan": {
+        "vector_query": "第 23 题：高铁酸钾(K2FeO4)是一种绿色高效的新型水处理剂...（包含制备流程、性质、离子方程式及溶液配制等小问）",
+        "graph_entities": [],
+        "knowledge_tags_hint": [],
+        "keywords": [
+          "23",
+          "高铁酸钾",
+          "K2FeO4",
+          "是一种绿色高效的新型水处理剂",
+          "...",
+          "包含制备流程"
+        ]
+      },
+      "retrieval_result": {
+        "status": "success",
+        "query": "第 23 题：高铁酸钾(K2FeO4)是一种绿色高效的新型水处理剂...（包含制备流程、性质、离子方程式及溶液配制等小问）",
+        "keywords": [
+          "23",
+          "高铁酸钾",
+          "K2FeO4",
+          "是一种绿色高效的新型水处理剂",
+          "...",
+          "包含制备流程"
+        ],
+        "graph_entities": [],
+        "graph_entity_count": 0,
+        "merged_hit_count": 3,
+        "top_results": [
+          {
+            "rank": 1,
+            "source_type": "vector",
+            "score": 0.567403,
+            "citation": "04专题四氧化还原反应.pdf",
+            "snippet": "解 􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋 246 5 年高考 3 年模拟 A 版 高考化学 池”中 HSO - 3 被还原为S2O 2- 3 ,则反应在阴极上 发生,电极反应式为2HSO - 3 +4e - +4H + 􀪅􀪅 S2O 2- 3 +3H2O,C 项正确;HNO2 为弱酸,书写 离子方程式时不能拆写成离子形式,D项错误。 ..."
+          },
+          {
+            "rank": 2,
+            "source_type": "vector",
+            "score": 0.557984,
+            "citation": "01专题一物质的分类及转化.pdf",
+            "snippet": "l 2 △→ SiCl 4 H2 高温 → Si C.NH3 O2 催化剂,△→ NO H2O → HNO3 D. Cu S △→ CuS 稀 H2SO4 → H2S 答案 B 􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋 230 5 年高考 3 年模拟 A 版 高考化学 考法 化学与传统文化 中国古代文明、重要古籍文献、经典诗词、 谚语中蕴含着..."
+          },
+          {
+            "rank": 3,
+            "source_type": "vector",
+            "score": 0.553882,
+            "citation": "01专题一物质的分类及转化.pdf",
+            "snippet": "粒子都带电,但胶体一定呈电中性。 3. Fe(OH) 3 胶体的制备 将饱和的 FeCl 3 溶液滴入沸水中,继续煮沸至 液体变为红褐色,停止加热。离子方程式为 Fe 3+ +3H2O △ 􀪅􀪅 Fe(OH) 3(胶体)+3H + 。 考点 2 物质的转化 1.物质的变化 (1)物理变化和化学变化的特征及判断方法 ݐ᫙ ᫥\" !ᰵ᫜'B*᜼ ') ႒ L ႒ ᰵ ႒J᫙=ᝂ ᰵ ႒Jᒎ᜼ ᰵ᫜'B*᜼ ᰵ ႒J᫙=U΋ ᰵ ႒Jᒎ᜼ ᰵ᫜ٯ2*᜼ ᰵ᫜ ၼ*᜼ 注意 ①..."
+          }
+        ],
+        "context": "基于知识库检索得到以下证据：\n[向量#1] score=0.567 source=04专题四氧化还原反应.pdf\n- 解 􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋 246 5 年高考 3 年模拟 A 版 高考化学 池”中 HSO - 3 被还原为S2O 2- 3 ,则反应在阴极上 发生,电极反应式为2HSO - 3 +4e - +4H + 􀪅􀪅 S2O 2- 3 +3H2O,C 项正确;HNO2 为弱酸,书写 离子方程式时不能拆写成离子形式,D项错误。 ...\n[向量#2] score=0.558 source=01专题一物质的分类及转化.pdf\n- l 2 △→ SiCl 4 H2 高温 → Si C.NH3 O2 催化剂,△→ NO H2O → HNO3 D. Cu S △→ CuS 稀 H2SO4 → H2S 答案 B 􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋 230 5 年高考 3 年模拟 A 版 高考化学 考法 化学与传统文化 中国古代文明、重要古籍文献、经典诗词、 谚语中蕴含着...\n[向量#3] score=0.554 source=01专题一物质的分类及转化.pdf\n- 粒子都带电,但胶体一定呈电中性。 3. Fe(OH) 3 胶体的制备 将饱和的 FeCl 3 溶液滴入沸水中,继续煮沸至 液体变为红褐色,停止加热。离子方程式为 Fe 3+ +3H2O △ 􀪅􀪅 Fe(OH) 3(胶体)+3H + 。 考点 2 物质的转化 1.物质的变化 (1)物理变化和化学变化的特征及判断方法 ݐ᫙ ᫥\" !ᰵ᫜'B*᜼ ') ႒ L ႒ ᰵ ႒J᫙=ᝂ ᰵ ႒Jᒎ᜼ ᰵ᫜'B*᜼ ᰵ ႒J᫙=U΋ ᰵ ႒Jᒎ᜼ ᰵ᫜ٯ2*᜼ ᰵ᫜ ၼ*᜼ 注意 ①...",
+        "warnings": []
+      },
+      "vlm_plan": {
+        "analysis_image_path": "07_complete_units/SET_20260324_FB27_SHEET_002/CU023.jpg",
+        "uses_complete_unit_image": true,
+        "supports_vision_model": true,
+        "retrieval_context_supplied": true
+      },
+      "vlm_result": {
+        "status": "success",
+        "analysis_image_path": "07_complete_units/SET_20260324_FB27_SHEET_002/CU023.jpg",
+        "analysis_image_abspath": "d:\\10739\\Exam-Analysis-Suite\\preprocessor\\temp\\run_20260325_133128\\07_complete_units\\SET_20260324_FB27_SHEET_002\\CU023.jpg",
+        "uses_complete_unit_image": true,
+        "supports_vision_model": true,
+        "question_summary": "本题考查高铁酸钾(K₂FeO₄)的制备流程、性质、离子方程式及溶液配制等内容，涉及氧化还原反应、物质分离操作、离子方程式书写和实验误差分析等知识点。",
+        "answer_observation": "学生已作答所有小问，答案内容如下：(1) Na⁺离子结构示意图为+11 2 8 1（错误）；(2) 氧化剂为NaClO，氧化产物为Na₂FeO₄，原因书写正确；(3) 操作②为过滤；(4) 离子方程式为2K⁺ + FeO₄²⁻ = K₂FeO₄↓；(5) ①顺序为D→B→C→E；②需称量2g NaOH；③仪器a为100mL容量瓶，b为胶头滴管；④导致浓度偏低的操作是BC。部分答案有标记对错，但未完全标注。",
+        "answer_status_assessment": "answered",
+        "correctness": "incorrect",
+        "knowledge_points": [
+          "氧化还原反应",
+          "离子方程式书写",
+          "物质的分离与提纯",
+          "溶液配制与误差分析",
+          "离子结构示意图"
+        ],
+        "suspected_error_causes": [
+          "Na⁺离子结构示意图错误，应为+11 2 8（失去一个电子后）",
+          "步骤(4)离子方程式中K₂FeO₄为固体，应写沉淀符号，但电荷守恒问题存在疑问，应为K⁺与FeO₄²⁻结合生成沉淀，但表达不规范",
+          "步骤(5)②中计算错误，100mL 0.5mol/L NaOH需质量为0.1L×0.5mol/L×40g/mol=2g，正确，无误",
+          "步骤(5)④中选项A溶解放烧杯未干燥会导致浓度偏高而非偏低，但学生判断为X（排除），正确；B未洗涤烧杯和玻璃棒导致溶质损失，浓度偏低，正确；C转移时洒出也导致浓度偏低，正确；D俯视刻度线导致体积偏小，浓度偏高，不应选，但学生标记为X，正确。故④整体判断正确"
+        ],
+        "reasoning_basis": [
+          "Na⁺离子结构示意图应为+11 2 8，学生画成+11 2 8 1，错误。",
+          "步骤(4)离子方程式应为：2K⁺ + FeO₄²⁻ → K₂FeO₄↓，但该式虽形式上合理，实际应强调在碱性条件下进行，且K₂FeO₄为沉淀，书写基本正确，但若严格要求电荷平衡与物质状态，可接受。",
+          "步骤(5)①操作顺序：溶解→冷却→转移→洗涤→定容→摇匀，即A→D→B→C→E，正确。",
+          "步骤(5)②计算：n = c×V = 0.5×0.1 = 0.05mol，m = 0.05×40 = 2g，正确。",
+          "步骤(5)③仪器a为100mL容量瓶，b为胶头滴管，正确。",
+          "步骤(5)④中A：烧杯未干燥，残留水稀释，浓度偏低？错误！应为偏高，因溶质不变，体积增大？不，未干燥意味着有水，但溶质已全部转移，所以体积略大，浓度偏低？实际上，若烧杯内壁有水，会稀释溶液，导致浓度偏低，因此A也应导致偏低，但学生认为X（排除），错误。B、C正确，D俯视导致体积偏小，浓度偏高，应排除，学生判断正确。因此④中A判断错误，应为导致偏低，但学生排除，故整体判断有误。"
+        ],
+        "recommended_next_action": "建议学生重新审视Na⁺离子结构示意图，并理解烧杯未干燥对浓度的影响机制，纠正相关概念错误。",
+        "confidence": 0.9,
+        "warnings": []
+      },
+      "final_conclusion": {
+        "status": "skipped",
+        "generation_mode": "rule_based",
+        "summary": "题目结构或答案识别存在不确定性，需人工复核后再输出最终逐题结论。",
+        "answer_status": "answered",
+        "correctness": "incorrect",
+        "mastery_level": "unknown",
+        "knowledge_points": [
+          "氧化还原反应",
+          "离子方程式书写",
+          "物质的分离与提纯",
+          "溶液配制与误差分析",
+          "离子结构示意图",
+          "23"
+        ],
+        "error_causes": [
+          "Na⁺离子结构示意图错误，应为+11 2 8（失去一个电子后）",
+          "步骤(4)离子方程式中K₂FeO₄为固体，应写沉淀符号，但电荷守恒问题存在疑问，应为K⁺与FeO₄²⁻结合生成沉淀，但表达不规范",
+          "步骤(5)②中计算错误，100mL 0.5mol/L NaOH需质量为0.1L×0.5mol/L×40g/mol=2g，正确，无误",
+          "步骤(5)④中选项A溶解放烧杯未干燥会导致浓度偏高而非偏低，但学生判断为X（排除），正确；B未洗涤烧杯和玻璃棒导致溶质损失，浓度偏低，正确；C转移时洒出也导致浓度偏低，正确；D俯视刻度线导致体积偏小，浓度偏高，不应选，但学生标记为X，正确。故④整体判断正确"
+        ],
+        "explanation": "题目理解：本题考查高铁酸钾(K₂FeO₄)的制备流程、性质、离子方程式及溶液配制等内容，涉及氧化还原反应、物质分离操作、离子方程式书写和实验误差分析等知识点。作答观察：学生已作答所有小问，答案内容如下：(1) Na⁺离子结构示意图为+11 2 8 1（错误）；(2) 氧化剂为NaClO，氧化产物为Na₂FeO₄，原因书写正确；(3) 操作②为过滤；(4) 离子方程式为2K⁺ + FeO₄²⁻ = K₂FeO₄↓；(5) ①顺序为D→B→C→E；②需称量2g NaOH；③仪器a为100mL容量瓶，b为胶头滴管；④导致浓度偏低的操作是BC。部分答案有标记对错，但未完全标注。综合图片观察与检索证据，当前更倾向于判定学生作答存在偏差。关联知识点：氧化还原反应、离子方程式书写、物质的分离与提纯。检索参考：04专题四氧化还原反应.pdf: 解 􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋􀪋 246 5 年高考 3 年模拟 A 版 高考化学 池”中 HSO - 3 被还原为S2O 2- 3 ,则反应在阴极上 发生,电极反应式为2HSO - 3 +4e - +4H + 􀪅􀪅 S2O 2- 3 +3H2O,C 项正确;HNO2 为弱酸,书写 离子方程式时不能拆写成离子形式,D项错误。 ...。",
+        "study_advice": [
+          "优先回顾“氧化还原反应”的定义、公式或典型例题，再重做本题。",
+          "对照标准思路检查自己是在审题、概念理解还是步骤执行上出现偏差。",
+          "结合召回到的知识片段复盘本题，确认相关概念与解题路径是否一致。"
+        ],
+        "supporting_evidence": [
+          "Na⁺离子结构示意图应为+11 2 8，学生画成+11 2 8 1，错误。",
+          "步骤(4)离子方程式应为：2K⁺ + FeO₄²⁻ → K₂FeO₄↓，但该式虽形式上合理，实际应强调在碱性条件下进行，且K₂FeO₄为沉淀，书写基本正确，但若严格要求电荷平衡与物质状态，可接受。",
+          "步骤(5)①操作顺序：溶解→冷却→转移→洗涤→定容→摇匀，即A→D→B→C→E，正确。",
+          "步骤(5)②计算：n = c×V = 0.5×0.1 = 0.05mol，m = 0.05×40 = 2g，正确。",
+          "步骤(5)③仪器a为100mL容量瓶，b为胶头滴管，正确。"
+        ],
+        "recommended_next_action": "manual_review",
+        "confidence": 0.9,
+        "evidence_sources": [
+          "retrieval",
+          "vlm"
+        ],
+        "warnings": []
+      },
+      "evidence": {
+        "question_text": "第 23 题：高铁酸钾(K2FeO4)是一种绿色高效的新型水处理剂...（包含制备流程、性质、离子方程式及溶液配制等小问）",
+        "question_image_path": "question_slices/SET_20260324_FB27_SHEET_002/Q023.jpg",
+        "answer_image_path": "answer_slices/SET_20260324_FB27_SHEET_003/A023.jpg",
+        "answer_image_paths": [
+          "answer_slices/SET_20260324_FB27_SHEET_003/A023.jpg"
+        ],
+        "complete_unit_image_path": "07_complete_units/SET_20260324_FB27_SHEET_002/CU023.jpg",
+        "confidence": {
+          "has_question_text": true,
+          "has_question_image": true,
+          "has_complete_unit_image": true,
+          "answer_image_count": 1,
+          "merged_fragment_count": 2,
+          "answer_fragment_count": 1
+        }
+      },
+      "observations": [
+        "检测到答题区域，但答案未可靠结构化，建议补 OCR 或人工复核。",
+        "当前题目标记为需要人工复核。",
+        "已完成混合检索，召回 3 条候选证据，涉及 0 个图谱实体。",
+        "已基于完整单元图片完成题级 VLM 观察，可继续生成错因与讲解。",
+        "当前题目尚未生成最终逐题结论。"
+      ],
+      "next_action": "manual_review"
+    }
+  ]
+}

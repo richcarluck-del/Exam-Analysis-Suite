@@ -1,0 +1,35 @@
+{
+  "compression_map": [
+    {
+      "original": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\my_test_images\\c.jpg",
+      "compressed": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\compressed_images\\c.jpg",
+      "high_res": true
+    },
+    {
+      "original": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\my_test_images\\f.jpg",
+      "compressed": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\compressed_images\\f.jpg",
+      "high_res": true
+    },
+    {
+      "original": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\my_test_images\\h.jpg",
+      "compressed": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\compressed_images\\h.jpg",
+      "high_res": true
+    },
+    {
+      "original": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\my_test_images\\j.jpg",
+      "compressed": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\compressed_images\\j.jpg",
+      "high_res": true
+    },
+    {
+      "original": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\my_test_images\\z.jpg",
+      "compressed": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\compressed_images\\z.jpg",
+      "high_res": true
+    }
+  ],
+  "statistics": {
+    "total_images": 5,
+    "total_original_size": 11546690,
+    "total_compressed_size": 6160755,
+    "overall_reduction": 46.64483934356946
+  }
+}

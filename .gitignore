@@ -1,0 +1,59 @@
+# Environment & secrets
+.env
+.venv*/
+venv*/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# AI/IDE tooling local config
+.claude/
+.agents/
+.codex/
+.cursor/
+.playwright-mcp/
+.mcp.json
+
+# IDE config (keep .vscode/settings.json tracked manually if needed)
+.idea/
+
+# OS junk
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Temp / debug artifacts
+*_out.txt
+page-*.yml
+
+# Large binaries in docs
+docs/*.png
+docs/*.xmind
+
+# User data / extracted artifacts
+obsidian/
+figures/
+pic/
+_temp_out/
+scripts/_out/
+
+# Runtime / generated project artifacts
+analyzer/_runs/
+analyzer/chroma_db/
+analyzer/knowledge_points/
+analyzer/normalized_documents/
+analyzer/tempdoc/
+analyzer/uploads/
+analyzer/client-app/node_modules/
+preprocessor/.venv/
+preprocessor/temp/
+preprocessor/my_test_images/
+preprocessor/pictures/
+preprocessor/preprocessor_test_ui/frontend/node_modules/
+
+# Misc
+*.pdf
+*.png
+*.jpg

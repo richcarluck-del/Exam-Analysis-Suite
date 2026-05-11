@@ -1,0 +1,98 @@
+{
+  "run_info": {
+    "start_time": "2026-03-30T19:25:50.763435",
+    "end_time": "2026-03-30T19:41:25.319173",
+    "duration_seconds": 934.555738,
+    "workspace": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449"
+  },
+  "llm_calls_summary": [
+    {
+      "step": "perspective_correction",
+      "timestamp": "2026-03-30T19:26:23.960371",
+      "duration": 30.405787467956543,
+      "model": "qwen3.5-plus",
+      "temperature": 0.1,
+      "image_hash": "97d675c0b89af6a8b0777118221875f45b65652c142e71bc7b04c6ba35c4eab8"
+    },
+    {
+      "step": "perspective_correction",
+      "timestamp": "2026-03-30T19:27:00.257023",
+      "duration": 36.08633303642273,
+      "model": "qwen3.5-plus",
+      "temperature": 0.1,
+      "image_hash": "a8c212fcf467c5900c274735cb4e40a439e5176e4fddafb4e58dfc7c48b9888f"
+    },
+    {
+      "step": "perspective_correction",
+      "timestamp": "2026-03-30T19:27:25.956317",
+      "duration": 25.55158019065857,
+      "model": "qwen3.5-plus",
+      "temperature": 0.1,
+      "image_hash": "7048c98100b92dd706a127a96600fb05f7459f5f08f7e2889fc51daa57c9968b"
+    },
+    {
+      "step": "perspective_correction",
+      "timestamp": "2026-03-30T19:28:08.757891",
+      "duration": 42.65935516357422,
+      "model": "qwen3.5-plus",
+      "temperature": 0.1,
+      "image_hash": "348c66179108fc26880db6113a828d77ec462506d14ae92c75532030dda4de47"
+    },
+    {
+      "step": "perspective_correction",
+      "timestamp": "2026-03-30T19:28:42.626447",
+      "duration": 33.738625049591064,
+      "model": "qwen3.5-plus",
+      "temperature": 0.1,
+      "image_hash": "a1ac7c8bd0cc46a95e8ea72b398e46fe3c1a3f65da7d8a3d9ae7674c0d14d246"
+    },
+    {
+      "step": "long_image_classification",
+      "timestamp": "2026-03-30T19:36:44.701517",
+      "duration": 481.6964566707611,
+      "model": "qwen3.5-plus",
+      "temperature": 0.1,
+      "image_hash": "e8d585fe1eadd37a3d97c156d3b6c2e6005af44cacebb6aa6a29c5e498cc4b5f"
+    },
+    {
+      "step": "content_extraction_question_paper",
+      "timestamp": "2026-03-30T19:38:07.958872",
+      "duration": 83.21452832221985,
+      "model": "qwen3.5-plus",
+      "temperature": 0.1,
+      "image_hash": "6395c8bcba69f521c869f0ef9d414b8660f121eb0dd858b9f366483b6cab7dd1"
+    },
+    {
+      "step": "content_extraction_question_paper",
+      "timestamp": "2026-03-30T19:39:04.078479",
+      "duration": 55.80906558036804,
+      "model": "qwen3.5-plus",
+      "temperature": 0.1,
+      "image_hash": "8a8f711fb444fbba2606f6dadcc8e4773217353465f5532000e87b8554105bb7"
+    },
+    {
+      "step": "content_extraction_answer_sheet",
+      "timestamp": "2026-03-30T19:39:39.071517",
+      "duration": 34.76739168167114,
+      "model": "qwen3.5-plus",
+      "temperature": 0.1,
+      "image_hash": "62775e442a04bef9cbc9af5d566bf24a5238590401da4914ac48a9b9f73a2107"
+    },
+    {
+      "step": "content_extraction_answer_sheet",
+      "timestamp": "2026-03-30T19:40:38.929743",
+      "duration": 59.83269810676575,
+      "model": "qwen3.5-plus",
+      "temperature": 0.1,
+      "image_hash": "4bf84eeb38bcf933e32cfe4283787188d4707e8de96ffb27a9c6c3a95491f242"
+    },
+    {
+      "step": "content_extraction_answer_sheet",
+      "timestamp": "2026-03-30T19:41:11.765321",
+      "duration": 32.81781339645386,
+      "model": "qwen3.5-plus",
+      "temperature": 0.1,
+      "image_hash": "98c9eac16621de159dc0cc30429aa147d82ee30620c1cd1ccce108c3d6dc5748"
+    }
+  ]
+}

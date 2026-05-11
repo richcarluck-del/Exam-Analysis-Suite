@@ -1,0 +1,4 @@
+# 可选：PDF 整页 OCR 回退（题库解析 QUESTION_BANK_PDF_OCR_MODE=auto|force）
+# pip install -r analyzer/requirements-ocr.txt
+# 首次运行会从网络拉取模型，体积较大（含 PyTorch 等依赖）。
+pix2text>=1.1.4

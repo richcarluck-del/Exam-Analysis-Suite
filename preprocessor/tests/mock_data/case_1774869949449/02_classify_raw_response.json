@@ -1,0 +1,35 @@
+{
+  "raw_api_response": "```json\n[\n  {\n    \"type\": \"答题纸\",\n    \"order\": 5,\n    \"physical_index\": 0,\n    \"reason\": \"全篇手写作答，含题号18解答\"\n  },\n  {\n    \"type\": \"答题纸\",\n    \"order\": 3,\n    \"physical_index\": 1,\n    \"reason\": \"有填涂区、基本信息区及题号18-19作答区\"\n  },\n  {\n    \"type\": \"答题纸\",\n    \"order\": 4,\n    \"physical_index\": 2,\n    \"reason\": \"有填涂区、基本信息区及题号20作答区\"\n  },\n  {\n    \"type\": \"题目纸\",\n    \"order\": 2,\n    \"physical_index\": 3,\n    \"reason\": \"左侧为解答题16-20题干，右侧有手写\"\n  },\n  {\n    \"type\": \"题目纸\",\n    \"order\": 1,\n    \"physical_index\": 4,\n    \"reason\": \"含选择题和填空题题干，无答题区\"\n  }\n]\n```",
+  "parsed_results": [
+    {
+      "type": "答题纸",
+      "order": 5,
+      "physical_index": 0,
+      "reason": "全篇手写作答，含题号18解答"
+    },
+    {
+      "type": "答题纸",
+      "order": 3,
+      "physical_index": 1,
+      "reason": "有填涂区、基本信息区及题号18-19作答区"
+    },
+    {
+      "type": "答题纸",
+      "order": 4,
+      "physical_index": 2,
+      "reason": "有填涂区、基本信息区及题号20作答区"
+    },
+    {
+      "type": "题目纸",
+      "order": 2,
+      "physical_index": 3,
+      "reason": "左侧为解答题16-20题干，右侧有手写"
+    },
+    {
+      "type": "题目纸",
+      "order": 1,
+      "physical_index": 4,
+      "reason": "含选择题和填空题题干，无答题区"
+    }
+  ]
+}

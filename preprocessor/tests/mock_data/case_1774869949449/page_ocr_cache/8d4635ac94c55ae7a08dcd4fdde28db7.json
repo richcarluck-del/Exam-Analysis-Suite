@@ -1,0 +1,1218 @@
+{
+  "image_path": "D:\\10739\\Exam-Analysis-Suite\\preprocessor\\tests\\mock_data\\case_1774869949449\\corrected_images\\h_corrected.jpg",
+  "backend": "opencv_fallback",
+  "text_blocks": [
+    {
+      "bbox": [
+        1449,
+        0,
+        1482,
+        10
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        1709,
+        0,
+        1847,
+        10
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        533,
+        3,
+        651,
+        14
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        1321,
+        3,
+        1386,
+        11
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        394,
+        4,
+        500,
+        12
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        40,
+        11,
+        60,
+        47
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        42,
+        48,
+        60,
+        66
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        1834,
+        51,
+        1852,
+        69
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        41,
+        68,
+        60,
+        91
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        1835,
+        74,
+        1852,
+        83
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        656,
+        78,
+        726,
+        136
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        1721,
+        82,
+        1749,
+        90
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        1835,
+        87,
+        1853,
+        104
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        366,
+        92,
+        624,
+        108
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        906,
+        101,
+        922,
+        110
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        43,
+        102,
+        59,
+        110
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        155,
+        108,
+        189,
+        129
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        402,
+        108,
+        587,
+        123
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        1676,
+        108,
+        1709,
+        129
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        41,
+        121,
+        58,
+        129
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        1836,
+        129,
+        1854,
+        152
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        989,
+        138,
+        1053,
+        162
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        187,
+        143,
+        260,
+        203
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        296,
+        145,
+        791,
+        174
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        42,
+        159,
+        57,
+        168
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        1837,
+        163,
+        1854,
+        176
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        493,
+        174,
+        595,
+        199
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        1837,
+        194,
+        1859,
+        205
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        241,
+        199,
+        388,
+        240
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        444,
+        205,
+        600,
+        241
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        32,
+        206,
+        56,
+        215
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        187,
+        215,
+        237,
+        232
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        391,
+        217,
+        441,
+        234
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        603,
+        219,
+        707,
+        237
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        711,
+        225,
+        861,
+        239
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        1836,
+        233,
+        1852,
+        244
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        520,
+        242,
+        846,
+        492
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        179,
+        243,
+        452,
+        489
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        1836,
+        245,
+        1858,
+        254
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        27,
+        249,
+        54,
+        259
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        150,
+        257,
+        173,
+        280
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        1836,
+        262,
+        1853,
+        280
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        22,
+        270,
+        54,
+        296
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        1835,
+        305,
+        1852,
+        321
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        33,
+        319,
+        52,
+        361
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        1835,
+        330,
+        1854,
+        361
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        33,
+        363,
+        50,
+        377
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        1835,
+        363,
+        1854,
+        371
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        1836,
+        372,
+        1852,
+        380
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        33,
+        381,
+        49,
+        390
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        29,
+        393,
+        49,
+        411
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        1836,
+        394,
+        1859,
+        402
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        1836,
+        413,
+        1854,
+        422
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        30,
+        417,
+        48,
+        437
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        29,
+        445,
+        48,
+        466
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        145,
+        450,
+        168,
+        473
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        1838,
+        467,
+        1854,
+        476
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        25,
+        469,
+        46,
+        483
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        18,
+        498,
+        47,
+        547
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        186,
+        506,
+        262,
+        522
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        1838,
+        512,
+        1856,
+        524
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        177,
+        526,
+        889,
+        597
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        1838,
+        536,
+        1855,
+        552
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        21,
+        564,
+        44,
+        572
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        1837,
+        565,
+        1856,
+        580
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        12,
+        588,
+        44,
+        673
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        185,
+        606,
+        260,
+        622
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        1838,
+        615,
+        1855,
+        630
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        161,
+        626,
+        888,
+        1180
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        141,
+        645,
+        164,
+        668
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        3,
+        647,
+        20,
+        656
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        20,
+        674,
+        41,
+        801
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        1837,
+        736,
+        1853,
+        744
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        1837,
+        750,
+        1856,
+        758
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        19,
+        802,
+        37,
+        838
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        19,
+        839,
+        36,
+        864
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        135,
+        841,
+        159,
+        864
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        1836,
+        861,
+        1853,
+        873
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        20,
+        871,
+        35,
+        879
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        1837,
+        885,
+        1853,
+        894
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        9,
+        927,
+        34,
+        941
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        1836,
+        943,
+        1855,
+        956
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        17,
+        972,
+        33,
+        980
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        17,
+        987,
+        32,
+        998
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        0,
+        1016,
+        31,
+        1030
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        0,
+        1035,
+        31,
+        1043
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        130,
+        1039,
+        153,
+        1062
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        13,
+        1049,
+        31,
+        1058
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        1689,
+        1057,
+        1705,
+        1065
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        1836,
+        1065,
+        1853,
+        1081
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        15,
+        1067,
+        30,
+        1081
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        1835,
+        1082,
+        1854,
+        1128
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        14,
+        1089,
+        30,
+        1097
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        13,
+        1117,
+        29,
+        1137
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        1834,
+        1133,
+        1853,
+        1143
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        10,
+        1142,
+        28,
+        1181
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        1835,
+        1144,
+        1851,
+        1158
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        1713,
+        1159,
+        1738,
+        1170
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        1835,
+        1173,
+        1854,
+        1181
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        126,
+        1174,
+        161,
+        1197
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        375,
+        1177,
+        468,
+        1200
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        1677,
+        1182,
+        1711,
+        1205
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        1171,
+        1183,
+        1265,
+        1207
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        7,
+        1186,
+        27,
+        1275
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        1834,
+        1187,
+        1852,
+        1197
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        1835,
+        1202,
+        1856,
+        1211
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        1835,
+        1212,
+        1852,
+        1230
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        1835,
+        1234,
+        1853,
+        1251
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        1836,
+        1257,
+        1854,
+        1276
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    },
+    {
+      "bbox": [
+        14,
+        1277,
+        768,
+        1287
+      ],
+      "text": "",
+      "score": 0.0,
+      "source": "opencv_fallback"
+    }
+  ],
+  "question_anchors": [],
+  "cached": false
+}

@@ -1,0 +1,1332 @@
+[
+  {
+    "question_no": "1",
+    "question_id": "SET_20260330_6CA8_SHEET_005_Q001",
+    "sheet_id": "SET_20260330_6CA8_SHEET_005",
+    "question_type": null,
+    "question_text": "第 1 题：已知集合 A={0,2}, B={-1,0,1}, 则集合 A∪B=",
+    "student_answer": "C",
+    "answer_source": "answer_card",
+    "answer_status": "answered",
+    "question_image_path": "question_slices/SET_20260330_6CA8_SHEET_005/Q001.jpg",
+    "answer_image_path": "answer_card_areas/answer_card_1-21.jpg",
+    "answer_image_paths": [
+      "answer_card_areas/answer_card_1-21.jpg"
+    ],
+    "complete_unit_image_path": "07_complete_units/SET_20260330_6CA8_SHEET_005/CU001.jpg",
+    "source_complete_unit_key": "1",
+    "source_merged_number": "1",
+    "needs_manual_review": false,
+    "confidence": {
+      "has_question_text": true,
+      "has_question_image": true,
+      "has_complete_unit_image": true,
+      "answer_image_count": 1,
+      "merged_fragment_count": 1,
+      "answer_fragment_count": 0
+    },
+    "tags": [],
+    "source": {
+      "question_points": {
+        "top_left": [
+          71,
+          339
+        ],
+        "top_right": [
+          513,
+          339
+        ],
+        "bottom_right": [
+          513,
+          417
+        ],
+        "bottom_left": [
+          71,
+          417
+        ]
+      },
+      "question_crop_area": [
+        0,
+        0,
+        1821,
+        1260
+      ],
+      "answer_points": [],
+      "source_corrected_image": "corrected_images/z_corrected.jpg",
+      "source_part_image": "corrected_images/z_corrected.jpg"
+    }
+  },
+  {
+    "question_no": "2",
+    "question_id": "SET_20260330_6CA8_SHEET_005_Q002",
+    "sheet_id": "SET_20260330_6CA8_SHEET_005",
+    "question_type": null,
+    "question_text": "第 2 题：命题“∀x∈R, x²-2x+4≤0”的否定为",
+    "student_answer": "B",
+    "answer_source": "answer_card",
+    "answer_status": "answered",
+    "question_image_path": "question_slices/SET_20260330_6CA8_SHEET_005/Q002.jpg",
+    "answer_image_path": "answer_card_areas/answer_card_1-21.jpg",
+    "answer_image_paths": [
+      "answer_card_areas/answer_card_1-21.jpg"
+    ],
+    "complete_unit_image_path": "07_complete_units/SET_20260330_6CA8_SHEET_005/CU002.jpg",
+    "source_complete_unit_key": "2",
+    "source_merged_number": "2",
+    "needs_manual_review": false,
+    "confidence": {
+      "has_question_text": true,
+      "has_question_image": true,
+      "has_complete_unit_image": true,
+      "answer_image_count": 1,
+      "merged_fragment_count": 1,
+      "answer_fragment_count": 0
+    },
+    "tags": [],
+    "source": {
+      "question_points": {
+        "top_left": [
+          71,
+          409
+        ],
+        "top_right": [
+          513,
+          409
+        ],
+        "bottom_right": [
+          513,
+          483
+        ],
+        "bottom_left": [
+          71,
+          483
+        ]
+      },
+      "question_crop_area": [
+        0,
+        0,
+        1821,
+        1260
+      ],
+      "answer_points": [],
+      "source_corrected_image": "corrected_images/z_corrected.jpg",
+      "source_part_image": "corrected_images/z_corrected.jpg"
+    }
+  },
+  {
+    "question_no": "3",
+    "question_id": "SET_20260330_6CA8_SHEET_005_Q003",
+    "sheet_id": "SET_20260330_6CA8_SHEET_005",
+    "question_type": null,
+    "question_text": "第 3 题：若函数 f(x)={x²+1, x≤1; 2/x, x>1}, 则 f(f(3))=",
+    "student_answer": "D",
+    "answer_source": "answer_card",
+    "answer_status": "answered",
+    "question_image_path": "question_slices/SET_20260330_6CA8_SHEET_005/Q003.jpg",
+    "answer_image_path": "answer_card_areas/answer_card_1-21.jpg",
+    "answer_image_paths": [
+      "answer_card_areas/answer_card_1-21.jpg"
+    ],
+    "complete_unit_image_path": "07_complete_units/SET_20260330_6CA8_SHEET_005/CU003.jpg",
+    "source_complete_unit_key": "3",
+    "source_merged_number": "3",
+    "needs_manual_review": false,
+    "confidence": {
+      "has_question_text": true,
+      "has_question_image": true,
+      "has_complete_unit_image": true,
+      "answer_image_count": 1,
+      "merged_fragment_count": 1,
+      "answer_fragment_count": 0
+    },
+    "tags": [],
+    "source": {
+      "question_points": {
+        "top_left": [
+          71,
+          475
+        ],
+        "top_right": [
+          513,
+          475
+        ],
+        "bottom_right": [
+          513,
+          579
+        ],
+        "bottom_left": [
+          71,
+          579
+        ]
+      },
+      "question_crop_area": [
+        0,
+        0,
+        1821,
+        1260
+      ],
+      "answer_points": [],
+      "source_corrected_image": "corrected_images/z_corrected.jpg",
+      "source_part_image": "corrected_images/z_corrected.jpg"
+    }
+  },
+  {
+    "question_no": "4",
+    "question_id": "SET_20260330_6CA8_SHEET_005_Q004",
+    "sheet_id": "SET_20260330_6CA8_SHEET_005",
+    "question_type": null,
+    "question_text": "第 4 题：若 a,b,c∈R, a>b, 则",
+    "student_answer": "D",
+    "answer_source": "answer_card",
+    "answer_status": "answered",
+    "question_image_path": "question_slices/SET_20260330_6CA8_SHEET_005/Q004.jpg",
+    "answer_image_path": "answer_card_areas/answer_card_1-21.jpg",
+    "answer_image_paths": [
+      "answer_card_areas/answer_card_1-21.jpg"
+    ],
+    "complete_unit_image_path": "07_complete_units/SET_20260330_6CA8_SHEET_005/CU004.jpg",
+    "source_complete_unit_key": "4",
+    "source_merged_number": "4",
+    "needs_manual_review": false,
+    "confidence": {
+      "has_question_text": true,
+      "has_question_image": true,
+      "has_complete_unit_image": true,
+      "answer_image_count": 1,
+      "merged_fragment_count": 1,
+      "answer_fragment_count": 0
+    },
+    "tags": [],
+    "source": {
+      "question_points": {
+        "top_left": [
+          71,
+          571
+        ],
+        "top_right": [
+          513,
+          571
+        ],
+        "bottom_right": [
+          513,
+          638
+        ],
+        "bottom_left": [
+          71,
+          638
+        ]
+      },
+      "question_crop_area": [
+        0,
+        0,
+        1821,
+        1260
+      ],
+      "answer_points": [],
+      "source_corrected_image": "corrected_images/z_corrected.jpg",
+      "source_part_image": "corrected_images/z_corrected.jpg"
+    }
+  },
+  {
+    "question_no": "5",
+    "question_id": "SET_20260330_6CA8_SHEET_005_Q005",
+    "sheet_id": "SET_20260330_6CA8_SHEET_005",
+    "question_type": null,
+    "question_text": "第 5 题：已知函数 f(x) 为奇函数, 且当 x>0 时, f(x)=x²-2/x, 则 f(-1)=",
+    "student_answer": "A",
+    "answer_source": "answer_card",
+    "answer_status": "answered",
+    "question_image_path": "question_slices/SET_20260330_6CA8_SHEET_005/Q005.jpg",
+    "answer_image_path": "answer_card_areas/answer_card_1-21.jpg",
+    "answer_image_paths": [
+      "answer_card_areas/answer_card_1-21.jpg"
+    ],
+    "complete_unit_image_path": "07_complete_units/SET_20260330_6CA8_SHEET_005/CU005.jpg",
+    "source_complete_unit_key": "5",
+    "source_merged_number": "5",
+    "needs_manual_review": false,
+    "confidence": {
+      "has_question_text": true,
+      "has_question_image": true,
+      "has_complete_unit_image": true,
+      "answer_image_count": 1,
+      "merged_fragment_count": 1,
+      "answer_fragment_count": 0
+    },
+    "tags": [],
+    "source": {
+      "question_points": {
+        "top_left": [
+          71,
+          630
+        ],
+        "top_right": [
+          513,
+          630
+        ],
+        "bottom_right": [
+          513,
+          698
+        ],
+        "bottom_left": [
+          71,
+          698
+        ]
+      },
+      "question_crop_area": [
+        0,
+        0,
+        1821,
+        1260
+      ],
+      "answer_points": [],
+      "source_corrected_image": "corrected_images/z_corrected.jpg",
+      "source_part_image": "corrected_images/z_corrected.jpg"
+    }
+  },
+  {
+    "question_no": "6",
+    "question_id": "SET_20260330_6CA8_SHEET_005_Q006",
+    "sheet_id": "SET_20260330_6CA8_SHEET_005",
+    "question_type": null,
+    "question_text": "第 6 题：下列四个函数中, 在 (0,+∞) 上单调递减的是",
+    "student_answer": "D",
+    "answer_source": "answer_card",
+    "answer_status": "answered",
+    "question_image_path": "question_slices/SET_20260330_6CA8_SHEET_005/Q006.jpg",
+    "answer_image_path": "answer_card_areas/answer_card_1-21.jpg",
+    "answer_image_paths": [
+      "answer_card_areas/answer_card_1-21.jpg"
+    ],
+    "complete_unit_image_path": "07_complete_units/SET_20260330_6CA8_SHEET_005/CU006.jpg",
+    "source_complete_unit_key": "6",
+    "source_merged_number": "6",
+    "needs_manual_review": false,
+    "confidence": {
+      "has_question_text": true,
+      "has_question_image": true,
+      "has_complete_unit_image": true,
+      "answer_image_count": 1,
+      "merged_fragment_count": 1,
+      "answer_fragment_count": 0
+    },
+    "tags": [],
+    "source": {
+      "question_points": {
+        "top_left": [
+          71,
+          690
+        ],
+        "top_right": [
+          513,
+          690
+        ],
+        "bottom_right": [
+          513,
+          759
+        ],
+        "bottom_left": [
+          71,
+          759
+        ]
+      },
+      "question_crop_area": [
+        0,
+        0,
+        1821,
+        1260
+      ],
+      "answer_points": [],
+      "source_corrected_image": "corrected_images/z_corrected.jpg",
+      "source_part_image": "corrected_images/z_corrected.jpg"
+    }
+  },
+  {
+    "question_no": "7",
+    "question_id": "SET_20260330_6CA8_SHEET_005_Q007",
+    "sheet_id": "SET_20260330_6CA8_SHEET_005",
+    "question_type": null,
+    "question_text": "第 7 题：已知函数 f(x) 是定义在 R 上的偶函数, 当 x≥0 时, f(x)=x-x², 则下列说法错误的是",
+    "student_answer": "C",
+    "answer_source": "answer_card",
+    "answer_status": "answered",
+    "question_image_path": "question_slices/SET_20260330_6CA8_SHEET_005/Q007.jpg",
+    "answer_image_path": "answer_card_areas/answer_card_1-21.jpg",
+    "answer_image_paths": [
+      "answer_card_areas/answer_card_1-21.jpg"
+    ],
+    "complete_unit_image_path": "07_complete_units/SET_20260330_6CA8_SHEET_005/CU007.jpg",
+    "source_complete_unit_key": "7",
+    "source_merged_number": "7",
+    "needs_manual_review": false,
+    "confidence": {
+      "has_question_text": true,
+      "has_question_image": true,
+      "has_complete_unit_image": true,
+      "answer_image_count": 1,
+      "merged_fragment_count": 1,
+      "answer_fragment_count": 0
+    },
+    "tags": [],
+    "source": {
+      "question_points": {
+        "top_left": [
+          71,
+          751
+        ],
+        "top_right": [
+          513,
+          751
+        ],
+        "bottom_right": [
+          513,
+          935
+        ],
+        "bottom_left": [
+          71,
+          935
+        ]
+      },
+      "question_crop_area": [
+        0,
+        0,
+        1821,
+        1260
+      ],
+      "answer_points": [],
+      "source_corrected_image": "corrected_images/z_corrected.jpg",
+      "source_part_image": "corrected_images/z_corrected.jpg"
+    }
+  },
+  {
+    "question_no": "8",
+    "question_id": "SET_20260330_6CA8_SHEET_005_Q008",
+    "sheet_id": "SET_20260330_6CA8_SHEET_005",
+    "question_type": null,
+    "question_text": "第 8 题：设 m∈R 且 m≠0, 则 m+4/m≥4 的一个必要不充分条件是",
+    "student_answer": "A",
+    "answer_source": "answer_card",
+    "answer_status": "answered",
+    "question_image_path": "question_slices/SET_20260330_6CA8_SHEET_005/Q008.jpg",
+    "answer_image_path": "answer_card_areas/answer_card_1-21.jpg",
+    "answer_image_paths": [
+      "answer_card_areas/answer_card_1-21.jpg"
+    ],
+    "complete_unit_image_path": "07_complete_units/SET_20260330_6CA8_SHEET_005/CU008.jpg",
+    "source_complete_unit_key": "8",
+    "source_merged_number": "8",
+    "needs_manual_review": false,
+    "confidence": {
+      "has_question_text": true,
+      "has_question_image": true,
+      "has_complete_unit_image": true,
+      "answer_image_count": 1,
+      "merged_fragment_count": 1,
+      "answer_fragment_count": 0
+    },
+    "tags": [],
+    "source": {
+      "question_points": {
+        "top_left": [
+          481,
+          83
+        ],
+        "top_right": [
+          954,
+          83
+        ],
+        "bottom_right": [
+          954,
+          168
+        ],
+        "bottom_left": [
+          481,
+          168
+        ]
+      },
+      "question_crop_area": [
+        0,
+        0,
+        1821,
+        1260
+      ],
+      "answer_points": [],
+      "source_corrected_image": "corrected_images/z_corrected.jpg",
+      "source_part_image": "corrected_images/z_corrected.jpg"
+    }
+  },
+  {
+    "question_no": "9",
+    "question_id": "SET_20260330_6CA8_SHEET_005_Q009",
+    "sheet_id": "SET_20260330_6CA8_SHEET_005",
+    "question_type": null,
+    "question_text": "第 9 题：已知函数 f(x)={x², x≥0; ax-1, x<0}, 若存在实数 x₀(x₀≠0), 使得 f(-x₀)=f(x₀) 成立, 则实数 a 的取值范围是",
+    "student_answer": "A",
+    "answer_source": "answer_card",
+    "answer_status": "answered",
+    "question_image_path": "question_slices/SET_20260330_6CA8_SHEET_005/Q009.jpg",
+    "answer_image_path": "answer_card_areas/answer_card_1-21.jpg",
+    "answer_image_paths": [
+      "answer_card_areas/answer_card_1-21.jpg"
+    ],
+    "complete_unit_image_path": "07_complete_units/SET_20260330_6CA8_SHEET_005/CU009.jpg",
+    "source_complete_unit_key": "9",
+    "source_merged_number": "9",
+    "needs_manual_review": false,
+    "confidence": {
+      "has_question_text": true,
+      "has_question_image": true,
+      "has_complete_unit_image": true,
+      "answer_image_count": 1,
+      "merged_fragment_count": 1,
+      "answer_fragment_count": 0
+    },
+    "tags": [],
+    "source": {
+      "question_points": {
+        "top_left": [
+          481,
+          160
+        ],
+        "top_right": [
+          954,
+          160
+        ],
+        "bottom_right": [
+          954,
+          279
+        ],
+        "bottom_left": [
+          481,
+          279
+        ]
+      },
+      "question_crop_area": [
+        0,
+        0,
+        1821,
+        1260
+      ],
+      "answer_points": [],
+      "source_corrected_image": "corrected_images/z_corrected.jpg",
+      "source_part_image": "corrected_images/z_corrected.jpg"
+    }
+  },
+  {
+    "question_no": "10",
+    "question_id": "SET_20260330_6CA8_SHEET_005_Q010",
+    "sheet_id": "SET_20260330_6CA8_SHEET_005",
+    "question_type": null,
+    "question_text": "第 10 题：已知集合 A={(x₁,x₂,⋯,x₁₀)|xᵢ=1 或 0, i=1,2,⋯,10}, 对于集合 A 中的任意元素 p=(p₁,p₂,⋯,p₁₀) 和 q=(q₁,q₂,⋯,q₁₀)...",
+    "student_answer": "B",
+    "answer_source": "answer_card",
+    "answer_status": "answered",
+    "question_image_path": "question_slices/SET_20260330_6CA8_SHEET_005/Q010.jpg",
+    "answer_image_path": "answer_card_areas/answer_card_1-21.jpg",
+    "answer_image_paths": [
+      "answer_card_areas/answer_card_1-21.jpg"
+    ],
+    "complete_unit_image_path": "07_complete_units/SET_20260330_6CA8_SHEET_005/CU010.jpg",
+    "source_complete_unit_key": "10",
+    "source_merged_number": "10",
+    "needs_manual_review": false,
+    "confidence": {
+      "has_question_text": true,
+      "has_question_image": true,
+      "has_complete_unit_image": true,
+      "answer_image_count": 1,
+      "merged_fragment_count": 1,
+      "answer_fragment_count": 0
+    },
+    "tags": [],
+    "source": {
+      "question_points": {
+        "top_left": [
+          514,
+          271
+        ],
+        "top_right": [
+          954,
+          271
+        ],
+        "bottom_right": [
+          954,
+          449
+        ],
+        "bottom_left": [
+          514,
+          449
+        ]
+      },
+      "question_crop_area": [
+        0,
+        0,
+        1821,
+        1260
+      ],
+      "answer_points": [],
+      "source_corrected_image": "corrected_images/z_corrected.jpg",
+      "source_part_image": "corrected_images/z_corrected.jpg"
+    }
+  },
+  {
+    "question_no": "11",
+    "question_id": "SET_20260330_6CA8_SHEET_005_Q011",
+    "sheet_id": "SET_20260330_6CA8_SHEET_005",
+    "question_type": null,
+    "question_text": "第 11 题：函数 f(x)=1/x + √(x+2) 的定义域为",
+    "student_answer": null,
+    "answer_source": "answer_area",
+    "answer_status": "uncertain",
+    "question_image_path": "question_slices/SET_20260330_6CA8_SHEET_005/Q011.jpg",
+    "answer_image_path": "answer_slices/SET_20260330_6CA8_SHEET_003/A011.jpg",
+    "answer_image_paths": [
+      "answer_slices/SET_20260330_6CA8_SHEET_003/A011.jpg"
+    ],
+    "complete_unit_image_path": "07_complete_units/SET_20260330_6CA8_SHEET_005/CU011.jpg",
+    "source_complete_unit_key": "11",
+    "source_merged_number": "11",
+    "needs_manual_review": true,
+    "confidence": {
+      "has_question_text": true,
+      "has_question_image": true,
+      "has_complete_unit_image": true,
+      "answer_image_count": 1,
+      "merged_fragment_count": 2,
+      "answer_fragment_count": 1
+    },
+    "tags": [],
+    "source": {
+      "question_points": {
+        "top_left": [
+          514,
+          441
+        ],
+        "top_right": [
+          954,
+          441
+        ],
+        "bottom_right": [
+          954,
+          498
+        ],
+        "bottom_left": [
+          514,
+          498
+        ]
+      },
+      "question_crop_area": [
+        0,
+        0,
+        1821,
+        1260
+      ],
+      "answer_points": [
+        {
+          "top_left": [
+            45,
+            498
+          ],
+          "top_right": [
+            495,
+            498
+          ],
+          "bottom_right": [
+            495,
+            583
+          ],
+          "bottom_left": [
+            45,
+            583
+          ]
+        }
+      ],
+      "source_corrected_image": "corrected_images/z_corrected.jpg",
+      "source_part_image": "corrected_images/z_corrected.jpg"
+    }
+  },
+  {
+    "question_no": "12",
+    "question_id": "SET_20260330_6CA8_SHEET_005_Q012",
+    "sheet_id": "SET_20260330_6CA8_SHEET_005",
+    "question_type": null,
+    "question_text": "第 12 题：若关于 x 的不等式 ax²+bx-2>0 的解集是 (-∞,-2)∪(1,+∞), 则 a+b=",
+    "student_answer": null,
+    "answer_source": "answer_area",
+    "answer_status": "uncertain",
+    "question_image_path": "question_slices/SET_20260330_6CA8_SHEET_005/Q012.jpg",
+    "answer_image_path": "answer_slices/SET_20260330_6CA8_SHEET_003/A012.jpg",
+    "answer_image_paths": [
+      "answer_slices/SET_20260330_6CA8_SHEET_003/A012.jpg"
+    ],
+    "complete_unit_image_path": "07_complete_units/SET_20260330_6CA8_SHEET_005/CU012.jpg",
+    "source_complete_unit_key": "12",
+    "source_merged_number": "12",
+    "needs_manual_review": true,
+    "confidence": {
+      "has_question_text": true,
+      "has_question_image": true,
+      "has_complete_unit_image": true,
+      "answer_image_count": 1,
+      "merged_fragment_count": 2,
+      "answer_fragment_count": 1
+    },
+    "tags": [],
+    "source": {
+      "question_points": {
+        "top_left": [
+          514,
+          493
+        ],
+        "top_right": [
+          954,
+          493
+        ],
+        "bottom_right": [
+          954,
+          538
+        ],
+        "bottom_left": [
+          514,
+          538
+        ]
+      },
+      "question_crop_area": [
+        0,
+        0,
+        1821,
+        1260
+      ],
+      "answer_points": [
+        {
+          "top_left": [
+            45,
+            584
+          ],
+          "top_right": [
+            495,
+            584
+          ],
+          "bottom_right": [
+            495,
+            632
+          ],
+          "bottom_left": [
+            45,
+            632
+          ]
+        }
+      ],
+      "source_corrected_image": "corrected_images/z_corrected.jpg",
+      "source_part_image": "corrected_images/z_corrected.jpg"
+    }
+  },
+  {
+    "question_no": "13",
+    "question_id": "SET_20260330_6CA8_SHEET_005_Q013",
+    "sheet_id": "SET_20260330_6CA8_SHEET_005",
+    "question_type": null,
+    "question_text": "第 13 题：设函数 f(x)=-x²+2ax+3. 若 f(x) 在区间 (-∞,2] 上是增函数, 则实数 a 的一个取值为__, a 的最小值为__",
+    "student_answer": null,
+    "answer_source": "answer_area",
+    "answer_status": "uncertain",
+    "question_image_path": "question_slices/SET_20260330_6CA8_SHEET_005/Q013.jpg",
+    "answer_image_path": "answer_slices/SET_20260330_6CA8_SHEET_003/A013.jpg",
+    "answer_image_paths": [
+      "answer_slices/SET_20260330_6CA8_SHEET_003/A013.jpg"
+    ],
+    "complete_unit_image_path": "07_complete_units/SET_20260330_6CA8_SHEET_005/CU013.jpg",
+    "source_complete_unit_key": "13",
+    "source_merged_number": "13",
+    "needs_manual_review": true,
+    "confidence": {
+      "has_question_text": true,
+      "has_question_image": true,
+      "has_complete_unit_image": true,
+      "answer_image_count": 1,
+      "merged_fragment_count": 2,
+      "answer_fragment_count": 1
+    },
+    "tags": [],
+    "source": {
+      "question_points": {
+        "top_left": [
+          514,
+          530
+        ],
+        "top_right": [
+          954,
+          530
+        ],
+        "bottom_right": [
+          954,
+          598
+        ],
+        "bottom_left": [
+          514,
+          598
+        ]
+      },
+      "question_crop_area": [
+        0,
+        0,
+        1821,
+        1260
+      ],
+      "answer_points": [
+        {
+          "top_left": [
+            45,
+            633
+          ],
+          "top_right": [
+            495,
+            633
+          ],
+          "bottom_right": [
+            495,
+            683
+          ],
+          "bottom_left": [
+            45,
+            683
+          ]
+        }
+      ],
+      "source_corrected_image": "corrected_images/z_corrected.jpg",
+      "source_part_image": "corrected_images/z_corrected.jpg"
+    }
+  },
+  {
+    "question_no": "14",
+    "question_id": "SET_20260330_6CA8_SHEET_005_Q014",
+    "sheet_id": "SET_20260330_6CA8_SHEET_005",
+    "question_type": null,
+    "question_text": "第 14 题：已知定义在 R 上的奇函数 f(x) 满足: 对任意的 x∈R, 都有 f(x+3)=-f(x), 且当 x∈(0,3/2] 时, f(x)=x², 则 f(9/4)=",
+    "student_answer": null,
+    "answer_source": "answer_area",
+    "answer_status": "uncertain",
+    "question_image_path": "question_slices/SET_20260330_6CA8_SHEET_005/Q014.jpg",
+    "answer_image_path": "answer_slices/SET_20260330_6CA8_SHEET_003/A014.jpg",
+    "answer_image_paths": [
+      "answer_slices/SET_20260330_6CA8_SHEET_003/A014.jpg"
+    ],
+    "complete_unit_image_path": "07_complete_units/SET_20260330_6CA8_SHEET_005/CU014.jpg",
+    "source_complete_unit_key": "14",
+    "source_merged_number": "14",
+    "needs_manual_review": true,
+    "confidence": {
+      "has_question_text": true,
+      "has_question_image": true,
+      "has_complete_unit_image": true,
+      "answer_image_count": 1,
+      "merged_fragment_count": 2,
+      "answer_fragment_count": 1
+    },
+    "tags": [],
+    "source": {
+      "question_points": {
+        "top_left": [
+          514,
+          590
+        ],
+        "top_right": [
+          954,
+          590
+        ],
+        "bottom_right": [
+          954,
+          659
+        ],
+        "bottom_left": [
+          514,
+          659
+        ]
+      },
+      "question_crop_area": [
+        0,
+        0,
+        1821,
+        1260
+      ],
+      "answer_points": [
+        {
+          "top_left": [
+            45,
+            685
+          ],
+          "top_right": [
+            495,
+            685
+          ],
+          "bottom_right": [
+            495,
+            747
+          ],
+          "bottom_left": [
+            45,
+            747
+          ]
+        }
+      ],
+      "source_corrected_image": "corrected_images/z_corrected.jpg",
+      "source_part_image": "corrected_images/z_corrected.jpg"
+    }
+  },
+  {
+    "question_no": "15",
+    "question_id": "SET_20260330_6CA8_SHEET_005_Q015",
+    "sheet_id": "SET_20260330_6CA8_SHEET_005",
+    "question_type": null,
+    "question_text": "第 15 题：已知符号 [x] 表示不超过 x 的最大整数, 若函数 f(x)=[x]/x (x≠0), 给出下列四个结论...",
+    "student_answer": null,
+    "answer_source": "answer_area",
+    "answer_status": "uncertain",
+    "question_image_path": "question_slices/SET_20260330_6CA8_SHEET_005/Q015.jpg",
+    "answer_image_path": "answer_slices/SET_20260330_6CA8_SHEET_003/A015.jpg",
+    "answer_image_paths": [
+      "answer_slices/SET_20260330_6CA8_SHEET_003/A015.jpg"
+    ],
+    "complete_unit_image_path": "07_complete_units/SET_20260330_6CA8_SHEET_005/CU015.jpg",
+    "source_complete_unit_key": "15",
+    "source_merged_number": "15",
+    "needs_manual_review": true,
+    "confidence": {
+      "has_question_text": true,
+      "has_question_image": true,
+      "has_complete_unit_image": true,
+      "answer_image_count": 1,
+      "merged_fragment_count": 2,
+      "answer_fragment_count": 1
+    },
+    "tags": [],
+    "source": {
+      "question_points": {
+        "top_left": [
+          514,
+          651
+        ],
+        "top_right": [
+          954,
+          651
+        ],
+        "bottom_right": [
+          954,
+          859
+        ],
+        "bottom_left": [
+          514,
+          859
+        ]
+      },
+      "question_crop_area": [
+        0,
+        0,
+        1821,
+        1260
+      ],
+      "answer_points": [
+        {
+          "top_left": [
+            45,
+            748
+          ],
+          "top_right": [
+            495,
+            748
+          ],
+          "bottom_right": [
+            495,
+            825
+          ],
+          "bottom_left": [
+            45,
+            825
+          ]
+        }
+      ],
+      "source_corrected_image": "corrected_images/z_corrected.jpg",
+      "source_part_image": "corrected_images/z_corrected.jpg"
+    }
+  },
+  {
+    "question_no": "16",
+    "question_id": "SET_20260330_6CA8_SHEET_004_Q016",
+    "sheet_id": "SET_20260330_6CA8_SHEET_004",
+    "question_type": null,
+    "question_text": "第 16 题：(本小题 11 分) 已知集合 A={x|...}, B={x|...}. (1) 求 A∪B, A∩∁RB; (2) 记关于 x 的不等式...的解集为 M, 若 B∪M=R, 求实数 m 的取值范围.",
+    "student_answer": null,
+    "answer_source": "answer_area",
+    "answer_status": "uncertain",
+    "question_image_path": "question_slices/SET_20260330_6CA8_SHEET_004/Q016.jpg",
+    "answer_image_path": "answer_slices/SET_20260330_6CA8_SHEET_003/A016.jpg",
+    "answer_image_paths": [
+      "answer_slices/SET_20260330_6CA8_SHEET_003/A016.jpg"
+    ],
+    "complete_unit_image_path": "07_complete_units/SET_20260330_6CA8_SHEET_004/CU016.jpg",
+    "source_complete_unit_key": "16",
+    "source_merged_number": "16",
+    "needs_manual_review": true,
+    "confidence": {
+      "has_question_text": true,
+      "has_question_image": true,
+      "has_complete_unit_image": true,
+      "answer_image_count": 1,
+      "merged_fragment_count": 2,
+      "answer_fragment_count": 1
+    },
+    "tags": [],
+    "source": {
+      "question_points": {
+        "top_left": [
+          69,
+          94
+        ],
+        "top_right": [
+          546,
+          94
+        ],
+        "bottom_right": [
+          546,
+          266
+        ],
+        "bottom_left": [
+          69,
+          266
+        ]
+      },
+      "question_crop_area": [
+        0,
+        0,
+        1872,
+        1314
+      ],
+      "answer_points": [
+        {
+          "top_left": [
+            512,
+            48
+          ],
+          "top_right": [
+            945,
+            48
+          ],
+          "bottom_right": [
+            945,
+            1000
+          ],
+          "bottom_left": [
+            512,
+            1000
+          ]
+        }
+      ],
+      "source_corrected_image": "corrected_images/j_corrected.jpg",
+      "source_part_image": "corrected_images/j_corrected.jpg"
+    }
+  },
+  {
+    "question_no": "17",
+    "question_id": "SET_20260330_6CA8_SHEET_004_Q017",
+    "sheet_id": "SET_20260330_6CA8_SHEET_004",
+    "question_type": null,
+    "question_text": "第 17 题：(本小题 11 分) 已知函数 f(x)=... 是定义在 (-2,2) 上的奇函数. (1) 确定 f(x) 的解析式; (2) 用定义证明: f(x) 在区间 (-2,2) 上是减函数; (3) 解不等式 f[t(t-1)] + f(t) < 0.",
+    "student_answer": null,
+    "answer_source": "answer_area",
+    "answer_status": "uncertain",
+    "question_image_path": "question_slices/SET_20260330_6CA8_SHEET_004/Q017.jpg",
+    "answer_image_path": "answer_slices/SET_20260330_6CA8_SHEET_001/A017.jpg",
+    "answer_image_paths": [
+      "answer_slices/SET_20260330_6CA8_SHEET_001/A017.jpg"
+    ],
+    "complete_unit_image_path": "07_complete_units/SET_20260330_6CA8_SHEET_004/CU017.jpg",
+    "source_complete_unit_key": "17",
+    "source_merged_number": "17",
+    "needs_manual_review": true,
+    "confidence": {
+      "has_question_text": true,
+      "has_question_image": true,
+      "has_complete_unit_image": true,
+      "answer_image_count": 1,
+      "merged_fragment_count": 2,
+      "answer_fragment_count": 1
+    },
+    "tags": [],
+    "source": {
+      "question_points": {
+        "top_left": [
+          69,
+          259
+        ],
+        "top_right": [
+          546,
+          259
+        ],
+        "bottom_right": [
+          546,
+          396
+        ],
+        "bottom_left": [
+          69,
+          396
+        ]
+      },
+      "question_crop_area": [
+        0,
+        0,
+        1872,
+        1314
+      ],
+      "answer_points": [
+        {
+          "top_left": [
+            45,
+            0
+          ],
+          "top_right": [
+            500,
+            0
+          ],
+          "bottom_right": [
+            500,
+            1000
+          ],
+          "bottom_left": [
+            45,
+            1000
+          ]
+        }
+      ],
+      "source_corrected_image": "corrected_images/j_corrected.jpg",
+      "source_part_image": "corrected_images/j_corrected.jpg"
+    }
+  },
+  {
+    "question_no": "18",
+    "question_id": "SET_20260330_6CA8_SHEET_004_Q018",
+    "sheet_id": "SET_20260330_6CA8_SHEET_004",
+    "question_type": null,
+    "question_text": "第 18 题：(本小题 10 分) 求关于 x 的不等式 ax²-x+1 < 3-2ax (a∈R) 的解集.",
+    "student_answer": null,
+    "answer_source": "answer_area",
+    "answer_status": "uncertain",
+    "question_image_path": "question_slices/SET_20260330_6CA8_SHEET_004/Q018.jpg",
+    "answer_image_path": "answer_slices/SET_20260330_6CA8_SHEET_001/A018.jpg",
+    "answer_image_paths": [
+      "answer_slices/SET_20260330_6CA8_SHEET_001/A018.jpg"
+    ],
+    "complete_unit_image_path": "07_complete_units/SET_20260330_6CA8_SHEET_004/CU018.jpg",
+    "source_complete_unit_key": "18",
+    "source_merged_number": "18",
+    "needs_manual_review": true,
+    "confidence": {
+      "has_question_text": true,
+      "has_question_image": true,
+      "has_complete_unit_image": true,
+      "answer_image_count": 1,
+      "merged_fragment_count": 2,
+      "answer_fragment_count": 1
+    },
+    "tags": [],
+    "source": {
+      "question_points": {
+        "top_left": [
+          69,
+          388
+        ],
+        "top_right": [
+          546,
+          388
+        ],
+        "bottom_right": [
+          546,
+          457
+        ],
+        "bottom_left": [
+          69,
+          457
+        ]
+      },
+      "question_crop_area": [
+        0,
+        0,
+        1872,
+        1314
+      ],
+      "answer_points": [
+        {
+          "top_left": [
+            517,
+            50
+          ],
+          "top_right": [
+            966,
+            50
+          ],
+          "bottom_right": [
+            966,
+            999
+          ],
+          "bottom_left": [
+            517,
+            999
+          ]
+        }
+      ],
+      "source_corrected_image": "corrected_images/j_corrected.jpg",
+      "source_part_image": "corrected_images/j_corrected.jpg"
+    }
+  },
+  {
+    "question_no": "19",
+    "question_id": "SET_20260330_6CA8_SHEET_004_Q019",
+    "sheet_id": "SET_20260330_6CA8_SHEET_004",
+    "question_type": null,
+    "question_text": "第 19 题：(本小题 11 分) 已知关于 x 的方程 x²-mx+n-2=0 (m,n∈R). (1) 若 m=1, n=0, 则不等式...的解集为___; (2) 若关于 x 的方程...有两个不相等的实数根 x₁, x₂, 且 (x₁+x₂)²-4x₁x₂=8, 求...的最小值.",
+    "student_answer": null,
+    "answer_source": "answer_area",
+    "answer_status": "uncertain",
+    "question_image_path": "question_slices/SET_20260330_6CA8_SHEET_004/Q019.jpg",
+    "answer_image_path": "answer_slices/SET_20260330_6CA8_SHEET_002/A019.jpg",
+    "answer_image_paths": [
+      "answer_slices/SET_20260330_6CA8_SHEET_002/A019.jpg"
+    ],
+    "complete_unit_image_path": "07_complete_units/SET_20260330_6CA8_SHEET_004/CU019.jpg",
+    "source_complete_unit_key": "19",
+    "source_merged_number": "19",
+    "needs_manual_review": true,
+    "confidence": {
+      "has_question_text": true,
+      "has_question_image": true,
+      "has_complete_unit_image": true,
+      "answer_image_count": 1,
+      "merged_fragment_count": 2,
+      "answer_fragment_count": 1
+    },
+    "tags": [],
+    "source": {
+      "question_points": {
+        "top_left": [
+          69,
+          449
+        ],
+        "top_right": [
+          546,
+          449
+        ],
+        "bottom_right": [
+          546,
+          587
+        ],
+        "bottom_left": [
+          69,
+          587
+        ]
+      },
+      "question_crop_area": [
+        0,
+        0,
+        1872,
+        1314
+      ],
+      "answer_points": [
+        {
+          "top_left": [
+            48,
+            328
+          ],
+          "top_right": [
+            502,
+            328
+          ],
+          "bottom_right": [
+            502,
+            976
+          ],
+          "bottom_left": [
+            48,
+            976
+          ]
+        }
+      ],
+      "source_corrected_image": "corrected_images/j_corrected.jpg",
+      "source_part_image": "corrected_images/j_corrected.jpg"
+    }
+  },
+  {
+    "question_no": "20",
+    "question_id": "SET_20260330_6CA8_SHEET_004_Q020",
+    "sheet_id": "SET_20260330_6CA8_SHEET_004",
+    "question_type": null,
+    "question_text": "第 20 题：(本小题 12 分) 已知 n 是正整数, 集合 Mn={x∈Z|-n≤x≤n}. 若集合 P⊆Mn 且 P 中元素个数为 k, 则称 P 是 Mn 的 k 元子集... (1) 判断 P={-3,-1,1,3} 是否是 M₃ 的 4 元基子集, 说明理由; (2) 设 P 是 M₄ 的 7 元子集, 判断 P 是否一定是 M₄ 的 7 元基子集, 说明理由; (3) 若 M₁₀ 的任意 k 元子集均是 k 元基子集, 求 k 的最小值.",
+    "student_answer": null,
+    "answer_source": "answer_area",
+    "answer_status": "uncertain",
+    "question_image_path": "question_slices/SET_20260330_6CA8_SHEET_004/Q020.jpg",
+    "answer_image_path": "answer_slices/SET_20260330_6CA8_SHEET_002/A020.jpg",
+    "answer_image_paths": [
+      "answer_slices/SET_20260330_6CA8_SHEET_002/A020.jpg"
+    ],
+    "complete_unit_image_path": "07_complete_units/SET_20260330_6CA8_SHEET_004/CU020.jpg",
+    "source_complete_unit_key": "20",
+    "source_merged_number": "20",
+    "needs_manual_review": true,
+    "confidence": {
+      "has_question_text": true,
+      "has_question_image": true,
+      "has_complete_unit_image": true,
+      "answer_image_count": 1,
+      "merged_fragment_count": 2,
+      "answer_fragment_count": 1
+    },
+    "tags": [],
+    "source": {
+      "question_points": {
+        "top_left": [
+          69,
+          579
+        ],
+        "top_right": [
+          546,
+          579
+        ],
+        "bottom_right": [
+          546,
+          804
+        ],
+        "bottom_left": [
+          69,
+          804
+        ]
+      },
+      "question_crop_area": [
+        0,
+        0,
+        1872,
+        1314
+      ],
+      "answer_points": [
+        {
+          "top_left": [
+            517,
+            13
+          ],
+          "top_right": [
+            958,
+            13
+          ],
+          "bottom_right": [
+            958,
+            1000
+          ],
+          "bottom_left": [
+            517,
+            1000
+          ]
+        }
+      ],
+      "source_corrected_image": "corrected_images/j_corrected.jpg",
+      "source_part_image": "corrected_images/j_corrected.jpg"
+    }
+  }
+]
