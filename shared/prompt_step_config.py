@@ -250,6 +250,60 @@ PROMPT_DEFINITIONS = [
         },
     },
     {
+        "prompt_key": "analyzer.topic_docx_kp_relations.default",
+        "display_name": "分析器-专题KP间关系抽取",
+        "module_name": "analyzer",
+        "description": "给定专题中全部知识点名称，让大模型输出 KP-KP 语义关系（prerequisite / specializes / equivalent / related）。",
+        "category": "analyzer",
+        "target_type": "topic_docx_kp_relations",
+        "seed_versions": {
+            1: """你是一名中学教研助手。下面给出同一专题中已确认的知识点列表：
+
+[[kp_list_json]]
+
+请从中识别知识点之间的语义关系，输出**你非常确定**的若干条，每条关系须满足 confidence >= 0.75。
+
+关系类型定义：
+- prerequisite：source 是学习 target 的先决条件/基础（有方向）
+- specializes：target 是 source 的下位概念/特殊情形（有方向）
+- equivalent：两个知识点语义等价或互为常见别称（无方向，source < target 字典序）
+- related：有强相关但不符合以上三类（无方向，source < target 字典序）
+
+硬性规则：
+1. 只输出一个 JSON 对象，不要 Markdown、不要代码围栏、不要解释性文字。
+2. 顶层结构必须为：{"relations":[{"source":"名称A","target":"名称B","relation_type":"类型","confidence":0.0到1.0的小数},...]}
+3. source 与 target 必须**完全匹配**输入列表中的名称，禁止改写或编造。
+4. 不要输出反向冗余的关系（若已有 A→B，不要再输出 B→A）。
+5. 最多输出 20 条；若不确定则宁缺毋滥，可输出空数组 []。""",
+            2: """你是一名中学教研助手。现在不是只看知识点名称，而是要基于专题内的真实证据块判断知识点之间的语义关系。
+
+专题标题：
+[[package_title]]
+
+知识点与证据块 JSON：
+[[kp_grounding_json]]
+
+请从中识别知识点之间**你非常确定**的语义关系，并且每条关系都必须绑定一个最能支撑该关系的 evidence_block_id。
+
+关系类型定义：
+- prerequisite：source 是学习 target 的先决条件/基础
+- specializes：target 是 source 的下位概念/特殊情形
+- equivalent：两个知识点语义等价或互为常见别称
+- related：有强相关，但不属于以上三类
+
+硬性规则：
+1. 只输出一个 JSON 对象，不要 Markdown、不要代码围栏、不要解释性文字。
+2. 顶层结构必须为：
+   {"relations":[{"source":"名称A","target":"名称B","relation_type":"类型","confidence":0.0到1.0的小数,"evidence_block_id":123},...]}
+3. source 与 target 必须完全匹配输入 JSON 中的 canonical_name；禁止改写、合并或编造。
+4. evidence_block_id 必须来自输入 JSON 中 source 或 target 对应的 evidence_blocks 列表，禁止编造其他 block id。
+5. 如果找不到能明确支撑关系的证据块，就不要输出这条关系。
+6. 不要输出反向冗余关系；若语义无方向（equivalent / related），请按 source < target 的字典序输出。
+7. 只保留高确定性关系；若不确定，宁缺毋滥，可输出空数组 []。
+8. 最多输出 20 条。""",
+        },
+    },
+    {
         "prompt_key": "analyzer.topic_docx_question_bridge.default",
         "display_name": "分析器-专题题知识点桥接",
         "module_name": "analyzer",
@@ -488,6 +542,14 @@ PROMPT_STEP_DEFINITIONS = [
         "step_order": "topic-docx-question-bridge",
         "description": "专题材料每道题从候选知识点中由大模型挑选最相关项。",
         "prompt_key": "analyzer.topic_docx_question_bridge.default",
+    },
+    {
+        "step_key": "analyzer.topic_docx_kp_relations",
+        "step_label": "分析器-专题KP间关系抽取",
+        "module_name": "analyzer",
+        "step_order": "topic-docx-kp-relations",
+        "description": "专题入库后对本包全部知识点调用大模型抽取 KP-KP 语义关系并写入 knowledge_point_relations 表。",
+        "prompt_key": "analyzer.topic_docx_kp_relations.default",
     },
     {
         "step_key": "analyzer.knowledge_derivative_generation",

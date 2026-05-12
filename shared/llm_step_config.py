@@ -139,10 +139,10 @@ STEP_CONFIG_DEFINITIONS = [
         "step_order": "topic_docx_block_points",
         "description": (
             "教辅/专题 DOCX 按内容块自动标注知识点名称（与正则抽取互补）。"
-            "KNOWLEDGE_TOPIC_BLOCK_POINTS_MULTIMODAL=true 时同步步骤会绑定到种子视觉模型以发图。"
+            "使用纯文本大模型（DeepSeek），非多模态。"
         ),
-        "seed_provider_name": "dashscope",
-        "seed_model_name": "qwen3-vl-plus",
+        "seed_provider_name": "deepseek",
+        "seed_model_name": "deepseek-v4-pro",
     },
     {
         "step_key": "analyzer.topic_docx_question_bridge",
@@ -151,6 +151,19 @@ STEP_CONFIG_DEFINITIONS = [
         "step_order": "topic_docx_question_bridge",
         "description": "专题材料中每道题从本包候选知识点中由大模型挑选最相关的若干项（题-点桥接）。",
         "seed_strategy": "first_available",
+    },
+    {
+        "step_key": "analyzer.topic_docx_kp_relations",
+        "step_label": "分析器-专题KP间关系抽取",
+        "module_name": "analyzer",
+        "step_order": "topic_docx_kp_relations",
+        "description": (
+            "专题 DOCX 入库后，对本包全部知识点调用 LLM 抽取 KP-KP 语义关系"
+            "（prerequisite / specializes / equivalent / related），写入 knowledge_point_relations 表。"
+            "需 KNOWLEDGE_POINT_RELATIONS_LLM_ENABLED=true 才会被触发。"
+        ),
+        "seed_provider_name": "deepseek",
+        "seed_model_name": "deepseek-v4-pro",
     },
     {
         "step_key": "analyzer.knowledge_derivative_generation",

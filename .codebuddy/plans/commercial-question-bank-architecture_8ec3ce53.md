@@ -51,7 +51,7 @@ todos:
 ## Tech Stack Selection
 
 - 已验证现有后端核心位于 `d:/10739/Exam-Analysis-Suite/analyzer/app`，技术栈为 Python 3.10、FastAPI、SQLAlchemy、Celery、Redis、Neo4j、PyMuPDF、python-docx。
-- 已验证当前知识库摄入在 `analyzer/app/tasks.py` 中以 PDF、DOCX、TXT 为主，采用固定长度切块后写入 `analyzer/app/vector_db.py` 中的本地 ChromaDB，嵌入模型为 `all-MiniLM-L6-v2`。
+- 已验证当前知识库摄入在 `analyzer/app/tasks.py` 中以 PDF、DOCX、TXT 为主，采用固定长度切块后写入 `analyzer/app/vector_db.py`，向量检索使用 Qdrant，文本检索使用 OpenSearch。
 - 已验证当前检索在 `analyzer/app/retriever.py` 中以“向量检索 + 图谱检索 + 规则合并”为主，尚未形成题目级对象库、题族、公式索引和多路检索文档。
 - 已验证当前关系型数据库配置存在分裂：`shared/database.py` 指向项目根 `exam_analysis.db`，`analyzer/app/config.py` 仍指向 `sqlite:///./test.db`。商业化改造前需先统一数据库配置入口。
 - 商业版建议在保留现有 FastAPI、Celery、SQLAlchemy 架构的前提下，将主业务库切换为 PostgreSQL，二进制资源落对象存储，全文检索采用 OpenSearch，向量检索优先 Qdrant 并保留本地 Chroma 作为开发回退，Neo4j 仅保留在显式关系和图谱诊断确有价值的链路中。

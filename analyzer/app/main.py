@@ -433,6 +433,71 @@ def get_knowledge_points_ingest_task(task_id: str):
     return _build_task_status_payload(task_id)
 
 
+# ── /api/knowledge-admin/ 别名（前端期望的路由） ──
+
+@app.get("/api/knowledge-admin/ingest/files")
+def list_knowledge_admin_ingest_files():
+    if not KNOWLEDGE_POINT_ENABLED:
+        raise HTTPException(status_code=503, detail="知识点功能未启用")
+    base_dir = Path(KNOWLEDGE_POINTS_DIR)
+    if not base_dir.exists():
+        return {"directory": str(base_dir), "files": []}
+    files = []
+    for item in sorted(base_dir.iterdir(), key=lambda p: p.name.lower()):
+        if not item.is_file():
+            continue
+        lower = item.name.lower()
+        if lower.endswith((".pdf", ".docx", ".txt")):
+            files.append(item.name)
+    return {"directory": str(base_dir), "files": files}
+
+
+@app.post("/api/knowledge-admin/ingest", status_code=202)
+def ingest_knowledge_admin(payload: schemas.KnowledgePointsIngestRequest):
+    if not KNOWLEDGE_POINT_ENABLED:
+        raise HTTPException(status_code=503, detail="知识点功能未启用")
+    task = ingest_knowledge_points_documents.delay(
+        payload.files,
+        payload.model_id,
+        payload.force_reingest,
+        payload.sync_retrieval,
+    )
+    return {"task_id": task.id}
+
+
+@app.get("/api/knowledge-admin/ingest/tasks/{task_id}")
+def get_knowledge_admin_ingest_task(task_id: str):
+    if not KNOWLEDGE_POINT_ENABLED:
+        raise HTTPException(status_code=503, detail="知识点功能未启用")
+    return _build_task_status_payload(task_id)
+
+
+@app.get("/api/knowledge-admin/overview")
+def get_knowledge_admin_overview(db: Session = Depends(get_db)):
+    if not KNOWLEDGE_POINT_ENABLED:
+        raise HTTPException(status_code=503, detail="知识点功能未启用")
+    try:
+        point_count = db.query(func.count(models.KnowledgePoint.id)).scalar() or 0
+    except Exception:
+        point_count = 0
+    try:
+        package_count = db.query(func.count(models.KnowledgePackage.id)).scalar() or 0
+    except Exception:
+        package_count = 0
+    try:
+        subjects_rows = db.query(models.KnowledgePoint.subject).filter(models.KnowledgePoint.subject.isnot(None)).distinct().all()
+        subjects = sorted({r[0] for r in subjects_rows if r[0]})
+    except Exception:
+        subjects = []
+    return {
+        "flags": {},
+        "counts": {"points": point_count, "packages": package_count},
+        "status_breakdown": {},
+        "subjects": subjects,
+        "backends": {},
+    }
+
+
 @app.post(
     "/api/knowledge-points/documents/{source_document_id}/sync-retrieval",
     response_model=schemas.SourceDocumentTaskResponse,

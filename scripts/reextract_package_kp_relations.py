@@ -252,6 +252,7 @@ def main() -> None:
             if (summary or {}).get("status") != "ok":
                 session.rollback()
                 raise RuntimeError(f"KP-KP re-extract failed for package {package_id}: {summary}")
+            debug_payload = summary.pop("debug_payload", None) if isinstance(summary, dict) else None
             reprojection = None
             if args.reproject:
                 reprojection = project_package(session, package_id, respect_flag=False)
@@ -271,6 +272,12 @@ def main() -> None:
                 "after_total_scoped_llm_relations": after_total,
                 "after_grounded_scoped_llm_relations": after_grounded,
             }
+            if debug_payload is not None:
+                debug_path = OUT_DIR / (
+                    f"reextract_package_kp_relations_debug_pkg{package_id}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+                )
+                debug_path.write_text(json.dumps(debug_payload, ensure_ascii=False, indent=2), encoding="utf-8")
+                row["debug_artifact_path"] = str(debug_path)
             results.append(row)
             print(
                 f"package={package_id} title={title}\n"
@@ -280,6 +287,8 @@ def main() -> None:
                 f"  extract_summary={summary}\n"
                 f"  after_total={after_total} after_grounded={after_grounded}\n"
             )
+            if debug_payload is not None:
+                print(f"  debug_artifact={row['debug_artifact_path']}\n")
             if reprojection is not None:
                 print(f"  reprojection={reprojection}\n")
 

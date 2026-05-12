@@ -1,4 +1,4 @@
-﻿import copy
+import copy
 import hashlib
 import logging
 import os
@@ -34,6 +34,7 @@ except Exception:
     gencache = None
 
 from shared import models
+from . import vector_db
 from .config import (
     KNOWLEDGE_POINTS_DIR,
     NORMALIZED_DOCUMENTS_DIR,
@@ -51,12 +52,6 @@ from .question_bank_rich_content import extract_docx_blocks, logger as rich_cont
 
 
 logger = logging.getLogger(__name__)
-
-
-def _get_vector_db():
-    from . import vector_db
-
-    return vector_db
 
 
 class _FrontendProgressLogHandler(logging.Handler):
@@ -90,131 +85,108 @@ class _ScopedFileLogHandler(logging.FileHandler):
 
 
 
-# 绗笁鏀細棰樺彿鍚庢棤鍙ョ偣鐩存帴鎺ュ嵎鏍囷紝濡傘€? 銆愰珮鑰冣€︺€嶏紱闄愬畾 lookahead 閬垮厤璇尮閰嶆鏂囥€? 銆愭煇璇嶃€戙€?
+# 第三支：题号后无句点直接接卷标，如「3 【高考…」；限定 lookahead 避免误匹配正文「5 【某词】」
 QUESTION_HEADER_PATTERN = re.compile(
     r"(?m)^\s*(?:"
-    r"绗琝s*(\d{1,3})\s*棰榺"
-    r"(\d{1,3})[\.锛庛€乚(?!\d)|"
-    r"(\d{1,3})\s*銆??=\s*(?:楂樿€億鏂拌鏍噟\d{4}\s*骞?)"
+    r"第\s*(\d{1,3})\s*题|"
+    r"(\d{1,3})[\.．、](?!\d)|"
+    r"(\d{1,3})\s*【(?=\s*(?:高考|新课标|\d{4}\s*年))"
     r")\s*"
 )
-TOPIC_TYPE_HEADER_PATTERN = re.compile(
-    r"^\s*(?P<label>[锛?]\s*(?:澶氶€墊鍗曢€墊鍒ゆ柇|濉┖)\s*[锛?])\s*",
-)
-TOPIC_DRILL_HEADER_PATTERN = re.compile(
-    r"^\s*(?P<label>瀵圭偣缁僜s*\d+)\s*[\.锛庛€?锛歖?\s*",
-)
-TOPIC_PRESENTATION_HEADER_PATTERN = re.compile(
-    r"^\s*(?P<label>\[(?:鏁欐潗鍛堢幇|鐪熼鍐嶇幇|鍙樺紡鎺㈢┒)\])\s*",
-)
-TOPIC_SUBQUESTION_HEADER_PATTERN = re.compile(
-    r"^\s*(?P<label>[锛?]\s*(?P<index>\d{1,2})\s*[锛?])\s*",
-)
-TOPIC_SUBQUESTION_STEM_CUE_PATTERN = re.compile(
-    r"^(?:宸茬煡|鑻璁緗姹倈姹傝瘉|璇佹槑|瑙鍑芥暟|鏁板垪|鏂圭▼|涓嶇瓑寮弢涓嬪垪|鍦?"
-)
-EMBEDDED_SECTION_MARKER_PATTERN = re.compile(
-    r"(?im)(?:^|\n)\s*(?P<label>鍙傝€冪瓟妗坾绛旀瑙ｆ瀽|绛旀|瑙ｆ瀽|鍒嗘瀽|璇﹁В|瑙瑙ｇ瓟|瑙ｆ硶|璇佹槑|璇佹槑濡備笅|杩囩▼)\s*[:锛歖"
-)
-QUESTION_LABEL_ONLY_PATTERN = re.compile(
-    r"^\s*(?:(?:瀵圭偣缁僜s*\d+|绗琝s*\d{1,3}\s*棰榺\d{1,3}[\.锛庛€乚|[锛?]\s*\d{1,2}\s*[锛?]|[锛?]\s*(?:澶氶€墊鍗曢€墊鍒ゆ柇|濉┖)\s*[锛?]|\(\s*[A-H]\s*\))\s*)+$"
-)
 _LEADING_IMAGE_PLACEHOLDER_RE = re.compile(
-    r"^(?:\[鍥剧墖\]|鍏紡鍥剧墖|鍏紡|formula|\[IMG\]|銆愬浘鐗囥€?+\s*"
+    r"^(?:\[图片\]|公式图片|公式|formula|\[IMG\]|【图片】)+\s*"
 )
 
-FORMULA_HINT_PATTERN = re.compile(r"[=鈮も墺鈭戔垰^_+\-脳梅]|\\frac|\\sqrt|\\int|\\sum")
-OPTION_PATTERN = re.compile(r"(?:^|\n)\s*[A-H锛?锛╙[\.锛庛€?锛歖\s*")
+FORMULA_HINT_PATTERN = re.compile(r"[=≤≥∑√^_+\-×÷]|\\frac|\\sqrt|\\int|\\sum")
+OPTION_PATTERN = re.compile(r"(?:^|\n)\s*[A-HＡ-Ｈ][\.．、:：]\s*")
 OPTION_BLOCK_PATTERN = re.compile(
-    r"(?ms)(?:^|\n)\s*(?P<key>[A-H锛?锛╙)[\.锛庛€?锛歖\s*(?P<content>.*?)(?=(?:\n\s*[A-H锛?锛╙[\.锛庛€?锛歖\s*)|\Z)"
+    r"(?ms)(?:^|\n)\s*(?P<key>[A-HＡ-Ｈ])[\.．、:：]\s*(?P<content>.*?)(?=(?:\n\s*[A-HＡ-Ｈ][\.．、:：]\s*)|\Z)"
 )
-FIGURE_MARKER_PATTERN = re.compile(r"(鍥綷s*\d+|鍥綶涓€浜屼笁鍥涗簲鍏竷鍏節鍗乚+|濡傚浘|瑙佸浘|涓嬪浘|涓婂浘|\[鍥剧墖\]|銆愬浘鐗囥€憒鎻掑浘)")
+FIGURE_MARKER_PATTERN = re.compile(r"(图\s*\d+|图[一二三四五六七八九十]+|如图|见图|下图|上图|\[图片\]|【图片】|插图)")
+
+_SUB_Q_NO_PATTERN = re.compile(r"^\s*\(\d{1,3}\)")
 LATEX_FORMULA_PATTERN = re.compile(r"(\$[^$]+\$|\\(?:frac|sqrt|int|sum|sin|cos|tan|log|ln)[^\n]{0,120})")
 
 SECTION_LABEL_ALIASES = {
-    "鍙傝€冪瓟妗?": "answer",
-    "绛旀": "answer",
-    "绛旀瑙ｆ瀽": "analysis",
-    "瑙ｆ瀽": "analysis",
-    "鍒嗘瀽": "analysis",
-    "璇﹁В": "solution",
-    "瑙ｇ瓟": "solution",
-    "鎬濊矾瀵煎紩": "solution",
-    "鎬濊矾寮曞": "solution",
-    "涓撳瑙ｈ": "comment",
+    "参考答案": "answer",
+    "答案": "answer",
+    "答案解析": "analysis",
+    "解析": "analysis",
+    "分析": "analysis",
+    "详解": "solution",
+    "解答": "solution",
+    "思路导引": "solution",
+    "思路引导": "solution",
+    "专家解读": "comment",
 
-    "瑙ｆ硶": "solution",
-    "杩囩▼": "solution",
-    "鐐硅瘎": "comment",
-    "璇勬敞": "comment",
-    "鐐规嫧": "comment",
-    "鐐圭潧": "comment",
-    "澶囨敞": "comment",
-    "鑰冪偣": "knowledge",
-    "鐭ヨ瘑鐐?": "knowledge",
-    "涓撻": "topic",
-    "棰樺瀷": "topic",
-    "涓婚": "topic",
+    "解法": "solution",
+    "过程": "solution",
+    "点评": "comment",
+    "评注": "comment",
+    "点拨": "comment",
+    "点睛": "comment",
+    "备注": "comment",
+    "考点": "knowledge",
+    "知识点": "knowledge",
+    "专题": "topic",
+    "题型": "topic",
+    "主题": "topic",
 }
 SECTION_LABEL_PATTERN = re.compile(
-    r"(?im)(?:^|\n)\s*(?:銆恷\[|\()?\s*(?P<label>"
+    r"(?im)(?:^|\n)\s*(?:【|\[|\()?\s*(?P<label>"
     + "|".join(sorted((re.escape(label) for label in SECTION_LABEL_ALIASES), key=len, reverse=True))
-    + r")\s*(?:銆憒\]|\))?\s*[:锛歖?\s*"
+    + r")\s*(?:】|\]|\))?\s*[:：]?\s*"
 )
 
-# 閫夐」姝ｆ枃鍚庤骞跺叆銆岀瓟妗?瑙ｆ瀽銆嶆垨涓嬩竴棰橀鍙凤紙鏃犳崲琛?A. 鏃讹級
-# 涔熸娴嬪瓙棰樺唴瀹规硠婕忥細閫夐」鍊煎悗绱ц窡鏂伴骞蹭俊鍙凤紙濡?"2a宸茬煡鍑芥暟..."锛?
+# 选项正文后误并入「答案/解析」或下一题题号（无换行 A. 时）
 _OPTION_TAIL_BLEED = re.compile(
+    r"(?:"
     r"(?:\n|^)\s*(?:"
-    r"绛旀\s*[:锛歖|鍙傝€冪瓟妗圽s*[:锛歖|銆愮瓟妗堛€憒銆愬弬鑰冪瓟妗堛€憒"
-    r"瑙ｆ瀽\s*[:锛歖|銆愯В鏋愩€憒"
-    r"璇﹁В\s*[:锛歖|瑙ｇ瓟\s*[:锛歖|"
-    r"(?:绗琝s*\d{1,3}\s*棰榺\d{1,3}[\.锛庛€乚(?!\d))"
-    r")"
-    r"|"
-    r"\S\s*(?:宸茬煡鍑芥暟|宸茬煡f\s*\(|鑻ュ嚱鏁皘鑻\s*\(|璁惧嚱鏁皘璁緁\s*\(|宸茬煡瀹氫箟鍩焲宸茬煡闆嗗悎|宸茬煡鏁板垪|宸茬煡妞渾|宸茬煡鍙屾洸绾?"
-    r"|"
-    r"(?:[)锛塡]銆慮|\d)\s*\n?\s*鍒橽s*(?:涓嶇瓑寮弢涓嬪垪|鍏充簬|鍑芥暟|瀹炴暟)"
-    r"|"
-    r"\n\s*(?:宸茬煡鍑芥暟|宸茬煡f\s*\(|宸茬煡瀹氫箟鍩焲宸茬煡闆嗗悎|鑻ュ嚱鏁皘鑻\s*\(|璁惧嚱鏁皘璁緁\s*\(|璁惧畾涔夊煙)"
-    ,
+    r"答案\s*[:：]|参考答案\s*[:：]|【答案】|【参考答案】|"
+    r"解析\s*[:：]|【解析】|"
+    r"详解\s*[:：]|解答\s*[:：]|"
+    r"(?:第\s*\d{1,3}\s*题|\d{1,3}[\.．、](?!\d))"
+    r")|"
+    r"(?:[。.．\n])\s*\(\d{1,2}\)|"
+    r"(?:\u3002|[。.．\n])\s*\uFF08\d{1,2}\uFF09"
+    r")",
     re.IGNORECASE,
 )
 
-# 浠呯敤浜庛€岄骞?閫夐」銆嶆埅鍙栵細鍦ㄩ涓寮忕瓟妗堝尯銆愨€︺€戝墠鎴柇锛岄伩鍏嶃€愯€冪偣銆戙€愪笓棰樸€戠瓑鎶婇€夐」鍒囨病
+# 仅用于「题干+选项」截取：在首个正式答案区【…】前截断，避免【考点】【专题】等把选项切没
 OPTION_SCOPE_BRACKET_LABELS = (
-    "鍙傝€冪瓟妗?",
-    "绛旀瑙ｆ瀽",
-    "绛旀",
-    "瑙ｆ瀽",
-    "璇﹁В",
-    "瑙ｇ瓟",
-    "涓撳瑙ｈ",
-    "鎬濊矾寮曞",
-    "鎬濊矾瀵煎紩",
-    "瑙ｆ硶",
-    "鐐硅瘎",
-    "璇勬敞",
-    "鐐规嫧",
-    "鐐圭潧",
-    "澶囨敞",
+    "参考答案",
+    "答案解析",
+    "答案",
+    "解析",
+    "详解",
+    "解答",
+    "专家解读",
+    "思路引导",
+    "思路导引",
+    "解法",
+    "点评",
+    "评注",
+    "点拨",
+    "点睛",
+    "备注",
 )
 OPTION_SCOPE_BRACKET_PATTERN = re.compile(
-    r"銆怽s*(?:"
+    r"【\s*(?:"
     + "|".join(re.escape(x) for x in sorted(OPTION_SCOPE_BRACKET_LABELS, key=len, reverse=True))
-    + r")\s*銆?",
+    + r")\s*】",
     re.IGNORECASE,
 )
 
 INLINE_KNOWLEDGE_PATTERNS = [
-    re.compile(r"(?:鑰冪偣|鐭ヨ瘑鐐箌鑰冩煡鍐呭)\s*[:锛歖\s*(?P<value>[^\n]+)", re.IGNORECASE),
-    re.compile(r"鏈鑰冩煡\s*(?P<value>[^銆傦紱\n]+)", re.IGNORECASE),
+    re.compile(r"(?:考点|知识点|考查内容)\s*[:：]\s*(?P<value>[^\n]+)", re.IGNORECASE),
+    re.compile(r"本题考查\s*(?P<value>[^。；\n]+)", re.IGNORECASE),
 ]
 INLINE_TOPIC_PATTERNS = [
-    re.compile(r"(?:涓撻|棰樺瀷|涓婚)\s*[:锛歖\s*(?P<value>[^\n]+)", re.IGNORECASE),
+    re.compile(r"(?:专题|题型|主题)\s*[:：]\s*(?P<value>[^\n]+)", re.IGNORECASE),
 ]
 INLINE_COMMENT_PATTERNS = [
-    re.compile(r"(?:鐐硅瘎|璇勬敞|鐐规嫧|澶囨敞)\s*[:锛歖\s*(?P<value>[^\n]+)", re.IGNORECASE),
+    re.compile(r"(?:点评|评注|点拨|备注)\s*[:：]\s*(?P<value>[^\n]+)", re.IGNORECASE),
 ]
 
 
@@ -257,7 +229,7 @@ class ExtractedQuestion:
     question_type: str
     has_formula: bool
     stem_text: str
-    # 鍘熷嵎棰樺彿锛堝銆?銆嶏級锛涘叆搴?question_no 鍙兘涓洪『搴忓彿浠ヤ繚璇佸悜閲?id 鍞竴
+    # 原卷题号（如「2」）；入库 question_no 可能为顺序号以保证向量 id 唯一
     original_question_label: Optional[str] = None
     options: List[ExtractedOption] = field(default_factory=list)
     answer_text: Optional[str] = None
@@ -269,7 +241,7 @@ class ExtractedQuestion:
     formulas: List[ExtractedFormula] = field(default_factory=list)
     figure_markers: List[str] = field(default_factory=list)
     render_payloads: Dict[str, Dict[str, object]] = field(default_factory=dict)
-    # 鏈鍦ㄦ暣娈?slice_text 涓殑 [start, end)锛屼緵瀵屾枃鏈槧灏勬椂闄愬埗 find 鑼冨洿
+    # 本题在整段 slice_text 中的 [start, end)，供富文本映射时限制 find 范围
     source_slice_span: Optional[Tuple[int, int]] = None
 
 
@@ -332,7 +304,7 @@ class QuestionBankIngestionService:
             .first()
         )
         if not source_document:
-            raise ValueError(f"SourceDocument {source_document_id} 涓嶅瓨鍦?")
+            raise ValueError(f"SourceDocument {source_document_id} 不存在")
 
         content_source = source_document.content_source
         is_knowledge_point_material = (
@@ -349,9 +321,9 @@ class QuestionBankIngestionService:
             is_knowledge_point_material,
         )
 
-        # 鍑℃寕鍦ㄦ湰 source_document_id 涓嬬殑 KnowledgePackage 涓€寰嬪厛鎷嗭紙鏃犲寘鏃朵负绌烘搷浣滐級銆?
-        # 鑻ヤ粎鎸?parse_profile / 鍐呭婧愬悕鍒ゆ柇銆屼笓棰樿祫鏂欍€嶏紝婕忓垽鏃朵細璺宠繃娓呯悊锛涜€?SourceDocument ORM 鏈骇鑱斾笓棰樺寘锛?
-        # 鍦ㄩ儴鍒?SQLite 閰嶇疆涓嬩粛鍙兘鍒犳帀鏂囨。琛屽嵈鐣欎笅瀛ゅ効鍖咃紝鐭ヨ瘑鐐圭鐞嗛〉灏变細缁х画鐪嬪埌鏃ц€冪偣銆?
+        # 凡挂在本 source_document_id 下的 KnowledgePackage 一律先拆（无包时为空操作）。
+        # 若仅按 parse_profile / 内容源名判断「专题资料」，漏判时会跳过清理；而 SourceDocument ORM 未级联专题包，
+        # 在部分 SQLite 配置下仍可能删掉文档行却留下孤儿包，知识点管理页就会继续看到旧考点。
         from analyzer.app.knowledge_point_parser import KnowledgePointIngestionService
 
         KnowledgePointIngestionService()._clear_existing_package_artifacts(db, source_document_id)
@@ -498,13 +470,12 @@ class QuestionBankIngestionService:
     ) -> Dict[str, object]:
         source_document = db.query(models.SourceDocument).filter(models.SourceDocument.id == source_document_id).first()
         if not source_document:
-            raise ValueError(f"SourceDocument {source_document_id} 涓嶅瓨鍦?")
+            raise ValueError(f"SourceDocument {source_document_id} 不存在")
 
         progress_log_handler = _FrontendProgressLogHandler(progress_callback) if progress_callback else None
         scoped_log_path = self._build_ingest_log_path(source_document)
         scoped_file_log_handler = _ScopedFileLogHandler(scoped_log_path)
-        vector_db_module = _get_vector_db()
-        progress_loggers = [logger, vector_db_module.logger, rich_content_logger, docx_sanitizer_logger]
+        progress_loggers = [logger, vector_db.logger, rich_content_logger, docx_sanitizer_logger]
 
 
         original_levels = {}
@@ -578,7 +549,7 @@ class QuestionBankIngestionService:
                 extracted_content = self.extract_document_content(source_document, normalized)
                 extracted_text = extracted_content.text
                 if not extracted_text.strip():
-                    raise ValueError("Document extraction produced no usable text")
+                    raise ValueError("文档未提取到有效文本，无法切题")
                 self._finish_job(db, extract_job, metrics_json={"text_length": len(extracted_text)})
                 logger.info(
                     "Extract stage done: source_document_id=%s elapsed=%s text_length=%s structured_question_count=%s",
@@ -628,10 +599,10 @@ class QuestionBankIngestionService:
                     db,
                     source_document_id,
                     "index",
-                    tool_name=vector_db_module.db.index_backend_label,
+                    tool_name=vector_db.db.index_backend_label,
                 )
                 stage_started_at = time.perf_counter()
-                logger.info("Index stage start: source_document_id=%s backend=%s", source_document_id, vector_db_module.db.index_backend_label)
+                logger.info("Index stage start: source_document_id=%s backend=%s", source_document_id, vector_db.db.index_backend_label)
                 index_metrics = self.index_document_questions(db, source_document_id)
                 self._finish_job(db, index_job, metrics_json=index_metrics)
                 logger.info(
@@ -701,7 +672,7 @@ class QuestionBankIngestionService:
     def normalize_document(self, source_document: models.SourceDocument) -> NormalizedDocument:
         source_path = self._resolve_local_path(source_document.storage_url)
         if not source_path.exists():
-            raise FileNotFoundError(f"婧愭枃浠朵笉瀛樺湪: {source_path}")
+            raise FileNotFoundError(f"源文件不存在: {source_path}")
 
         file_ext = self._normalize_extension(source_document.file_ext or source_path.suffix)
         output_dir = self.normalized_root / f"document_{source_document.id}"
@@ -720,7 +691,7 @@ class QuestionBankIngestionService:
             normalized_pdf_path = self._convert_with_libreoffice(source_path, output_dir, "pdf", optional=True)
             if not word_export_docx_path:
                 raise DocumentNormalizationError(
-                    "LibreOffice failed to convert .doc to .docx"
+                    "当前环境未检测到 LibreOffice，无法自动将 .doc 归一化为 .docx。"
                 )
             normalized_docx_path = self._maybe_sanitize_docx(source_document.id, file_ext, word_export_docx_path, output_dir)
 
@@ -754,7 +725,7 @@ class QuestionBankIngestionService:
             logger.info("Normalize document plan: source_document_id=%s .txt direct pass-through", source_document.id)
             return NormalizedDocument(source_path=source_path)
 
-        raise ValueError(f"鏆備笉鏀寔鐨勬枃浠剁被鍨? {file_ext}")
+        raise ValueError(f"暂不支持的文件类型: {file_ext}")
 
     def _resolve_docx_sanitize_backend(self, source_file_ext: str) -> str:
         backend = self.docx_sanitize_backend
@@ -906,262 +877,10 @@ class QuestionBankIngestionService:
 
     def _is_reasonable_question_transition(self, previous_no: Optional[int], current_no: Optional[int]) -> bool:
         if current_no is None:
-            return True
+            return False
         if previous_no is None:
             return True
         return current_no == 1 or current_no == previous_no + 1
-
-    def _extract_subquestion_index(self, label: Optional[str]) -> Optional[int]:
-        normalized = self._normalize_text(label or "")
-        if not normalized:
-            return None
-        match = TOPIC_SUBQUESTION_HEADER_PATTERN.match(normalized)
-        if not match:
-            return None
-        try:
-            return int(match.group("index"))
-        except (TypeError, ValueError):
-            return None
-
-    def _blocks_have_explicit_solution_zone(self, blocks: List[Dict[str, Any]]) -> bool:
-        for block in blocks:
-            text = self._normalize_text(str(block.get("text") or ""))
-            if not text:
-                continue
-            if re.search(r"(?im)(?:^|\n)\s*(?:绛旀|鍙傝€冪瓟妗坾瑙ｆ瀽|鍒嗘瀽|璇﹁В|瑙瑙ｇ瓟|瑙ｆ硶|璇佹槑|璇佹槑濡備笅|杩囩▼)\s*[:锛歖", text):
-                return True
-            match = SECTION_LABEL_PATTERN.match(text)
-            if not match:
-                continue
-            label = self._normalize_text(match.group("label"))
-            role = SECTION_LABEL_ALIASES.get(label, "comment")
-            if role in {"answer", "analysis", "solution"}:
-                return True
-        return False
-
-    def _merge_structured_followup_subquestions(
-        self,
-        segments: List[Tuple[str, List[Dict[str, Any]]]],
-    ) -> List[Tuple[str, List[Dict[str, Any]]]]:
-        if len(segments) <= 1:
-            return segments
-
-        merged: List[Tuple[str, List[Dict[str, Any]]]] = []
-        i = 0
-        while i < len(segments):
-            question_no, blocks = segments[i]
-            current_sub_idx = self._extract_subquestion_index(question_no)
-
-            # Case A: top-level parent stem followed by sub-questions like "(1)/(2)".
-            if current_sub_idx is None and i + 1 < len(segments):
-                next_sub_idx = self._extract_subquestion_index(segments[i + 1][0])
-                if next_sub_idx is not None:
-                    group = [segments[i]]
-                    j = i + 1
-                    expected_idx = next_sub_idx + 1
-                    saw_explicit_solution = False
-                    while j < len(segments):
-                        follow_no, follow_blocks = segments[j]
-                        follow_sub_idx = self._extract_subquestion_index(follow_no)
-                        if follow_sub_idx is None:
-                            break
-                        if j == i + 1 or follow_sub_idx == expected_idx:
-                            group.append(segments[j])
-                            saw_explicit_solution = saw_explicit_solution or self._blocks_have_explicit_solution_zone(follow_blocks)
-                            expected_idx = follow_sub_idx + 1
-                            j += 1
-                            continue
-                        break
-                    if len(group) > 1 and saw_explicit_solution:
-                        merged_blocks: List[Dict[str, Any]] = []
-                        for _, grouped_blocks in group:
-                            merged_blocks.extend(grouped_blocks)
-                        merged.append((question_no, merged_blocks))
-                        i = j
-                        continue
-
-            # Case B: a sub-question group starts at "(1)" and the shared answer/analysis
-            # only appears in the last sub-question.
-            if current_sub_idx == 1:
-                group = [segments[i]]
-                j = i + 1
-                expected_idx = 2
-                saw_explicit_solution = self._blocks_have_explicit_solution_zone(blocks)
-                while j < len(segments):
-                    follow_no, follow_blocks = segments[j]
-                    follow_sub_idx = self._extract_subquestion_index(follow_no)
-                    if follow_sub_idx is None:
-                        break
-                    if follow_sub_idx == expected_idx:
-                        group.append(segments[j])
-                        saw_explicit_solution = saw_explicit_solution or self._blocks_have_explicit_solution_zone(follow_blocks)
-                        expected_idx += 1
-                        j += 1
-                        continue
-                    break
-                if len(group) > 1 and saw_explicit_solution:
-                    merged_blocks: List[Dict[str, Any]] = []
-                    for _, grouped_blocks in group:
-                        merged_blocks.extend(grouped_blocks)
-                    merged.append((question_no, merged_blocks))
-                    i = j
-                    continue
-
-            merged.append(segments[i])
-            i += 1
-
-        return merged
-
-    def _split_embedded_section_texts(
-        self,
-        stem_text: str,
-    ) -> Tuple[str, Dict[str, str]]:
-        normalized_stem = self._normalize_text(stem_text or "")
-        if not normalized_stem:
-            return normalized_stem, {}
-
-        matches = [m for m in EMBEDDED_SECTION_MARKER_PATTERN.finditer(normalized_stem) if m.start() > 0]
-        if not matches:
-            return normalized_stem, {}
-
-        first = matches[0]
-        prefix_text = self._normalize_text(normalized_stem[: first.start()])
-        first_label = self._normalize_text(first.group("label"))
-        first_role = SECTION_LABEL_ALIASES.get(first_label, "comment")
-        if first_role == "comment" and first_label in {"???", "???", "??????"}:
-            first_role = "solution"
-        prompt_signal_count = sum(
-            1
-            for hit in (
-                re.search(r"[(\uFF08]\s*\d+\s*\u5206\s*[)\uFF09]", prefix_text),
-                re.search(r"(?:\u5df2\u77e5|\u82e5|\u8bbe|\u6c42|\u8bd5|\u8ba8\u8bba|\u8bc1\u660e|\u6c42\u8bc1)", prefix_text),
-                re.search(r"(?:\u51fd\u6570|\u65b9\u7a0b|\u4e0d\u7b49\u5f0f|\u6570\u5217|\u56fe\u8c61|\u533a\u95f4|\u8303\u56f4|\u5355\u8c03)", prefix_text),
-                "\n" in prefix_text,
-                len(prefix_text) >= 28,
-            )
-            if hit
-        )
-        should_split = bool(
-            re.search(r"[锛?]\s*\d{1,2}\s*[锛?]", prefix_text)
-            or re.search(r"(?:瀵圭偣缁億瑙ｄ笅鍒梶姹傝В涓嬪垪|瀹屾垚涓嬪垪)", prefix_text)
-            or (first_role in {"answer", "analysis", "solution"} and prompt_signal_count >= 3)
-        )
-        if not should_split:
-            return normalized_stem, {}
-        stem_head = self._normalize_text(normalized_stem[: first.start()])
-        sections: Dict[str, str] = {}
-        for idx, match in enumerate(matches):
-            label = self._normalize_text(match.group("label"))
-            role = SECTION_LABEL_ALIASES.get(label, "comment")
-            if role == "comment" and label in {"???", "???", "??????"}:
-                role = "solution"
-            content_start = match.end()
-            content_end = matches[idx + 1].start() if idx + 1 < len(matches) else len(normalized_stem)
-            content = self._normalize_text(normalized_stem[content_start:content_end])
-            if not content:
-                continue
-            previous = sections.get(role)
-            sections[role] = self._normalize_text(f"{previous}\n{content}" if previous else content)
-        return stem_head or normalized_stem, sections
-
-    def _strip_question_heading_prefix(self, text: str) -> str:
-        stripped = self._normalize_text(text or "")
-        if not stripped:
-            return stripped
-        while True:
-            updated = re.sub(
-                r"^\s*(?:瀵圭偣缁僜s*\d+|绗琝s*\d{1,3}\s*棰榺\d{1,3}[\.锛庛€乚|[锛?]\s*\d{1,2}\s*[锛?]|[锛?]\s*(?:澶氶€墊鍗曢€墊鍒ゆ柇|濉┖)\s*[锛?])\s*",
-                "",
-                stripped,
-            )
-            updated = self._normalize_text(updated)
-            if updated == stripped:
-                break
-            stripped = updated
-        return stripped
-
-    def validate_extracted_question_quality(self, extracted_question: ExtractedQuestion) -> List[str]:
-        issues: List[str] = []
-        stem_text = self._normalize_text(extracted_question.stem_text or "")
-        stripped_stem = self._strip_question_heading_prefix(stem_text)
-        answer_text = self._normalize_text(extracted_question.answer_text or "")
-        analysis_text = self._normalize_text(extracted_question.analysis_text or "")
-        solution_text = self._normalize_text(extracted_question.solution_text or "")
-
-        if not stem_text:
-            issues.append("empty_stem")
-            return issues
-
-        if QUESTION_LABEL_ONLY_PATTERN.match(stem_text) or len(stripped_stem) <= 2:
-            issues.append("label_only_stem")
-
-        if extracted_question.question_type == "choice" and not extracted_question.options:
-            issues.append("choice_without_options")
-
-        if (
-            extracted_question.question_type != "choice"
-            and not answer_text
-            and not analysis_text
-            and not solution_text
-            and len(stripped_stem) <= 20
-        ):
-            issues.append("subjective_missing_answer_and_solution")
-
-        if (
-            extracted_question.question_type != "choice"
-            and not answer_text
-            and not analysis_text
-            and not solution_text
-            and re.search(r"(?im)(?:^|\n)\s*(?:绛旀|鍙傝€冪瓟妗坾瑙ｆ瀽|鍒嗘瀽|璇﹁В|瑙瑙ｇ瓟|瑙ｆ硶|璇佹槑|璇佹槑濡備笅|杩囩▼)\s*[:锛歖", stem_text)
-        ):
-            issues.append("embedded_solution_left_in_stem")
-
-        return issues
-
-    def _match_topic_style_question_head(self, text: str) -> Optional[Tuple[str, Optional[int], int]]:
-        normalized = self._normalize_text(text)
-        if not normalized:
-            return None
-
-        def has_signal(after_text: str) -> bool:
-            if not after_text:
-                return False
-            if OPTION_PATTERN.search(after_text):
-                return True
-            if SECTION_LABEL_PATTERN.search(after_text):
-                return True
-            if FORMULA_HINT_PATTERN.search(after_text):
-                return True
-            if re.search(r"(?:宸茬煡|鑻璁緗姹倈鍑芥暟|涓嶇瓑寮弢鏂圭▼|鏁板垪|涓嬪垪|鍒?", after_text[:160]):
-                return True
-            if re.search(r"[锛?]\s*[銆€ ]{2,10}\s*[锛?]|_{2,}", after_text):
-                return True
-            return False
-
-        drill_match = TOPIC_DRILL_HEADER_PATTERN.match(normalized)
-        if drill_match and has_signal(normalized[drill_match.end():]):
-            label = re.sub(r"\s+", "", drill_match.group("label") or "")
-            return label, None, drill_match.end()
-
-        presentation_match = TOPIC_PRESENTATION_HEADER_PATTERN.match(normalized)
-        if presentation_match:
-            after_text = normalized[presentation_match.end():].strip()
-            if has_signal(after_text):
-                return after_text[:24], None, presentation_match.end()
-
-        type_match = TOPIC_TYPE_HEADER_PATTERN.match(normalized)
-        if type_match and has_signal(normalized[type_match.end():]):
-            label = re.sub(r"\s+", "", type_match.group("label") or "")
-            return label, None, type_match.end()
-
-        subquestion_match = TOPIC_SUBQUESTION_HEADER_PATTERN.match(normalized)
-        if subquestion_match:
-            after_text = normalized[subquestion_match.end():].strip()
-            if TOPIC_SUBQUESTION_STEM_CUE_PATTERN.search(after_text) and has_signal(after_text):
-                label = re.sub(r"\s+", "", subquestion_match.group("label") or "")
-                return label, None, subquestion_match.end()
-
-        return None
 
     def segment_questions(self, text: str) -> List[ExtractedQuestion]:
         matches = list(QUESTION_HEADER_PATTERN.finditer(text))
@@ -1254,12 +973,12 @@ class QuestionBankIngestionService:
         start_p: int,
         end_p: int,
     ) -> None:
-        """Attach rich-content render payloads to ExtractedQuestion."""
+        """为切题后的 ExtractedQuestion 附加 rich_content_json render_payloads。
 
-
-
-
-
+        原理：先将本 slice 涉及页的 rich_paragraphs 按在 slice_text 中的字符偏移
+        排列，然后根据每道题 stem_text / answer_text 等在 slice_text 中的位置，
+        找出对应的 rich paragraph 子集，组装成 block_group 写入 render_payloads。
+        """
         from .pdf_structured_extractor import build_rich_content_json
 
         para_offsets: List[Tuple[int, int, Dict[str, Any]]] = []
@@ -1530,7 +1249,7 @@ class QuestionBankIngestionService:
         raw_outline["formula_count"] = formula_count
         raw_outline["question_asset_count"] = question_asset_count
         paper.raw_outline_json = raw_outline
-        db.flush()
+        db.commit()
 
         return {
             "question_count": question_count,
@@ -1581,14 +1300,12 @@ class QuestionBankIngestionService:
             point_rows.append((retrieval_document.id, vector_id, retrieval_document.content_hash, retrieval_document.text_for_embedding))
 
         if not payload:
-            vector_db_module = _get_vector_db()
             return {
                 "indexed_documents": 0,
-                **vector_db_module.db.backend_summary,
+                **vector_db.db.backend_summary,
             }
 
-        vector_db_module = _get_vector_db()
-        sync_result = vector_db_module.db.upsert_retrieval_documents(payload)
+        sync_result = vector_db.db.upsert_retrieval_documents(payload)
         db.query(models.EmbeddingPoint).filter(models.EmbeddingPoint.retrieval_document_id.in_([row[0] for row in point_rows])).delete(
             synchronize_session=False
         )
@@ -1611,7 +1328,7 @@ class QuestionBankIngestionService:
 
 
     def _slice_before_first_option_scope_bracket(self, text: str) -> str:
-        """Slice text before the first explicit answer or analysis bracket block."""
+        """截取到首个【答案】【解析】等正式区块之前，供选项抽取兜底。"""
         if not text:
             return ""
         m = OPTION_SCOPE_BRACKET_PATTERN.search(text)
@@ -1694,7 +1411,7 @@ class QuestionBankIngestionService:
         )
 
     def _segment_structured_questions(self, blocks: List[Dict[str, Any]]) -> List[ExtractedQuestion]:
-        segmented_blocks: List[Tuple[str, List[Dict[str, Any]]]] = []
+        extracted_questions: List[ExtractedQuestion] = []
         current_question_no: Optional[str] = None
         current_question_no_int: Optional[int] = None
         current_blocks: List[Dict[str, Any]] = []
@@ -1703,40 +1420,25 @@ class QuestionBankIngestionService:
             text = self._normalize_text(str(block.get("text") or ""))
             clean_text = _LEADING_IMAGE_PLACEHOLDER_RE.sub("", text)
             match = QUESTION_HEADER_PATTERN.match(clean_text)
-            special_match = None if match else self._match_topic_style_question_head(clean_text)
-            if match or special_match:
-                candidate_no_int = self._extract_question_no_from_match(match) if match else special_match[1]
+            if match:
+                candidate_no_int = self._extract_question_no_from_match(match)
                 if current_question_no is not None and not self._is_reasonable_question_transition(current_question_no_int, candidate_no_int):
                     current_blocks.append(block)
                     continue
 
                 if current_question_no and current_blocks:
-                    segmented_blocks.append((current_question_no, current_blocks))
-                current_question_no = (
-                    match.group(1) or match.group(2) or match.group(3) or str(len(segmented_blocks) + 1)
-                ) if match else (special_match[0] or str(len(segmented_blocks) + 1))
+                    extracted_questions.append(self._parse_structured_question_segment(current_question_no, current_blocks))
+                current_question_no = match.group(1) or match.group(2) or match.group(3) or str(len(extracted_questions) + 1)
                 current_question_no_int = candidate_no_int
-                prefix_length = match.end() if match else special_match[2]
-                trimmed_block = self._trim_structured_block_prefix(block, prefix_length)
+                trimmed_block = self._trim_structured_block_prefix(block, match.end())
                 current_blocks = [trimmed_block] if self._block_has_visible_content(trimmed_block) else []
                 continue
             if current_question_no is not None:
                 current_blocks.append(block)
 
         if current_question_no and current_blocks:
-            segmented_blocks.append((current_question_no, current_blocks))
-
-        merged_segments = self._merge_structured_followup_subquestions(segmented_blocks)
-        extracted_questions: List[ExtractedQuestion] = []
-        for index, (question_no, segment_blocks) in enumerate(merged_segments, start=1):
-            parsed = self._parse_structured_question_segment(question_no, segment_blocks)
-            if not parsed.original_question_label:
-                parsed.original_question_label = question_no
-            if not parsed.question_no:
-                parsed.question_no = str(index)
-            extracted_questions.append(parsed)
+            extracted_questions.append(self._parse_structured_question_segment(current_question_no, current_blocks))
         return extracted_questions
-
 
     def _parse_structured_question_segment(
         self,
@@ -1765,7 +1467,7 @@ class QuestionBankIngestionService:
             text = self._normalize_text(str(block.get("text") or ""))
             option_match = self._match_option_label(text)
             section_match = SECTION_LABEL_PATTERN.match(text)
-
+            sub_q_match = _SUB_Q_NO_PATTERN.match(text) if current_role == "option" else None
 
             if option_match:
                 current_role = "option"
@@ -1774,25 +1476,14 @@ class QuestionBankIngestionService:
                     option_block_map[current_option_key] = []
                     option_order.append(current_option_key)
                 block = self._trim_structured_block_prefix(block, option_match.end())
+            elif sub_q_match:
+                current_role = "stem"
+                current_option_key = None
             elif section_match:
                 matched_label = self._normalize_text(section_match.group("label"))
                 current_role = SECTION_LABEL_ALIASES.get(matched_label, "comment")
                 current_option_key = None
                 block = self._trim_structured_block_prefix(block, section_match.end())
-            elif current_role == "option" and self._looks_like_answer_block(text):
-                current_role = "answer"
-                current_option_key = None
-            elif current_role == "answer" and not self._looks_like_answer_block(text):
-                # Text after answer that doesn't continue the answer 鈥?likely analysis/solution
-                analysis_section = SECTION_LABEL_PATTERN.match(text)
-                if analysis_section:
-                    matched_label = self._normalize_text(analysis_section.group("label"))
-                    current_role = SECTION_LABEL_ALIASES.get(matched_label, "comment")
-                    current_option_key = None
-                    block = self._trim_structured_block_prefix(block, analysis_section.end())
-                else:
-                    current_role = "analysis"
-                    current_option_key = None
 
             if not self._block_has_visible_content(block):
                 continue
@@ -1810,8 +1501,30 @@ class QuestionBankIngestionService:
 
 
         option_block_map, option_order = self._normalize_structured_option_blocks(option_block_map, option_order)
+        if option_order:
+            role_blocks["stem"] = self._strip_trailing_option_paragraphs_from_stem_blocks(
+                role_blocks.get("stem") or [],
+                option_order,
+            )
 
         stem_text = self._join_structured_block_texts(role_blocks.get("stem") or [])
+        stem_text = self._strip_trailing_option_lines_from_stem_text(stem_text, option_order)
+
+        if option_order:
+            option_inline_parts: List[str] = []
+            for ok in option_order:
+                opt_txt = self._truncate_option_text_bleed(
+                    self._join_structured_block_texts(option_block_map.get(ok) or [])
+                )
+                if opt_txt:
+                    option_inline_parts.append("%s.%s" % (ok, opt_txt))
+            if option_inline_parts:
+                option_inline = "\n".join(option_inline_parts)
+                insert_pos = self._find_grouped_subquestion_insert_pos(stem_text)
+                if insert_pos > 0:
+                    stem_text = stem_text[:insert_pos].rstrip() + "\n" + option_inline + "\n" + stem_text[insert_pos:]
+                else:
+                    stem_text = stem_text.rstrip() + "\n" + option_inline
 
         options = [
             ExtractedOption(
@@ -1830,27 +1543,12 @@ class QuestionBankIngestionService:
                 )
             )
         ]
-        if options and stem_text:
-            stem_text = self._strip_inline_options_from_stem(stem_text)
-
         answer_text = self._sanitize_answer_text(
             self._join_structured_block_texts(role_blocks.get("answer") or []) or None,
         )
         analysis_text = self._join_structured_block_texts(role_blocks.get("analysis") or []) or None
         solution_text = self._join_structured_block_texts(role_blocks.get("solution") or []) or None
         comment_text = self._join_structured_block_texts(role_blocks.get("comment") or []) or None
-
-        stem_text, embedded_sections = self._split_embedded_section_texts(stem_text)
-        if embedded_sections:
-            if not answer_text:
-                answer_text = self._sanitize_answer_text(embedded_sections.get("answer"))
-            if not analysis_text:
-                analysis_text = embedded_sections.get("analysis")
-            if not solution_text:
-                solution_text = embedded_sections.get("solution")
-            if not comment_text:
-                comment_text = embedded_sections.get("comment")
-
         knowledge_points = [
             self._join_structured_block_texts([block])
             for block in role_blocks.get("knowledge") or []
@@ -1925,24 +1623,6 @@ class QuestionBankIngestionService:
         )
         figure_markers = self._unique_preserve_order(FIGURE_MARKER_PATTERN.findall(normalized_text))
 
-        if not options and question_type == "choice" and blocks:
-            try:
-                import json as _json
-                _dump = {
-                    "question_no": question_no,
-                    "blocks": [{"text": str(b.get("text",""))[:200], "render_type": str(b.get("render",{}).get("type","?")) if isinstance(b.get("render"), dict) else str(type(b.get("render"))) } for b in blocks],
-                    "option_order": list(option_order),
-                    "option_block_map_keys": list(option_block_map.keys()),
-                    "stem_text": (stem_text or "")[:200],
-                    "answer_text": answer_text,
-                }
-                _path = "D:/10739/Exam-Analysis-Suite/scripts/_out/qparse_debug.json"
-                with open(_path, "a", encoding="utf-8") as _f:
-                    _f.write(_json.dumps(_dump, ensure_ascii=False, indent=2) + "\n---\n")
-            except Exception as _exc:
-                with open("D:/10739/Exam-Analysis-Suite/scripts/_out/qparse_debug_err.txt", "a", encoding="utf-8") as _f:
-                    _f.write(f"Error: {_exc}\n")
-
         return ExtractedQuestion(
             question_no=question_no,
             text=normalized_text,
@@ -1970,7 +1650,7 @@ class QuestionBankIngestionService:
         return "'type': 'image'" in raw or '"type": "image"' in raw
 
     def _merge_structured_option_paragraphs(self, blocks: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-        """Split paragraphs that inline options and analysis into cleaner blocks."""
+        """将同一选项下多个段落块合并为单一 paragraph，保留原文顺序与图片。"""
         children: List[Dict[str, Any]] = []
         style: Dict[str, Any] = {}
 
@@ -2029,18 +1709,115 @@ class QuestionBankIngestionService:
             with_img = [b for b in blk_list if self._block_has_image(b)]
             without_img = [b for b in blk_list if not self._block_has_image(b)]
             if with_img and without_img:
-                # 浠呬繚鐣欏浘鐗囦細涓㈡帀 鈥溾垰2鈥濃€滃尯闂粹€濈瓑浼寸敓鏂囧瓧锛岃鍐呭叕寮忎篃浼氳鍘嬫垚涓€鏉＄嚎
+                # 仅保留图片会丢掉 “√2”“区间”等伴生文字，行内公式也会被压成一条线
                 merged = self._merge_structured_option_paragraphs(blk_list)
                 if merged:
                     normalized_map[key] = merged
 
         return normalized_map, normalized_order
 
-    # 閫夐」闂村父鐢ㄥ崟绌烘牸锛圓锛庘€?B锛庘€︼級銆佹崲琛岋紙A锛庘€nB锛庘€︼級鎴?2+ 绌烘牸鍒嗛殧銆?
-    # (?<=\S)\s 鍖归厤鏂囨湰鍚庤窡鍗曠┖鏍煎啀鎺ラ€夐」鏍囩鐨勫父瑙佹帓鐗堬紝涓嶄細璇激鏁板琛ㄨ揪寮忋€?
-    _INLINE_OPTION_LABEL_RE = re.compile(
-        r"(?:^|\n|\s{2,}|(?<=\S)\s)(?P<key>[A-H锛?锛╙)[\.锛庛€?锛歖\s*"
-    )
+    _INLINE_OPTION_LABEL_RE = re.compile(r"(?:^|\s{2,})(?P<key>[A-HＡ-Ｈ])[\.．、:：]\s*")
+
+    def _looks_like_option_rich_paragraph(
+        self,
+        render: Any,
+        option_keys: Sequence[str],
+    ) -> bool:
+        if not isinstance(render, dict) or render.get("type") != "paragraph":
+            return False
+        paragraph_text = self._normalize_text(
+            "".join(self._inline_node_text(child) for child in (render.get("children") or []))
+        )
+        if not paragraph_text:
+            return False
+        found = {
+            self._normalize_option_key(match.group("key"))
+            for match in self._INLINE_OPTION_LABEL_RE.finditer(paragraph_text)
+        }
+        if not found:
+            match = self._match_option_label(paragraph_text)
+            if match:
+                found = {self._normalize_option_key(match.group("key"))}
+        option_key_set = {self._normalize_option_key(key) for key in option_keys if key}
+        return bool(found and found.issubset(option_key_set))
+
+    def _strip_trailing_option_paragraphs_from_stem_blocks(
+        self,
+        stem_blocks: List[Dict[str, Any]],
+        option_order: Sequence[str],
+    ) -> List[Dict[str, Any]]:
+        if not stem_blocks or not option_order:
+            return stem_blocks
+
+        sanitized = [copy.deepcopy(block) for block in stem_blocks]
+        while sanitized:
+            tail = sanitized[-1]
+            render = tail.get("render")
+            if isinstance(render, dict) and render.get("type") == "block_group":
+                sub_blocks = [copy.deepcopy(item) for item in (render.get("blocks") or [])]
+                removed = 0
+                while sub_blocks and self._looks_like_option_rich_paragraph(sub_blocks[-1], option_order):
+                    sub_blocks.pop()
+                    removed += 1
+                if removed:
+                    if sub_blocks:
+                        render["blocks"] = sub_blocks
+                        tail["render"] = render
+                        tail["text"] = self._structured_block_text_from_render(render)
+                        if self._block_has_visible_content(tail):
+                            sanitized[-1] = tail
+                            break
+                    sanitized.pop()
+                    continue
+
+            if self._looks_like_option_rich_paragraph(render, option_order):
+                sanitized.pop()
+                continue
+            break
+        return sanitized
+
+    def _strip_trailing_option_lines_from_stem_text(
+        self,
+        stem_text: str,
+        option_order: Sequence[str],
+    ) -> str:
+        if not stem_text or not option_order:
+            return stem_text
+        lines = stem_text.splitlines()
+        option_key_set = {self._normalize_option_key(key) for key in option_order if key}
+        removed_keys: set[str] = set()
+        while lines:
+            candidate = self._normalize_text(lines[-1])
+            if not candidate:
+                lines.pop()
+                continue
+            found = {
+                self._normalize_option_key(match.group("key"))
+                for match in self._INLINE_OPTION_LABEL_RE.finditer(candidate)
+            }
+            if not found:
+                match = self._match_option_label(candidate)
+                if match:
+                    found = {self._normalize_option_key(match.group("key"))}
+            if not found or not found.issubset(option_key_set):
+                break
+            removed_keys.update(found)
+            lines.pop()
+        if len(removed_keys) < 2:
+            return stem_text
+        return "\n".join(lines).rstrip()
+
+    def _find_grouped_subquestion_insert_pos(self, stem_text: str) -> int:
+        markers: List[re.Match[str]] = []
+        for match in re.finditer(r"\(\d{1,3}\)", stem_text or ""):
+            line_start = stem_text.rfind("\n", 0, match.start()) + 1
+            prefix = stem_text[line_start:match.start()]
+            prefix_clean = prefix.strip()
+            if not prefix_clean or _LEADING_IMAGE_PLACEHOLDER_RE.match(prefix_clean):
+                markers.append(match)
+        if len(markers) >= 2:
+            return markers[1].start()
+        return -1
 
     def _split_inline_structured_options(
         self,
@@ -2184,35 +1961,7 @@ class QuestionBankIngestionService:
         return self._normalize_text("\n".join(self._normalize_text(str(block.get("text") or "")) for block in blocks if block))
 
     def _match_option_label(self, text: str) -> Optional[re.Match]:
-        return re.match(r"^\s*(?P<key>[A-H锛?锛╙)[\.锛庛€?锛歖\s*", text or "")
-
-    _ANSWER_BLOCK_RE = re.compile(
-        r"^\s*"
-        r"(?:"
-        r"[A-H](?:[,锛孿s]*[A-H]){0,3}"                         # C, ABC, ABD, A,B,C, BD
-        r"|"
-        r"[(锛圿\d+[)锛塢\s*[A-H]"                                  # (1)C
-        r"(?:\s*[;锛?锛孿s]*[(锛圿\d+[)锛塢\s*[A-H])*"              # (1)C;(2)A
-        r")\s*$"
-    )
-
-    def _looks_like_answer_block(self, text: str) -> bool:
-        text = self._normalize_text(text or "")
-        if not text or len(text) > 24:
-            return False
-        return bool(self._ANSWER_BLOCK_RE.match(text))
-
-    _STEM_INLINE_OPTION_RE = re.compile(
-        r"\s+[A-D锛?锛[\.锛庛€?锛歖\s*\S"
-    )
-
-    def _strip_inline_options_from_stem(self, stem_text: str) -> str:
-        if not stem_text:
-            return stem_text
-        match = self._STEM_INLINE_OPTION_RE.search(stem_text)
-        if not match:
-            return stem_text
-        return self._normalize_text(stem_text[:match.start()]).strip()
+        return re.match(r"^\s*(?P<key>[A-HＡ-Ｈ])[\.．、:：]\s*", text or "")
 
     def _block_has_visible_content(self, block: Dict[str, Any]) -> bool:
         if self._normalize_text(str(block.get("text") or "")):
@@ -2283,7 +2032,7 @@ class QuestionBankIngestionService:
         return sliced
 
     def _slice_inline_children_keep_prefix(self, children: List[Dict[str, Any]], max_len: int) -> List[Dict[str, Any]]:
-        """Keep inline child nodes up to max_len while preserving prefix structure."""
+        """保留行内树前 max_len 个「逻辑字符」（与 _inline_node_text 计数一致）。"""
         if max_len <= 0:
             return []
         out: List[Dict[str, Any]] = []
@@ -2314,7 +2063,7 @@ class QuestionBankIngestionService:
         return out
 
     def slice_paragraph_render_range(self, render: Dict[str, Any], start: int, end: int) -> Dict[str, Any]:
-        """Slice a paragraph render by character range."""
+        """按「逻辑字符」下标截取 paragraph 的 render（用于同段解析+新题号合并块的拆分）。"""
         r = copy.deepcopy(render)
         if r.get("type") != "paragraph":
             return r
@@ -2324,7 +2073,7 @@ class QuestionBankIngestionService:
         r["children"] = self._slice_inline_children_keep_prefix(after_start, span)
         return r
 
-    _FORMULA_ALT_TEXTS = frozenset({"鍏紡", "鍏紡鍥剧墖", "[鍏紡]", "formula"})
+    _FORMULA_ALT_TEXTS = frozenset({"公式", "公式图片", "[公式]", "formula"})
 
     def _inline_node_text(self, node: Dict[str, Any]) -> str:
         node_type = node.get("type")
@@ -2338,7 +2087,7 @@ class QuestionBankIngestionService:
             alt = str(node.get("alt_text") or "")
             if alt in self._FORMULA_ALT_TEXTS:
                 return ""
-            return alt or "[鍥剧墖]"
+            return alt or "[图片]"
         if node_type == "line_break":
             return "\n"
         return ""
@@ -2441,7 +2190,7 @@ class QuestionBankIngestionService:
             )
             if vector_ids:
                 try:
-                    _get_vector_db().db.delete_documents(ids=vector_ids)
+                    vector_db.db.delete_documents(ids=vector_ids)
                 except Exception as exc:
                     logger.warning("Failed to delete stale vectors for source_document=%s: %s", source_document_id, exc)
 
@@ -2529,7 +2278,7 @@ class QuestionBankIngestionService:
         source_document_id: int,
         package_ids: Optional[Sequence[int]] = None,
     ) -> int:
-        """Delete topic material papers linked to removed knowledge packages."""
+        """删除某文档下「专题材料卷」（Paper.knowledge_package_id 非空）及关联题目。"""
         query = db.query(models.Paper).filter(models.Paper.source_document_id == source_document_id)
         query = query.filter(models.Paper.knowledge_package_id.isnot(None))
         if package_ids is not None:
@@ -2541,174 +2290,16 @@ class QuestionBankIngestionService:
         if not paper_ids:
             return 0
         self._tear_down_paper_questions(db, source_document_id, paper_ids)
-        db.flush()
+        db.commit()
         return len(paper_ids)
-
-    def delete_question_items(
-        self,
-        db: Session,
-        *,
-        source_document_id: int,
-        question_item_ids: Sequence[int],
-    ) -> Dict[str, object]:
-        target_ids = [int(qid) for qid in question_item_ids if qid is not None]
-        if not target_ids:
-            return {"deleted_questions": 0, "paper_ids": [], "package_ids": []}
-
-        paper_rows = (
-            db.query(models.PaperQuestion.paper_id, models.PaperQuestion.question_item_id)
-            .filter(models.PaperQuestion.question_item_id.in_(target_ids))
-            .all()
-        )
-        existing_ids = sorted({int(row.question_item_id) for row in paper_rows if row.question_item_id is not None})
-        if not existing_ids:
-            existing_ids = [
-                int(qid)
-                for (qid,) in db.query(models.QuestionItem.id)
-                .filter(models.QuestionItem.id.in_(target_ids))
-                .all()
-                if qid is not None
-            ]
-        if not existing_ids:
-            return {"deleted_questions": 0, "paper_ids": [], "package_ids": []}
-
-        paper_ids = sorted({int(row.paper_id) for row in paper_rows if row.paper_id is not None})
-        package_ids = sorted(
-            {
-                int(pid)
-                for (pid,) in db.query(models.KnowledgePackageQuestion.package_id)
-                .filter(models.KnowledgePackageQuestion.question_item_id.in_(existing_ids))
-                .all()
-                if pid is not None
-            }
-        )
-        block_ids = list(
-            dict.fromkeys(
-                row[0]
-                for row in db.query(models.QuestionBlock.id)
-                .filter(models.QuestionBlock.question_item_id.in_(existing_ids))
-                .all()
-            )
-        )
-
-        retrieval_documents = (
-            db.query(models.RetrievalDocument)
-            .filter(models.RetrievalDocument.entity_id.in_(existing_ids))
-            .filter(models.RetrievalDocument.entity_type.in_(["question_item", "question"]))
-            .all()
-        )
-        vector_ids = self._unique_preserve_order(
-            [
-                self._resolve_vector_id_from_retrieval_document(
-                    retrieval_document=retrieval_document,
-                    source_document_id=source_document_id,
-                )
-                for retrieval_document in retrieval_documents
-            ]
-        )
-        if vector_ids:
-            try:
-                _get_vector_db().db.delete_documents(ids=vector_ids)
-            except Exception as exc:
-                logger.warning("Failed to delete vectors for question_items=%s: %s", existing_ids, exc)
-
-        retrieval_document_ids = [item.id for item in retrieval_documents]
-        if retrieval_document_ids:
-            db.query(models.EmbeddingPoint).filter(
-                models.EmbeddingPoint.retrieval_document_id.in_(retrieval_document_ids)
-            ).delete(synchronize_session=False)
-
-        db.query(models.KnowledgePackageQuestion).filter(
-            models.KnowledgePackageQuestion.question_item_id.in_(existing_ids)
-        ).delete(synchronize_session=False)
-        db.query(models.KnowledgeQuestionLink).filter(
-            models.KnowledgeQuestionLink.question_item_id.in_(existing_ids)
-        ).delete(synchronize_session=False)
-        db.query(models.QuestionMatchResult).filter(
-            models.QuestionMatchResult.candidate_question_id.in_(existing_ids)
-        ).delete(synchronize_session=False)
-        db.query(models.StudentAttempt).filter(models.StudentAttempt.question_item_id.in_(existing_ids)).update(
-            {models.StudentAttempt.question_item_id: None},
-            synchronize_session=False,
-        )
-        db.query(models.ExamSessionQuestion).filter(
-            models.ExamSessionQuestion.question_item_id.in_(existing_ids)
-        ).update(
-            {models.ExamSessionQuestion.question_item_id: None},
-            synchronize_session=False,
-        )
-        db.query(models.QuestionRelation).filter(
-            (models.QuestionRelation.source_question_id.in_(existing_ids))
-            | (models.QuestionRelation.target_question_id.in_(existing_ids))
-        ).delete(synchronize_session=False)
-        if block_ids:
-            db.query(models.QuestionTagLink).filter(
-                (models.QuestionTagLink.question_item_id.in_(existing_ids))
-                | (models.QuestionTagLink.evidence_block_id.in_(block_ids))
-            ).delete(synchronize_session=False)
-            db.query(models.QuestionBlock).filter(models.QuestionBlock.id.in_(block_ids)).update(
-                {models.QuestionBlock.formula_id: None, models.QuestionBlock.parent_block_id: None},
-                synchronize_session=False,
-            )
-        else:
-            db.query(models.QuestionTagLink).filter(
-                models.QuestionTagLink.question_item_id.in_(existing_ids)
-            ).delete(synchronize_session=False)
-        db.query(models.QuestionOption).filter(models.QuestionOption.question_item_id.in_(existing_ids)).update(
-            {models.QuestionOption.formula_id: None},
-            synchronize_session=False,
-        )
-        db.query(models.Formula).filter(models.Formula.question_item_id.in_(existing_ids)).delete(
-            synchronize_session=False
-        )
-        db.query(models.QuestionOption).filter(models.QuestionOption.question_item_id.in_(existing_ids)).delete(
-            synchronize_session=False
-        )
-        if block_ids:
-            db.query(models.QuestionBlock).filter(models.QuestionBlock.id.in_(block_ids)).delete(
-                synchronize_session=False
-            )
-        db.query(models.Asset).filter(models.Asset.owner_type == "question_item").filter(
-            models.Asset.owner_id.in_(existing_ids)
-        ).delete(synchronize_session=False)
-        if retrieval_document_ids:
-            db.query(models.RetrievalDocument).filter(models.RetrievalDocument.id.in_(retrieval_document_ids)).delete(
-                synchronize_session=False
-            )
-        db.query(models.PaperQuestion).filter(models.PaperQuestion.question_item_id.in_(existing_ids)).delete(
-            synchronize_session=False
-        )
-        db.query(models.QuestionItem).filter(models.QuestionItem.id.in_(existing_ids)).delete(
-            synchronize_session=False
-        )
-
-        for paper_id in paper_ids:
-            total_questions = int(
-                db.query(models.PaperQuestion)
-                .filter(models.PaperQuestion.paper_id == paper_id)
-                .count()
-            )
-            db.query(models.Paper).filter(models.Paper.id == paper_id).update(
-                {models.Paper.total_questions: total_questions},
-                synchronize_session=False,
-            )
-
-        db.flush()
-        return {
-            "deleted_questions": len(existing_ids),
-            "question_item_ids": existing_ids,
-            "paper_ids": paper_ids,
-            "package_ids": package_ids,
-        }
 
     def ingest_topic_packages_questions(
         self,
         db: Session,
         source_document_id: int,
-        sync_retrieval: bool = False,
         progress_callback: Optional[Callable[[str], None]] = None,
     ) -> Dict[str, object]:
-        """Build topic-material papers from package page ranges and persist questions."""
+        """按 KnowledgePackage 的页码范围切 PDF 文本并切题落库；每专题一张「材料卷」并写入 KnowledgePackageQuestion。"""
 
         def notify(msg: str) -> None:
             if progress_callback:
@@ -2719,7 +2310,7 @@ class QuestionBankIngestionService:
 
         source_document = db.query(models.SourceDocument).filter(models.SourceDocument.id == source_document_id).first()
         if not source_document:
-            raise ValueError(f"SourceDocument {source_document_id} 涓嶅瓨鍦?")
+            raise ValueError(f"SourceDocument {source_document_id} 不存在")
 
         packages = (
             db.query(models.KnowledgePackage)
@@ -2735,10 +2326,10 @@ class QuestionBankIngestionService:
             return {"status": "skipped", "reason": "not_pdf", "papers_created": 0, "question_count": 0}
 
         pkg_ids = [pkg.id for pkg in packages]
-        notify(f"?????????? {len(pkg_ids)} ?????")
+        notify(f"清理旧专题材料卷（共 {len(pkg_ids)} 个专题包）…")
         self.clear_topic_material_papers_for_document(db, source_document_id, package_ids=pkg_ids)
 
-        notify("?? PDF ??????????? + PUA ??????? fallback OCR?")
+        notify("读取 PDF 目标页文本（结构化提取 + PUA 符号映射；仅纯图片页 fallback OCR）…")
         needed_pages: set[int] = set()
         for pkg in packages:
             page_range = pkg.page_range_json or {}
@@ -2786,10 +2377,10 @@ class QuestionBankIngestionService:
                             page_text_by_no[pn] = (page.get_text(sort=True) or "").strip()
 
                     if idx_pn == 1 or idx_pn == total_targets or idx_pn % 10 == 0:
-                        notify(f"  ???? {idx_pn}/{total_targets}?pn={pn} mode={extraction_mode}?")
+                        notify(f"  已读取页 {idx_pn}/{total_targets}（pn={pn} mode={extraction_mode}）")
 
         pages = [(pn, (page_text_by_no.get(pn) or "").strip()) for pn in sorted(page_text_by_no.keys()) if (page_text_by_no.get(pn) or "").strip()]
-        notify(f"PDF ?????{len(pages)} ????? {len(page_text_by_no)}?")
+        notify(f"PDF 有效页块：{len(pages)} 段（目标页={len(page_text_by_no)}）")
 
         file_stem = Path(source_document.file_name or "document").stem
         papers_created = 0
@@ -2799,29 +2390,29 @@ class QuestionBankIngestionService:
 
         for idx, pkg in enumerate(packages, start=1):
             title_short = (pkg.package_title or "")[:72]
-            notify(f"??? [{idx}/{n_pkg}] package_id={pkg.id} ?{title_short}? ???? + ??")
+            notify(f"专题题 [{idx}/{n_pkg}] package_id={pkg.id} «{title_short}» 页码切片 + 切题…")
             page_range = pkg.page_range_json or {}
             start_p = int(page_range.get("start") or 1)
             end_p = int(page_range.get("end") or start_p)
             slice_parts = [txt for pn, txt in pages if start_p <= pn <= end_p]
             slice_text = "\n".join(slice_parts)
             if not slice_text.strip():
-                notify(f"  [??] ???? {start_p}-{end_p} ???")
+                notify(f"  [跳过] 页码范围 {start_p}-{end_p} 无文本")
                 continue
             extracted_questions = self.segment_questions(slice_text)
             if not extracted_questions:
-                notify(f"  [??] ????? 0?? {start_p}-{end_p}?")
+                notify(f"  [跳过] 切题结果为 0（页 {start_p}-{end_p}）")
                 continue
 
-            # 灏嗙粨鏋勫寲 rich content 鏄犲皠鍒版瘡閬撳垏鍒嗗嚭鏉ョ殑棰樼洰
+            # 将结构化 rich content 映射到每道切分出来的题目
             if page_rich_by_no:
                 self._attach_rich_payloads_to_questions(
                     extracted_questions, slice_text,
                     pages, page_rich_by_no, start_p, end_p,
                 )
 
-            notify(f"  segment_questions -> {len(extracted_questions)} ???? Paper / QuestionItem")
-            title = f"{file_stem} 路 {pkg.package_title}"[:255]
+            notify(f"  segment_questions → {len(extracted_questions)} 题，写入 Paper 与 QuestionItem…")
+            title = f"{file_stem} · {pkg.package_title}"[:255]
             paper = models.Paper(
                 source_document_id=source_document.id,
                 knowledge_package_id=pkg.id,
@@ -2854,8 +2445,8 @@ class QuestionBankIngestionService:
             qids = metrics.get("question_item_ids") or []
             id_range = ""
             if isinstance(qids, list) and qids:
-                id_range = f" id鈭圼{min(qids)}, {max(qids)}]"
-            notify(f"  鉁?paper_id={paper.id} 棰樼洰鏁?{qn}{id_range}")
+                id_range = f" id∈[{min(qids)}, {max(qids)}]"
+            notify(f"  ✓ paper_id={paper.id} 题目数={qn}{id_range}")
             paper_summaries.append(
                 {
                     "package_id": pkg.id,
@@ -2869,36 +2460,20 @@ class QuestionBankIngestionService:
 
         db.commit()
 
-        index_metrics: Dict[str, object] = {
-            "status": "deferred",
-            "indexed_documents": 0,
-            "inline_requested": bool(sync_retrieval),
-        }
-        if sync_retrieval:
-            notify(f"批量提交完成，开始向量索引（source_document_id={source_document_id}）")
-            try:
-                index_metrics = self.index_document_questions(db, source_document_id)
-                index_metrics["status"] = "success"
-                index_metrics["inline_requested"] = True
-                notify(f"向量索引完成：indexed_documents={index_metrics.get('indexed_documents', 0)}")
-            except Exception as exc:
-                logger.warning("Topic question vector index failed: source_document_id=%s err=%s", source_document_id, exc)
-                index_metrics = {
-                    "status": "failed",
-                    "indexed_documents": 0,
-                    "inline_requested": True,
-                    "error": str(exc),
-                }
-                notify(f"向量索引失败（已记录日志）：{exc}")
-        else:
-            notify(f"批量提交完成，题目检索同步已后置（source_document_id={source_document_id}）")
+        notify(f"批量提交完成，开始向量索引（source_document_id={source_document_id}）…")
+        try:
+            index_metrics = self.index_document_questions(db, source_document_id)
+            notify(f"向量索引完成：indexed_documents={index_metrics.get('indexed_documents', 0)}")
+        except Exception as exc:
+            logger.warning("Topic question vector index failed: source_document_id=%s err=%s", source_document_id, exc)
+            index_metrics = {"indexed_documents": 0}
+            notify(f"向量索引失败（已记录日志）：{exc}")
 
         return {
             "status": "success",
             "papers_created": papers_created,
             "question_count": question_total,
             "indexed_documents": index_metrics.get("indexed_documents", 0),
-            "retrieval_sync": index_metrics,
             "paper_summaries": paper_summaries,
             "source_document_id": source_document_id,
         }
@@ -2987,7 +2562,7 @@ class QuestionBankIngestionService:
         return "\n".join(parts)
 
     def _extract_pdf_page_texts(self, path: Path) -> List[str]:
-        """Extract PDF page texts using text layer first and OCR fallback when needed."""
+        """逐页取 PDF 文本：默认 PyMuPDF 文本层；按质量分与 QUESTION_BANK_PDF_OCR_MODE 可整页走 Pix2Text。"""
         from . import question_bank_pdf_ocr_fallback as ocr_fb
         from .config import QUESTION_BANK_PDF_OCR_MODE, QUESTION_BANK_PDF_OCR_RENDER_SCALE, QUESTION_BANK_PDF_OCR_THRESHOLD
         from .question_bank_pdf_text_quality import score_pdf_text_layer_quality
@@ -3161,7 +2736,7 @@ class QuestionBankIngestionService:
             )
             if optional:
                 return None
-            raise DocumentNormalizationError("鏈壘鍒?LibreOffice 鍙墽琛屾枃浠?soffice")
+            raise DocumentNormalizationError("未找到 LibreOffice 可执行文件 soffice")
 
         output_dir.mkdir(parents=True, exist_ok=True)
         final_output_path = output_dir / f"normalized.{target_format.lower()}"
@@ -3221,7 +2796,7 @@ class QuestionBankIngestionService:
                     staged_output_dir,
                     completed.returncode,
                 )
-                fallback_error = completed.stderr or completed.stdout or "LibreOffice 杞崲澶辫触"
+                fallback_error = completed.stderr or completed.stdout or "LibreOffice 转换失败"
                 fallback_path = self._convert_with_word(source_path, output_dir, target_format, optional=True)
                 if fallback_path is not None:
                     logger.info("Word convert fallback output found: %s", fallback_path)
@@ -3229,7 +2804,7 @@ class QuestionBankIngestionService:
                 if optional:
                     logger.warning("LibreOffice optional convert failed without Word fallback: source_path=%s target_format=%s", source_path, target_format)
                     return None
-                raise DocumentNormalizationError(fallback_error if completed.returncode != 0 else f"杞崲缁撴灉涓嶅瓨鍦? {final_output_path}")
+                raise DocumentNormalizationError(fallback_error if completed.returncode != 0 else f"转换结果不存在: {final_output_path}")
 
             shutil.copy2(converted_path, final_output_path)
             if completed.returncode != 0:
@@ -3571,15 +3146,15 @@ class QuestionBankIngestionService:
             ),
             (
                 "question_knowledge",
-                "\n".join(extracted_question.knowledge_points) if extracted_question.knowledge_points else None,
+                "；".join(extracted_question.knowledge_points) if extracted_question.knowledge_points else None,
                 "knowledge",
-                self._hash_text("\n".join(extracted_question.knowledge_points)),
+                self._hash_text("；".join(extracted_question.knowledge_points)),
             ),
             (
                 "question_topic",
-                "\n".join(extracted_question.topics) if extracted_question.topics else None,
+                "；".join(extracted_question.topics) if extracted_question.topics else None,
                 "topic",
-                self._hash_text("\n".join(extracted_question.topics)),
+                self._hash_text("；".join(extracted_question.topics)),
             ),
         ]
 
@@ -3612,11 +3187,11 @@ class QuestionBankIngestionService:
 
     @staticmethod
     def _trim_topic_comment_bleed(text: Optional[str]) -> Optional[str]:
-        """Trim trailing topic or comment bleed from solution-like fields."""
+        """裁掉专家解读/点评后误并入的图书大节标题（如「一、考向分析」「（1）确定性」）。"""
         if not text or not text.strip():
             return text
         m = re.search(
-            r"\n(?:[涓€浜屼笁鍥涗簲鍏竷鍏節鍗佺櫨鍗僝{1,4}[銆侊紟]|锛圽s*\d{1,2}\s*[)锛塢)",
+            r"\n(?:[一二三四五六七八九十百千]{1,4}[、．]|（\s*\d{1,2}\s*[)）])",
             text,
         )
         if m and m.start() > 30:
@@ -3631,7 +3206,7 @@ class QuestionBankIngestionService:
         lo: int,
         hi: int,
     ) -> Optional[Tuple[int, int]]:
-        """Locate field text within a larger slice for provenance alignment."""
+        """在 slice_text[lo:hi] 内定位 field_text 的 [start,end)，避免短串误匹配到选项区。"""
         if not field_text or not field_text.strip() or lo < 0 or hi > len(slice_text) or lo >= hi:
             return None
         region = slice_text[lo:hi]
@@ -3641,10 +3216,10 @@ class QuestionBankIngestionService:
         n = len(ft)
 
         role_prefixes: Dict[str, Tuple[str, ...]] = {
-            "answer": ("????", "??????"),
-            "analysis": ("????", "????", "??????"),
-            "solution": ("????", "????", "??????", "??????"),
-            "comment": ("??????", "????", "????", "????", "????"),
+            "answer": ("【答案】", "【参考答案】"),
+            "analysis": ("【解析】", "【分析】", "【答案解析】"),
+            "solution": ("【详解】", "【解答】", "【思路导引】", "【思路引导】"),
+            "comment": ("【专家解读】", "【点评】", "【评注】", "【点拨】", "【点睛】"),
         }
         prefixes = role_prefixes.get(role, ())
         for pfx in prefixes:
@@ -3655,13 +3230,13 @@ class QuestionBankIngestionService:
             k = after.find(ft)
             if k >= 0:
                 gap = after[:k].strip()
-                if k == 0 or not gap or re.fullmatch(r"[:锛歕s]+", gap):
+                if k == 0 or not gap or re.fullmatch(r"[:：\s]+", gap):
                     start = lo + j + len(pfx) + k
                     return (start, start + n)
 
         if role == "answer" and n <= 24:
             m = re.search(
-                r"(?:銆愮瓟妗堛€憒銆愬弬鑰冪瓟妗堛€?\s*[:锛歖?\s*(" + re.escape(ft) + r")",
+                r"(?:【答案】|【参考答案】)\s*[:：]?\s*(" + re.escape(ft) + r")",
                 region,
             )
             if m:
@@ -3694,12 +3269,12 @@ class QuestionBankIngestionService:
 
     def _prepare_section_parsing_text(self, text: str) -> str:
         prepared = self._normalize_text(text)
-        # 鏃犮€愩€戜粎銆屾爣绛撅細銆嶆崲琛屾椂锛岀煭鏍囩鏋佹槗涓庢鏂囨挒杞︼紙濡傘€屼笓棰橈細銆嶃€岃В鏋愶細銆嶈鍒囬骞诧級锛屼粎淇濈暀銆岀瓟妗堛€嶇被
-        colon_only_short_labels = frozenset({"??", "????"})
+        # 无【】仅「标签：」换行时，短标签极易与正文撞车（如「专题：」「解析：」误切题干），仅保留「答案」类
+        colon_only_short_labels = frozenset({"答案", "参考答案"})
         for label in sorted(SECTION_LABEL_ALIASES, key=len, reverse=True):
             escaped_label = re.escape(label)
             prepared = re.sub(
-                rf"(?<!^)(?<!\n)\s*(?{escaped_label}?)",
+                rf"(?<!^)(?<!\n)\s*(【{escaped_label}】)",
                 r"\n\1",
                 prepared,
                 flags=re.IGNORECASE,
@@ -3712,14 +3287,14 @@ class QuestionBankIngestionService:
             )
             if len(label) >= 3 or label in colon_only_short_labels:
                 prepared = re.sub(
-                    rf"(?<!^)(?<!\n)\s*({escaped_label}\s*[:锛歖)",
+                    rf"(?<!^)(?<!\n)\s*({escaped_label}\s*[:：])",
                     r"\n\1",
                     prepared,
                     flags=re.IGNORECASE,
                 )
-        # 銆岀瓟妗堬細A 瑙ｆ瀽锛氣€︺€嶅悓娈垫椂锛孲ECTION_LABEL 鏃犳硶璇嗗埆琛屼腑鐨勩€岃В鏋愩€嶁€斺€斿己鍒舵崲琛?
+        # 「答案：A 解析：…」同段时，SECTION_LABEL 无法识别行中的「解析」——强制换行
         prepared = re.sub(
-            r"((?:绛旀|鍙傝€冪瓟妗?\s*[:锛歖\s*[^\n]{0,120}?)\s+((?:瑙ｆ瀽|鍒嗘瀽|璇﹁В|瑙ｇ瓟|瑙ｆ硶|杩囩▼|鐐硅瘎)\s*[:锛歖)",
+            r"((?:答案|参考答案)\s*[:：]\s*[^\n]{0,120}?)\s+((?:解析|分析|详解|解答|解法|过程|点评)\s*[:：])",
             r"\1\n\2",
             prepared,
             flags=re.IGNORECASE,
@@ -3727,22 +3302,22 @@ class QuestionBankIngestionService:
         return self._normalize_text(prepared)
 
     def _sanitize_answer_text(self, text: Optional[str]) -> Optional[str]:
-        """Trim answer text to avoid trailing analysis or next-question bleed."""
+        """裁掉误并入答案字段的「解析」「下一题」等尾部（常见于 Word 单行排版）。"""
         if not text or not str(text).strip():
             return text
         s = str(text).strip()
         cut = len(s)
         for pat in (
-            r"(?<=[\s\u3000,锛?锛涖€俔)"
-            r"(?:瑙ｆ瀽|鍒嗘瀽|璇﹁В|瑙ｇ瓟|瑙ｆ硶|杩囩▼|鐐硅瘎|銆愯В鏋愩€憒銆愬垎鏋愩€憒銆愯瑙ｃ€憒銆愯В绛斻€憒銆愮瓟妗堣В鏋愩€?\s*[:锛歖?",
-            r"(?<=\S)(?:瑙ｆ瀽|鍒嗘瀽|璇﹁В|瑙ｇ瓟)\s*[:锛歖",  # 濡傘€孉瑙ｆ瀽锛氥€?
-            r"\s+(?:绗琝s*\d{1,3}\s*棰?",
+            r"(?<=[\s\u3000,，;；。])"
+            r"(?:解析|分析|详解|解答|解法|过程|点评|【解析】|【分析】|【详解】|【解答】|【答案解析】)\s*[:：]?",
+            r"(?<=\S)(?:解析|分析|详解|解答)\s*[:：]",  # 如「A解析：」
+            r"\s+(?:第\s*\d{1,3}\s*题)",
         ):
             m = re.search(pat, s, re.IGNORECASE)
             if m and m.start() > 0 and m.start() < cut:
                 cut = m.start()
         m2 = re.search(
-            r"\s+\d{1,3}[\.锛庛€乚(?!\d)(?=[^\n]{0,240}?(?:\(澶氶€塡)|\(鍗曢€塡)|宸茬煡|鑻璁緗姹倈涓嬪垪))",
+            r"\s+\d{1,3}[\.．、](?!\d)(?=[^\n]{0,240}?(?:\(多选\)|\(单选\)|已知|若|设|求|下列))",
             s,
         )
         if m2 and m2.start() > 8 and m2.start() < cut:
@@ -3752,20 +3327,20 @@ class QuestionBankIngestionService:
         return s
 
     def _truncate_option_text_bleed(self, text: str) -> str:
-        """Trim option text bleed that runs into answer or analysis markers."""
+        """选项正文后误并入答案区、解析或下一题题号时截断。"""
         if not text:
             return text
         m = _OPTION_TAIL_BLEED.search(text)
         if m and m.start() > 0:
             text = text[: m.start()].strip()
-        # 鍚屼竴琛屽唴銆屸€?5 绛旀锛氥€嶆棤鎹㈣鏃?
-        m2 = re.search(r"(?:\s|^)(?:绛旀|鍙傝€冪瓟妗?\s*[:锛歖", text, re.IGNORECASE)
+        # 同一行内「…15 答案：」无换行时
+        m2 = re.search(r"(?:\s|^)(?:答案|参考答案)\s*[:：]", text, re.IGNORECASE)
         if m2 and m2.start() > 0:
             text = text[: m2.start()].strip()
         return text.strip()
 
     def _reflow_horizontal_options(self, text: str) -> str:
-        """Reflow horizontal inline options into one-option-per-line text."""
+        """将「A. -4 B. -2 C. 2 D. 4」同一行横向选项拆成多行，供 OPTION_BLOCK_PATTERN 使用。"""
         if not text or not text.strip():
             return text
         out_lines: List[str] = []
@@ -3776,7 +3351,7 @@ class QuestionBankIngestionService:
                 continue
             markers = list(
                 re.finditer(
-                    r"(?<![A-Za-z])[A-H锛?锛╙[\.锛庛€?锛歖",
+                    r"(?<![A-Za-z])[A-HＡ-Ｈ][\.．、:：]",
                     raw,
                 )
             )
@@ -3792,16 +3367,16 @@ class QuestionBankIngestionService:
         return "\n".join(out_lines)
 
     def _extract_options_loose(self, text: str) -> Tuple[str, List[ExtractedOption]]:
-        """Fallback option extractor for loose inline option formatting."""
+        """题干后选项为「A -4」「A) -4」等带点可有可无、键与值间有空格时的兜底。"""
         if not text:
             return "", []
         work = self._reflow_horizontal_options(text)
-        work = re.sub(r"([)锛塡]銆慮)\s*([A-H锛?锛╙)", r"\1\n\2", work)
-        work = re.sub(r"(?<!^)(?<!\n)\s+([A-H锛?锛╙)(?=\s*[-鈭掞紣-锛?-9\(锛圿)", r"\n\1", work)
+        work = re.sub(r"([)）\]】])\s*([A-HＡ-Ｈ])", r"\1\n\2", work)
+        work = re.sub(r"(?<!^)(?<!\n)\s+([A-HＡ-Ｈ])(?=\s*[-−０-９0-9\(（])", r"\n\1", work)
         loose_block = re.compile(
-            r"(?m)(?:^|\n)\s*(?P<key>[A-H锛?锛╙)\s*[\.锛庛€?锛氾級)]?\s+"
+            r"(?m)(?:^|\n)\s*(?P<key>[A-HＡ-Ｈ])\s*[\.．、:：）)]?\s+"
             r"(?P<content>[^\n]+?)"
-            r"(?=(?:(?:^|\n)\s*[A-H锛?锛╙\s*[\.锛庛€?锛氾級)]?\s+)|\Z)"
+            r"(?=(?:(?:^|\n)\s*[A-HＡ-Ｈ]\s*[\.．、:：）)]?\s+)|\Z)"
         )
         matches = list(loose_block.finditer(work))
         if len(matches) < 2:
@@ -3822,8 +3397,8 @@ class QuestionBankIngestionService:
 
         original = text
         text = self._reflow_horizontal_options(text)
-        text = re.sub(r"([)锛塡]銆慮)\s*([A-H锛?锛╙[\.锛庛€?锛歖)", r"\1\n\2", text)
-        prepared = re.sub(r"(?<!^)(?<!\n)\s+([A-H锛?锛╙[\.锛庛€?锛歖)", r"\n\1", text)
+        text = re.sub(r"([)）\]】])\s*([A-HＡ-Ｈ][\.．、:：])", r"\1\n\2", text)
+        prepared = re.sub(r"(?<!^)(?<!\n)\s+([A-HＡ-Ｈ][\.．、:：])", r"\n\1", text)
         matches = list(OPTION_BLOCK_PATTERN.finditer(prepared))
         options: List[ExtractedOption] = []
         if matches:
@@ -3910,13 +3485,13 @@ class QuestionBankIngestionService:
         return set(re.findall(r"[A-H]", normalized_answer))
 
     def _normalize_option_key(self, raw_value: str) -> str:
-        translation_table = str.maketrans("锛★饥锛ｏ激锛ワ鸡锛э绩锝侊絺锝冿絼锝咃絾锝囷綀", "ABCDEFGHabcdefgh")
+        translation_table = str.maketrans("ＡＢＣＤＥＦＧＨａｂｃｄｅｆｇｈ", "ABCDEFGHabcdefgh")
         return raw_value.translate(translation_table).upper()
 
     def _infer_question_type(self, text: str, options: List[ExtractedOption]) -> str:
         if options or OPTION_PATTERN.search(text):
             return "choice"
-        if "濉┖" in text:
+        if "填空" in text:
             return "fill"
         return "subjective"
 
@@ -3931,14 +3506,14 @@ class QuestionBankIngestionService:
         comments = self._extract_inline_metadata(text, INLINE_COMMENT_PATTERNS)
         if not comments:
             return None
-        return self._normalize_text("\n".join(comments))
+        return self._normalize_text("；".join(comments))
 
     def _split_metadata_values(self, value: Optional[str]) -> List[str]:
         normalized_value = self._normalize_text(value or "")
         if not normalized_value:
             return []
-        parts = re.split(r"[??/?;\s]+", normalized_value)
-        return self._unique_preserve_order([part.strip(" ??/?;") for part in parts if part.strip(" ??/?;")])
+        parts = re.split(r"[；;、,/，]\s*", normalized_value)
+        return self._unique_preserve_order([part.strip(" ：:。") for part in parts if part.strip(" ：:。")])
 
     def _coalesce_metadata_items(self, *groups: List[str]) -> List[str]:
         merged: List[str] = []
@@ -3961,17 +3536,17 @@ class QuestionBankIngestionService:
         if options:
             parts.extend(f"{option.option_key}. {option.option_text}" for option in options)
         if answer_text:
-            parts.append(f"???{self._normalize_text(answer_text)}")
+            parts.append(f"答案：{self._normalize_text(answer_text)}")
         if analysis_text:
-            parts.append(f"???{self._normalize_text(analysis_text)}")
+            parts.append(f"解析：{self._normalize_text(analysis_text)}")
         if solution_text:
-            parts.append(f"???{self._normalize_text(solution_text)}")
+            parts.append(f"解法：{self._normalize_text(solution_text)}")
         if comment_text:
-            parts.append(f"???{self._normalize_text(comment_text)}")
+            parts.append(f"点评：{self._normalize_text(comment_text)}")
         if knowledge_points:
-            parts.append("???" + "?".join(knowledge_points))
+            parts.append(f"考点：{'；'.join(knowledge_points)}")
         if topics:
-            parts.append("???" + "?".join(topics))
+            parts.append(f"专题：{'；'.join(topics)}")
         return self._normalize_text("\n".join(part for part in parts if part))
 
     def _build_solution_summary(self, extracted_question: ExtractedQuestion) -> Optional[str]:
@@ -4024,7 +3599,7 @@ class QuestionBankIngestionService:
         return hashlib.sha256(normalized_text.encode("utf-8")).hexdigest()
 
     def _sanitize_pdf_extract_noise(self, text: str) -> str:
-        """Clean noisy private-use and zero-width characters from PDF text."""
+        """弱化 PDF 内嵌数学字体映射到私用区导致的「小方块」与零宽字符。"""
         if not text:
             return ""
         s = text
@@ -4071,4 +3646,3 @@ class QuestionBankIngestionService:
             seen.add(normalized_value)
             unique_values.append(normalized_value)
         return unique_values
-

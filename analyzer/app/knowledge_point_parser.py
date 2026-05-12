@@ -14,11 +14,10 @@ from typing import Any, Callable, Dict, List, Optional, Sequence, Set, Tuple
 
 import fitz
 from docx import Document
-from sqlalchemy import and_, func, or_
+from sqlalchemy import func
 from sqlalchemy.orm import Session
 
 from analyzer.app.llm_client import call_llm, supports_vision_model
-from analyzer.app.package_point_purity import reclassify_package_point_purity
 from shared.llm_step_config import resolve_step_llm_config, sync_llm_step_configs
 from shared.prompt_step_config import resolve_step_prompt, sync_prompt_step_configs
 
@@ -30,7 +29,6 @@ from .config import (
     KNOWLEDGE_PACKAGE_KEYWORDS,
     KNOWLEDGE_POINTS_DIR,
     KNOWLEDGE_RAG_ENABLED,
-    KNOWLEDGE_TOPIC_INLINE_RETRIEVAL_SYNC,
     KNOWLEDGE_TOPIC_BLOCK_POINTS_MULTIMODAL,
     QUESTION_BANK_ASSET_DIR,
 )
@@ -50,83 +48,8 @@ logger = logging.getLogger(__name__)
 
 TOPIC_DOCX_BLOCK_POINTS_STEP_KEY = "analyzer.topic_docx_block_points"
 TOPIC_DOCX_QUESTION_BRIDGE_STEP_KEY = "analyzer.topic_docx_question_bridge"
-TOPIC_DOCX_KP_RELATIONS_STEP_KEY = "analyzer.topic_docx_kp_relations"
 _TOPIC_BRIDGE_LLM_POOL_CAP = 72
 _TOPIC_BRIDGE_QUERY_MAX = 1200
-_KP_RELATION_MAX_EVIDENCE_BLOCKS_PER_POINT = 3
-_KP_RELATION_MAX_EVIDENCE_TEXT_CHARS = 240
-_PLACEHOLDER_POINT_NAMES = {
-    "llm_pending",
-    "fallback",
-    "placeholder",
-    "unclassified",
-    "\u672a\u5f52\u7c7b\u77e5\u8bc6\u70b9",
-    "\u4e13\u9898\u6b63\u6587",
-}
-_PLACEHOLDER_POINT_NAME_KEYS = {
-    re.sub(r"\s+", "", value).strip().lower()
-    for value in _PLACEHOLDER_POINT_NAMES
-}
-_KP_RELATION_NOTE_RE = re.compile(
-    r"注意|易错|误区|陷阱|边界|警告|说明|备注|note|pitfall|warning|boundary|mistake",
-    re.I,
-)
-_KP_RELATION_PROCEDURE_RE = re.compile(
-    r"步骤|流程|程序|过程|判定步骤|求解步骤|step|procedure|workflow|process",
-    re.I,
-)
-_KP_RELATION_METHOD_RE = re.compile(
-    r"方法|解法|技巧|证明|求解|策略|approach|method|proof|solve|technique",
-    re.I,
-)
-_KP_RELATION_SCENARIO_RE = re.compile(
-    r"应用|模型|情形|场景|题型|pattern|application|model|scenario",
-    re.I,
-)
-_KP_RELATION_GENERIC_UMBRELLA_RE = re.compile(
-    r"最值|范围|性质|定义|概念|方法|解法|证明|应用|条件|max|min|range|method|proof|define|application|condition",
-    re.I,
-)
-_KP_RELATION_SPECIFIC_METHOD_RE = re.compile(
-    r"换元|消元|配方|判别式|分类讨论|分离参数|根与系数|开口方向|解集为空|区间|恒成立|交运算|并运算|"
-    r"substitut|eliminat|complete the square|discriminant|classif|constant|step|attention",
-    re.I,
-)
-_KP_RELATION_FOCUS_PATTERNS: Sequence[Tuple[str, re.Pattern[str]]] = (
-    ("extrema", re.compile(r"最值|最大|最小|max|min", re.I)),
-    ("range", re.compile(r"范围|区间|值域|range", re.I)),
-    ("identity", re.compile(r"恒等|恒成立|identity", re.I)),
-    ("condition", re.compile(r"条件|成立|取值范围|condition", re.I)),
-    ("definition", re.compile(r"定义|概念|definition|define", re.I)),
-    ("proof", re.compile(r"证明|求证|proof|prove", re.I)),
-    ("method", re.compile(r"方法|解法|求解|method|solve", re.I)),
-    ("application", re.compile(r"应用|模型|题型|application|apply", re.I)),
-    ("classification", re.compile(r"分类|讨论|classif", re.I)),
-    ("discriminant", re.compile(r"判别式|discriminant", re.I)),
-    ("substitution", re.compile(r"换元|substitut", re.I)),
-    ("elimination", re.compile(r"消元|eliminat", re.I)),
-    ("square", re.compile(r"配方|平方|square", re.I)),
-    ("step", re.compile(r"步骤|流程|step|procedure", re.I)),
-)
-_KP_RELATION_GENERIC_NAME_FRAGMENTS = {
-    "\u6982\u5ff5",
-    "\u5b9a\u4e49",
-    "\u6027\u8d28",
-    "\u5173\u7cfb",
-    "\u65b9\u6cd5",
-    "\u89e3\u6cd5",
-    "\u5e94\u7528",
-    "\u6b65\u9aa4",
-    "\u8bc1\u660e",
-    "\u6761\u4ef6",
-    "\u95ee\u9898",
-    "\u516c\u5f0f",
-    "\u5b9a\u7406",
-    "\u63a2\u7a76",
-    "\u603b\u7ed3",
-    "\u6c42\u6cd5",
-    "\u6c42\u89e3",
-}
 
 
 def _topic_bridge_llm_max_links() -> int:
@@ -163,191 +86,6 @@ _TOPIC_DOCX_LLM_CONFIDENCE = 0.72
 
 def _env_flag_true(key: str) -> bool:
     return os.environ.get(key, "").strip().lower() in ("1", "true", "yes", "on")
-
-
-def _kp_relation_normalize_text(text: Optional[str]) -> str:
-    if not text:
-        return ""
-    return re.sub(r"[^0-9A-Za-z\u4e00-\u9fff]+", "", str(text), flags=re.UNICODE).lower()
-
-
-def _kp_relation_relaxed_title_text(text: Optional[str]) -> str:
-    raw = str(text or "")
-    raw = re.sub(r"考点[一二三四五六七八九十0-9]+[：:、\.\s]*", "", raw)
-    raw = re.sub(r"(专题|问题|探究|多维|例题|教材呈现|课程标准)", "", raw)
-    normalized = _kp_relation_normalize_text(raw)
-    if not normalized:
-        return ""
-    normalized = normalized.replace("的", "")
-    return normalized
-
-
-def _kp_relation_name_fragments(name: Optional[str]) -> List[str]:
-    if not name:
-        return []
-    raw_parts = re.split(r"[锛?銆傦紱;锛氾紙锛?)\[\]銆愩€?\s]+", str(name))
-    out: List[str] = []
-    for part in raw_parts:
-        normalized = _kp_relation_normalize_text(part)
-        if len(normalized) >= 2:
-            out.append(normalized)
-    if not out:
-        normalized_name = _kp_relation_normalize_text(name)
-        if len(normalized_name) >= 2:
-            out.append(normalized_name)
-    return list(dict.fromkeys(out))
-
-
-def _kp_relation_name_fragments(name: Optional[str]) -> List[str]:
-    if not name:
-        return []
-    raw = str(name)
-    raw_parts = re.split(r"[()（）\[\]【】,，、/\\;；:：\s]+", raw)
-    out: List[str] = []
-
-    def add_fragment(value: Optional[str]) -> None:
-        normalized = _kp_relation_normalize_text(value)
-        if len(normalized) >= 2:
-            out.append(normalized)
-
-    for part in raw_parts:
-        add_fragment(part)
-        stripped = re.sub(r"^(?:利用|关于|有关|基于)", "", str(part or "")).strip()
-        if stripped != part:
-            add_fragment(stripped)
-        for sub in re.split(r"[与和及或、]|以及", str(part or "")):
-            add_fragment(sub)
-        if "的" in str(part or ""):
-            left, right = str(part).split("的", 1)
-            add_fragment(left)
-            add_fragment(right)
-            suffix_trimmed = re.sub(
-                r"(定义|性质|关系|方法|解法|应用|步骤|证明|条件|问题|公式|定理)$",
-                "",
-                str(part),
-            ).strip()
-            add_fragment(suffix_trimmed)
-
-    normalized_name = _kp_relation_normalize_text(name)
-    if len(normalized_name) >= 2:
-        out.append(normalized_name)
-    filtered: List[str] = []
-    for fragment in out:
-        if fragment in _KP_RELATION_GENERIC_NAME_FRAGMENTS:
-            continue
-        if fragment.endswith("\u7684") and len(fragment) <= 6:
-            continue
-        filtered.append(fragment)
-    return list(dict.fromkeys(filtered))
-
-
-def _kp_relation_name_fragments(name: Optional[str]) -> List[str]:
-    if not name:
-        return []
-    raw = str(name)
-    raw_parts = re.split(r"[()\uFF08\uFF09\[\]\u3010\u3011,\uFF0C\u3001/\\\\;\uFF1B:\uFF1A\s]+", raw)
-    out: List[str] = []
-
-    def add_fragment(value: Optional[str]) -> None:
-        normalized = _kp_relation_normalize_text(value)
-        if len(normalized) >= 2:
-            out.append(normalized)
-
-    for part in raw_parts:
-        text = str(part or "")
-        add_fragment(text)
-        add_fragment(text.replace("\u7684", ""))
-        stripped = re.sub(r"^(?:\u5229\u7528|\u5173\u4e8e|\u6709\u5173|\u57fa\u4e8e)", "", text).strip()
-        if stripped != text:
-            add_fragment(stripped)
-        for sub in re.split(r"[\u4e0e\u548c\u53ca\u6216\u3001]|\u4ee5\u53ca", text):
-            add_fragment(sub)
-            add_fragment(str(sub or "").replace("\u7684", ""))
-        suffix_trimmed = re.sub(
-            r"(\u5b9a\u4e49|\u6027\u8d28|\u5173\u7cfb|\u65b9\u6cd5|\u89e3\u6cd5|\u5e94\u7528|\u6b65\u9aa4|\u8bc1\u660e|\u6761\u4ef6|\u95ee\u9898|\u516c\u5f0f|\u5b9a\u7406|\u63a2\u7a76|\u603b\u7ed3)$",
-            "",
-            text,
-        ).strip()
-        if suffix_trimmed != text:
-            add_fragment(suffix_trimmed)
-            add_fragment(suffix_trimmed.replace("\u7684", ""))
-        if "\u7684" in text:
-            left, right = text.split("\u7684", 1)
-            add_fragment(left)
-            add_fragment(right)
-            suffix_trimmed = re.sub(
-                r"(\u5b9a\u4e49|\u6027\u8d28|\u5173\u7cfb|\u65b9\u6cd5|\u89e3\u6cd5|\u5e94\u7528|\u6b65\u9aa4|\u8bc1\u660e|\u6761\u4ef6|\u95ee\u9898|\u516c\u5f0f|\u5b9a\u7406)$",
-                "",
-                text,
-            ).strip()
-            add_fragment(suffix_trimmed)
-        method_chunk_match = re.match(
-            r"^\s*((?:\u56fe\u8c61|\u5b9a\u4e49|\u590d\u5408\u51fd\u6570|\u5bfc\u6570|\u6027\u8d28|\u914d\u65b9|\u6d88\u5143|\u6362\u5143|.*?))\u6cd5(?:\u6c42|\u89e3|\u5224\u65ad|\u8bc1\u660e|\u6bd4\u8f83|\u8ba8\u8bba|\u786e\u5b9a)",
-            text,
-        )
-        if method_chunk_match:
-            add_fragment(f"{method_chunk_match.group(1)}\u6cd5")
-        if "\u65b9\u6cd5" in text:
-            method_prefix = text.split("\u65b9\u6cd5", 1)[0].strip()
-            add_fragment(method_prefix)
-
-    normalized_name = _kp_relation_normalize_text(name)
-    if len(normalized_name) >= 2:
-        out.append(normalized_name)
-    filtered: List[str] = []
-    for fragment in out:
-        if fragment in _KP_RELATION_GENERIC_NAME_FRAGMENTS:
-            continue
-        if fragment.endswith("\u7684") and len(fragment) <= 6:
-            continue
-        filtered.append(fragment)
-    return list(dict.fromkeys(filtered))
-
-
-def _kp_relation_text_mentions_name(text: Optional[str], name: Optional[str]) -> bool:
-    normalized_text = _kp_relation_normalize_text(text)
-    relaxed_text = _kp_relation_relaxed_title_text(text)
-    for fragment in _kp_relation_name_fragments(name):
-        if fragment in normalized_text or (fragment and fragment in relaxed_text):
-            return True
-    return False
-
-
-def _kp_relation_shared_char_ratio(a: Optional[str], b: Optional[str]) -> float:
-    na = _kp_relation_normalize_text(a)
-    nb = _kp_relation_normalize_text(b)
-    if not na or not nb:
-        return 0.0
-    a_set = set(na)
-    b_set = set(nb)
-    denom = max(len(a_set | b_set), 1)
-    return len(a_set & b_set) / denom
-
-
-def _kp_relation_contains_family(a: Optional[str], b: Optional[str]) -> bool:
-    na = _kp_relation_normalize_text(a)
-    nb = _kp_relation_normalize_text(b)
-    return bool(na and nb and (na in nb or nb in na))
-
-
-def _kp_relation_common_prefix_len(a: Optional[str], b: Optional[str]) -> int:
-    na = _kp_relation_normalize_text(a)
-    nb = _kp_relation_normalize_text(b)
-    limit = min(len(na), len(nb))
-    idx = 0
-    while idx < limit and na[idx] == nb[idx]:
-        idx += 1
-    return idx
-
-
-def _kp_relation_looks_more_specific(candidate: Optional[str], parent: Optional[str]) -> bool:
-    nc = _kp_relation_normalize_text(candidate)
-    np = _kp_relation_normalize_text(parent)
-    if not nc or not np:
-        return False
-    if np in nc and len(nc) > len(np):
-        return True
-    return len(nc) >= len(np) + 3 and _kp_relation_shared_char_ratio(candidate, parent) >= 0.45
 
 
 def _topic_docx_point_mode() -> str:
@@ -529,9 +267,9 @@ _QUESTION_HEAD_RE = re.compile(
 _QUESTION_BODY_HINT_RE = re.compile(
     r"[（(]\s*[　 ]*\s*[）)]|"                       # (　　) 选择留空
     r"[（(]\s*(?:多选|单选|判断|填空)\s*[）)]|"         # (多选) 等题型括号
-    r"(?:已知|若集合|设集合)|"
+    r"(?:已知|若集合|设集合|等于)|"
     r"[A-HＡ-Ｈ][\.．、]|"                            # 选项
-    r"(?:答案\s*[:：]|解析\s*[:：])|"
+    r"(?:答案|解析)|"
     r"_{2,}|"                                         # 填空线
     r"=\s*[（(]|"                                     # =( 选择
     r"\d{4}\s*[·•年]"                                 # 年份标记（真题来源）
@@ -540,6 +278,9 @@ _OPTION_RE = re.compile(r"^\s*[A-HＡ-Ｈ][\.．、:：]\s*")
 # Word 自动编号里的「2.」常不在 runs 中，extract 后首段可能直接以卷种括号开头。
 _LOOSE_TOPIC_QUESTION_HEAD_RE = re.compile(
     r"^\s*[（(]\s*\d{4}\s*[·•・年][^。\n]{0,70}?(?:设集合|若集合|已知)"
+)
+_SUB_QUESTION_HEAD_RE = re.compile(
+    r"^\s*\((\d{1,2})\)[\.．、]?\s*"
 )
 _ANSWER_LABEL_RE = re.compile(
     r"^\s*(?:【|\[|\()?\s*(?:参考答案|答案解析|答案|解析|详解|解答|思路导引|思路引导|解法|过程|点评|评注|点拨|点睛)"
@@ -555,32 +296,9 @@ _LEADING_BRACKET_TOPIC_STRIP_RE = re.compile(
 _METHOD_SUMMARY_KEYWORDS = re.compile(
     r"方法|技巧|注意|关键|规律|策略|易错|总结|归纳|结论|常用|重点|要点|步骤"
 )
-_TOPIC_DRILL_INLINE_HEAD_RE = re.compile(
-    r"^\s*(?P<label>对点练\s*\d+)\s*[\.．、:：]?\s*(?P<rest>.*)$"
-)
-_TOPIC_SUBQUESTION_HEAD_RE = re.compile(
-    r"^\s*(?P<label>[（(]\s*(?P<index>\d{1,2})\s*[）)])\s*(?P<rest>.*)$"
-)
-_TOPIC_ANGLE_HEADING_RE = re.compile(r"^\s*角度\s*\d+\s*[：:、．.]?\s*")
-_TOPIC_PRESENTATION_HEADING_RE = re.compile(
-    r"^\s*\[(?:教材呈现|真题再现|变式探究)\]\s*"
-)
-_TOPIC_PRESENTATION_INLINE_HEAD_RE = re.compile(
-    r"^\s*(?P<label>\[(?:教材呈现|真题再现|变式探究)\])\s*(?P<rest>.*)$"
-)
-_QUESTION_CONTEXT_HEADING_RE = re.compile(
-    r"^\s*(?:考点[一二三四五六七八九十\d]|课时测评\d+|角度\s*\d+|对点练\s*\d+|\[(?:教材呈现|真题再现|变式探究)\])"
-)
-_INSTRUCTIONAL_HEADING_RE = re.compile(
-    r"(?:的方法$|四种方法$|基本策略$|解题策略$|分类讨论[:：]|数形结合[:：]|^求.*方法$|^解决.*策略$)"
-)
 
 _SECTION_TABLE_KEYWORDS_RE = re.compile(
     r"考点[一二三四五六七八九十\d]|自主检测|自主练透|师生共研|课时测评|真题再现|教材呈现|学生用书"
-)
-_SECTION_TRANSITION_HEADING_RE = re.compile(
-    r"^\s*(?:瀛︾敓鐢ㄤ功.*?椤?[\s|｜]*)?(?:鑰冪偣[涓€浜屼笁鍥涗簲鍏竷鍏節鍗乗d]|"
-    r"璇炬椂娴嬭瘎\d+|瀛︾敓鐢ㄤ功绗?\d+椤?)"
 )
 
 
@@ -617,10 +335,6 @@ def _extract_section_table_title(block: Dict[str, Any]) -> str:
 
 def _block_text(block: Dict[str, Any]) -> str:
     return (block.get("text") or "").strip()
-
-
-def _strip_leading_media_placeholders(text: str) -> str:
-    return re.sub(r"^(?:\[图片\]|公式图片|公式|formula|\[IMG\]|【图片】)+\s*", "", text or "")
 
 
 def _render_node_plain_text(node: Any) -> str:
@@ -661,303 +375,6 @@ def _same_block_suggests_question_stem(stem_text: str) -> bool:
     return False
 
 
-def _text_has_question_signal(text: str) -> bool:
-    if not text:
-        return False
-    body = _strip_leading_media_placeholders(text).strip()
-    if not body:
-        return False
-    if _QUESTION_BODY_HINT_RE.search(body):
-        return True
-    if _same_block_suggests_question_stem(body):
-        return True
-    if re.search(r"^(?:已知|若|设|求|求证|证明|解|完成下列|解下列)", body):
-        return True
-    return False
-
-
-def _is_instructional_heading(block_text: str) -> bool:
-    text = _strip_leading_media_placeholders(block_text).strip()
-    if not text:
-        return False
-    if re.match(r"^\s*[（(]\s*(?:\u591a\u9009|\u5355\u9009|\u5224\u65ad|\u586b\u7a7a|\u9009\u62e9)\s*[）)]", text):
-        return False
-    if re.search(r"(?:\u65b9\u6cd5|\u7b56\u7565)$", text):
-        return True
-    if re.search(r"^\s*\d+\.\s*(?:\u5206\u7c7b\u8ba8\u8bba|\u6570\u5f62\u7ed3\u5408)\s*[:：]?", text):
-        return True
-    if _INSTRUCTIONAL_HEADING_RE.search(text):
-        return True
-    if _METHOD_SUMMARY_KEYWORDS.search(text) and len(text) <= 40:
-        return True
-    if _text_has_question_signal(text):
-        return False
-    return False
-
-
-def _is_section_transition_heading(block_text: str) -> bool:
-    text = _strip_leading_media_placeholders(block_text).strip()
-    if not text:
-        return False
-    if _text_has_question_signal(text):
-        return False
-    if re.match(r"^\s*(?:\u8003\u70b9[\u4e00-\u5341\d]|\u8bfe\u65f6\u6d4b\u8bc4\d+)", text):
-        return True
-    if re.match(r"^\s*\u5b66\u751f\u7528\u4e66.*?\u9875", text):
-        return True
-    return bool(_SECTION_TRANSITION_HEADING_RE.match(text))
-
-
-def _is_question_group_intro_block(block_text: str) -> bool:
-    text = _strip_leading_media_placeholders(block_text).strip()
-    if not text:
-        return False
-    if _text_has_question_signal(text):
-        return False
-    if re.match(r"^\s*\[(?:\u6559\u6750\u5448\u73b0|\u771f\u9898\u518d\u73b0|\u53d8\u5f0f\u63a2\u7a76)\]", text):
-        return True
-    return bool(_TOPIC_PRESENTATION_HEADING_RE.match(text))
-
-
-def _is_analysis_like_text(text: str) -> bool:
-    body = _strip_leading_media_placeholders(text).strip()
-    if not body:
-        return False
-    if "故选" in body or "综上" in body or "故答案为" in body:
-        return True
-    if _ANSWER_LABEL_RE.match(body):
-        return True
-    if re.match(r"^[（(]\s*\d{1,2}\s*[）)]\s*.*由.*得", body):
-        return True
-    if re.match(r"^[（(]\s*\d{1,2}\s*[）)]\s*(?:由|因|因为|当|则|所以|综上|解)", body):
-        return True
-    if re.match(r"^(?:由|因|因为|当|则|所以|综上|解得|故选)", body):
-        return True
-    # 证明/解答类长文本若含推导链则视为解析
-    if re.match(r"^(?:证明|解|法[一二三四五六七八九十]?)[:：]\s*.*(?:由|因为|所以|则|可得|因此|故|从而|于是)", body):
-        return True
-    return False
-
-
-def _topic_subquestion_index(label: Optional[str]) -> Optional[int]:
-    text = _strip_leading_media_placeholders(str(label or "")).strip()
-    if not text:
-        return None
-    match = _TOPIC_SUBQUESTION_HEAD_RE.match(text)
-    if not match:
-        return None
-    try:
-        return int(match.group("index"))
-    except (TypeError, ValueError):
-        return None
-
-
-def _extract_top_level_topic_question_label(text: Optional[str]) -> Optional[str]:
-    body = _strip_leading_media_placeholders(str(text or "")).strip()
-    if not body:
-        return None
-    match = _QUESTION_HEAD_RE.match(body)
-    if not match:
-        return None
-    raw = match.group(1) or match.group(2) or match.group(3)
-    if not raw:
-        return None
-    tail = body[match.end():].strip()
-    if not tail:
-        return None
-    if not (_text_has_question_signal(tail) or re.search(r"[(\uFF08]\s*\d+\s*\u5206\s*[)\uFF09]", tail)):
-        return None
-    return str(raw).strip()
-
-
-def _strip_topic_presentation_prefix(text: Optional[str]) -> str:
-    body = _strip_leading_media_placeholders(str(text or "")).strip()
-    if not body:
-        return ""
-    return re.sub(r"^\s*(?:\[(?:教材呈现|真题再现|变式探究)\])\s*", "", body).strip()
-
-
-def _extract_relaxed_topic_subquestion_index(label: Optional[str]) -> Optional[int]:
-    strict = _topic_subquestion_index(label)
-    if strict is not None:
-        return strict
-    text = _strip_leading_media_placeholders(str(label or "")).strip()
-    if not text:
-        return None
-    match = re.search(r"[()\uFF08\uFF09]\s*(\d{1,2})\s*[()\uFF08\uFF09]\s*$", text)
-    if not match:
-        return None
-    try:
-        return int(match.group(1))
-    except (TypeError, ValueError):
-        return None
-
-
-def _topic_text_looks_like_context_heading(text: str) -> bool:
-    body = _strip_leading_media_placeholders(text).strip()
-    if not body:
-        return True
-    lines = [line.strip() for line in re.split(r"[\n\r]+", body) if line.strip()]
-    if not lines:
-        return True
-    if _is_instructional_heading(body):
-        return True
-    if re.search(r"(?:^|\n)\s*角度\s*\d+", body) and not re.search(r"(?:已知|若|设|求证|证明|下列)", body):
-        return True
-    if re.search(r"(?:^|\n)\s*对点练\s*\d+", body) and not re.search(r"(?:已知|若|设|求证|证明|下列)", body):
-        return True
-    if "勿忘" in body and not re.search(r"(?:已知|若|设|求证|证明|下列|答案|解析|A[\.．、])", body):
-        return True
-    heading_like_lines = 0
-    for line in lines:
-        if (
-            _TOPIC_ANGLE_HEADING_RE.match(line)
-            or _QUESTION_CONTEXT_HEADING_RE.match(line)
-            or (len(line) <= 20 and "勿忘" in line)
-        ):
-            heading_like_lines += 1
-    return heading_like_lines == len(lines) and not _text_has_question_signal(body)
-
-
-def _content_segment_looks_like_question_tail(seg: TopicContentSegment) -> bool:
-    texts = [_strip_leading_media_placeholders(_block_text(block)).strip() for block in (seg.blocks or []) if _block_text(block)]
-    texts = [text for text in texts if text]
-    if not texts:
-        return False
-    first = texts[0]
-    joined = "\n".join(texts)
-    if _OPTION_RE.match(first) or _ANSWER_LABEL_RE.match(first):
-        return True
-    if re.match(r"^(?:解析|答案|解|证明|点评|评注)[:：]", first):
-        return True
-    if len(texts) >= 2 and _OPTION_RE.match(first) and any(_ANSWER_LABEL_RE.match(text) for text in texts[1:]):
-        return True
-    if _OPTION_RE.search(joined) and _ANSWER_LABEL_RE.search(joined):
-        return True
-    return False
-
-
-def _topic_segment_is_numbered_explanatory_statement(text: Optional[str]) -> bool:
-    body = _strip_topic_presentation_prefix(text)
-    if not body:
-        return True
-    head = _QUESTION_HEAD_RE.match(body)
-    if head:
-        body = body[head.end():].strip()
-    if not body:
-        return True
-    normalized = _strip_leading_media_placeholders(body).strip()
-    if not normalized:
-        return True
-    if re.search(r"(?:^|\n)\s*(?:[A-H][\.．、]|答案|解析|解[:：]|证明[:：])", normalized):
-        return False
-    if re.search(r"[()\uFF08\uFF09]\s*\d{1,2}\s*[()\uFF08\uFF09]", normalized):
-        return False
-    if _text_has_question_signal(normalized):
-        sentence_like = bool(re.search(r"[。．.]$", normalized)) and "\n" not in normalized
-        explanatory_like = bool(
-            sentence_like
-            and re.match(r"^(?:利用|根据|结合|通过|借助|由|从|对于|关于|函数的|周期性|奇偶性|单调性|结论|方法|策略|技巧)", normalized)
-            and re.search(r"(?:可将|转化到|进而|从而|一般地|通常|可把|解决问题)", normalized)
-        )
-        if not explanatory_like:
-            return False
-    if re.search(r"[（(]\s*\d+\s*分[）)]", body):
-        return False
-    return bool(
-        re.match(r"^(?:利用|根据|由|结合|通过|借助|从|对于|关于|函数|函数的|周期|周期性|奇偶性|单调性|性质|结论|方法|技巧|策略)", normalized)
-        and re.search(r"[。．.]$", normalized)
-    )
-
-
-def _count_topic_subquestion_markers(text: Optional[str]) -> int:
-    if not text:
-        return 0
-    indexes: List[int] = []
-    for match in re.finditer(r"[()\uFF08\uFF09]\s*(\d{1,2})\s*[()\uFF08\uFF09]", str(text)):
-        try:
-            current = int(match.group(1))
-        except (TypeError, ValueError):
-            continue
-        if not indexes or indexes[-1] != current:
-            indexes.append(current)
-    return len(indexes)
-
-
-def _match_contextual_topic_question_head(
-    text: str,
-    *,
-    prev_text: str = "",
-    state: str = "CONTENT",
-    current_question_blocks: Optional[List[Dict[str, Any]]] = None,
-) -> Optional[Tuple[str, Optional[int]]]:
-    body = _strip_leading_media_placeholders(text).strip()
-    prev = _strip_leading_media_placeholders(prev_text).strip()
-    if not body:
-        return None
-    if _is_analysis_like_text(body):
-        return None
-
-    drill_match = _TOPIC_DRILL_INLINE_HEAD_RE.match(body)
-    if drill_match:
-        rest = (drill_match.group("rest") or "").strip()
-        if _is_analysis_like_text(rest):
-            return None
-        sub_match = _TOPIC_SUBQUESTION_HEAD_RE.match(rest)
-        if sub_match:
-            tail = (sub_match.group("rest") or "").strip()
-            if _text_has_question_signal(tail) or "求" in tail:
-                try:
-                    return (
-                        f"{drill_match.group('label')}{sub_match.group('label')}",
-                        int(sub_match.group("index")),
-                    )
-                except (TypeError, ValueError):
-                    return f"{drill_match.group('label')}{sub_match.group('label')}", None
-        if _text_has_question_signal(rest):
-            return drill_match.group("label"), None
-
-    presentation_match = _TOPIC_PRESENTATION_INLINE_HEAD_RE.match(body)
-    if presentation_match:
-        rest = (presentation_match.group("rest") or "").strip()
-        if rest and not _is_analysis_like_text(rest):
-            drill_rest = _TOPIC_DRILL_INLINE_HEAD_RE.match(rest)
-            if drill_rest:
-                drill_tail = (drill_rest.group("rest") or "").strip()
-                if _text_has_question_signal(drill_tail):
-                    return drill_rest.group("label"), None
-            if _text_has_question_signal(rest) or _LOOSE_TOPIC_QUESTION_HEAD_RE.match(rest):
-                return rest[:24], None
-
-    sub_match = _TOPIC_SUBQUESTION_HEAD_RE.match(body)
-    if sub_match:
-        rest = (sub_match.group("rest") or "").strip()
-        if _is_analysis_like_text(rest):
-            return None
-        group_context = state in {"QUESTION", "ANSWER_ZONE"} and bool(current_question_blocks)
-        prev_is_group_lead = bool(
-            _TOPIC_ANGLE_HEADING_RE.match(prev)
-            or _TOPIC_PRESENTATION_HEADING_RE.match(prev)
-            or _TOPIC_DRILL_INLINE_HEAD_RE.match(prev)
-            or _QUESTION_CONTEXT_HEADING_RE.match(prev)
-            or (state in {"QUESTION", "ANSWER_ZONE"} and _TOPIC_SUBQUESTION_HEAD_RE.match(prev))
-        )
-        if _text_has_question_signal(rest) or (prev_is_group_lead and "求" in rest):
-            if group_context or prev_is_group_lead:
-                try:
-                    return sub_match.group("label"), int(sub_match.group("index"))
-                except (TypeError, ValueError):
-                    return sub_match.group("label"), None
-
-    if (
-        (_TOPIC_ANGLE_HEADING_RE.match(prev) or _TOPIC_PRESENTATION_HEADING_RE.match(prev))
-        and _text_has_question_signal(body)
-    ):
-        return body[:24], None
-
-    return None
-
-
 def _lookahead_suggests_question_tail(
     blocks: List[Dict[str, Any]],
     idx: int,
@@ -991,10 +408,6 @@ def _looks_like_real_question(
 ) -> bool:
     """区分「真题号」（如 "1.(多选)下列..."）和「知识小标题」（如 "1.集合与元素"）。"""
     after_num = block_text[q_match.end():]
-    if _is_instructional_heading(after_num):
-        return False
-    if re.search(r"^\s*[（(]\s*(?:\u591a\u9009|\u5355\u9009|\u5224\u65ad|\u586b\u7a7a|\u9009\u62e9)\s*[）)]", after_num):
-        return True
     if _QUESTION_BODY_HINT_RE.search(after_num):
         return True
     lookahead = min(idx + 5, len(blocks))
@@ -1067,28 +480,6 @@ def _gather_embedded_question_split_positions(t: str) -> List[int]:
     for m in pat_newline.finditer(t):
         if m.start() > 0:
             poses.add(m.start())
-    generic_top_level_head_re = re.compile(
-        r"(?=(?:\s|\[图片\]|\[IMG\])*(?:\d{1,3}[\.．、]|第\s*\d{1,3}\s*题|对点练\s*\d+))"
-    )
-    generic_subquestion_head_re = re.compile(r"(?=(?:\s|\[图片\]|\[IMG\])*[（(]\s*\d{1,2}\s*[)）])")
-    for m in generic_top_level_head_re.finditer(t):
-        pos = m.start()
-        if pos <= 0:
-            continue
-        prev = t[max(0, pos - 24) : pos]
-        if re.search(r"(?:[。！？；\n\r\u2029]|\[图片\]|\[IMG\])\s*$", prev):
-            poses.add(pos)
-    for m in generic_subquestion_head_re.finditer(t):
-        pos = m.start()
-        if pos <= 0:
-            continue
-        prev = t[max(0, pos - 160) : pos]
-        if (
-            re.search(r"(?:[。！？；\n\r\u2029]|\[图片\]|\[IMG\])\s*$", prev)
-            or _OPTION_RE.search(prev)
-            or _ANSWER_LABEL_RE.search(prev)
-        ):
-            poses.add(pos)
     return sorted(poses)
 
 
@@ -1096,26 +487,9 @@ def _piece_looks_like_question_opening(px: str) -> bool:
     s = (px or "").strip()
     if not s:
         return False
-    body = _strip_leading_media_placeholders(s).strip()
-    if not body:
-        return False
-    if _QUESTION_HEAD_RE.match(body):
+    if _QUESTION_HEAD_RE.match(s):
         return True
-    if _LOOSE_TOPIC_QUESTION_HEAD_RE.match(body):
-        return True
-    drill_match = _TOPIC_DRILL_INLINE_HEAD_RE.match(body)
-    if drill_match and _text_has_question_signal((drill_match.group("rest") or "").strip()):
-        return True
-    presentation_match = _TOPIC_PRESENTATION_INLINE_HEAD_RE.match(body)
-    if presentation_match:
-        rest = (presentation_match.group("rest") or "").strip()
-        if _text_has_question_signal(rest):
-            return True
-        drill_rest = _TOPIC_DRILL_INLINE_HEAD_RE.match(rest)
-        if drill_rest and _text_has_question_signal((drill_rest.group("rest") or "").strip()):
-            return True
-    sub_match = _TOPIC_SUBQUESTION_HEAD_RE.match(body)
-    if sub_match and _text_has_question_signal((sub_match.group("rest") or "").strip()):
+    if _LOOSE_TOPIC_QUESTION_HEAD_RE.match(s):
         return True
     return False
 
@@ -1180,6 +554,92 @@ def _expand_embedded_question_after_sentence(
             split_paragraph_count,
         )
     return out, split_paragraph_count
+
+
+_SUB_Q_NO_RE = re.compile(r"^\((\d+)\)$")
+
+
+def _merge_sub_questions_with_shared_answers(
+    question_segments: List[TopicQuestionSegment],
+) -> List[TopicQuestionSegment]:
+    """合并共享答案区的连续子题 ((1)(2)(3))。"""
+    if len(question_segments) < 2:
+        return question_segments
+
+    merged: List[TopicQuestionSegment] = []
+    skip: set[int] = set()
+    i = 0
+    while i < len(question_segments):
+        seg = question_segments[i]
+        m = _SUB_Q_NO_RE.match(seg.question_no)
+        if not m:
+            merged.append(seg)
+            i += 1
+            continue
+
+        group: List[TopicQuestionSegment] = [seg]
+        group_indices = [i]
+        expected = int(m.group(1)) + 1
+        j = i + 1
+        while j < len(question_segments):
+            m2 = _SUB_Q_NO_RE.match(question_segments[j].question_no)
+            if m2 and int(m2.group(1)) == expected:
+                group.append(question_segments[j])
+                group_indices.append(j)
+                expected += 1
+                j += 1
+            else:
+                break
+
+        if len(group) < 2:
+            merged.append(seg)
+            i += 1
+            continue
+
+        last_text = "\n".join(_block_text(b) for b in group[-1].blocks)
+        has_shared = bool(re.search(r"答案[：:].*\(1\)", last_text))
+        if not has_shared:
+            merged.extend(group)
+            i = j
+            continue
+
+        all_blocks: List[Dict[str, Any]] = []
+        for g in group:
+            all_blocks.extend(g.blocks)
+        merged.append(
+            TopicQuestionSegment(
+                question_no=group[0].question_no,
+                section_title=group[0].section_title,
+                blocks=all_blocks,
+                block_index_start=group[0].block_index_start,
+                block_index_end=group[-1].block_index_end,
+            )
+        )
+        for idx in group_indices:
+            skip.add(idx)
+        i = j
+
+    return merged
+
+
+def _filter_answerless_questions(
+    question_segments: List[TopicQuestionSegment],
+) -> List[TopicQuestionSegment]:
+    """过滤无答案的题目。"""
+    kept: List[TopicQuestionSegment] = []
+    for seg in question_segments:
+        has_answer = False
+        for b in seg.blocks:
+            text = _block_text(b)
+            if _ANSWER_LABEL_RE.match(text):
+                has_answer = True
+                break
+            if len(seg.blocks) > 1 and re.match(r"^\s*证明[:：]", text) and len(text) > 30:
+                has_answer = True
+                break
+        if has_answer:
+            kept.append(seg)
+    return kept
 
 
 def classify_topic_docx_blocks(
@@ -1278,11 +738,6 @@ def classify_topic_docx_blocks(
         text = _block_text(block)
         render = block.get("render")
         is_table = isinstance(render, dict) and render.get("type") == "table"
-        prev_text = ""
-        for prev_idx in range(idx - 1, -1, -1):
-            prev_text = _block_text(blocks[prev_idx])
-            if prev_text:
-                break
 
         if _is_section_marker_table(block):
             if state == "QUESTION" or state == "ANSWER_ZONE":
@@ -1294,7 +749,7 @@ def classify_topic_docx_blocks(
             cur_content_start = idx + 1
             continue
 
-        clean_text = _strip_leading_media_placeholders(text) if text else text
+        clean_text = re.sub(r"^(?:\[图片\]|公式图片|公式|formula|\[IMG\]|【图片】)+\s*", "", text) if text else text
         clean_text = _LEADING_BRACKET_TOPIC_STRIP_RE.sub("", clean_text or "")
         raw_q_match = _QUESTION_HEAD_RE.match(clean_text) if clean_text else None
         std_head = bool(
@@ -1302,30 +757,19 @@ def classify_topic_docx_blocks(
         )
         q_match = raw_q_match if std_head else None
         q_no_override: Optional[Tuple[str, Optional[int]]] = None
-        contextual_q_head = _match_contextual_topic_question_head(
-            text,
-            prev_text=prev_text,
-            state=state,
-            current_question_blocks=cur_q_blocks,
-        )
         if (
             not std_head
-            and last_question_no_int is not None
             and clean_text
             and _LOOSE_TOPIC_QUESTION_HEAD_RE.match(clean_text)
             and _lookahead_suggests_question_tail(blocks, idx, clean_text)
         ):
-            nxt = last_question_no_int + 1
+            nxt = (last_question_no_int or 0) + 1
             q_no_override = (str(nxt), nxt)
-        elif contextual_q_head:
-            q_no_override = contextual_q_head
         has_topic_q_head = bool(q_match) or bool(q_no_override)
         is_option = bool(_OPTION_RE.match(text)) if text else False
         is_answer = bool(_ANSWER_LABEL_RE.match(text)) if text else False
         is_ktag = bool(_KNOWLEDGE_TAG_RE.match(text)) if text else False
         is_ksummary_table = _is_knowledge_summary_table(block)
-        is_instructional = _is_instructional_heading(text) if text else False
-        is_section_transition = _is_section_transition_heading(text) if text else False
         is_method = (
             not has_topic_q_head
             and not is_option
@@ -1350,6 +794,30 @@ def classify_topic_docx_blocks(
                     last_question_no_int = q_int
                     plain_after_answer = 0
                     continue
+            sub_q_match = _SUB_QUESTION_HEAD_RE.match(clean_text) if clean_text and not has_topic_q_head else None
+            if sub_q_match and _lookahead_suggests_question_tail(blocks, idx, clean_text):
+                q_str = sub_q_match.group(0).strip()
+                try:
+                    q_int = int(sub_q_match.group(1))
+                except ValueError:
+                    q_int = None
+                _flush_content(idx)
+                state = "QUESTION"
+                cur_q_no = q_str
+                cur_q_blocks = [block]
+                cur_q_start = idx
+                last_question_no_int = q_int
+                plain_after_answer = 0
+                continue
+            if not has_topic_q_head and text and _LOOSE_STEM_BLANK_RE.search(text) and _lookahead_suggests_question_tail(blocks, idx, text):
+                _flush_content(idx)
+                state = "QUESTION"
+                cur_q_no = f"Q_bare_{idx}"
+                cur_q_blocks = [block]
+                cur_q_start = idx
+                last_question_no_int = None
+                plain_after_answer = 0
+                continue
             cur_content_blocks.append(block)
 
         elif state == "QUESTION":
@@ -1370,7 +838,7 @@ def classify_topic_docx_blocks(
                 state = "ANSWER_ZONE"
                 plain_after_answer = 0
                 continue
-            if is_ktag or is_method or is_instructional or is_section_transition:
+            if is_ktag or is_ksummary_table or is_method:
                 _flush_question(idx)
                 state = "CONTENT"
                 cur_content_blocks = [block]
@@ -1396,7 +864,7 @@ def classify_topic_docx_blocks(
                 cur_q_blocks.append(block)
                 plain_after_answer = 0
                 continue
-            if is_ktag or is_instructional or is_section_transition:
+            if is_ktag or is_ksummary_table:
                 _flush_question(idx)
                 state = "CONTENT"
                 cur_content_blocks = [block]
@@ -1404,7 +872,7 @@ def classify_topic_docx_blocks(
                 continue
             if is_method:
                 plain_after_answer += 1
-                if plain_after_answer >= 1:
+                if plain_after_answer >= 2:
                     _flush_question(idx - 1)
                     state = "CONTENT"
                     cur_content_blocks = [block]
@@ -1428,6 +896,9 @@ def classify_topic_docx_blocks(
             if abs(qs.block_index_end - cs.block_index_start) <= 2:
                 if qs.question_no not in cs.adjacent_question_nos:
                     cs.adjacent_question_nos.append(qs.question_no)
+
+    question_segments = _merge_sub_questions_with_shared_answers(question_segments)
+    question_segments = _filter_answerless_questions(question_segments)
 
     return content_segments, question_segments, embedded_q_split
 
@@ -1498,7 +969,6 @@ class KnowledgePointIngestionService:
         db: Session,
         source_document_id: int,
         force_reingest: bool = False,
-        sync_retrieval: Optional[bool] = None,
         progress_callback: Optional[Callable[[str], None]] = None,
     ) -> Dict[str, object]:
         source_document = (
@@ -1519,7 +989,6 @@ class KnowledgePointIngestionService:
             raise ValueError(f"文件不存在：{source_path}")
 
         extension = source_path.suffix.lower()
-        should_sync_retrieval = KNOWLEDGE_TOPIC_INLINE_RETRIEVAL_SYNC if sync_retrieval is None else bool(sync_retrieval)
         if extension not in SUPPORTED_EXTENSIONS:
             raise ValueError(f"不支持的知识点资料格式：{extension or 'unknown'}")
 
@@ -1543,7 +1012,6 @@ class KnowledgePointIngestionService:
             if extension == ".docx":
                 result = self._ingest_docx_topic(
                     db, source_document, source_path, parse_job, fallback_point=None,
-                    sync_retrieval=sync_retrieval,
                     progress_callback=progress_callback,
                 )
                 # _ingest_docx_topic 已完成 parse_job，但也需要同步更新 SourceDocument.parse_status
@@ -1715,7 +1183,6 @@ class KnowledgePointIngestionService:
                 topic_question_metrics = QuestionBankIngestionService().ingest_topic_packages_questions(
                     db,
                     source_document.id,
-                    sync_retrieval=should_sync_retrieval,
                     progress_callback=progress_callback,
                 )
                 self._notify_progress(
@@ -1788,11 +1255,9 @@ class KnowledgePointIngestionService:
         parse_job: models.DocumentParseJob,
         *,
         fallback_point: Optional[models.KnowledgePoint] = None,
-        sync_retrieval: Optional[bool] = None,
         progress_callback: Optional[Callable[[str], None]] = None,
     ) -> Dict[str, object]:
         notify = lambda msg: self._notify_progress(progress_callback, msg)
-        should_sync_retrieval = KNOWLEDGE_TOPIC_INLINE_RETRIEVAL_SYNC if sync_retrieval is None else bool(sync_retrieval)
 
         if fallback_point is None:
             fallback_point = self._get_or_create_knowledge_point(
@@ -1859,8 +1324,6 @@ class KnowledgePointIngestionService:
 
         notify("段落分类（知识内容 vs 题目）…")
         content_segments, question_segments, embedded_q_split = classify_topic_docx_blocks(blocks)
-        question_segments = self._refine_topic_question_segments(content_segments, question_segments)
-        content_segments = self._prune_content_segments_by_question_spans(content_segments, question_segments)
         notify(f"  专题内容段={len(content_segments)} 题目段={len(question_segments)}")
         if embedded_q_split:
             notify(
@@ -2063,24 +1526,6 @@ class KnowledgePointIngestionService:
                 progress_callback=progress_callback,
                 topic_point_mode=topic_point_mode,
             )
-            self.reconcile_topic_placeholder_residue(
-                db,
-                package.id,
-                progress_callback=progress_callback,
-            )
-            package_point_links.clear()
-            package_point_links.update(self._refresh_package_point_links_map(db, package.id))
-            relation_summary = self._extract_kp_relations_with_llm(
-                db,
-                package,
-                package_point_links,
-                progress_callback=progress_callback,
-            )
-            if relation_summary.get("status") not in {"ok", "skipped"}:
-                notify(
-                    "  KP-KP extraction warning: "
-                    f"status={relation_summary.get('status')} reason={relation_summary.get('reason')}"
-                )
 
         notify(f"知识块写入完成：blocks={block_count} atoms={atom_count} points={len(package_point_links)}")
 
@@ -2091,7 +1536,6 @@ class KnowledgePointIngestionService:
                 db, source_document, package, question_segments,
                 content_block_ids=content_block_ids,
                 content_segments=content_segments,
-                sync_retrieval=should_sync_retrieval,
                 progress_callback=progress_callback,
             )
             notify(
@@ -2099,37 +1543,10 @@ class KnowledgePointIngestionService:
                 f"questions={topic_question_metrics.get('question_count')}"
             )
 
-        retrieval_sync_summary: Dict[str, Any] = {
-            "status": "disabled" if not KNOWLEDGE_RAG_ENABLED else "deferred",
-            "package_id": package.id,
-            "inline_requested": should_sync_retrieval,
-        }
-        if KNOWLEDGE_RAG_ENABLED and should_sync_retrieval:
-            notify("专题检索索引同步：生成 RetrievalDocument 与 embedding points...")
-            try:
-                from .knowledge_point_retriever import sync_knowledge_package_retrieval
-
-                retrieval_sync_summary = sync_knowledge_package_retrieval(db, package.id)
-                retrieval_sync_summary["inline_requested"] = True
-                notify(
-                    "专题检索索引同步完成："
-                    f"indexed_documents={retrieval_sync_summary.get('indexed_documents')} "
-                    f"vector_backend={retrieval_sync_summary.get('vector_backend')} "
-                    f"text_backend={retrieval_sync_summary.get('text_backend')}"
-                )
-            except Exception:
-                logger.exception("Retrieval sync after topic ingest failed: package_id=%s", package.id)
-                raise
-        elif KNOWLEDGE_RAG_ENABLED:
-            notify(
-                f"专题检索索引同步：改为后置阶段，主摄入链路本次跳过（package_id={package.id}）"
-            )
-
         package.parse_status = "success"
         db.commit()
 
         graph_projection_summary: Dict[str, Any] = {"status": "skipped"}
-        neo4j_sync_summary: Dict[str, Any] = {"status": "skipped"}
         try:
             from .config import KNOWLEDGE_GRAPH_ENABLED as _KG_ENABLED
             from . import knowledge_graph_projection as _kg_proj
@@ -2142,22 +1559,11 @@ class KnowledgePointIngestionService:
                     f"inserted={graph_projection_summary.get('inserted')} "
                     f"deleted={graph_projection_summary.get('deleted')}"
                 )
-                notify("Neo4j 图谱同步：将本包投影边写入 Neo4j…")
-                from .academic_graph_service import service as _academic_graph_service
-
-                neo4j_sync_summary = _academic_graph_service.sync_package_projection(db, package.id)
-                notify(
-                    "Neo4j 图谱同步完成："
-                    f"nodes={neo4j_sync_summary.get('synced_nodes')} "
-                    f"relationships={neo4j_sync_summary.get('synced_relationships')}"
-                )
             else:
                 notify("知识图谱投影：KNOWLEDGE_GRAPH_ENABLED=false，跳过。")
         except Exception as exc:
-            logger.exception("Graph projection / Neo4j sync after ingest failed: package_id=%s", package.id)
+            logger.warning("Graph projection after ingest failed: %s", exc, exc_info=True)
             graph_projection_summary = {"status": "error", "reason": str(exc)}
-            neo4j_sync_summary = {"status": "error", "reason": str(exc)}
-            raise
 
         metrics_json = {
             "package_count": 1,
@@ -2166,9 +1572,7 @@ class KnowledgePointIngestionService:
             "knowledge_point_count": len(package_point_links),
             "topic_question_papers": topic_question_metrics.get("papers_created", 0),
             "topic_question_count": topic_question_metrics.get("question_count", 0),
-            "retrieval_sync": retrieval_sync_summary,
             "graph_projection": graph_projection_summary,
-            "neo4j_sync": neo4j_sync_summary,
         }
         self._finish_parse_job(
             db, parse_job, status="success",
@@ -2198,9 +1602,6 @@ class KnowledgePointIngestionService:
                 }
             ],
             "topic_question_metrics": topic_question_metrics,
-            "retrieval_sync": retrieval_sync_summary,
-            "graph_projection": graph_projection_summary,
-            "neo4j_sync": neo4j_sync_summary,
         }
 
     def _pick_content_segment_index_for_question(
@@ -2256,18 +1657,15 @@ class KnowledgePointIngestionService:
 
     def _package_linked_point_ids(self, db: Session, package_id: int) -> List[int]:
         rows = (
-            db.query(models.KnowledgePackagePoint.knowledge_point_id, models.KnowledgePoint.canonical_name)
-            .join(models.KnowledgePoint, models.KnowledgePoint.id == models.KnowledgePackagePoint.knowledge_point_id)
+            db.query(models.KnowledgePackagePoint.knowledge_point_id)
             .filter(models.KnowledgePackagePoint.package_id == package_id)
             .order_by(models.KnowledgePackagePoint.order_in_package.asc(), models.KnowledgePackagePoint.id.asc())
             .all()
         )
         out: List[int] = []
         seen: Set[int] = set()
-        for pid, canonical_name in rows:
+        for (pid,) in rows:
             if pid is None or pid in seen:
-                continue
-            if self._is_placeholder_point_name(canonical_name):
                 continue
             seen.add(int(pid))
             out.append(int(pid))
@@ -2276,8 +1674,7 @@ class KnowledgePointIngestionService:
     def _package_representative_point_id(self, db: Session, package_id: int) -> Optional[int]:
         """本包「代表考点」：优先 core，其次 order_in_package 最小/id 最小。"""
         row = (
-            db.query(models.KnowledgePackagePoint.knowledge_point_id, models.KnowledgePoint.canonical_name)
-            .join(models.KnowledgePoint, models.KnowledgePoint.id == models.KnowledgePackagePoint.knowledge_point_id)
+            db.query(models.KnowledgePackagePoint.knowledge_point_id)
             .filter(
                 models.KnowledgePackagePoint.package_id == package_id,
                 models.KnowledgePackagePoint.relation_type == "core",
@@ -2285,16 +1682,15 @@ class KnowledgePointIngestionService:
             .order_by(models.KnowledgePackagePoint.order_in_package.asc(), models.KnowledgePackagePoint.id.asc())
             .first()
         )
-        if row and row[0] is not None and not self._is_placeholder_point_name(row[1]):
+        if row and row[0] is not None:
             return int(row[0])
         row = (
-            db.query(models.KnowledgePackagePoint.knowledge_point_id, models.KnowledgePoint.canonical_name)
-            .join(models.KnowledgePoint, models.KnowledgePoint.id == models.KnowledgePackagePoint.knowledge_point_id)
+            db.query(models.KnowledgePackagePoint.knowledge_point_id)
             .filter(models.KnowledgePackagePoint.package_id == package_id)
             .order_by(models.KnowledgePackagePoint.order_in_package.asc(), models.KnowledgePackagePoint.id.asc())
             .first()
         )
-        if row and row[0] is not None and not self._is_placeholder_point_name(row[1]):
+        if row and row[0] is not None:
             return int(row[0])
         return None
 
@@ -2945,799 +2341,6 @@ class KnowledgePointIngestionService:
         db.flush()
         return stats
 
-    def _split_grouped_topic_question_segment(
-        self,
-        seg: TopicQuestionSegment,
-    ) -> List[TopicQuestionSegment]:
-        blocks = list(seg.blocks or [])
-        if len(blocks) < 2:
-            return [seg]
-
-        start_rows: List[Tuple[int, str]] = []
-        for idx, block in enumerate(blocks):
-            text = _block_text(block)
-            prev_text = _block_text(blocks[idx - 1]) if idx > 0 else ""
-            match = _match_contextual_topic_question_head(
-                text,
-                prev_text=prev_text,
-                state="QUESTION" if idx > 0 else "CONTENT",
-                current_question_blocks=blocks[:idx],
-            )
-            if not match:
-                continue
-            if idx == 0 and _is_instructional_heading(text):
-                continue
-            start_rows.append((idx, match[0]))
-
-        if not start_rows:
-            return [seg]
-
-        def _prefix_is_group_context(prefix_blocks: List[Dict[str, Any]]) -> bool:
-            texts = [_block_text(block) for block in prefix_blocks if _block_text(block)]
-            if not texts:
-                return False
-            return all(
-                _is_question_group_intro_block(text) or _is_instructional_heading(text)
-                for text in texts
-            )
-
-        first_start_idx = start_rows[0][0]
-        if first_start_idx > 0 and not _prefix_is_group_context(blocks[:first_start_idx]):
-            return [seg]
-        first_child_start_idx = 0 if first_start_idx > 0 else first_start_idx
-
-        answer_idx = next(
-            (idx for idx, block in enumerate(blocks) if _ANSWER_LABEL_RE.match(_block_text(block))),
-            len(blocks),
-        )
-        question_slices: List[Tuple[str, int, int]] = []
-        sequential_starts = [(idx, label) for idx, label in start_rows if idx >= answer_idx]
-        if sequential_starts:
-            for pos, (start_idx, label) in enumerate(start_rows):
-                child_start_idx = first_child_start_idx if pos == 0 else start_idx
-                next_idx = start_rows[pos + 1][0] if pos + 1 < len(start_rows) else len(blocks)
-                if next_idx > child_start_idx:
-                    question_slices.append((label, child_start_idx, next_idx))
-            if len(question_slices) <= 1:
-                return [seg]
-            return [
-                TopicQuestionSegment(
-                    question_no=label,
-                    section_title=seg.section_title,
-                    blocks=[copy.deepcopy(block) for block in blocks[start_idx:end_idx]],
-                    block_index_start=seg.block_index_start + start_idx,
-                    block_index_end=seg.block_index_start + end_idx,
-                )
-                for label, start_idx, end_idx in question_slices
-            ]
-
-        pre_answer_starts = [(idx, label) for idx, label in start_rows if idx < answer_idx]
-        if not pre_answer_starts:
-            return [seg]
-        for pos, (start_idx, label) in enumerate(pre_answer_starts):
-            child_start_idx = first_child_start_idx if pos == 0 else start_idx
-            next_idx = pre_answer_starts[pos + 1][0] if pos + 1 < len(pre_answer_starts) else answer_idx
-            if next_idx > child_start_idx:
-                question_slices.append((label, child_start_idx, next_idx))
-
-        if len(question_slices) <= 1:
-            return [seg]
-
-        answer_blocks = blocks[answer_idx:] if answer_idx < len(blocks) else []
-        children: List[TopicQuestionSegment] = []
-        for child_pos, (label, start_idx, end_idx) in enumerate(question_slices, start=1):
-            child_blocks = [copy.deepcopy(block) for block in blocks[start_idx:end_idx]]
-            child_sub_idx: Optional[int] = None
-            sub_match = re.search(r"[（(]\s*(\d{1,2})\s*[）)]\s*$", label)
-            if sub_match:
-                try:
-                    child_sub_idx = int(sub_match.group(1))
-                except (TypeError, ValueError):
-                    child_sub_idx = None
-
-            for tail_idx, block in enumerate(answer_blocks):
-                text = _block_text(block)
-                if not text:
-                    continue
-                stripped = _strip_leading_media_placeholders(text)
-                if tail_idx == 0 and _ANSWER_LABEL_RE.match(text):
-                    child_blocks.append(copy.deepcopy(block))
-                    continue
-                tail_match = _TOPIC_SUBQUESTION_HEAD_RE.match(stripped)
-                if tail_match and child_sub_idx is not None:
-                    try:
-                        tail_sub_idx = int(tail_match.group("index"))
-                    except (TypeError, ValueError):
-                        tail_sub_idx = None
-                    if tail_sub_idx == child_sub_idx:
-                        child_blocks.append(copy.deepcopy(block))
-                    continue
-                if child_pos == len(question_slices):
-                    child_blocks.append(copy.deepcopy(block))
-
-            children.append(
-                TopicQuestionSegment(
-                    question_no=label,
-                    section_title=seg.section_title,
-                    blocks=child_blocks,
-                    block_index_start=seg.block_index_start + start_idx,
-                    block_index_end=seg.block_index_start + end_idx,
-                )
-            )
-
-        return children or [seg]
-
-    def _prune_content_segments_by_question_spans(
-        self,
-        content_segments: List[TopicContentSegment],
-        question_segments: List[TopicQuestionSegment],
-    ) -> List[TopicContentSegment]:
-        covered_indexes: set[int] = set()
-        for seg in question_segments:
-            covered_indexes.update(range(seg.block_index_start, seg.block_index_end))
-
-        pruned: List[TopicContentSegment] = []
-        for seg in content_segments:
-            kept_runs: List[List[Tuple[int, Dict[str, Any]]]] = []
-            current_run: List[Tuple[int, Dict[str, Any]]] = []
-            for offset, block in enumerate(seg.blocks or []):
-                global_idx = seg.block_index_start + offset
-                if global_idx in covered_indexes:
-                    if current_run:
-                        kept_runs.append(current_run)
-                        current_run = []
-                    continue
-                current_run.append((global_idx, copy.deepcopy(block)))
-            if current_run:
-                kept_runs.append(current_run)
-
-            for run in kept_runs:
-                run_blocks = [block for _, block in run if _block_text(block)]
-                if not run_blocks:
-                    continue
-                start_idx = run[0][0]
-                end_idx = run[-1][0] + 1
-                plain = "\n".join(_block_text(block) for block in run_blocks if _block_text(block)).strip()
-                if not plain:
-                    continue
-                candidate = TopicContentSegment(
-                    section_title=seg.section_title,
-                    blocks=run_blocks,
-                    plain_text=plain,
-                    block_index_start=start_idx,
-                    block_index_end=end_idx,
-                    adjacent_question_nos=list(seg.adjacent_question_nos or []),
-                )
-                if self._should_drop_topic_content_segment(candidate):
-                    continue
-                pruned.append(candidate)
-
-        pruned.sort(key=lambda item: (item.block_index_start, item.block_index_end))
-        return pruned or content_segments
-
-    def _should_drop_topic_content_segment(self, seg: TopicContentSegment) -> bool:
-        texts = [_strip_leading_media_placeholders(_block_text(block)).strip() for block in (seg.blocks or []) if _block_text(block)]
-        texts = [text for text in texts if text]
-        if not texts:
-            return True
-        if all(_is_question_group_intro_block(text) for text in texts):
-            return True
-        if seg.adjacent_question_nos:
-            joined = "\n".join(texts)
-            if re.match(r"^\s*\[(?:\u6559\u6750\u5448\u73b0|\u771f\u9898\u518d\u73b0|\u53d8\u5f0f\u63a2\u7a76)\]", texts[0]):
-                return True
-            if re.search(r"(?:\u8bfe\u65f6\u6d4b\u8bc4|\u65f6\u95f4\uff1a|\u6ee1\u5206\uff1a|\u6bcf\u5c0f\u9898|\u5b66\u751f\u7528\u4e66|\u5206\u518c\u88c5\u8ba2)", joined):
-                return True
-        return False
-
-    def _refine_topic_question_segments(
-        self,
-        content_segments: List[TopicContentSegment],
-        question_segments: List[TopicQuestionSegment],
-    ) -> List[TopicQuestionSegment]:
-        refined: List[TopicQuestionSegment] = []
-        seen_signatures: set[Tuple[int, int, str]] = set()
-
-        for seg in question_segments:
-            for child in self._split_grouped_topic_question_segment(seg):
-                texts = [_block_text(block) for block in (child.blocks or []) if _block_text(block)]
-                if not texts:
-                    continue
-                if len(texts) == 1 and _is_instructional_heading(texts[0]):
-                    continue
-                if (
-                    len(texts) == 1
-                    and re.match(r"^[（(]\s*\d{1,2}\s*[）)]\s*若已知函数", _strip_leading_media_placeholders(texts[0]))
-                ):
-                    continue
-                if (
-                    re.match(r"^[（(]\s*\d{1,2}\s*[）)]\s*若已知", _strip_leading_media_placeholders(texts[0]))
-                    and not any(_OPTION_RE.match(text) or _ANSWER_LABEL_RE.match(text) for text in texts[1:])
-                ):
-                    continue
-                signature = (child.block_index_start, child.block_index_end, child.question_no)
-                if signature in seen_signatures:
-                    continue
-                seen_signatures.add(signature)
-                refined.append(child)
-
-        synthetic_order = 0
-        for seg in content_segments:
-            blocks = list(seg.blocks or [])
-            starts: List[Tuple[int, str]] = []
-            for idx, block in enumerate(blocks):
-                text = _block_text(block)
-                prev_text = _block_text(blocks[idx - 1]) if idx > 0 else ""
-                match = _match_contextual_topic_question_head(
-                    text,
-                    prev_text=prev_text,
-                    state="CONTENT",
-                    current_question_blocks=None,
-                )
-                if match:
-                    starts.append((idx, match[0]))
-            for pos, (start_idx, label) in enumerate(starts):
-                next_idx = starts[pos + 1][0] if pos + 1 < len(starts) else len(blocks)
-                child_start_idx = start_idx
-                if pos == 0 and start_idx > 0:
-                    prefix_blocks = blocks[:start_idx]
-                    if prefix_blocks and all(_is_question_group_intro_block(_block_text(block)) for block in prefix_blocks):
-                        child_start_idx = 0
-                child_blocks = [copy.deepcopy(block) for block in blocks[child_start_idx:next_idx]]
-                if not child_blocks:
-                    continue
-                synthetic_order += 1
-                child = TopicQuestionSegment(
-                    question_no=label or f"synthetic_{synthetic_order}",
-                    section_title=seg.section_title,
-                    blocks=child_blocks,
-                    block_index_start=seg.block_index_start + child_start_idx,
-                    block_index_end=seg.block_index_start + next_idx,
-                )
-                signature = (child.block_index_start, child.block_index_end, child.question_no)
-                if signature in seen_signatures:
-                    continue
-                seen_signatures.add(signature)
-                refined.append(child)
-
-        for seg in content_segments:
-            if not _content_segment_looks_like_question_tail(seg):
-                continue
-            if not refined:
-                continue
-            prev = None
-            for candidate in reversed(refined):
-                if candidate.block_index_end <= seg.block_index_start:
-                    prev = candidate
-                    break
-            if prev is None:
-                continue
-            next_start = min(
-                (
-                    candidate.block_index_start
-                    for candidate in refined
-                    if candidate.block_index_start >= prev.block_index_end and candidate is not prev
-                ),
-                default=None,
-            )
-            if next_start is not None and seg.block_index_end > next_start:
-                continue
-            if seg.block_index_start > prev.block_index_end + 8:
-                continue
-            prev.blocks.extend(copy.deepcopy(block) for block in (seg.blocks or []))
-            prev.block_index_end = max(prev.block_index_end, seg.block_index_end)
-
-        refined.sort(key=lambda item: (item.block_index_start, item.block_index_end, item.question_no))
-        if not refined:
-            return question_segments
-
-        merged_refined: List[TopicQuestionSegment] = []
-        for seg in refined:
-            seg_texts = [_block_text(block) for block in (seg.blocks or []) if _block_text(block)]
-            first_text = _strip_leading_media_placeholders(seg_texts[0]).strip() if seg_texts else ""
-            if not first_text:
-                first_text = _strip_leading_media_placeholders(seg.question_no or "").strip()
-            is_option_tail = bool(first_text) and (_OPTION_RE.match(first_text) or _ANSWER_LABEL_RE.match(first_text))
-            if (
-                is_option_tail
-                and merged_refined
-                and seg.block_index_start <= merged_refined[-1].block_index_end + 6
-            ):
-                prev = merged_refined[-1]
-                prev.blocks.extend(copy.deepcopy(block) for block in (seg.blocks or []))
-                prev.block_index_end = max(prev.block_index_end, seg.block_index_end)
-                continue
-            merged_refined.append(seg)
-        return merged_refined
-
-    def _topic_question_segment_plain_text(self, seg: TopicQuestionSegment) -> str:
-        return "\n".join(
-            _strip_leading_media_placeholders(_block_text(block)).strip()
-            for block in (seg.blocks or [])
-            if _block_text(block)
-        ).strip()
-
-    @staticmethod
-    def _slice_topic_subquestion_text(text: Optional[str], sub_idx: Optional[int]) -> Optional[str]:
-        if not text or sub_idx is None:
-            return text
-        raw = str(text).strip()
-        if not raw:
-            return text
-        marker_re = re.compile(r"(?<![\dA-Za-z])[（(]\s*(\d{1,2})\s*[）)]")
-        matches = list(marker_re.finditer(raw))
-        if not matches:
-            return text
-
-        indexes: List[int] = []
-        for match in matches:
-            try:
-                indexes.append(int(match.group(1)))
-            except (TypeError, ValueError):
-                continue
-        if not indexes:
-            return text
-        if len(set(indexes)) == 1 and indexes[0] == sub_idx:
-            sliced = raw[matches[0].end():].strip()
-            return sliced or text
-
-        for pos, match in enumerate(matches):
-            try:
-                current_idx = int(match.group(1))
-            except (TypeError, ValueError):
-                continue
-            if current_idx != sub_idx:
-                continue
-            next_start = matches[pos + 1].start() if pos + 1 < len(matches) else len(raw)
-            sliced = raw[match.end():next_start].strip()
-            return sliced or text
-        return text
-
-    @staticmethod
-    def _trim_topic_tail_noise(text: Optional[str]) -> Optional[str]:
-        if not text:
-            return text
-        cleaned = str(text).strip()
-        if not cleaned:
-            return text
-        cleaned = re.sub(r"\s*[（(](?:每小题\d+分，共\d+分|时间[:：].{0,40}?满分[:：].{0,20})[）)]\s*$", "", cleaned)
-        cleaned = re.sub(r"(?:\n\s*)+(?:每小题\d+分，共\d+分|时间[:：].{0,40}?满分[:：].{0,20})\s*$", "", cleaned)
-        return cleaned.strip() or None
-
-    def _postprocess_topic_extracted_question(
-        self,
-        qbs: object,
-        extracted_question: object,
-        seg_label: Optional[str],
-        *,
-        preserve_grouped_subquestions: bool = False,
-    ) -> object:
-        sub_idx = None if preserve_grouped_subquestions else _extract_relaxed_topic_subquestion_index(seg_label)
-        stem_text = self._trim_topic_tail_noise(getattr(extracted_question, "stem_text", None))
-        answer_text = self._slice_topic_subquestion_text(getattr(extracted_question, "answer_text", None), sub_idx)
-        analysis_text = self._slice_topic_subquestion_text(getattr(extracted_question, "analysis_text", None), sub_idx)
-        solution_text = self._slice_topic_subquestion_text(getattr(extracted_question, "solution_text", None), sub_idx)
-
-        answer_text = self._trim_topic_tail_noise(answer_text)
-        analysis_text = self._trim_topic_tail_noise(analysis_text)
-        solution_text = self._trim_topic_tail_noise(solution_text)
-
-        normalized_text = qbs._build_full_question_text(
-            stem_text=stem_text or getattr(extracted_question, "stem_text", None) or getattr(extracted_question, "text", ""),
-            options=list(getattr(extracted_question, "options", None) or []),
-            answer_text=answer_text,
-            analysis_text=analysis_text,
-            solution_text=solution_text,
-            comment_text=getattr(extracted_question, "comment_text", None),
-            knowledge_points=list(getattr(extracted_question, "knowledge_points", None) or []),
-            topics=list(getattr(extracted_question, "topics", None) or []),
-        )
-        return dc_replace(
-            extracted_question,
-            text=normalized_text,
-            stem_text=stem_text or getattr(extracted_question, "stem_text", None),
-            answer_text=answer_text,
-            analysis_text=analysis_text,
-            solution_text=solution_text,
-        )
-
-    @staticmethod
-    def _count_standalone_subquestion_markers(text: Optional[str]) -> int:
-        """Count subquestion markers like (1)/(2) excluding function notation like f(1)."""
-        if not text:
-            return 0
-        indexes: List[int] = []
-        for match in re.finditer(r"(?<![a-zA-Z0-9])[()（）]\s*(\d{1,2})\s*[()（）]", str(text)):
-            try:
-                current = int(match.group(1))
-            except (TypeError, ValueError):
-                continue
-            if not indexes or indexes[-1] != current:
-                indexes.append(current)
-        return len(indexes)
-
-    def _topic_segment_needs_grouped_plaintext_rebuild(
-        self,
-        seg: TopicQuestionSegment,
-        extracted_question: object,
-    ) -> bool:
-        plain_text = self._topic_question_segment_plain_text(seg)
-        if _count_topic_subquestion_markers(plain_text) < 2:
-            return False
-        stem_text = str(getattr(extracted_question, "stem_text", "") or "")
-        if _count_topic_subquestion_markers(stem_text) >= 2:
-            return False
-        answer_text = str(getattr(extracted_question, "answer_text", "") or "")
-        if _count_topic_subquestion_markers(answer_text) >= 2:
-            return True
-        existing_options = list(getattr(extracted_question, "options", None) or [])
-        for option in existing_options:
-            opt_text = getattr(option, "option_text", None)
-            if self._count_standalone_subquestion_markers(opt_text) > 0:
-                return True
-            normalized_opt_text = _strip_leading_media_placeholders(str(opt_text or "")).strip()
-            if normalized_opt_text and _text_has_question_signal(normalized_opt_text):
-                return True
-        if existing_options:
-            return False
-        return True
-
-    def _rebuild_grouped_topic_plaintext_question(
-        self,
-        qbs: object,
-        seg: TopicQuestionSegment,
-        extracted_question: object,
-    ) -> object:
-        plain_text = self._topic_question_segment_plain_text(seg)
-        stem_text, embedded_sections = qbs._split_embedded_section_texts(plain_text)
-        answer_text = embedded_sections.get("answer") or getattr(extracted_question, "answer_text", None)
-        analysis_text = embedded_sections.get("analysis") or getattr(extracted_question, "analysis_text", None)
-        solution_text = embedded_sections.get("solution") or getattr(extracted_question, "solution_text", None)
-        comment_text = embedded_sections.get("comment") or getattr(extracted_question, "comment_text", None)
-        question_type = "choice" if _OPTION_RE.search(stem_text or "") else getattr(extracted_question, "question_type", "subjective")
-        normalized_text = qbs._build_full_question_text(
-            stem_text=stem_text or plain_text,
-            options=[],
-            answer_text=answer_text,
-            analysis_text=analysis_text,
-            solution_text=solution_text,
-            comment_text=comment_text,
-            knowledge_points=list(getattr(extracted_question, "knowledge_points", None) or []),
-            topics=list(getattr(extracted_question, "topics", None) or []),
-        )
-        return dc_replace(
-            extracted_question,
-            text=normalized_text,
-            question_type=question_type,
-            stem_text=stem_text or plain_text,
-            options=[],
-            answer_text=answer_text,
-            analysis_text=analysis_text,
-            solution_text=solution_text,
-            comment_text=comment_text,
-        )
-
-    def _merge_topic_followup_subquestion_segments(
-        self,
-        question_segments: List[TopicQuestionSegment],
-    ) -> List[TopicQuestionSegment]:
-        if len(question_segments) <= 1:
-            return question_segments
-
-        split_segments: List[TopicQuestionSegment] = []
-        for seg in question_segments:
-            blocks = list(seg.blocks or [])
-            if len(blocks) <= 1:
-                split_segments.append(seg)
-                continue
-            head_rows: List[Tuple[int, str]] = []
-            for block_idx, block in enumerate(blocks[1:], start=1):
-                label = _extract_top_level_topic_question_label(_block_text(block))
-                if label:
-                    head_rows.append((block_idx, label))
-            if not head_rows:
-                split_segments.append(seg)
-                continue
-            start = 0
-            current_label = seg.question_no
-            for block_idx, label in head_rows:
-                if block_idx > start:
-                    split_segments.append(
-                        TopicQuestionSegment(
-                            question_no=current_label,
-                            section_title=seg.section_title,
-                            blocks=[copy.deepcopy(block) for block in blocks[start:block_idx]],
-                            block_index_start=seg.block_index_start + start,
-                            block_index_end=seg.block_index_start + block_idx,
-                        )
-                    )
-                start = block_idx
-                current_label = label
-            if start < len(blocks):
-                split_segments.append(
-                    TopicQuestionSegment(
-                        question_no=current_label,
-                        section_title=seg.section_title,
-                        blocks=[copy.deepcopy(block) for block in blocks[start:]],
-                        block_index_start=seg.block_index_start + start,
-                        block_index_end=seg.block_index_start + len(blocks),
-                    )
-                )
-
-        normalized_segments: List[TopicQuestionSegment] = []
-        for seg in split_segments:
-            if not normalized_segments:
-                normalized_segments.append(seg)
-                continue
-            prev = normalized_segments[-1]
-            next_sub_idx = _topic_subquestion_index(seg.question_no)
-            if next_sub_idx == 1 and prev.blocks:
-                tail_label = _extract_top_level_topic_question_label(_block_text(prev.blocks[-1]))
-                if tail_label:
-                    tail_block = copy.deepcopy(prev.blocks[-1])
-                    head_blocks = [copy.deepcopy(block) for block in prev.blocks[:-1]]
-                    if head_blocks:
-                        normalized_segments[-1] = TopicQuestionSegment(
-                            question_no=prev.question_no,
-                            section_title=prev.section_title,
-                            blocks=head_blocks,
-                            block_index_start=prev.block_index_start,
-                            block_index_end=max(prev.block_index_start, prev.block_index_end - 1),
-                        )
-                    else:
-                        normalized_segments.pop()
-                    normalized_segments.append(
-                        TopicQuestionSegment(
-                            question_no=tail_label,
-                            section_title=prev.section_title,
-                            blocks=[tail_block],
-                            block_index_start=max(prev.block_index_start, prev.block_index_end - 1),
-                            block_index_end=prev.block_index_end,
-                        )
-                    )
-            normalized_segments.append(seg)
-
-        question_segments = normalized_segments
-
-        merged: List[TopicQuestionSegment] = []
-        i = 0
-        while i < len(question_segments):
-            seg = question_segments[i]
-            current_sub_idx = _extract_relaxed_topic_subquestion_index(seg.question_no)
-
-            if merged and current_sub_idx is not None:
-                current_text = self._topic_question_segment_plain_text(seg)
-                current_body = _strip_leading_media_placeholders(current_text).strip()
-                sub_match = _TOPIC_SUBQUESTION_HEAD_RE.match(current_body)
-                prev_text = self._topic_question_segment_plain_text(merged[-1])
-                rest_text = (sub_match.group("rest") or "").strip() if sub_match else ""
-                looks_like_solution_tail = bool(
-                    rest_text
-                    and not re.search(r"(?:^|\n)\s*[A-H][\.．、]", rest_text)
-                    and (
-                        not _text_has_question_signal(rest_text)
-                        or re.match(r"^(?:法[一二三四五六七八九十]?|解[:：]?|证明[:：]?|由|因为|当|先|再|令|作|所以|故|则)", rest_text)
-                    )
-                )
-                if (
-                    sub_match
-                    and re.search(rf"[（(]\s*{current_sub_idx}\s*[）)]", prev_text)
-                    and looks_like_solution_tail
-                ):
-                    merged[-1].blocks.extend(copy.deepcopy(block) for block in (seg.blocks or []))
-                    merged[-1].block_index_end = max(merged[-1].block_index_end, seg.block_index_end)
-                    i += 1
-                    continue
-
-            if current_sub_idx is None and i + 1 < len(question_segments):
-                next_sub_idx = _extract_relaxed_topic_subquestion_index(question_segments[i + 1].question_no)
-                if next_sub_idx == 1:
-                    group = [seg]
-                    j = i + 1
-                    expected_idx = 1
-                    parent_text = self._topic_question_segment_plain_text(seg)
-                    if _topic_segment_is_numbered_explanatory_statement(parent_text):
-                        merged.append(seg)
-                        i += 1
-                        continue
-                    while j < len(question_segments):
-                        follow = question_segments[j]
-                        follow_sub_idx = _extract_relaxed_topic_subquestion_index(follow.question_no)
-                        if follow_sub_idx != expected_idx:
-                            break
-                        group.append(follow)
-                        expected_idx += 1
-                        j += 1
-                    if len(group) > 1:
-                        parent_text = self._topic_question_segment_plain_text(seg)
-                        if _topic_text_looks_like_context_heading(parent_text):
-                            merged.extend(group[1:])
-                        else:
-                            merged_blocks: List[Dict[str, Any]] = []
-                            for grouped_seg in group:
-                                merged_blocks.extend(copy.deepcopy(block) for block in (grouped_seg.blocks or []))
-                            merged.append(
-                                TopicQuestionSegment(
-                                    question_no=seg.question_no,
-                                    section_title=seg.section_title,
-                                    blocks=merged_blocks,
-                                    block_index_start=seg.block_index_start,
-                                    block_index_end=group[-1].block_index_end,
-                                )
-                            )
-                        i = j
-                        continue
-
-            if current_sub_idx == 1 and i + 1 < len(question_segments):
-                group = [seg]
-                j = i + 1
-                expected_idx = 2
-                while j < len(question_segments):
-                    follow = question_segments[j]
-                    follow_sub_idx = _extract_relaxed_topic_subquestion_index(follow.question_no)
-                    if follow_sub_idx != expected_idx:
-                        break
-                    group.append(follow)
-                    expected_idx += 1
-                    j += 1
-                if len(group) > 1:
-                    merged_blocks: List[Dict[str, Any]] = []
-                    for grouped_seg in group:
-                        merged_blocks.extend(copy.deepcopy(block) for block in (grouped_seg.blocks or []))
-                    merged.append(
-                        TopicQuestionSegment(
-                            question_no=seg.question_no,
-                            section_title=seg.section_title,
-                            blocks=merged_blocks,
-                            block_index_start=seg.block_index_start,
-                            block_index_end=group[-1].block_index_end,
-                        )
-                    )
-                    i = j
-                    continue
-
-            merged.append(seg)
-            i += 1
-
-        return merged
-
-    def _topic_question_parse_looks_overcaptured(self, extracted_question: object) -> bool:
-        answer_text = str(getattr(extracted_question, "answer_text", "") or "")
-        analysis_text = str(getattr(extracted_question, "analysis_text", "") or "")
-        solution_text = str(getattr(extracted_question, "solution_text", "") or "")
-        tail_text = "\n".join(part for part in [answer_text, analysis_text, solution_text] if part).strip()
-        if not tail_text:
-            return False
-        top_level_head_re = re.compile(
-            r"(?m)^\s*(?:\d{1,3}[\.．、]|对点练\s*\d+|\[(?:教材呈现|真题再现|变式探究)\]|[（(]\s*\d{1,2}\s*[）)])"
-        )
-        matches = list(top_level_head_re.finditer(tail_text))
-        if not matches:
-            return False
-        for match in matches:
-            suffix = tail_text[match.start() : match.start() + 160]
-            stripped = _strip_leading_media_placeholders(suffix).strip()
-            presentation_match = _TOPIC_PRESENTATION_INLINE_HEAD_RE.match(stripped)
-            if presentation_match:
-                stripped = (presentation_match.group("rest") or "").strip()
-            sub_match = _TOPIC_SUBQUESTION_HEAD_RE.match(stripped)
-            if sub_match:
-                stripped = (sub_match.group("rest") or "").strip()
-            if _text_has_question_signal(stripped):
-                return True
-        return False
-
-    def _merge_trailing_solution_only_topic_questions(
-        self,
-        qbs: object,
-        extracted_questions: List[object],
-        paired_segments: List[TopicQuestionSegment],
-    ) -> Tuple[List[object], List[TopicQuestionSegment]]:
-        if len(extracted_questions) <= 1:
-            return extracted_questions, paired_segments
-
-        merged_questions: List[object] = []
-        merged_segments: List[TopicQuestionSegment] = []
-
-        for idx, eq in enumerate(extracted_questions):
-            seg = paired_segments[idx] if idx < len(paired_segments) else None
-            stem_text = str(getattr(eq, "stem_text", "") or "").strip()
-            label = str(getattr(eq, "original_question_label", None) or getattr(eq, "question_no", None) or "").strip()
-            sub_idx = _extract_relaxed_topic_subquestion_index(label)
-            has_options = bool(list(getattr(eq, "options", None) or []))
-            answer_text = str(getattr(eq, "answer_text", "") or "").strip()
-            analysis_text = str(getattr(eq, "analysis_text", "") or "").strip()
-            solution_text = str(getattr(eq, "solution_text", "") or "").strip()
-            tail_like = bool(
-                sub_idx is not None
-                and stem_text
-                and re.match(r"^[（(]\s*\d{1,2}\s*[）)]\s*(?:法[一二三四五六七八九十]?|解[:：]?|证明[:：]?|由|因为|当|先|再|令|作|所以|故)", stem_text)
-                and not has_options
-            )
-            if tail_like and merged_questions:
-                prev = merged_questions[-1]
-                prev_stem = str(getattr(prev, "stem_text", "") or "")
-                if re.search(rf"[（(]\s*{sub_idx}\s*[）)]", prev_stem):
-                    tail_solution = "\n".join(
-                        part
-                        for part in [
-                            getattr(prev, "solution_text", None),
-                            stem_text,
-                            getattr(eq, "solution_text", None),
-                            getattr(eq, "analysis_text", None),
-                        ]
-                        if part
-                    ).strip() or None
-                    merged_questions[-1] = dc_replace(
-                        prev,
-                        solution_text=tail_solution,
-                        text=qbs._build_full_question_text(
-                            stem_text=getattr(prev, "stem_text", None) or "",
-                            options=list(getattr(prev, "options", None) or []),
-                            answer_text=getattr(prev, "answer_text", None),
-                            analysis_text=getattr(prev, "analysis_text", None),
-                            solution_text=tail_solution,
-                            comment_text=getattr(prev, "comment_text", None),
-                            knowledge_points=list(getattr(prev, "knowledge_points", None) or []),
-                            topics=list(getattr(prev, "topics", None) or []),
-                        ),
-                    )
-                    if seg is not None and merged_segments:
-                        merged_segments[-1].blocks.extend(copy.deepcopy(block) for block in (seg.blocks or []))
-                        merged_segments[-1].block_index_end = max(merged_segments[-1].block_index_end, seg.block_index_end)
-                    continue
-
-            if merged_questions:
-                prev = merged_questions[-1]
-                prev_grouped = (
-                    _count_topic_subquestion_markers(str(getattr(prev, "stem_text", "") or "")) >= 2
-                    or _count_topic_subquestion_markers(str(getattr(prev, "answer_text", "") or "")) >= 2
-                )
-                current_is_analysis_tail = bool(
-                    prev_grouped
-                    and stem_text
-                    and not has_options
-                    and not answer_text
-                    and not analysis_text
-                    and not solution_text
-                    and _is_analysis_like_text(stem_text)
-                )
-                if current_is_analysis_tail:
-                    tail_solution = "\n".join(
-                        part
-                        for part in [
-                            getattr(prev, "solution_text", None),
-                            stem_text,
-                        ]
-                        if part
-                    ).strip() or None
-                    merged_questions[-1] = dc_replace(
-                        prev,
-                        solution_text=tail_solution,
-                        text=qbs._build_full_question_text(
-                            stem_text=getattr(prev, "stem_text", None) or "",
-                            options=list(getattr(prev, "options", None) or []),
-                            answer_text=getattr(prev, "answer_text", None),
-                            analysis_text=getattr(prev, "analysis_text", None),
-                            solution_text=tail_solution,
-                            comment_text=getattr(prev, "comment_text", None),
-                            knowledge_points=list(getattr(prev, "knowledge_points", None) or []),
-                            topics=list(getattr(prev, "topics", None) or []),
-                        ),
-                    )
-                    if seg is not None and merged_segments:
-                        merged_segments[-1].blocks.extend(copy.deepcopy(block) for block in (seg.blocks or []))
-                        merged_segments[-1].block_index_end = max(merged_segments[-1].block_index_end, seg.block_index_end)
-                    continue
-
-            merged_questions.append(eq)
-            if seg is not None:
-                merged_segments.append(seg)
-
-        for order, eq in enumerate(merged_questions, start=1):
-            merged_questions[order - 1] = dc_replace(eq, question_no=str(order))
-        return merged_questions, merged_segments
-
     def _persist_docx_topic_questions(
         self,
         db: Session,
@@ -3747,15 +2350,12 @@ class KnowledgePointIngestionService:
         *,
         content_block_ids: List[int],
         content_segments: List[TopicContentSegment],
-        sync_retrieval: bool = False,
         progress_callback: Optional[Callable[[str], None]] = None,
     ) -> Dict[str, object]:
         from analyzer.app.question_bank_parser import QuestionBankIngestionService
 
         qbs = QuestionBankIngestionService()
         notify = lambda msg: self._notify_progress(progress_callback, msg)
-        question_segments = self._refine_topic_question_segments(content_segments, question_segments)
-        question_segments = self._merge_topic_followup_subquestion_segments(question_segments)
 
         file_stem = Path(source_document.file_name or "document").stem
         title = f"{file_stem} · {package.package_title}"[:255]
@@ -3779,95 +2379,12 @@ class KnowledgePointIngestionService:
         # 按 TopicQuestionSegment 逐段解析，避免把所有题目块拼成一条流导致选项/答案区边界错乱
         extracted_questions: List[object] = []
         paired_question_segments: List[TopicQuestionSegment] = []
+        sub_question_nos: List[Optional[str]] = []
         built_from_per_segment = False
         for order, seg in enumerate(question_segments, start=1):
             if not seg.blocks:
                 continue
             eq = qbs._parse_structured_question_segment(seg.question_no, seg.blocks)
-            preserve_grouped_subquestions = _count_topic_subquestion_markers(self._topic_question_segment_plain_text(seg)) >= 2
-            if self._topic_segment_needs_grouped_plaintext_rebuild(seg, eq):
-                eq = self._rebuild_grouped_topic_plaintext_question(qbs, seg, eq)
-            eq = self._postprocess_topic_extracted_question(
-                qbs,
-                eq,
-                seg.question_no,
-                preserve_grouped_subquestions=preserve_grouped_subquestions,
-            )
-            if self._topic_question_parse_looks_overcaptured(eq):
-                recovered_questions = qbs._segment_structured_questions(seg.blocks)
-                if len(recovered_questions) <= 1:
-                    combined_text = "\n".join(_block_text(block) for block in (seg.blocks or []) if _block_text(block))
-                    recovered_questions = qbs.segment_questions(combined_text) if combined_text else []
-                recovered_valid: List[object] = []
-                for recovered in recovered_questions:
-                    recovered = self._postprocess_topic_extracted_question(
-                        qbs,
-                        recovered,
-                        getattr(recovered, "original_question_label", None) or getattr(recovered, "question_no", None) or seg.question_no,
-                        preserve_grouped_subquestions=preserve_grouped_subquestions,
-                    )
-                    recovered_issues = set(qbs.validate_extracted_question_quality(recovered))
-                    recovered_stem = qbs._normalize_text(getattr(recovered, "stem_text", "") or "")
-                    if not recovered_stem:
-                        continue
-                    if "label_only_stem" in recovered_issues and "subjective_missing_answer_and_solution" in recovered_issues:
-                        continue
-                    recovered_valid.append(recovered)
-                if len(recovered_valid) > 1:
-                    for recovered in recovered_valid:
-                        extracted_questions.append(
-                            dc_replace(
-                                recovered,
-                                question_no=str(len(extracted_questions) + 1),
-                                original_question_label=(
-                                    (getattr(recovered, "original_question_label", None) or getattr(recovered, "question_no", None) or seg.question_no)
-                                ),
-                            )
-                        )
-                        paired_question_segments.append(seg)
-                    built_from_per_segment = True
-                    continue
-            issues = set(qbs.validate_extracted_question_quality(eq))
-            first_block_text = _block_text(seg.blocks[0]) if seg.blocks else ""
-            normalized_stem = qbs._normalize_text(eq.stem_text or "")
-            has_solution_zone = bool(
-                getattr(eq, "answer_text", None)
-                or getattr(eq, "analysis_text", None)
-                or getattr(eq, "solution_text", None)
-            )
-            if _is_analysis_like_text(first_block_text):
-                continue
-            if (
-                not eq.options
-                and not has_solution_zone
-                and _is_analysis_like_text(normalized_stem)
-            ):
-                continue
-            if (
-                not has_solution_zone
-                and _topic_segment_is_numbered_explanatory_statement(normalized_stem or first_block_text)
-            ):
-                continue
-            if (
-                "subjective_missing_answer_and_solution" in issues
-                and _topic_segment_is_numbered_explanatory_statement(normalized_stem or first_block_text)
-            ):
-                continue
-            if (
-                _is_analysis_like_text(first_block_text)
-                or _is_analysis_like_text(normalized_stem)
-            ) and "subjective_missing_answer_and_solution" in issues:
-                continue
-            if (
-                "subjective_missing_answer_and_solution" in issues
-                and _is_instructional_heading(first_block_text)
-            ):
-                continue
-            if (
-                "subjective_missing_answer_and_solution" in issues
-                and _topic_text_looks_like_context_heading(self._topic_question_segment_plain_text(seg))
-            ):
-                continue
             extracted_questions.append(
                 dc_replace(
                     eq,
@@ -3876,13 +2393,8 @@ class KnowledgePointIngestionService:
                 )
             )
             paired_question_segments.append(seg)
-            built_from_per_segment = True
-        if built_from_per_segment and extracted_questions and len(paired_question_segments) == len(extracted_questions):
-            extracted_questions, paired_question_segments = self._merge_trailing_solution_only_topic_questions(
-                qbs,
-                extracted_questions,
-                paired_question_segments,
-            )
+            sub_question_nos.append(None)
+        built_from_per_segment = True
         if not extracted_questions:
             built_from_per_segment = False
             paired_question_segments.clear()
@@ -3962,7 +2474,6 @@ class KnowledgePointIngestionService:
                 ),
             )
 
-        notify("  题目持久化：开始写入 QuestionItem / RetrievalDocument")
         metrics = qbs.persist_questions(
             db=db,
             paper=paper,
@@ -3971,10 +2482,6 @@ class KnowledgePointIngestionService:
             extracted_questions=extracted_questions,
             document_asset_count=0,
             knowledge_package_id=package.id,
-        )
-        notify(
-            "  题目持久化：完成"
-            f" question_count={metrics.get('question_count', 0)}"
         )
 
         question_count = int(metrics.get("question_count") or 0)
@@ -3985,7 +2492,6 @@ class KnowledgePointIngestionService:
         else:
             paired_for_link = [None] * len(qids)
 
-        notify("  题-知识点桥接：开始")
         bridge_stats = self._sync_docx_topic_question_knowledge_links(
             db=db,
             package=package,
@@ -3994,11 +2500,6 @@ class KnowledgePointIngestionService:
             question_item_ids=qids,
             paired_segments=paired_for_link,
             progress_callback=progress_callback,
-        )
-        notify(
-            "  题-知识点桥接：完成"
-            f" strong={bridge_stats.get('strong_links', 0)}"
-            f" adjacent={bridge_stats.get('adjacent_links', 0)}"
         )
 
         if self._ingest_verbose_enabled():
@@ -4040,32 +2541,14 @@ class KnowledgePointIngestionService:
                     json.dumps(llm_dbg, ensure_ascii=False, indent=2, default=str),
                 )
 
-        notify("  事务提交：开始")
         db.commit()
-        notify("  事务提交：完成")
 
-        index_metrics: Dict[str, object] = {
-            "status": "deferred",
-            "indexed_documents": 0,
-            "inline_requested": bool(sync_retrieval),
-        }
-        if sync_retrieval:
-            notify("  题目检索同步：开始 question vector sync")
-            try:
-                index_metrics = qbs.index_document_questions(db, source_document.id)
-                index_metrics["status"] = "success"
-                index_metrics["inline_requested"] = True
-                notify(f"  题目检索同步：完成 indexed={index_metrics.get('indexed_documents', 0)}")
-            except Exception as exc:
-                logger.warning("DOCX topic question vector index failed: %s", exc)
-                index_metrics = {
-                    "status": "failed",
-                    "indexed_documents": 0,
-                    "inline_requested": True,
-                    "error": str(exc),
-                }
-        else:
-            notify("  题目检索同步：已后置，本次主摄入跳过 question vector sync")
+        try:
+            index_metrics = qbs.index_document_questions(db, source_document.id)
+            notify(f"  向量索引完成：indexed={index_metrics.get('indexed_documents', 0)}")
+        except Exception as exc:
+            logger.warning("DOCX topic question vector index failed: %s", exc)
+            index_metrics = {"indexed_documents": 0}
 
         if self._ingest_verbose_enabled():
             self._ingest_verbose_write(
@@ -4080,7 +2563,6 @@ class KnowledgePointIngestionService:
             "question_item_ids": qids,
             "paper_id": paper.id,
             "indexed_documents": index_metrics.get("indexed_documents", 0),
-            "retrieval_sync": index_metrics,
             "bridge_metrics": bridge_stats,
         }
 
@@ -4122,7 +2604,6 @@ class KnowledgePointIngestionService:
         db: Session,
         files: List[str],
         force_reingest: bool = False,
-        sync_retrieval: bool = False,
         progress_callback: Optional[Callable[[str], None]] = None,
         ingest_run_assets_dir: Optional[Path] = None,
         ingest_run_dir: Optional[Path] = None,
@@ -4189,7 +2670,6 @@ class KnowledgePointIngestionService:
                     db,
                     source_document_id=source_document.id,
                     force_reingest=force_reingest,
-                    sync_retrieval=sync_retrieval,
                     progress_callback=progress_callback,
                 )
                 processed.append({"file": safe_name, **result})
@@ -4210,73 +2690,6 @@ class KnowledgePointIngestionService:
             "status": "complete",
             "processed_count": len(processed),
             "processed": processed,
-        }
-
-    def sync_source_document_retrieval(
-        self,
-        db: Session,
-        source_document_id: int,
-        progress_callback: Optional[Callable[[str], None]] = None,
-    ) -> Dict[str, object]:
-        notify = lambda msg: self._notify_progress(progress_callback, msg)
-        source_document = (
-            db.query(models.SourceDocument)
-            .filter(models.SourceDocument.id == source_document_id)
-            .first()
-        )
-        if not source_document:
-            raise ValueError(f"SourceDocument {source_document_id} 不存在")
-        if not KNOWLEDGE_RAG_ENABLED:
-            return {
-                "status": "disabled",
-                "source_document_id": source_document_id,
-                "reason": "KNOWLEDGE_RAG_ENABLED=false",
-                "package_results": [],
-            }
-
-        package_rows = (
-            db.query(models.KnowledgePackage)
-            .filter(models.KnowledgePackage.source_document_id == source_document_id)
-            .order_by(models.KnowledgePackage.id.asc())
-            .all()
-        )
-        if not package_rows:
-            return {
-                "status": "skipped",
-                "source_document_id": source_document_id,
-                "reason": "no knowledge packages found",
-                "package_results": [],
-            }
-
-        from .knowledge_point_retriever import sync_knowledge_package_retrieval
-
-        package_results: List[Dict[str, Any]] = []
-        total_indexed = 0
-        for package in package_rows:
-            notify(f"专题检索索引同步：package_id={package.id} package_title={package.package_title}")
-            result = sync_knowledge_package_retrieval(db, package.id)
-            package_results.append(
-                {
-                    "package_id": package.id,
-                    "package_title": package.package_title,
-                    **result,
-                }
-            )
-            total_indexed += int(result.get("indexed_documents") or 0)
-
-        from analyzer.app.question_bank_parser import QuestionBankIngestionService
-
-        notify(f"专题题检索索引同步：source_document_id={source_document_id}")
-        question_result = QuestionBankIngestionService().index_document_questions(db, source_document_id)
-        total_indexed += int(question_result.get("indexed_documents") or 0)
-
-        return {
-            "status": "success",
-            "source_document_id": source_document_id,
-            "package_count": len(package_results),
-            "indexed_documents": total_indexed,
-            "package_results": package_results,
-            "question_result": question_result,
         }
 
     def _extract_pages(self, source_path: Path) -> List[Tuple[int, str]]:
@@ -4906,722 +3319,6 @@ class KnowledgePointIngestionService:
         )
         return {row.knowledge_point_id: row for row in rows}
 
-    def _reclassify_package_point_purity(
-        self,
-        db: Session,
-        package_id: int,
-        progress_callback: Optional[Callable[[str], None]] = None,
-    ) -> dict:
-        self._notify_progress(progress_callback, f"  Reclassifying package point purity for package {package_id}")
-        result = reclassify_package_point_purity(db, package_id, apply=True)
-        self._notify_progress(
-            progress_callback,
-            "  Purity result: "
-            f"core={result.get('core', 0)} "
-            f"adjacent={result.get('adjacent', 0)} "
-            f"dependency={result.get('dependency', 0)} "
-            f"changed={result.get('changed', 0)}",
-        )
-        return result
-
-    def _is_placeholder_point_name(self, value: Optional[str]) -> bool:
-        key = re.sub(r"\s+", "", str(value or "")).strip().lower()
-        return key in _PLACEHOLDER_POINT_NAME_KEYS
-
-    def _is_relation_extraction_candidate(
-        self,
-        point: Optional[models.KnowledgePoint],
-        package_point: Optional[models.KnowledgePackagePoint],
-    ) -> bool:
-        if point is None:
-            return False
-        if self._is_placeholder_point_name(point.canonical_name):
-            return False
-        if package_point is None:
-            return True
-        status = (package_point.approved_status or "").strip().lower()
-        relation_type = (package_point.relation_type or "").strip().lower()
-        return status != "placeholder" and relation_type not in {"placeholder", "fallback", "dependency", "supplement"}
-
-    def _kp_relation_block_preview(
-        self,
-        text: Optional[str],
-        *,
-        source_name: Optional[str] = None,
-        target_name: Optional[str] = None,
-    ) -> str:
-        compact = re.sub(r"\s+", " ", text or "").strip()
-        if len(compact) <= _KP_RELATION_MAX_EVIDENCE_TEXT_CHARS:
-            return compact
-
-        best_pos: Optional[int] = None
-        surface_terms: List[str] = []
-        for raw_name in (source_name, target_name):
-            name = str(raw_name or "").strip()
-            if not name:
-                continue
-            candidates = {
-                name,
-                name.replace("\u7684", ""),
-                re.sub(
-                    r"(\u5b9a\u4e49|\u6027\u8d28|\u5173\u7cfb|\u65b9\u6cd5|\u89e3\u6cd5|\u5e94\u7528|\u6b65\u9aa4|\u8bc1\u660e|\u6761\u4ef6|\u95ee\u9898|\u516c\u5f0f|\u5b9a\u7406|\u63a2\u7a76|\u603b\u7ed3)$",
-                    "",
-                    name,
-                ).strip(),
-            }
-            if "\u7684" in name:
-                left, right = name.split("\u7684", 1)
-                candidates.update({left.strip(), right.strip()})
-            surface_terms.extend(term for term in candidates if term)
-
-        for term in surface_terms:
-            idx = compact.find(term)
-            if idx >= 0 and (best_pos is None or idx < best_pos):
-                best_pos = idx
-
-        if best_pos is None:
-            normalized_compact = _kp_relation_normalize_text(compact)
-            for raw_name in (source_name, target_name):
-                for fragment in _kp_relation_name_fragments(raw_name):
-                    idx = normalized_compact.find(fragment)
-                    if idx >= 0 and (best_pos is None or idx < best_pos):
-                        best_pos = idx
-
-        if best_pos is None:
-            return compact[: _KP_RELATION_MAX_EVIDENCE_TEXT_CHARS - 3] + "..."
-
-        start = max(best_pos - _KP_RELATION_MAX_EVIDENCE_TEXT_CHARS // 3, 0)
-        end = min(start + _KP_RELATION_MAX_EVIDENCE_TEXT_CHARS, len(compact))
-        snippet = compact[start:end].strip()
-        if start > 0:
-            snippet = "..." + snippet
-        if end < len(compact):
-            snippet = snippet + "..."
-        return snippet
-
-    def _kp_relation_block_evidence_text(self, block: Optional[models.KnowledgeBlock]) -> str:
-        if block is None:
-            return ""
-        parts: List[str] = []
-        if block.section_path:
-            parts.append(str(block.section_path))
-        rich = block.rich_content_json if isinstance(block.rich_content_json, dict) else {}
-        for key in ("section_title", "heading", "title"):
-            value = rich.get(key)
-            if isinstance(value, str) and value.strip():
-                parts.append(value.strip())
-        if block.normalized_text:
-            parts.append(str(block.normalized_text))
-        elif block.raw_text:
-            parts.append(str(block.raw_text))
-        return "\n".join(part for part in parts if part)
-
-    def _kp_relation_focus_tokens(self, name: Optional[str]) -> Set[str]:
-        tokens: Set[str] = set()
-        for label, pattern in _KP_RELATION_FOCUS_PATTERNS:
-            if pattern.search(name or ""):
-                tokens.add(label)
-        return tokens
-
-    def _kp_relation_name_profile(self, name: Optional[str]) -> Set[str]:
-        profile: Set[str] = set()
-        text = name or ""
-        if _KP_RELATION_NOTE_RE.search(text):
-            profile.add("note")
-        if _KP_RELATION_PROCEDURE_RE.search(text):
-            profile.add("procedure")
-        if _KP_RELATION_METHOD_RE.search(text):
-            profile.add("method")
-        if any(token in text for token in ("\u65b9\u6cd5", "\u89e3\u6cd5", "\u6c42\u6cd5", "\u6c42\u89e3")):
-            profile.add("method")
-        if _KP_RELATION_SCENARIO_RE.search(text):
-            profile.add("scenario")
-        if not profile:
-            profile.add("concept")
-        return profile
-
-    def _kp_relation_specificity_score(self, name: Optional[str]) -> int:
-        text = name or ""
-        score = 0
-        if _KP_RELATION_SPECIFIC_METHOD_RE.search(text):
-            score += 2
-        if re.search(
-            r"\u4e8c\u6b21\u9879\u7cfb\u6570\s*a\s*=\s*0|"
-            r"\u542b\u53c2\u6570|"
-            r"\u8f6c\u5316|"
-            r"\u5206\u7c7b\u8ba8\u8bba|"
-            r"\u6052\u6210\u7acb|"
-            r"\u6c42\u53c2\u6570|"
-            r"\u89e3\u96c6\u4e3a\u7a7a",
-            text,
-            re.I,
-        ):
-            score += 1
-        if _KP_RELATION_PROCEDURE_RE.search(text) and not _KP_RELATION_NOTE_RE.search(text):
-            score += 1
-        if _KP_RELATION_NOTE_RE.search(text):
-            score += 1
-        if _KP_RELATION_GENERIC_UMBRELLA_RE.search(text):
-            score -= 1
-        return score
-
-    def _build_kp_relation_grounding_payload(
-        self,
-        db: Session,
-        package: models.KnowledgePackage,
-        kp_id_map: Dict[str, int],
-        package_point_links: Dict[int, models.KnowledgePackagePoint],
-    ) -> Tuple[List[Dict[str, Any]], Dict[str, Set[int]]]:
-        point_ids = [int(point_id) for point_id in kp_id_map.values()]
-        if not point_ids:
-            return [], {}
-
-        point_name_by_id = {int(point_id): point_name for point_name, point_id in kp_id_map.items()}
-        point_name_norm_by_id = {
-            int(point_id): _kp_relation_relaxed_title_text(point_name)
-            for point_name, point_id in kp_id_map.items()
-        }
-        block_candidates: Dict[int, Dict[int, Dict[str, Any]]] = {}
-
-        def add_block(
-            point_id: int,
-            block: Optional[models.KnowledgeBlock],
-            score: float,
-            source_tag: str,
-            *,
-            preview_override: Optional[str] = None,
-        ) -> None:
-            if block is None or block.id is None:
-                return
-            preview_source = preview_override if preview_override is not None else self._kp_relation_block_evidence_text(block)
-            preview = self._kp_relation_block_preview(preview_source)
-            if not preview:
-                return
-            bucket = block_candidates.setdefault(int(point_id), {})
-            block_id = int(block.id)
-            current = bucket.get(block_id)
-            candidate = {
-                "block_id": block_id,
-                "block_role": str(block.block_role or ""),
-                "text_preview": preview,
-                "score": float(score),
-                "source_tags": [source_tag],
-            }
-            if current is None:
-                bucket[block_id] = candidate
-                return
-            current["score"] = max(float(current.get("score", 0.0)), float(score))
-            if len(str(preview)) < len(str(current.get("text_preview") or "")):
-                current["text_preview"] = preview
-            tags = list(current.get("source_tags") or [])
-            if source_tag not in tags:
-                tags.append(source_tag)
-            current["source_tags"] = tags
-
-        direct_blocks = (
-            db.query(models.KnowledgeBlock)
-            .filter(
-                models.KnowledgeBlock.package_id == package.id,
-                models.KnowledgeBlock.knowledge_point_id.in_(point_ids),
-            )
-            .all()
-        )
-        for block in direct_blocks:
-            point_id = int(block.knowledge_point_id)
-            score = 4.0 + min(len((block.normalized_text or block.raw_text or "").strip()) / 400.0, 1.0)
-            if getattr(block, "is_primary", False):
-                score += 1.0
-            add_block(point_id, block, score, "block_fk")
-
-        provenance_rows = (
-            db.query(models.KnowledgePointProvenance, models.KnowledgeBlock)
-            .join(models.KnowledgeBlock, models.KnowledgeBlock.id == models.KnowledgePointProvenance.source_id)
-            .filter(
-                models.KnowledgePointProvenance.package_id == package.id,
-                models.KnowledgePointProvenance.source_kind == SOURCE_KIND_KNOWLEDGE_BLOCK,
-                models.KnowledgePointProvenance.knowledge_point_id.in_(point_ids),
-            )
-            .all()
-        )
-        provenance_point_ids_by_block: Dict[int, Set[int]] = {}
-        for provenance, block in provenance_rows:
-            if block is None or block.id is None or provenance.knowledge_point_id is None:
-                continue
-            provenance_point_ids_by_block.setdefault(int(block.id), set()).add(int(provenance.knowledge_point_id))
-
-        for provenance, block in provenance_rows:
-            if block is None or provenance.knowledge_point_id is None:
-                continue
-            point_id = int(provenance.knowledge_point_id)
-            point_name = point_name_by_id.get(point_id, "")
-            mentions_point = _kp_relation_text_mentions_name(block.normalized_text or block.raw_text, point_name)
-            package_link = package_point_links.get(point_id)
-            package_relation_type = (package_link.relation_type or "").strip().lower() if package_link else ""
-            shared_provenance_count = len(provenance_point_ids_by_block.get(int(block.id), set()))
-            if package_relation_type == "adjacent" and shared_provenance_count >= 3 and not mentions_point:
-                direct_point_id = int(block.knowledge_point_id or 0)
-                if direct_point_id != point_id:
-                    continue
-            score = 3.0 + min(len((block.normalized_text or block.raw_text or "").strip()) / 400.0, 1.0)
-            if getattr(provenance, "is_primary", False):
-                score += 1.5
-            if getattr(block, "is_primary", False):
-                score += 0.5
-            if mentions_point:
-                score += 1.0
-            add_block(point_id, block, score, "provenance")
-
-        package_blocks = (
-            db.query(models.KnowledgeBlock)
-            .filter(models.KnowledgeBlock.package_id == package.id)
-            .all()
-        )
-        block_by_id = {int(block.id): block for block in package_blocks}
-
-        atom_rows = (
-            db.query(models.KnowledgeAtom)
-            .filter(
-                models.KnowledgeAtom.package_id == package.id,
-                models.KnowledgeAtom.knowledge_point_id.in_(point_ids),
-                models.KnowledgeAtom.evidence_block_id.isnot(None),
-            )
-            .all()
-        )
-        for atom in atom_rows:
-            point_id = int(atom.knowledge_point_id or 0)
-            block = block_by_id.get(int(atom.evidence_block_id or 0))
-            if point_id <= 0 or block is None:
-                continue
-            point_name = point_name_by_id.get(point_id, "")
-            atom_text = str(atom.canonical_text or "")
-            mentions_point = _kp_relation_text_mentions_name(atom_text, point_name)
-            score = 4.4 + min(len(atom_text.strip()) / 240.0, 1.0)
-            if mentions_point:
-                score += 1.2
-            add_block(point_id, block, score, "atom", preview_override=atom_text)
-
-        for block in package_blocks:
-            title_parts: List[str] = []
-            if block.section_path:
-                title_parts.append(str(block.section_path))
-            rich = block.rich_content_json if isinstance(block.rich_content_json, dict) else {}
-            for key in ("section_title", "heading", "title"):
-                value = rich.get(key)
-                if isinstance(value, str) and value.strip():
-                    title_parts.append(value.strip())
-            title_norm = _kp_relation_relaxed_title_text(" ".join(title_parts))
-            if not title_norm:
-                continue
-            for point_id, point_name_norm in point_name_norm_by_id.items():
-                if not point_name_norm:
-                    continue
-                if point_name_norm not in title_norm and _kp_relation_shared_char_ratio(point_name_norm, title_norm) < 0.55:
-                    continue
-                add_block(point_id, block, 2.6, "section_title")
-
-        grounding_payload: List[Dict[str, Any]] = []
-        allowed_block_ids_by_name: Dict[str, Set[int]] = {}
-        for point_name, point_id in sorted(kp_id_map.items(), key=lambda item: item[0]):
-            ranked_blocks = list(block_candidates.get(int(point_id), {}).values())
-            ranked_blocks.sort(key=lambda item: (-float(item.get("score", 0.0)), int(item.get("block_id", 0))))
-            selected_blocks = [
-                {
-                    "block_id": int(item["block_id"]),
-                    "block_role": str(item.get("block_role") or ""),
-                    "text_preview": str(item.get("text_preview") or ""),
-                    "source_tags": list(item.get("source_tags") or []),
-                }
-                for item in ranked_blocks[:_KP_RELATION_MAX_EVIDENCE_BLOCKS_PER_POINT]
-            ]
-            allowed_block_ids_by_name[point_name] = {
-                int(item["block_id"]) for item in selected_blocks if item.get("block_id") is not None
-            }
-            package_link = package_point_links.get(int(point_id))
-            grounding_payload.append(
-                {
-                    "knowledge_point_id": int(point_id),
-                    "canonical_name": point_name,
-                    "package_relation_type": package_link.relation_type if package_link else None,
-                    "evidence_blocks": selected_blocks,
-                }
-            )
-        return grounding_payload, allowed_block_ids_by_name
-
-    def _validate_llm_kp_relation(
-        self,
-        source_name: str,
-        target_name: str,
-        relation_type: str,
-        evidence_preview: Optional[str],
-        *,
-        shared_grounding: bool = False,
-        confidence: float = 0.0,
-    ) -> Tuple[bool, Optional[str]]:
-        source_profile = self._kp_relation_name_profile(source_name)
-        target_profile = self._kp_relation_name_profile(target_name)
-        source_focus = self._kp_relation_focus_tokens(source_name)
-        target_focus = self._kp_relation_focus_tokens(target_name)
-        focus_overlap = source_focus & target_focus
-        lexical_close = _kp_relation_contains_family(source_name, target_name) or (
-            _kp_relation_shared_char_ratio(source_name, target_name) >= 0.45
-        )
-        common_prefix_len = _kp_relation_common_prefix_len(source_name, target_name)
-        source_more_specific = _kp_relation_looks_more_specific(source_name, target_name)
-        target_more_specific = _kp_relation_looks_more_specific(target_name, source_name)
-        source_specificity = self._kp_relation_specificity_score(source_name)
-        target_specificity = self._kp_relation_specificity_score(target_name)
-        if source_specificity >= target_specificity + 2:
-            source_more_specific = True
-        if target_specificity >= source_specificity + 2:
-            target_more_specific = True
-        mentions_source = _kp_relation_text_mentions_name(evidence_preview, source_name)
-        mentions_target = _kp_relation_text_mentions_name(evidence_preview, target_name)
-
-        if relation_type == "equivalent":
-            if not lexical_close:
-                return False, "equivalent_weak_family"
-            if {"note", "procedure"} & (source_profile | target_profile):
-                return False, "equivalent_procedural"
-            if source_focus and target_focus and not focus_overlap:
-                return False, "equivalent_focus_mismatch"
-            if source_more_specific or target_more_specific:
-                return False, "equivalent_hierarchy_conflict"
-            if "method" in source_profile and "method" in target_profile:
-                if _kp_relation_shared_char_ratio(source_name, target_name) < 0.60 and common_prefix_len < 3:
-                    return False, "equivalent_method_overlap_weak"
-
-        if relation_type == "specializes":
-            if source_more_specific:
-                return False, "specializes_direction_reverse"
-            if source_focus and target_focus and not focus_overlap:
-                if not (lexical_close or high_conf):
-                    return False, "specializes_focus_mismatch"
-            if not lexical_close and not focus_overlap:
-                return False, "specializes_weak_family"
-            if "note" in target_profile:
-                return False, "specializes_into_note"
-
-        high_conf = confidence >= 0.90
-
-        if relation_type == "prerequisite":
-            if "note" in source_profile:
-                return False, "prerequisite_from_note"
-            if "procedure" in source_profile and not ({"procedure", "note"} & target_profile):
-                return False, "prerequisite_from_procedure"
-            if source_more_specific and not focus_overlap:
-                return False, "prerequisite_from_specific"
-            if not mentions_source and not (lexical_close or bool(focus_overlap)):
-                return False, "prerequisite_source_weak"
-            if "method" in target_profile and not mentions_target:
-                if not (high_conf and "concept" in source_profile):
-                    return False, "prerequisite_method_target_weak"
-            if "concept" in source_profile and "method" in target_profile and not (
-                lexical_close or bool(focus_overlap)
-            ):
-                if not high_conf:
-                    return False, "prerequisite_concept_to_distant_method"
-
-        if relation_type == "related":
-            if {"note", "procedure"} & (source_profile | target_profile):
-                return False, "related_procedural"
-            same_goal_method_pair = "method" in source_profile and "method" in target_profile and bool(focus_overlap)
-            same_family_variant_pair = lexical_close and (source_more_specific or target_more_specific)
-            same_family_peer_pair = lexical_close and (
-                bool(focus_overlap) or common_prefix_len >= 2 or _kp_relation_contains_family(source_name, target_name)
-            )
-            if same_goal_method_pair and same_family_variant_pair:
-                return False, "related_same_family_method"
-            if same_family_peer_pair:
-                return False, "related_same_family"
-            if not mentions_source and not mentions_target:
-                return False, "related_evidence_weak"
-            related_grounded = shared_grounding and (
-                lexical_close or bool(focus_overlap) or common_prefix_len >= 3
-            )
-            if not ((mentions_source and mentions_target) or related_grounded):
-                return False, "related_evidence_partial"
-
-        grounded_by_shared_block = shared_grounding and (
-            lexical_close or bool(focus_overlap) or common_prefix_len >= 3
-        )
-        if relation_type in {"specializes", "prerequisite", "equivalent"} and not (
-            (mentions_source and mentions_target) or grounded_by_shared_block
-        ):
-            # For prerequisite: source and target often live in different blocks
-            # (source in overview/theory, target in application/exercise).
-            # High-confidence LLM judgment + source mention is sufficient signal.
-            if relation_type == "prerequisite" and high_conf and mentions_source:
-                pass
-            elif relation_type == "specializes" and high_conf and lexical_close and mentions_source:
-                pass
-            else:
-                return False, f"{relation_type}_evidence_weak"
-
-        return True, None
-
-    def _parse_llm_json_object_response(self, raw: Optional[str]) -> Optional[Dict[str, Any]]:
-        if not raw:
-            return None
-        raw = raw.strip()
-        try:
-            data = json.loads(raw)
-            return data if isinstance(data, dict) else None
-        except Exception:
-            pass
-        start = raw.find("{")
-        end = raw.rfind("}")
-        if start >= 0 and end > start:
-            try:
-                data = json.loads(raw[start : end + 1])
-                return data if isinstance(data, dict) else None
-            except Exception:
-                return None
-        return None
-
-    def _extract_kp_relations_with_llm(
-        self,
-        db: Session,
-        package: models.KnowledgePackage,
-        package_point_links: Dict[int, models.KnowledgePackagePoint],
-        progress_callback: Optional[Callable[[str], None]] = None,
-    ) -> Dict[str, Any]:
-        notify = lambda msg: self._notify_progress(progress_callback, msg)
-
-        sync_llm_step_configs(db)
-        sync_prompt_step_configs(db)
-
-        point_rows = (
-            db.query(models.KnowledgePoint)
-            .filter(models.KnowledgePoint.id.in_(list(package_point_links.keys())))
-            .all()
-        )
-        kp_id_map = {
-            str(point.canonical_name): int(point.id)
-            for point in point_rows
-            if self._is_relation_extraction_candidate(point, package_point_links.get(int(point.id)))
-        }
-        if len(kp_id_map) < 2:
-            return {"status": "skipped", "reason": "insufficient_candidates", "inserted": 0, "skipped": 0, "rule_rejected": 0}
-
-        grounding_payload, allowed_block_ids_by_name = self._build_kp_relation_grounding_payload(
-            db, package, kp_id_map, package_point_links
-        )
-        prompt_cfg = resolve_step_prompt(
-            db,
-            TOPIC_DOCX_KP_RELATIONS_STEP_KEY,
-            variables={
-                "package_title": package.package_title or "",
-                "kp_grounding_json": json.dumps(grounding_payload, ensure_ascii=False),
-            },
-        )
-        if not prompt_cfg or not prompt_cfg.get("prompt_text"):
-            return {"status": "error", "reason": "prompt_not_configured", "inserted": 0, "skipped": 0, "rule_rejected": 0}
-        llm_cfg = resolve_step_llm_config(db, TOPIC_DOCX_KP_RELATIONS_STEP_KEY, allow_generic_fallback=True)
-        if not llm_cfg:
-            return {"status": "error", "reason": "llm_not_configured", "inserted": 0, "skipped": 0, "rule_rejected": 0}
-
-        messages = [
-            {"role": "system", "content": "You extract grounded semantic relations between knowledge points and must return JSON only."},
-            {"role": "user", "content": prompt_cfg["prompt_text"]},
-        ]
-        raw = call_llm(messages, llm_cfg, json_mode=True)
-        payload = self._parse_llm_json_object_response(raw)
-        if not payload:
-            return {"status": "error", "reason": "llm_parse_failed", "inserted": 0, "skipped": 0, "rule_rejected": 0, "raw": (raw or "")[:2000]}
-
-        allowed_relation_types = {"prerequisite", "specializes", "equivalent", "related"}
-        inserted = 0
-        skipped = 0
-        rule_rejected = 0
-        reject_reason_counts: Dict[str, int] = {}
-        debug_rows: List[Dict[str, Any]] = []
-
-        for row in payload.get("relations") or []:
-            if not isinstance(row, dict):
-                skipped += 1
-                continue
-            source_name = str(row.get("source") or "").strip()
-            target_name = str(row.get("target") or "").strip()
-            relation_type = str(row.get("relation_type") or "").strip().lower()
-            if source_name not in kp_id_map or target_name not in kp_id_map or source_name == target_name:
-                skipped += 1
-                continue
-            if relation_type not in allowed_relation_types:
-                skipped += 1
-                continue
-            try:
-                confidence = float(row.get("confidence") or 0.0)
-            except (TypeError, ValueError):
-                confidence = 0.0
-            if confidence < 0.70:
-                skipped += 1
-                continue
-
-            if relation_type in {"equivalent", "related"} and source_name > target_name:
-                source_name, target_name = target_name, source_name
-
-            source_id = int(kp_id_map[source_name])
-            target_id = int(kp_id_map[target_name])
-            evidence_block_id = row.get("evidence_block_id")
-            try:
-                evidence_block_id = int(evidence_block_id) if evidence_block_id is not None else None
-            except (TypeError, ValueError):
-                evidence_block_id = None
-
-            allowed_block_ids = set(allowed_block_ids_by_name.get(source_name, set())) | set(
-                allowed_block_ids_by_name.get(target_name, set())
-            )
-            if evidence_block_id is None or evidence_block_id not in allowed_block_ids:
-                skipped += 1
-                continue
-            source_allowed_block_ids = set(allowed_block_ids_by_name.get(source_name, set()))
-            target_allowed_block_ids = set(allowed_block_ids_by_name.get(target_name, set()))
-            shared_grounding = evidence_block_id in source_allowed_block_ids and evidence_block_id in target_allowed_block_ids
-
-            block = db.query(models.KnowledgeBlock).filter(models.KnowledgeBlock.id == evidence_block_id).first()
-            evidence_preview = self._kp_relation_block_preview(
-                self._kp_relation_block_evidence_text(block),
-                source_name=source_name,
-                target_name=target_name,
-            )
-            debug_row: Dict[str, Any] = {
-                "source": source_name,
-                "target": target_name,
-                "relation_type": relation_type,
-                "confidence": round(confidence, 4),
-                "evidence_block_id": evidence_block_id,
-                "shared_grounding": shared_grounding,
-                "evidence_preview": evidence_preview,
-            }
-            ok, reject_reason = self._validate_llm_kp_relation(
-                source_name,
-                target_name,
-                relation_type,
-                evidence_preview,
-                shared_grounding=shared_grounding,
-                confidence=confidence,
-            )
-            if not ok:
-                rule_rejected += 1
-                reject_reason_counts[reject_reason or "unknown"] = reject_reason_counts.get(reject_reason or "unknown", 0) + 1
-                debug_row["decision"] = "rule_rejected"
-                debug_row["reject_reason"] = reject_reason
-                debug_rows.append(debug_row)
-                logger.info(
-                    "Rejecting LLM KP relation package=%s source=%s target=%s type=%s reason=%s",
-                    package.id,
-                    source_name,
-                    target_name,
-                    relation_type,
-                    reject_reason,
-                )
-                continue
-
-            exists = (
-                db.query(models.KnowledgePointRelation)
-                .filter(
-                    models.KnowledgePointRelation.source_knowledge_point_id == source_id,
-                    models.KnowledgePointRelation.target_knowledge_point_id == target_id,
-                    models.KnowledgePointRelation.relation_type == relation_type,
-                    models.KnowledgePointRelation.evidence_block_id == evidence_block_id,
-                )
-                .first()
-            )
-            if exists:
-                skipped += 1
-                debug_row["decision"] = "skip_existing_exact"
-                debug_rows.append(debug_row)
-                continue
-
-            existing_signature = (
-                db.query(models.KnowledgePointRelation)
-                .filter(
-                    models.KnowledgePointRelation.source_knowledge_point_id == source_id,
-                    models.KnowledgePointRelation.target_knowledge_point_id == target_id,
-                    models.KnowledgePointRelation.relation_type == relation_type,
-                )
-                .first()
-            )
-            if existing_signature:
-                skipped += 1
-                debug_row["decision"] = "skip_existing_signature"
-                debug_rows.append(debug_row)
-                continue
-
-            reverse_signature = None
-            if relation_type in {"specializes", "prerequisite", "related"}:
-                reverse_signature = (
-                    db.query(models.KnowledgePointRelation)
-                    .filter(
-                        models.KnowledgePointRelation.source_knowledge_point_id == target_id,
-                        models.KnowledgePointRelation.target_knowledge_point_id == source_id,
-                        models.KnowledgePointRelation.relation_type == relation_type,
-                    )
-                    .first()
-                )
-            if reverse_signature:
-                skipped += 1
-                debug_row["decision"] = "skip_reverse_signature"
-                debug_rows.append(debug_row)
-                continue
-
-            db.add(
-                models.KnowledgePointRelation(
-                    source_knowledge_point_id=source_id,
-                    target_knowledge_point_id=target_id,
-                    relation_type=relation_type,
-                    strength_score=round(confidence, 4),
-                    evidence_block_id=evidence_block_id,
-                    source_origin="llm",
-                    confidence=round(confidence, 2),
-                    approved_status="pending",
-                )
-            )
-            inserted += 1
-            debug_row["decision"] = "inserted"
-            debug_rows.append(debug_row)
-
-        db.flush()
-        debug_payload = {
-            "package_id": int(package.id),
-            "package_title": package.package_title or "",
-            "candidate_count": len(kp_id_map),
-            "grounding_payload": grounding_payload,
-            "raw_llm_response": raw,
-            "parsed_relations": payload.get("relations") or [],
-            "decision_rows": debug_rows,
-            "summary": {
-                "inserted": inserted,
-                "skipped": skipped,
-                "rule_rejected": rule_rejected,
-                "reject_reason_counts": reject_reason_counts,
-            },
-        }
-        if self._ingest_verbose_enabled():
-            base = f"llm/kp_relations_pkg{package.id}"
-            self._ingest_verbose_write(
-                f"{base}_grounding.json",
-                json.dumps(grounding_payload, ensure_ascii=False, indent=2),
-            )
-            self._ingest_verbose_write(f"{base}_raw.txt", raw or "")
-            self._ingest_verbose_write(
-                f"{base}_decisions.json",
-                json.dumps(debug_payload, ensure_ascii=False, indent=2, default=str),
-            )
-        notify(
-            f"  KP-KP extraction: package={package.id} inserted={inserted} "
-            f"skipped={skipped} rule_rejected={rule_rejected}"
-        )
-        return {
-            "status": "ok",
-            "inserted": inserted,
-            "skipped": skipped,
-            "rule_rejected": rule_rejected,
-            "reject_reason_counts": reject_reason_counts,
-            "candidate_count": len(kp_id_map),
-            "debug_payload": debug_payload,
-        }
-
     def _enrich_topic_docx_with_llm_block_points(
         self,
         db: Session,
@@ -5924,274 +3621,6 @@ class KnowledgePointIngestionService:
             models.KnowledgePackagePoint.package_id == package_id,
             models.KnowledgePackagePoint.knowledge_point_id.in_(matched_point_ids),
         ).delete(synchronize_session=False)
-
-    def _block_llm_primary_point_id(self, block: Optional[models.KnowledgeBlock]) -> Optional[int]:
-        if block is None:
-            return None
-        anchor = block.source_anchor_json if isinstance(block.source_anchor_json, dict) else {}
-        rows = anchor.get("llm_knowledge_points")
-        if not isinstance(rows, list):
-            return None
-        for row in rows:
-            if not isinstance(row, dict):
-                continue
-            try:
-                point_id = int(row.get("knowledge_point_id"))
-            except (TypeError, ValueError):
-                continue
-            if point_id <= 0:
-                continue
-            return point_id
-        return None
-
-    def _block_is_semantic_placeholder_only(self, block: Optional[models.KnowledgeBlock]) -> bool:
-        if block is None:
-            return True
-        rich = block.rich_content_json if isinstance(block.rich_content_json, dict) else {}
-
-        def _strip_placeholder_text(value: Optional[str]) -> str:
-            text = str(value or "")
-            text = re.sub(r"\[(?:图片|鍥剧墖)\]", " ", text, flags=re.I)
-            text = re.sub(r"(?:未命名区域|专题正文)", " ", text)
-            text = re.sub(r"\s+", "", text)
-            return text
-
-        if _strip_placeholder_text(block.raw_text):
-            return False
-        for key in ("plain_text", "normalized_text", "title", "heading", "section_title"):
-            if _strip_placeholder_text(rich.get(key)):
-                return False
-        return True
-
-    def reconcile_topic_placeholder_residue(
-        self,
-        db: Session,
-        package_id: int,
-        progress_callback: Optional[Callable[[str], None]] = None,
-    ) -> Dict[str, Any]:
-        notify = lambda msg: self._notify_progress(progress_callback, msg)
-        placeholder_ids = {
-            int(point_id)
-            for (point_id,) in db.query(models.KnowledgePoint.id)
-            .join(models.KnowledgePackagePoint, models.KnowledgePackagePoint.knowledge_point_id == models.KnowledgePoint.id)
-            .filter(
-                models.KnowledgePackagePoint.package_id == package_id,
-                or_(
-                    models.KnowledgePackagePoint.relation_type == "placeholder",
-                    models.KnowledgePackagePoint.approved_status == "placeholder",
-                ),
-            )
-            .all()
-            if point_id is not None
-        }
-        placeholder_ids.update(
-            int(point_id)
-            for (point_id, canonical_name) in db.query(models.KnowledgePoint.id, models.KnowledgePoint.canonical_name)
-            .join(models.KnowledgeBlock, models.KnowledgeBlock.knowledge_point_id == models.KnowledgePoint.id)
-            .filter(models.KnowledgeBlock.package_id == package_id)
-            .all()
-            if point_id is not None and self._is_placeholder_point_name(canonical_name)
-        )
-        placeholder_ids.update(
-            int(point_id)
-            for (point_id, canonical_name) in db.query(models.KnowledgePoint.id, models.KnowledgePoint.canonical_name)
-            .join(models.KnowledgeAtom, models.KnowledgeAtom.knowledge_point_id == models.KnowledgePoint.id)
-            .filter(models.KnowledgeAtom.package_id == package_id)
-            .all()
-            if point_id is not None and self._is_placeholder_point_name(canonical_name)
-        )
-        placeholder_ids.update(
-            int(point_id)
-            for (point_id, canonical_name) in db.query(models.KnowledgePoint.id, models.KnowledgePoint.canonical_name)
-            .join(models.KnowledgePointProvenance, models.KnowledgePointProvenance.knowledge_point_id == models.KnowledgePoint.id)
-            .filter(models.KnowledgePointProvenance.package_id == package_id)
-            .all()
-            if point_id is not None and self._is_placeholder_point_name(canonical_name)
-        )
-        if not placeholder_ids:
-            return {
-                "status": "ok",
-                "package_id": package_id,
-                "placeholder_point_ids": [],
-                "updated_blocks": 0,
-                "nulled_blocks": 0,
-                "updated_atoms": 0,
-                "deleted_atoms": 0,
-                "updated_provenance": 0,
-                "deleted_provenance": 0,
-                "deleted_package_points": 0,
-                "unresolved_blocks": 0,
-                "unresolved_atoms": 0,
-                "unresolved_provenance": 0,
-            }
-
-        package_blocks = (
-            db.query(models.KnowledgeBlock)
-            .filter(models.KnowledgeBlock.package_id == package_id)
-            .all()
-        )
-        all_block_by_id: Dict[int, models.KnowledgeBlock] = {
-            int(block.id): block for block in package_blocks if block.id is not None
-        }
-        blocks = (
-            db.query(models.KnowledgeBlock)
-            .filter(
-                models.KnowledgeBlock.package_id == package_id,
-                models.KnowledgeBlock.knowledge_point_id.in_(list(placeholder_ids)),
-            )
-            .all()
-        )
-        updated_blocks = 0
-        nulled_blocks = 0
-        unresolved_blocks = 0
-
-        for block in blocks:
-            replacement_id = self._block_llm_primary_point_id(block)
-            if replacement_id and replacement_id not in placeholder_ids:
-                block.knowledge_point_id = replacement_id
-                updated_blocks += 1
-                continue
-            if self._block_is_semantic_placeholder_only(block):
-                block.knowledge_point_id = None
-                nulled_blocks += 1
-                continue
-            unresolved_blocks += 1
-
-        atoms = (
-            db.query(models.KnowledgeAtom)
-            .filter(
-                models.KnowledgeAtom.package_id == package_id,
-                models.KnowledgeAtom.knowledge_point_id.in_(list(placeholder_ids)),
-            )
-            .all()
-        )
-        updated_atoms = 0
-        deleted_atoms = 0
-        unresolved_atoms = 0
-        for atom in atoms:
-            block = all_block_by_id.get(int(atom.evidence_block_id or 0))
-            replacement_id = None
-            if block is not None and block.knowledge_point_id and block.knowledge_point_id not in placeholder_ids:
-                replacement_id = int(block.knowledge_point_id)
-            elif block is not None:
-                llm_point_id = self._block_llm_primary_point_id(block)
-                if llm_point_id and llm_point_id not in placeholder_ids:
-                    replacement_id = llm_point_id
-            if replacement_id:
-                atom.knowledge_point_id = replacement_id
-                updated_atoms += 1
-                continue
-            if block is not None and self._block_is_semantic_placeholder_only(block):
-                db.delete(atom)
-                deleted_atoms += 1
-                continue
-            unresolved_atoms += 1
-
-        provenance_rows = (
-            db.query(models.KnowledgePointProvenance)
-            .filter(
-                models.KnowledgePointProvenance.package_id == package_id,
-                models.KnowledgePointProvenance.knowledge_point_id.in_(list(placeholder_ids)),
-                models.KnowledgePointProvenance.source_kind == SOURCE_KIND_KNOWLEDGE_BLOCK,
-            )
-            .all()
-        )
-        updated_provenance = 0
-        deleted_provenance = 0
-        unresolved_provenance = 0
-        for provenance in provenance_rows:
-            block = all_block_by_id.get(int(provenance.source_id or 0))
-            replacement_id = None
-            if block is not None and block.knowledge_point_id and block.knowledge_point_id not in placeholder_ids:
-                replacement_id = int(block.knowledge_point_id)
-            elif block is not None:
-                llm_point_id = self._block_llm_primary_point_id(block)
-                if llm_point_id and llm_point_id not in placeholder_ids:
-                    replacement_id = llm_point_id
-            if replacement_id:
-                exists = (
-                    db.query(models.KnowledgePointProvenance.id)
-                    .filter(
-                        models.KnowledgePointProvenance.id != provenance.id,
-                        models.KnowledgePointProvenance.knowledge_point_id == replacement_id,
-                        models.KnowledgePointProvenance.source_kind == provenance.source_kind,
-                        models.KnowledgePointProvenance.source_id == provenance.source_id,
-                    )
-                    .first()
-                )
-                if exists:
-                    db.delete(provenance)
-                    deleted_provenance += 1
-                    continue
-                provenance.knowledge_point_id = replacement_id
-                updated_provenance += 1
-                continue
-            if block is not None and self._block_is_semantic_placeholder_only(block):
-                db.delete(provenance)
-                deleted_provenance += 1
-                continue
-            unresolved_provenance += 1
-
-        db.flush()
-
-        deleted_package_points = 0
-        placeholder_package_points = (
-            db.query(models.KnowledgePackagePoint)
-            .filter(
-                models.KnowledgePackagePoint.package_id == package_id,
-                models.KnowledgePackagePoint.knowledge_point_id.in_(list(placeholder_ids)),
-            )
-            .all()
-        )
-        for link in placeholder_package_points:
-            kp_id = int(link.knowledge_point_id)
-            remaining_blocks = db.query(models.KnowledgeBlock.id).filter(
-                models.KnowledgeBlock.package_id == package_id,
-                models.KnowledgeBlock.knowledge_point_id == kp_id,
-            ).count()
-            remaining_atoms = db.query(models.KnowledgeAtom.id).filter(
-                models.KnowledgeAtom.package_id == package_id,
-                models.KnowledgeAtom.knowledge_point_id == kp_id,
-            ).count()
-            remaining_provenance = db.query(models.KnowledgePointProvenance.id).filter(
-                models.KnowledgePointProvenance.package_id == package_id,
-                models.KnowledgePointProvenance.knowledge_point_id == kp_id,
-            ).count()
-            remaining_q_links = db.query(models.KnowledgeQuestionLink.id).join(
-                models.KnowledgePackageQuestion,
-                models.KnowledgePackageQuestion.question_item_id == models.KnowledgeQuestionLink.question_item_id,
-            ).filter(
-                models.KnowledgePackageQuestion.package_id == package_id,
-                models.KnowledgeQuestionLink.knowledge_point_id == kp_id,
-            ).count()
-            if any((remaining_blocks, remaining_atoms, remaining_provenance, remaining_q_links)):
-                continue
-            db.delete(link)
-            deleted_package_points += 1
-
-        db.flush()
-        notify(
-            "  Placeholder residue reconcile: "
-            f"blocks(updated={updated_blocks}, nulled={nulled_blocks}, unresolved={unresolved_blocks}) "
-            f"atoms(updated={updated_atoms}, deleted={deleted_atoms}, unresolved={unresolved_atoms}) "
-            f"provenance(updated={updated_provenance}, deleted={deleted_provenance}, unresolved={unresolved_provenance}) "
-            f"package_points_deleted={deleted_package_points}"
-        )
-        return {
-            "status": "ok",
-            "package_id": package_id,
-            "placeholder_point_ids": sorted(placeholder_ids),
-            "updated_blocks": updated_blocks,
-            "nulled_blocks": nulled_blocks,
-            "updated_atoms": updated_atoms,
-            "deleted_atoms": deleted_atoms,
-            "updated_provenance": updated_provenance,
-            "deleted_provenance": deleted_provenance,
-            "deleted_package_points": deleted_package_points,
-            "unresolved_blocks": unresolved_blocks,
-            "unresolved_atoms": unresolved_atoms,
-            "unresolved_provenance": unresolved_provenance,
-        }
 
     def _infer_block_role(self, heading: str) -> str:
         for role, pattern in SECTION_ROLE_PATTERNS:
